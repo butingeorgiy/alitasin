@@ -1,0 +1,23 @@
+{
+    "private": true,
+    "scripts": {
+        "prod:css": "NODE_ENV=production npx tailwindcss-cli@latest build ./resources/css/index.css -o ./public/css/index.css",
+        "dev:css": "npx tailwindcss-cli@latest build ./resources/css/index.css -o ./public/css/index.css",
+        "prod": "webpack --mode=production",
+        "dev": "webpack --mode=development --watch"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.13.10",
+        "@babel/preset-env": "^7.13.10",
+        "axios": "^0.19",
+        "babel-loader": "^8.2.2",
+        "cross-env": "^5.1",
+        "lodash": "^4.17.13",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^2.3.1",
+        "source-map-loader": "^2.0.1",
+        "tailwindcss": "^2.0.4",
+        "webpack": "^5.27.1",
+        "webpack-cli": "^4.5.0"
+    }
+}
