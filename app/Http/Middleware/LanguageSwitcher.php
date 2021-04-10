@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Authenticate
+class LanguageSwitcher
 {
     /**
      * Handle an incoming request.
