@@ -92,9 +92,12 @@ class TourController extends Controller
 
         $tourImages = [];
 
-        foreach ($request->file() as $file) {
+        foreach ($request->file() as $index => $file) {
             $name = Str::random() . '.' . $file->extension();
-            $tourImages[] = new TourImage(['link' => $name]);
+            $tourImages[] = new TourImage([
+                'link' => $name,
+                'is_main' => $index === 0 ? '1' : '0'
+            ]);
 
             $file->storeAs('tour_pictures', $name);
         }
