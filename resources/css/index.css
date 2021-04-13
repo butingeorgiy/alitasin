@@ -1,3 +1,138 @@
+@import "/css/font.css";
+@import "/css/swiper.css";
+@import "/css/flatpickr.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: 'Gilroy', serif;
+    @apply select-none;
+}
+
+body.shake {
+    animation: shake 0.2s;
+    animation-iteration-count: 1;
+}
+
+input, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+    @apply outline-none;
+}
+
+input::-ms-expand,
+select::-ms-expand {
+    display: none;
+}
+
+#heroSection {
+    height: 250px;
+}
+
+#regionsSection .region-card:hover {
+    top: -5px !important;
+}
+
+#toursSection .left-side {
+    width: 450px;
+}
+
+/* Clear tours filter button modes (start) */
+
+.filters .filter-item {
+    @apply inline px-3 py-1 text-sm border-2 border-gray-600 rounded-full cursor-pointer;
+}
+
+.filters .filter-item.active {
+    @apply text-white border-blue bg-blue;
+}
+
+.filters .filter-item.active span {
+    @apply text-white;
+}
+
+/* Clear tours filter button modes (end) */
+
+.select-text {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Show more tours button modes (start) */
+
+.show-more-tours-button,
+.update-tour-button,
+.save-tour-button {
+    @apply flex justify-center mt-6 py-2 text-sm text-white font-medium rounded-md cursor-pointer;
+}
+
+.show-more-tours-button.loading,
+.show-more-tours-button.disabled,
+.login-button.loading,
+.login-button.disabled,
+.update-tour-button.loading,
+.update-tour-button.disabled,
+.save-tour-button.loading,
+.save-tour-button.disabled {
+    @apply cursor-not-allowed opacity-60;
+}
+
+.show-more-tours-button.loading .animate-spin,
+.login-button.loading .animate-spin,
+.update-tour-button.loading .animate-spin,
+.save-tour-button.loading .animate-spin {
+    @apply block;
+}
+
+/* Show more tours button modes (end) */
+
+/* Shaking an */
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+#createTourForm .image-item,
+#editTourForm .image-item {
+    @apply flex justify-center relative px-10 py-5 border-2 border-dashed border-black rounded-md cursor-pointer;
+}
+
+#createTourForm .image-item .remove-image-button,
+#editTourForm .image-item .remove-image-button{
+    @apply hidden min-w-4 min-h-4 w-4 h-4 absolute -top-3 -right-1 text-red-500;
+}
+
+#createTourForm .image-item.filled,
+#editTourForm .image-item.filled {
+    @apply border-none bg-cover bg-center bg-no-repeat;
+}
+
+#createTourForm .image-item.filled .empty,
+#editTourForm .image-item.filled .empty {
+    @apply opacity-0;
+}
+
+#createTourForm .image-item.filled .remove-image-button,
+#editTourForm .image-item.filled .remove-image-button {
+    @apply block;
+}

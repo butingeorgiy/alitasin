@@ -21,6 +21,7 @@ class CreateRegionsTable extends Migration
             $table->string('ru_description', 2048)->nullable();
             $table->string('en_description', 2048)->nullable();
             $table->string('tr_description', 2048)->nullable();
+            $table->enum('show_at_index_page', ['0', '1'])->default('0');
         });
     }
 

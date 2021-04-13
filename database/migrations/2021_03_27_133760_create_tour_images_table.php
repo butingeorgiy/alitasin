@@ -17,12 +17,13 @@ class CreateTourImagesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('tour_id')->unsigned();
             $table->string('link', 20);
-            $table->timestamp('deleted_at');
+            $table->enum('is_main', ['0', '1'])->default('0');
 
 
             $table->foreign('tour_id')
                 ->references('id')
-                ->on('tours');
+                ->on('tours')
+                ->onDelete('restrict');
         });
     }
 

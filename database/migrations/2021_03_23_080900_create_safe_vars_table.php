@@ -14,8 +14,10 @@ class CreateSafeVarsTable extends Migration
     public function up()
     {
         Schema::create('safe_vars', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->char('uuid', 16)->unique();
+            $table->string('value', 32);
+            $table->integer('time_valid')->default(300);
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

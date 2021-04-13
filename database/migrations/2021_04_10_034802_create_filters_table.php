@@ -14,8 +14,10 @@ class CreateFiltersTable extends Migration
     public function up()
     {
         Schema::create('filters', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->tinyIncrements('id');
+            $table->string('ru_name', 64);
+            $table->string('en_name', 64);
+            $table->string('tr_name', 64);
         });
     }
 

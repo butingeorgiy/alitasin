@@ -14,8 +14,19 @@ class CreateToursHasFiltersTable extends Migration
     public function up()
     {
         Schema::create('tours_has_filters', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigInteger('tour_id')->unsigned();
+            $table->tinyInteger('filter_id')->unsigned();
+
+
+            $table->foreign('tour_id')
+                ->references('id')
+                ->on('tours')
+                ->onDelete('restrict');
+
+            $table->foreign('filter_id')
+                ->references('id')
+                ->on('filters')
+                ->onDelete('restrict');
         });
     }
 

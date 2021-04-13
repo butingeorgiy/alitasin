@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Facades\Hash;
 
-class UserTest extends TestCase
+class HashingTest extends TestCase
 {
     /**
      * @dataProvider passwordHashMakingProvider

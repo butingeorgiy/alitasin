@@ -11,6 +11,14 @@ class AccountTypesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $rows = [
+            ['title' => 'Клиент'],
+            ['title' => 'Партнёр'],
+            ['title' => 'Редактор'],
+            ['title' => 'Менеджер'],
+            ['title' => 'Главный менеджер']
+        ];
+
+        DB::table('account_types')->insert($rows);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AuthTokens extends Model
+class AuthToken extends Model
 {
     public $timestamps = false;
     protected $fillable = [

@@ -17,24 +17,36 @@ class CreateToursTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('tour_title_id')->unsigned();
             $table->bigInteger('tour_description_id')->unsigned();
+            $table->integer('price')->unsigned();
             $table->string('address', 256);
+            $table->date('date');
+            $table->string('duration', 16)->nullable();
             $table->bigInteger('manager_id')->unsigned();
             $table->integer('region_id')->unsigned();
+            $table->tinyInteger('tour_type_id')->unsigned();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
 
 
             $table->foreign('tour_title_id')
                 ->references('id')
-                ->on('tour_titles');
+                ->on('tour_titles')
+                ->onDelete('restrict');
 
             $table->foreign('tour_description_id')
                 ->references('id')
-                ->on('tour_descriptions');
+                ->on('tour_descriptions')
+                ->onDelete('restrict');
 
             $table->foreign('region_id')
                 ->references('id')
-                ->on('regions');
+                ->on('regions')
+                ->onDelete('restrict');
+
+            $table->foreign('tour_type_id')
+                ->references('id')
+                ->on('tour_types')
+                ->onDelete('restrict');
         });
     }
 
