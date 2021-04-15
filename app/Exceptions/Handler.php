@@ -42,10 +42,17 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return bool[]|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
+        if ($request->is('api/*')) {
+            return response()->json([
+                'error' => true,
+                'message' => parent::isHttpException($exception) ? 'Unknown error happen!' : $exception->getMessage()
+            ]);
+        }
+
         return parent::render($request, $exception);
     }
 }

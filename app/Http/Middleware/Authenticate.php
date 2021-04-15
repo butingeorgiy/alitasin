@@ -2,20 +2,34 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use App\Facades\Auth;
+use Closure;
+use Exception;
+use Illuminate\Http\Request;
 
-class Authenticate extends Middleware
+class Authenticate
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string
+     * @param Request $request
+     * @param Closure $next
+     * @param string $accountType
+     * @return mixed
+     * @throws Exception
      */
-    protected function redirectTo($request)
+    public function handle(Request $request, Closure $next, ...$accountType)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        $authStatus = Auth::check(array_map(function ($item) { return $item; }, $accountType ?: ['1']));
+
+        if ($authStatus !== true) {
+            if ($request->is('api/*')) {
+                throw new Exception('Api request forbidden!');
+            } else {
+                return redirect('/#login');
+            }
         }
+
+        return $next($request);
     }
 }

@@ -1,15 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang='{{ App::getLocale() }}'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="{{ asset('js/index.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-    <title>Index page</title>
+    <meta charset='UTF-8'>
+    <meta name='viewport'
+          content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <script type='text/javascript' src='{{ asset('js/index.js') }}'></script>
+    <link rel='stylesheet' href='{{ asset('css/index.css') }}'>
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
+    <title>{{ __('page-titles.main') }}</title>
 </head>
 <body>
-    <h1 class="text-red-400">It's index page!</h1>
+    @include('components.general.header')
+    @include('components.general.hero', ['title' => __('short-phrases.tours-in-turkey')])
+    @include('components.index.global-search')
+    @include('components.index.regions')
+    @include('components.general.tours')
+    @include('components.general.reviews-slider')
+    @include('components.general.footer')
+
+    @include('popups.login')
 </body>
 </html>
