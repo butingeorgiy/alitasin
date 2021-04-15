@@ -18,3 +18,5 @@ Route::group(['prefix' => 'tours', 'middleware' => 'auth:5'], function () {
     Route::post('update/{tourId}/upload-image', 'Api\TourController@uploadImage');
     Route::post('update/{id}', 'Api\TourController@update');
 });
+
+Route::get('tours', 'Api\TourController@get');

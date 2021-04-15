@@ -21,7 +21,8 @@ class PageController extends Controller
             }
         }
 
-        $tours = Tour::with(['title', 'description', 'images', 'type'])->limit(15)->get();
+        $tours = Tour::with(['title', 'description', 'images', 'type', 'filters'])->limit(15)->get();
+        $filterCounter = [];
 
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
@@ -33,9 +34,17 @@ class PageController extends Controller
                     }
                 }
             }
+
+            foreach ($tour->filters as $filter) {
+                if (isset($filterCounter[$filter->id])) {
+                    $filterCounter[$filter->id]++;
+                } else {
+                    $filterCounter[$filter->id] = 1;
+                }
+            }
         }
 
-        return view('index', compact('regions', 'tours'));
+        return view('index', compact('regions', 'tours', 'filterCounter'));
     }
 
     public function adminIndex()

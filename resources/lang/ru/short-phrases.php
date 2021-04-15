@@ -38,5 +38,33 @@ return [
     'reviews' => 'Отзывы',
     'enter-into-account' => 'Вход в аккаунт',
     'email' => 'Email',
-    'password' => 'Пароль'
+    'password' => 'Пароль',
+    'search' => 'Поиск',
+    'tour-duration' => 'Продолжительность экскурсии',
+    'duration' => 'Продолжительность',
+    'unnecessary' => 'необязательно',
+    'amount' => 'Количество',
+    'hours' => 'Часы',
+    'days' => 'Дни',
+    'conducted-days' => 'Дни проведения',
+
+    // Days of the week
+
+    'monday-shorten' => 'Пн',
+    'tuesday-shorten' => 'Вт',
+    'wednesday-shorten' => 'Ср',
+    'thursday-shorten' => 'Чт',
+    'friday-shorten' => 'Пт',
+    'saturday-shorten' => 'Сб',
+    'sunday-shorten' => 'Вс',
+
+    'monday' => 'Понедельник',
+    'tuesday' => 'Вторник',
+    'wednesday' => 'Среда',
+    'thursday' => 'Четверг',
+    'friday' => 'Пятница',
+    'saturday' => 'Суббота',
+    'sunday' => 'Воскресенье',
+
+    // Days of the week (end)
 ];

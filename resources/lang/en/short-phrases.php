@@ -38,5 +38,33 @@ return [
     'reviews' => 'Reviews',
     'enter-into-account' => 'Enter into account',
     'email' => 'Email',
-    'password' => 'Password'
+    'password' => 'Password',
+    'search' => 'Search',
+    'tour-duration' => 'Tour duration',
+    'duration' => 'Duration',
+    'unnecessary' => 'unnecessary',
+    'amount' => 'Amount',
+    'hours' => 'Hours',
+    'days' => 'Days',
+    'conducted-days' => 'Conducted days',
+
+    // Days of the week
+
+    'monday-shorten' => 'Mon',
+    'tuesday-shorten' => 'Tue',
+    'wednesday-shorten' => 'Wed',
+    'thursday-shorten' => 'Thu',
+    'friday-shorten' => 'Fri',
+    'saturday-shorten' => 'Sat',
+    'sunday-shorten' => 'Sun',
+
+    'monday' => 'Monday',
+    'tuesday' => 'Tuesday',
+    'wednesday' => 'Wednesday',
+    'thursday' => 'Thursday',
+    'friday' => 'Friday',
+    'saturday' => 'Saturday',
+    'sunday' => 'Sunday',
+
+    // Days of the week (end)
 ];

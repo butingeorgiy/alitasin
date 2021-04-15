@@ -23,6 +23,7 @@
     "dependencies": {
         "flatpickr": "^4.6.9",
         "js-cookie": "^2.2.1",
-        "swiper": "^6.5.4"
+        "swiper": "^6.5.4",
+        "tom-select": "^1.4.3"
     }
 }

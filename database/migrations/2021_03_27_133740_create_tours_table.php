@@ -19,7 +19,7 @@ class CreateToursTable extends Migration
             $table->bigInteger('tour_description_id')->unsigned();
             $table->integer('price')->unsigned();
             $table->string('address', 256);
-            $table->date('date');
+            $table->string('conducted_at', 32)->nullable();
             $table->string('duration', 16)->nullable();
             $table->bigInteger('manager_id')->unsigned();
             $table->integer('region_id')->unsigned();

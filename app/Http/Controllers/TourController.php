@@ -24,7 +24,7 @@ class TourController extends Controller
      */
     public function showEditForm($id)
     {
-        $tour = Tour::with(['title', 'description', 'images', 'type', 'manager', 'region'])->findOrFail($id);
+        $tour = Tour::with(['title', 'description', 'images', 'type', 'manager', 'region', 'filters'])->findOrFail($id);
 
         return view('admin.edit-tour', compact('tour'));
     }

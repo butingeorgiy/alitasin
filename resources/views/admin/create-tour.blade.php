@@ -128,12 +128,16 @@
             </div>
 
             <div>
-                <p class="mb-2 font-semibold">{{ __('short-phrases.date') }}</p>
-                <input type="text"
-                       name="date"
-                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer"
-                       readonly
-                       placeholder="{{ __('short-phrases.choose-date') }}">
+                <p class="mb-2 font-semibold">{{ __('short-phrases.conducted-days') }}</p>
+                <select name="conduct_at" multiple placeholder="{{ __('short-phrases.search') }}">
+                    <option value="mon">{{ __('short-phrases.monday') }}</option>
+                    <option value="tue">{{ __('short-phrases.tuesday') }}</option>
+                    <option value="wed">{{ __('short-phrases.wednesday') }}</option>
+                    <option value="thu">{{ __('short-phrases.thursday') }}</option>
+                    <option value="fri">{{ __('short-phrases.friday') }}</option>
+                    <option value="sat">{{ __('short-phrases.saturday') }}</option>
+                    <option value="sun">{{ __('short-phrases.sunday') }}</option>
+                </select>
             </div>
 
             <div>
@@ -152,7 +156,7 @@
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.region') }}</p>
                 <select name="region_id"
-                        class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
+                        class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
                     <option value="">{{ __('short-phrases.choose-region') }}</option>
                     @foreach(\App\Models\Region::all() as $region)
                         <option value="{{ $region->id }}">{{ $region->name }}</option>
@@ -163,7 +167,7 @@
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.manager') }}</p>
                 <select name="manager_id"
-                        class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
+                        class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
                     <option value="">@lang('short-phrases.choose-manager')</option>
                     @foreach(\App\Models\User::managers()->get() as $manager)
                         <option value="{{ $manager->id }}">{{ $manager->full_name }}</option>
@@ -176,8 +180,34 @@
                 <input type="text"
                        name="address"
                        maxlength="256"
-                       class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                        placeholder="{{ __('short-phrases.departure-place') }}">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-5 mt-6">
+            <div>
+                <p class="mb-2 font-semibold">{{ __('short-phrases.duration') }} ({{ __('short-phrases.unnecessary') }})</p>
+                <div class="w-full flex items-center mb-5 px-4 py-3 text-sm bg-white shadow rounded-md">
+                    <input type="text"
+                           name="duration"
+                           class="mr-3 text-gray-400 placeholder-gray-400"
+                           style="flex: 1"
+                           placeholder="{{ __('short-phrases.amount') }}">
+                    <select name="duration-mode" class="cursor-pointer">
+                        <option value="h">{{ __('short-phrases.hours') }}</option>
+                        <option value="d">{{ __('short-phrases.days') }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-span-2">
+                <p class="mb-2 font-semibold">{{ __('short-phrases.filters') }}</p>
+                <select name="filters" multiple placeholder="{{ __('short-phrases.search') }}">
+                    @foreach(\App\Models\Filter::all() as $filter)
+                        <option value="{{ $filter->id }}">{{ $filter->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
@@ -190,8 +220,7 @@
             <span></span>
         </div>
 
-        <div
-            class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
+        <div class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
             <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

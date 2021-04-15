@@ -1,7 +1,7 @@
-<div class="shadow rounded-md">
+<div class="flex flex-col shadow rounded-md">
     <div class="bg-center bg-cover bg-no-repeat bg-gray-50 rounded-md"
          style="height: 180px; background-image: url({{ $tour->image }})"></div>
-    <div class="px-4 pb-2">
+    <div class="flex flex-col px-4 pb-2 h-full" style="flex: 1">
         <div class="flex items-center py-3 text-xs 2xl:text-sm text-blue font-semibold">
             <div class="flex items-center mr-4">
                 <svg class="min-w-5 min-w-5 w-5 h-5 mr-2" viewBox="0 0 21 21" fill="none"
@@ -39,23 +39,25 @@
                 <span>{{ $tour->type->name }}</span>
             </div>
 
-{{--            <div class="flex items-center">--}}
-{{--                <svg class="min-w-5 min-w-5 w-5 h-5 mr-2" width="21" height="21" viewBox="0 0 21 21"--}}
-{{--                     fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                    <path--}}
-{{--                        d="M10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751--}}
-{{--                                        19.25 1.75 15.3325 1.75 10.5C1.75 6.91194 3.90967 3.8283 7 2.47808M10.5 5.25V10.5L14 12.25"--}}
-{{--                        stroke="#0094FF" stroke-width="2" stroke-linecap="round"--}}
-{{--                        stroke-linejoin="round"/>--}}
-{{--                </svg>--}}
-{{--                <span>6 часов</span>--}}
-{{--            </div>--}}
+            @if($tour->duration)
+                <div class="flex items-center">
+                    <svg class="min-w-5 min-w-5 w-5 h-5 mr-2" width="21" height="21" viewBox="0 0 21 21"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751
+                                            19.25 1.75 15.3325 1.75 10.5C1.75 6.91194 3.90967 3.8283 7 2.47808M10.5 5.25V10.5L14 12.25"
+                            stroke="#0094FF" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ $tour->duration }}</span>
+                </div>
+            @endif
         </div>
 
         <p class="mb-2 text-black font-bold leading-5">{{ $tour->title[App::getLocale()] }}</p>
         <p class="mb-4 text-sm text-gray-600 leading-5">{{ \Illuminate\Support\Str::limit($tour->description[App::getLocale()]) }}</p>
 
-        <div class="flex items-end">
+        <div class="flex items-end" style="flex: 1">
             <p class="mr-auto text-3xl text-black font-bold">${{ $tour->price }}</p>
             <div class="flex flex-col items-end pb-0.5">
                 <div class="flex mb-1">

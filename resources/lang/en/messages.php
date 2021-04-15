@@ -1,6 +1,7 @@
 <?php
 
 return [
+    // General messages
     'tour-not-found' => 'Tour not found!',
     'manager-not-found' => 'Manager not found!',
     'region-not-found' => 'Region not found!',
@@ -25,5 +26,48 @@ return [
     'password-required' => 'Password is required!',
     'min-password-length' => 'The minimum password length is 8 characters!',
     'email-wrong-format' => 'Incorrect E-mail format!',
-    'wrong-password' => 'Password is wrong!'
+    'wrong-password' => 'Password is wrong!',
+    'no-results' => 'No results found!',
+    'tour-filters-parse-error' => 'Incorrect format of filters for searching for excursions!',
+    'tour-types-parse-error' => 'Incorrect format of types for searching for excursions!',
+
+    // Tour validation messages
+    'tour-en-title-required' => 'Must specify the name of the tour in English!',
+    'tour-en-title-min' => 'The name of the tour in English must not be shorter than 10 characters!',
+    'tour-en-title-max' => 'The name of the tour in English must not be longer than 256 characters!',
+    'tour-ru-title-required' => 'Must specify the name of the tour in Russian!',
+    'tour-ru-title-min' => 'The name of the tour in Russian must not be shorter than 10 characters!',
+    'tour-ru-title-max' => 'The name of the tour in Russian must not be longer than 256 characters!',
+    'tour-tr-title-required' => 'Must specify the name of the tour in Turkish!',
+    'tour-tr-title-min' => 'The name of the tour in Turkish must not be shorter than 10 characters!',
+    'tour-tr-title-max' => 'The name of the tour in Turkish must not be longer than 256 characters!',
+    'tour-en-description-required' => 'Must specify a description of the tour in English!',
+    'tour-en-description-min' => 'The tour description in English must not be shorter than 10 characters!',
+    'tour-en-description-max' => 'The tour description in English must not be longer than 2048 characters!',
+    'tour-ru-description-required' => 'Must specify a description of the tour in Russian!',
+    'tour-ru-description-min' => 'The tour description in Russian must not be shorter than 10 characters!',
+    'tour-ru-description-max' => 'The tour description in Russian must not be longer than 2048 characters!',
+    'tour-tr-description-required' => 'Must specify a description of the tour in Turkish!',
+    'tour-tr-description-min' => 'The tour description in Turkish must not be shorter than 10 characters!',
+    'tour-tr-description-max' => 'The tour description in Turkish must not be longer than 2048 characters!',
+    'tour-address-required' => 'Must specify the address of the tour!',
+    'tour-address-min' => 'The address must not be shorter than 10 characters!',
+    'tour-address-max' => 'The address must not be longer than 256 characters!',
+    'tour-manager-require' => 'Must specify the manager of the tour!',
+    'tour-manager-id-numeric' => 'Invalid manager ID! ID is a number!',
+    'tour-region-require' => 'Must specify the region of the tour!',
+    'tour-region-id-numeric' => 'Invalid region ID! ID is a number!',
+    'tour-price-require' => 'Must specify the price of the tour!',
+    'tour-price-numeric' => 'The price of tour must be a number!',
+    'tour-price-min' => 'The price cannot be negative!',
+    'tour-conducted-at-require' => 'Must specify the days of the excursion!',
+    'tour-conducted-at-json' => 'Incorrect type of days of weeks! JSON must be sent!',
+    'tour-conducted-at-min' => 'Must specify at least one conducted day!',
+    'tour-type-require' => 'Must specify the type of the tour!',
+    'tour-type-id-numeric' => 'Invalid tour\'s type ID! ID is a number!',
+    'tour-filters-require' => 'Must specify filters of the tour!',
+    'tour-filters-json' => 'Invalid filters format! JSON must be sent!',
+    'tour-filters-min' => 'Must specify at least one filter!',
+    'tour-duration-format' => 'Invalid duration format!',
+    'week-day-invalid' => 'Invalid day of the week!'
 ];

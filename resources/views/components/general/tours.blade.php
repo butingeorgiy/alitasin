@@ -1,6 +1,7 @@
 <section id="toursSection" class="mb-10 pb-6 border-b border-gray-200">
     <div class="container mx-auto px-5">
-        <p class="mb-4 text-center text-black text-2xl font-bold text-black">{{ __('short-phrases.popular-tours') }}<span class="text-blue">.</span></p>
+        <p class="mb-4 text-center text-black text-2xl font-bold text-black">{{ __('short-phrases.popular-tours') }}
+            <span class="text-blue">.</span></p>
         <div class="flex items-start">
             <div class="left-side mr-5">
                 <div class="filters mb-5 shadow rounded-md">
@@ -8,14 +9,15 @@
                         <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.filters') }}</p>
                         <div class="flex flex-wrap mb-4 px-3 pb-4 gap-2 border-b border-gray-200">
                             @foreach(\App\Models\Filter::all() as $filter)
-                                <div class="filter-item">
-                                    <span class="text-blue">0</span>&nbsp;&nbsp;{{ $filter->name }}
+                                <div class="filter-item" data-filter-id="{{ $filter->id }}">
+                                    <span
+                                        class="text-blue">{{ $filterCounter[$filter->id] ?? 0 }}</span>&nbsp;&nbsp;{{ $filter->name }}
                                 </div>
                             @endforeach
-{{--                            <div--}}
-{{--                                class="inline px-3 py-1 text-sm border border-black text-white bg-black rounded-full cursor-pointer">--}}
-{{--                                {{ __('buttons.show-all') }}--}}
-{{--                            </div>--}}
+                            {{--                            <div--}}
+                            {{--                                class="inline px-3 py-1 text-sm border border-black text-white bg-black rounded-full cursor-pointer">--}}
+                            {{--                                {{ __('buttons.show-all') }}--}}
+                            {{--                            </div>--}}
                         </div>
 
                         <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.price') }}</p>
@@ -44,43 +46,45 @@
                                    placeholder="{{ __('short-phrases.to') }}">
                         </div>
 
-                        <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.date') }}</p>
-                        <div class="flex items-center mb-4 px-3 pb-4 border-b border-gray-200">
-                            <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6 10H21V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V20C3
-                                    21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13M17 18H13"
-                                    stroke="#0094FF"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                                <path d="M16 1V4" stroke="#0094FF" stroke-width="2" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                                <path d="M8 1V4" stroke="#0094FF" stroke-width="2" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                            </svg>
-                            <input type="text" name="date_from"
-                                   class="w-24 px-2 py-1 text-sm text-center text-gray-600 placeholder-gray-600 border-2 border-black rounded-full cursor-pointer"
-                                   placeholder="{{ __('short-phrases.from') }}" readonly>
-                            <div class="w-6 mx-4 border-b-2 border-black"></div>
-                            <input type="text" name="date_to"
-                                   class="w-24 px-2 py-1 text-sm text-center text-gray-600 placeholder-gray-600 border-2 border-black rounded-full cursor-pointer"
-                                   placeholder="{{ __('short-phrases.to') }}" readonly>
-                        </div>
+{{--                        <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.date') }}</p>--}}
+{{--                        <div class="flex items-center mb-4 px-3 pb-4 border-b border-gray-200">--}}
+{{--                            <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 24 24" fill="none"--}}
+{{--                                 xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                <path--}}
+{{--                                    d="M6 10H21V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V20C3--}}
+{{--                                    21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13M17 18H13"--}}
+{{--                                    stroke="#0094FF"--}}
+{{--                                    stroke-width="2"--}}
+{{--                                    stroke-linecap="round"--}}
+{{--                                    stroke-linejoin="round"--}}
+{{--                                />--}}
+{{--                                <path d="M16 1V4" stroke="#0094FF" stroke-width="2" stroke-linecap="round"--}}
+{{--                                      stroke-linejoin="round"/>--}}
+{{--                                <path d="M8 1V4" stroke="#0094FF" stroke-width="2" stroke-linecap="round"--}}
+{{--                                      stroke-linejoin="round"/>--}}
+{{--                            </svg>--}}
+{{--                            <input type="text" name="date_from"--}}
+{{--                                   class="w-24 px-2 py-1 text-sm text-center text-gray-600 placeholder-gray-600 border-2 border-black rounded-full cursor-pointer"--}}
+{{--                                   placeholder="{{ __('short-phrases.from') }}" readonly>--}}
+{{--                            <div class="w-6 mx-4 border-b-2 border-black"></div>--}}
+{{--                            <input type="text" name="date_to"--}}
+{{--                                   class="w-24 px-2 py-1 text-sm text-center text-gray-600 placeholder-gray-600 border-2 border-black rounded-full cursor-pointer"--}}
+{{--                                   placeholder="{{ __('short-phrases.to') }}" readonly>--}}
+{{--                        </div>--}}
 
                         <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.tour-types') }}</p>
                         <div class="flex flex-wrap mb-4 px-3 pb-4 gap-2 border-b border-gray-200">
                             @foreach(\App\Models\TourType::all() as $type)
-                                <div class="inline px-3 py-1 text-sm border-2 border-gray-600 rounded-full cursor-pointer">
+                                <div
+                                    class="type-items inline px-3 py-1 text-sm border-2 border-gray-600 rounded-full cursor-pointer"
+                                    data-type-id="{{ $type->id }}">
                                     {{ $type->name }}
                                 </div>
                             @endforeach
                         </div>
 
                         <button
-                            class="self-center text-sm text-gray-600 hover:underline cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:no-underline"
+                            class="reset-filters-button self-center text-sm text-gray-600 hover:underline cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:no-underline"
                             disabled>{{ __('buttons.reset-filters') }}</button>
                     </div>
                 </div>
@@ -130,7 +134,8 @@
                     </a>
                     <a href="#" class="flex justify-center items-center py-2 text-white font-semibold rounded-md"
                        style="background-color: #7527F5">
-                        <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 29 29" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15.82 2.312C15.9328 2.32025 16.0373 2.3285 16.1253 2.34088C22.3169 3.29375 25.1645 6.22662 25.9524 12.4664C25.9661
                                 12.5722 25.9689 12.7015 25.9703 12.8376C25.9785 13.3258 25.995 14.3405 27.084 14.3611H27.117C27.4594 14.3611 27.7303
@@ -156,7 +161,7 @@
                     </a>
                 </div>
             </div>
-            <div class="w-full grid grid-cols-2 xl:grid-cols-3 gap-5">
+            <div class="tours-container w-full grid grid-cols-2 xl:grid-cols-3 gap-5">
                 @foreach($tours as $tour)
                     @include('components.tours.tour-card', compact('tour'))
                 @endforeach

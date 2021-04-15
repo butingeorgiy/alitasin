@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', _ => {
         const controller = new UpdateTourController({
             error: document.querySelector('#editTourForm .error-message'),
             success: document.querySelector('#editTourForm .success-message'),
-            updateTourButton
+            updateTourButton,
+            datePickerTextInput: document.querySelector('#createTourForm input[name="date"]')
         });
 
         // Image boxes initialization
@@ -20,18 +21,10 @@ document.addEventListener('DOMContentLoaded', _ => {
             console.error('Failed to initialize image boxes!');
         }
 
-        // Date picker initialization
-        const datePickerTextInput = document.querySelector('#editTourForm input[name="date"]');
-
-        if (datePickerTextInput) {
-            controller.initDateCalendar(datePickerTextInput);
-        } else {
-            console.error('Failed to initialize date picker!');
-        }
-
-        // Update tour
-        updateTourButton.addEventListener('click', e => {
-            if (!e.currentTarget.classList.contains('loading')) {
+        // Update tour handler
+        updateTourButton.addEventListener('click', _ => {
+            if (!controller.loading) {
+                controller.loading = true;
                 controller.updateTour(form);
             }
         });

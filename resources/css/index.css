@@ -1,6 +1,7 @@
 @import "/css/font.css";
 @import "/css/swiper.css";
 @import "/css/flatpickr.min.css";
+@import "/css/tom-select.css";
 
 @tailwind base;
 @tailwind components;
@@ -45,21 +46,19 @@ select::-ms-expand {
     width: 450px;
 }
 
-/* Clear tours filter button modes (start) */
-
-.filters .filter-item {
+.filters .filter-item,
+.filters .type-items {
     @apply inline px-3 py-1 text-sm border-2 border-gray-600 rounded-full cursor-pointer;
 }
 
-.filters .filter-item.active {
+.filters .filter-item.active,
+.filters .type-items.active {
     @apply text-white border-blue bg-blue;
 }
 
 .filters .filter-item.active span {
     @apply text-white;
 }
-
-/* Clear tours filter button modes (end) */
 
 .select-text {
     -webkit-user-select: text !important;
@@ -135,4 +134,22 @@ select::-ms-expand {
 #createTourForm .image-item.filled .remove-image-button,
 #editTourForm .image-item.filled .remove-image-button {
     @apply block;
+}
+
+/* Tom Select */
+
+.ts-input {
+    @apply w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer;
+}
+
+.ts-control.multi .ts-input > .comma-separate::after {
+    content: ',';
+}
+
+.ts-control.multi .ts-input > .comma-separate:last-child::after {
+    content: none !important;
+}
+
+.ts-dropdown {
+    @apply rounded-md shadow overflow-hidden;
 }

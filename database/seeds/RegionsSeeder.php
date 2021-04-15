@@ -13,9 +13,9 @@ class RegionsSeeder extends Seeder
     {
         DB::table('regions')->insert([
             [
-                'ru_name' => 'Стамбул',
-                'en_name' => 'Istanbul',
-                'tr_name' => 'İstanbul',
+                'ru_name' => 'Мармарис',
+                'en_name' => 'Marmaris',
+                'tr_name' => 'Marmaris',
                 'show_at_index_page' => '1'
             ],
             [
@@ -25,9 +25,9 @@ class RegionsSeeder extends Seeder
                 'show_at_index_page' => '1'
             ],
             [
-                'ru_name' => 'Кемер',
-                'en_name' => 'Kemer',
-                'tr_name' => 'Kemer',
+                'ru_name' => 'Белек',
+                'en_name' => 'Belek',
+                'tr_name' => 'Belek',
                 'show_at_index_page' => '1'
             ],
             [
@@ -47,6 +47,12 @@ class RegionsSeeder extends Seeder
                 'en_name' => 'Bodrum',
                 'tr_name' => 'Bodrum',
                 'show_at_index_page' => '1'
+            ],
+            [
+                'ru_name' => 'Фетхие',
+                'en_name' => 'Fethiye',
+                'tr_name' => 'Fethiye',
+                'show_at_index_page' => '0'
             ]
         ]);
     }

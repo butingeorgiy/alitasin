@@ -7,11 +7,15 @@ class CreateTourController extends TourFormBaseController {
     constructor(nodes) {
         super(nodes);
 
+        this.loading = false;
         this.view = new CreateTourView({
             error: nodes.error,
             success: nodes.success,
             btn: nodes.saveTourButton
         });
+
+        this.initFiltersSelect('#createTourForm select[name="filters"]');
+        this.initWeekDaysSelect('#createTourForm select[name="conduct_at"]');
     }
 
     initImageBoxes(items) {
@@ -49,10 +53,14 @@ class CreateTourController extends TourFormBaseController {
 
         const formData = new FormData(form);
 
-        if (this.datePicker.selectedDates[0]) {
-            formData.append('date', DateHelper.format(this.datePicker.selectedDates[0]));
-        } else {
-            formData.delete('date');
+        formData.append('filters', JSON.stringify(this.filtersSelect.getValue()));
+        formData.append('conducted_at', JSON.stringify(this.weekDaysSelect.getValue()));
+
+        const durationInput = form.querySelector('input[name="duration"]');
+        const durationSelect = form.querySelector('select[name="duration-mode"]');
+
+        if (durationInput && durationSelect) {
+            formData.append('duration', durationInput.value ? `${durationInput.value}~${durationSelect.value}` : '')
         }
 
         CreateTourModel.create(formData)
@@ -70,7 +78,10 @@ class CreateTourController extends TourFormBaseController {
                     }, 500)
                 }
             })
-            .catch(error => alert(`Error: ${error}`));
+            .catch(error => alert(`Error: ${error}`))
+            .finally(_ => {
+                this.loading = false;
+            });
     }
 }
 

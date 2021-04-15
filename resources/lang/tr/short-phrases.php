@@ -35,8 +35,36 @@ return [
     'region' => 'Bölge',
     'manager' => 'Yönetici',
     'address' => 'Adres',
-    'reviews' => 'Görüşler',
+    'reviews' => 'Yorumlar',
     'enter-into-account' => 'Hesabınıza giriş yapın',
     'email' => 'E-posta adresi',
-    'password' => 'Parola'
+    'password' => 'Parola',
+    'search' => 'Aramak',
+    'tour-duration' => 'Tur süresi',
+    'duration' => 'Süre',
+    'unnecessary' => 'gereksiz',
+    'amount' => 'Miktar',
+    'hours' => 'Saatler',
+    'days' => 'Günler',
+    'conducted-days' => 'Yürütülen günler',
+
+    // Days of the week
+
+    'monday-shorten' => 'Pzt',
+    'tuesday-shorten' => 'Sal',
+    'wednesday-shorten' => 'Çar',
+    'thursday-shorten' => 'Per',
+    'friday-shorten' => 'Cum',
+    'saturday-shorten' => 'Cmt',
+    'sunday-shorten' => 'Paz',
+
+    'monday' => 'Pazartesi',
+    'tuesday' => 'Salı',
+    'wednesday' => 'Çarşamba',
+    'thursday' => 'Perşembe',
+    'friday' => 'Cuma',
+    'saturday' => 'Cumartesi',
+    'sunday' => 'Pazar',
+
+    // Days of the week (end)
 ];

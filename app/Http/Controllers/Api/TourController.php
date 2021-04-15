@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\TourRequest;
+use App\Models\Filter;
 use App\Models\Region;
 use App\Models\Tour;
 use App\Models\TourDescription;
@@ -14,6 +15,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class TourController extends Controller
@@ -27,24 +29,28 @@ class TourController extends Controller
      */
     public function create(TourRequest $request): array
     {
+        // Region validation
         $region = Region::find($request->input('region_id'));
 
         if (!$region) {
             throw new Exception(__('messages.region-not-found'));
         }
 
+        // Manager validation
         $manager = User::managers()->find($request->input('manager_id'));
 
         if (!$manager) {
             throw new Exception(__('messages.manager-not-found'));
         }
 
+        // Tour type validation
         $tourType = TourType::find($request->input('tour_type_id'));
 
         if (!$tourType) {
             throw new Exception(__('messages.tour-type-not-found'));
         }
 
+        // Images validation
         if (count($request->file()) === 0) {
             throw new Exception(__('messages.tour-must-have-image'));
         }
@@ -63,6 +69,27 @@ class TourController extends Controller
             }
         }
 
+        // Filters validation
+        $filters = json_decode($request->input('filters'));
+
+        if (count($filters) === 0) {
+            throw new Exception(__('messages.tour-filters-min'));
+        }
+
+        // Conducting days validation
+        $days = json_decode($request->input('conducted_at'));
+
+        if (count($days) === 0) {
+            throw new Exception(__('messages.tour-conducted-at-min'));
+        }
+
+        foreach ($days as $day) {
+            if (!in_array($day, ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'])) {
+                throw new Exception(__('messages.week-day-invalid'));
+            }
+        }
+
+        // Creating tour
         $tour = new Tour();
 
         $tourTitle = TourTitle::create([
@@ -84,25 +111,33 @@ class TourController extends Controller
         $tour->type()->associate($tourType);
         $tour->address = $request->input('address');
         $tour->price = $request->input('price');
-        $tour->date = $request->input('date');
+        $tour->conducted_at = implode('~', $days);
+
+        if ($request->has('duration')) {
+            $tour->duration = $request->input('duration');
+        }
+
 
         if(!$tour->save()) {
             throw new Exception(__('messages.tour-creation-failed'));
         }
 
         $tourImages = [];
+        $i = 0;
 
-        foreach ($request->file() as $index => $file) {
+        foreach ($request->file() as $file) {
             $name = Str::random() . '.' . $file->extension();
             $tourImages[] = new TourImage([
                 'link' => $name,
-                'is_main' => $index === 0 ? '1' : '0'
+                'is_main' => $i === 0 ? '1' : '0'
             ]);
 
+            $i++;
             $file->storeAs('tour_pictures', $name);
         }
 
         $tour->images()->saveMany($tourImages);
+        $tour->filters()->attach($filters);
 
         return [
             'message' => __('messages.tour-created')
@@ -117,12 +152,26 @@ class TourController extends Controller
      * @return array
      * @throws Exception
      */
-    public function update(TourRequest $request, $id)
+    public function update(TourRequest $request, $id): array
     {
         $tour = Tour::with(['title', 'description', 'region', 'manager', 'type'])->find($id);
 
         if (!$tour) {
             throw new Exception(__('messages.tour-not-found'));
+        }
+
+        // Filters validation
+        $filters = json_decode($request->input('filters'));
+
+        if (count($filters) === 0) {
+            throw new Exception(__('messages.tour-filters-min'));
+        }
+
+        // Conducting days validation
+        $days = json_decode($request->input('conducted_at'));
+
+        if (count($days) === 0) {
+            throw new Exception(__('messages.tour-conducted-at-min'));
         }
 
         // Title updating
@@ -188,17 +237,24 @@ class TourController extends Controller
             $tour->type()->associate($tourType);
         }
 
+        // Filters updating
+        $tour->filters()->sync($filters);
+
         // Other tour's fields updating
         if ($tour->address !== $request->input('address')) {
             $tour->address = $request->input('address');
         }
 
-        if ($tour->date !== $request->input('date')) {
-            $tour->date = $request->input('date');
+        if ($tour->conducted_at !== implode('~', json_decode($request->input('conducted_at')))) {
+            $tour->conducted_at = implode('~', json_decode($request->input('conducted_at')));
         }
 
         if ($tour->price !== $request->input('price')) {
             $tour->price = $request->input('price');
+        }
+
+        if ($tour->getOriginal('duration') !== $request->input('duration')) {
+            $tour->duration = $request->input('duration');
         }
 
         if ($tour->save()) {
@@ -228,7 +284,7 @@ class TourController extends Controller
      * @return array
      * @throws Exception
      */
-    public function changeMainImage(Request $request, $tourId)
+    public function changeMainImage(Request $request, $tourId): array
     {
         if (!$request->has('image_id')) {
             throw new Exception(__('messages.specify-image-id'));
@@ -276,7 +332,7 @@ class TourController extends Controller
      * @return array
      * @throws Exception
      */
-    public function deleteImage(Request $request, $tourId)
+    public function deleteImage(Request $request, $tourId): array
     {
         if (!$request->has('image_id')) {
             throw new Exception(__('messages.specify-image-id'));
@@ -322,7 +378,7 @@ class TourController extends Controller
      * @return array
      * @throws Exception
      */
-    public function uploadImage(Request $request, $tourId)
+    public function uploadImage(Request $request, $tourId): array
     {
         $tour = Tour::find($tourId);
 
@@ -372,5 +428,65 @@ class TourController extends Controller
         return [
             'message' => __('messages.file-uploading-success')
         ];
+    }
+
+    public function get(Request $request)
+    {
+        $tours = Tour::with(['title', 'description', 'type', 'filters', 'images']);
+
+        if ($request->has('filters')) {
+            $filters = json_decode($request->input('filters'));
+
+            if ($filters === null) {
+                throw new Exception(__('messages.tour-filters-parse-error'));
+            }
+
+            $tours->whereHas('filters', function ($query) use ($filters) {
+                $query->whereIn('id', $filters);
+            });
+        }
+
+        if ($request->has('types')) {
+            $types = json_decode($request->input('types'));
+
+            if ($types === null) {
+                throw new Exception(__('messages.tour-types-parse-error'));
+            }
+
+            $tours->whereIn('tour_type_id', $types);
+        }
+
+        if ($request->has('min_price')) {
+            $tours->where('price', '>=', $request->input('min_price'));
+        }
+
+        if ($request->has('max_price')) {
+            $tours->where('price', '<=', $request->input('max_price'));
+        }
+
+        $tours = $tours->offset($request->input('offset') ?? 0)->limit(15)->get();
+
+        foreach ($tours as $tour) {
+            $row = $tour->only(['id', 'price']);
+
+            $row['title'] = $tour->title[\App::getLocale()];
+            $row['description'] = Str::limit($tour->description[\App::getLocale()]);
+            $row['duration'] = $tour->duration;
+            $row['type'] = $tour->type->name;
+
+            foreach ($tour->images as $image) {
+                if ($image->isMain()) {
+                    $path = 'tour_pictures/' . $image->link;
+
+                    if (Storage::exists($path)) {
+                        $row['image'] = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                    }
+                }
+            }
+
+            $response[] = $row;
+        }
+
+        return $response ?? [];
     }
 }
