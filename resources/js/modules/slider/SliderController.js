@@ -32,6 +32,14 @@ class SliderController {
             slidesPerView: 'auto'
         });
     }
+
+    static initPopularToursSlider() {
+        new Swiper('#popularToursSection .swiper-container', {
+            spaceBetween: 16,
+            loop: true,
+            slidesPerView: 'auto'
+        });
+    }
 }
 
 export default SliderController;

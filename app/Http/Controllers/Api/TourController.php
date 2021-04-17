@@ -464,6 +464,10 @@ class TourController extends Controller
             $tours->where('price', '<=', $request->input('max_price'));
         }
 
+        if ($request->has('region_id')) {
+            $tours->where('region_id', $request->input('region_id'));
+        }
+
         $tours = $tours->offset($request->input('offset') ?? 0)->limit(15)->get();
 
         foreach ($tours as $tour) {

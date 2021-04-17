@@ -112,6 +112,9 @@ class PageController extends Controller
         return view('index', compact('regions', 'tours', 'filterCounter', 'vehicles'));
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function adminIndex()
     {
         $user = Auth::user();
@@ -121,5 +124,56 @@ class PageController extends Controller
         }
 
         return redirect()->route('index');
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRegion($id)
+    {
+        $currentRegion = Region::findOrFail($id);
+
+        $tours = Tour::with(['title', 'description', 'images', 'type', 'filters'])
+            ->where('region_id', $id)->limit(15)->get();
+        $filterCounter = [];
+        $popularTours = [];
+
+        foreach ($tours as $tour) {
+            foreach ($tour->images as $image) {
+                if ($image->isMain()) {
+                    $path = 'tour_pictures/' . $image->link;
+
+                    if (Storage::exists($path)) {
+                        $tour->image = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                    }
+                }
+            }
+
+            foreach ($tour->filters as $filter) {
+                if ($filter->id === 1) {
+                    $popularTours[] = $tour;
+                }
+
+                if (isset($filterCounter[$filter->id])) {
+                    $filterCounter[$filter->id]++;
+                } else {
+                    $filterCounter[$filter->id] = 1;
+                }
+            }
+        }
+
+
+        $regions = Region::where('id', '!=', $id)->get();
+
+        foreach ($regions as $region) {
+            $path = 'region_pictures/region-' . $region->id . '-s.jpg';
+
+            if (Storage::exists($path)) {
+                $region->image = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+            }
+        }
+
+        return view('region', compact('tours', 'regions', 'currentRegion', 'filterCounter', 'popularTours'));
     }
 }

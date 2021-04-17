@@ -1,4 +1,4 @@
-<section id="globalSearch" class="relative bg-white rounded-t-3xl" style="top: -20px">
+<section id="globalSearch" class="relative bg-white rounded-t-3xl {{ $bottomBorder ? 'pb-6 border-b border-gray-200' : '' }}" style="top: -20px">
     <div class="container flex justify-center mx-auto px-5 pt-6">
         <div class="flex sm:justify-center items-center w-192 px-5 py-3 border-2 border-blue rounded-xl">
             <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">

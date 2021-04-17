@@ -8,7 +8,7 @@ class FilterToursController extends EventHandler {
 
         this.nodes = nodes;
         this.loading = false;
-        this.shoudShowMore = true;
+        this.shoudShowMore = !nodes.showMoreButton.classList.contains('disabled');
         this.offsetStep = 15;
         this.offset = 0;
         this.filters = {
@@ -99,7 +99,11 @@ class FilterToursController extends EventHandler {
         }
 
         if (this.offset !== 0) {
-            uri += `offset=${this.offset}`;
+            uri += `offset=${this.offset}&`;
+        }
+
+        if (/^\/regions\/\d+$/.test(location.pathname)) {
+            uri += `region_id=${location.pathname.split('/')[2]}`;
         }
 
         return uri === '?' ? '' : uri;
@@ -183,11 +187,11 @@ class FilterToursController extends EventHandler {
 
                 if (mode === 'filter') {
                     this.view.clearContainer();
-                } else if (mode === 'show-more') {
-                    if (result.length < this.offsetStep) {
-                        this.shoudShowMore = false;
-                        this.view.disableShowMoreButton();
-                    }
+                }
+
+                if (result.length < this.offsetStep) {
+                    this.shoudShowMore = false;
+                    this.view.disableShowMoreButton();
                 }
 
                 this.view.render(result);

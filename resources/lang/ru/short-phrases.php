@@ -8,7 +8,7 @@ return [
     'choose-region' => 'Выберите регион',
     'choose-manager' => 'Выберите менеджера',
     'tours-in-turkey' => 'Экскурсии в Турции',
-    'tours-around-turkey' => 'Экскурсии по городам Турции',
+    'popular-turkey-regions' => 'Популярные регионы Турции',
     'popular-tours' => 'Популярные экскурсии',
     'clients-reviews' => 'Отзывы клиентов',
     'date' => 'Дата',
@@ -46,6 +46,7 @@ return [
     'amount' => 'Количество',
     'hours' => 'Часы',
     'days' => 'Дни',
+    'day' => 'День',
     'conducted-days' => 'Дни проведения',
 
     // Days of the week
@@ -77,5 +78,6 @@ return [
     'main-sections-tours-amount' => 'доступных экскурсий',
     'main-sections-transport-amount' => 'доступных автомобилей',
     'main-sections-hotels-amount' => 'доступных отелей',
-    'all-tours' => 'Все экскурсии'
+    'all-tours' => 'Все экскурсии',
+    'other-turkey-regions' => 'Другие регионы Турции'
 ];

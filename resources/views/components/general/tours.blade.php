@@ -2,10 +2,12 @@
     <div class="container mx-auto px-5">
         <div class="flex justify-between items-center lg:justify-center mb-4">
             <p class="inline text-black text-2xl font-bold text-black">{{ __('short-phrases.all-tours') }}<span class="text-blue">.</span></p>
-            <span class="show-filters-button block lg:hidden px-5 py-1 text-sm text-blue border-2 border-blue rounded-md cursor-pointer">{{ __('short-phrases.filters') }}</span>
+            @if(count($tours) > 0)
+                <span class="show-filters-button block lg:hidden px-5 py-1 text-sm text-blue border-2 border-blue rounded-md cursor-pointer">{{ __('short-phrases.filters') }}</span>
+            @endif
         </div>
         <div class="flex items-start relative">
-            <div class="hidden lg:block right-0 absolute lg:relative left-side mr-0 lg:mr-5">
+            <div class="left-side hidden lg:block absolute lg:relative right-0 z-10 mr-0 lg:mr-5">
                 <div class="filters mb-0 lg:mb-5 bg-white shadow rounded-md">
                     <div class="flex flex-col py-4">
                         <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.filters') }}</p>
@@ -164,13 +166,15 @@
                 </div>
             </div>
             <div class="tours-container w-full grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
-                @foreach($tours as $tour)
+                @forelse($tours as $tour)
                     @include('components.tours.tour-card', compact('tour'))
-                @endforeach
+                @empty
+                    <p class="lg:m-3 text-xl text-gray-600 font-light">{{ __('messages.no-results') }}</p>
+                @endforelse
             </div>
         </div>
 
-        <div class="show-more-tours-button bg-blue">
+        <div class="show-more-tours-button bg-blue {{ count($tours) < 15 ? 'disabled' : '' }}">
             <svg class="animate-spin mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
