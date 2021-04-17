@@ -67,4 +67,15 @@ return [
     'sunday' => 'Pazar',
 
     // Days of the week (end)
+
+    'tours' => 'Geziler',
+    'transport' => 'Ulaşım',
+    'hotels' => 'Oteller',
+    'main-sections-tours-description' => 'Zevkinize göre herhangi bir gezi',
+    'main-sections-transport-description' => 'Gezileri paylaşmak için bir araba seçin',
+    'main-sections-hotels-description' => 'Türkiye\'deki en iyi otellerin değerlendirmesi',
+    'main-sections-tours-amount' => 'mevcut geziler',
+    'main-sections-transport-amount' => 'mevcut araçlar',
+    'main-sections-hotels-amount' => 'müsait oteller',
+    'all-tours' => 'Tüm geziler'
 ];

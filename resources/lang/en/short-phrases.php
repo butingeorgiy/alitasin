@@ -67,4 +67,15 @@ return [
     'sunday' => 'Sunday',
 
     // Days of the week (end)
+
+    'tours' => 'Excursions',
+    'transport' => 'Transport',
+    'hotels' => 'Hotels',
+    'main-sections-tours-description' => 'Any excursions to your taste',
+    'main-sections-transport-description' => 'Choose a car for sharing trips',
+    'main-sections-hotels-description' => 'Rating of the best hotels in Turkey',
+    'main-sections-tours-amount' => 'available excursions',
+    'main-sections-transport-amount' => 'available vehicles',
+    'main-sections-hotels-amount' => 'available hotels',
+    'all-tours' => 'All excursions'
 ];

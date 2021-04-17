@@ -1,6 +1,6 @@
-<section id="globalSearch" class="relative bg-white rounded-t-3xl border-b border-gray-200" style="top: -20px">
-    <div class="container flex justify-center mx-auto px-5 py-6">
-        <div class="flex justify-center items-center w-192 py-3 border-2 border-blue rounded-xl">
+<section id="globalSearch" class="relative bg-white rounded-t-3xl" style="top: -20px">
+    <div class="container flex justify-center mx-auto px-5 pt-6">
+        <div class="flex sm:justify-center items-center w-192 px-5 py-3 border-2 border-blue rounded-xl">
             <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M19.7309 18.3109L16.0209 14.6309C17.461 12.8353 18.1584
@@ -23,7 +23,7 @@
                     fill="#747474"
                 />
             </svg>
-            <input type="text" name="search" class="w-80 text-gray-500 placeholder-gray-500 border-none focus:outline-none" placeholder="{{ __('short-phrases.global-search-placeholder') }}">
+            <input type="text" name="search" class="w-full sm:w-80 text-gray-500 placeholder-gray-500 border-none focus:outline-none" placeholder="{{ __('short-phrases.global-search-placeholder') }}">
         </div>
     </div>
 </section>
