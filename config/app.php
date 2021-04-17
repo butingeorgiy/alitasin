@@ -176,9 +176,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Custom Providers...
+         * Another Package Providers...
          */
-//        App\Providers\HelpersResolutionProvider::class
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -226,7 +226,8 @@ return [
         'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
-        'View' => Illuminate\Support\Facades\View::class
+        'View' => Illuminate\Support\Facades\View::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

@@ -17,6 +17,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class TourController extends Controller
 {
@@ -118,7 +119,7 @@ class TourController extends Controller
         }
 
 
-        if(!$tour->save()) {
+        if (!$tour->save()) {
             throw new Exception(__('messages.tour-creation-failed'));
         }
 
@@ -126,14 +127,23 @@ class TourController extends Controller
         $i = 0;
 
         foreach ($request->file() as $file) {
-            $name = Str::random() . '.' . $file->extension();
+            while (true) {
+                $name = Str::random() . '.' . $file->extension();
+
+                if (!Storage::exists('tour_pictures/' . $name)) {
+                    break;
+                }
+            }
+
             $tourImages[] = new TourImage([
                 'link' => $name,
                 'is_main' => $i === 0 ? '1' : '0'
             ]);
 
             $i++;
-            $file->storeAs('tour_pictures', $name);
+
+            Image::make($file->get())
+                ->save(storage_path('app/tour_pictures/' . $name), $file->getSize() > 1000000 ? 50 : 90);
         }
 
         $tour->images()->saveMany($tourImages);
@@ -386,7 +396,7 @@ class TourController extends Controller
             throw new Exception(__('messages.tour-not-found'));
         }
 
-        if ($tour->images->count() >= 5) {
+        if ($tour->images->count() > 5) {
             throw new Exception(__('messages.tour-can-have-max-five-images'));
         }
 
@@ -409,9 +419,13 @@ class TourController extends Controller
                 throw new Exception(__('messages.image-not-found'));
             }
 
-            $file->storeAs('tour_pictures', $image->link);
+            $fileName = $image->link;
         } else {
             // Add a new image
+            if ($tour->images->count() === 5) {
+                throw new Exception(__('messages.tour-can-have-max-five-images'));
+            }
+
             while (true) {
                 $fileName = Str::random() . '.' . $file->extension();
 
@@ -421,9 +435,11 @@ class TourController extends Controller
             }
 
             $image = new TourImage(['link' => $fileName]);
-            $file->storeAs('tour_pictures', $fileName);
             $tour->images()->save($image);
         }
+
+        Image::make($file->get())
+            ->save(storage_path('app/tour_pictures/' . $fileName), ($file->getSize() > 1000000 ? 50 : 90));
 
         return [
             'message' => __('messages.file-uploading-success')
@@ -480,11 +496,7 @@ class TourController extends Controller
 
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $path = 'tour_pictures/' . $image->link;
-
-                    if (Storage::exists($path)) {
-                        $row['image'] = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
-                    }
+                    $row['image'] = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
                 }
             }
 

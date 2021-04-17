@@ -10,3 +10,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('tours/create', 'TourController@showCreateForm')->middleware('auth:5')->name('create-form-tour');
     Route::get('tours/update/{id}', 'TourController@showEditForm')->middleware('auth:5')->name('edit-form-tour');
 });
+
+Route::get('cdn/images/{fileName}', 'ImageController@get')->name('get-image');
