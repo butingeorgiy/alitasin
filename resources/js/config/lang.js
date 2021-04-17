@@ -11,6 +11,16 @@ const langConfig = {
             'en': 'No results found',
             'ru': 'Ничего не найдено',
             'tr': 'Sonuç bulunamadı'
+        },
+        'close': {
+            'en': 'Close',
+            'ru': 'Закрыть',
+            'tr': 'Kapat'
+        },
+        'filters': {
+            'en': 'Filters',
+            'ru': 'Фильтры',
+            'tr': 'Filtreler'
         }
     }
 };

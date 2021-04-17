@@ -67,4 +67,15 @@ return [
     'sunday' => 'Воскресенье',
 
     // Days of the week (end)
+
+    'tours' => 'Экскурсии',
+    'transport' => 'Транспорт',
+    'hotels' => 'Отели',
+    'main-sections-tours-description' => 'Любые экскурсии на ваш вкус',
+    'main-sections-transport-description' => 'Выберите автомобиль для совместных поездок',
+    'main-sections-hotels-description' => 'Рейтинг самых лучших отелей Турции',
+    'main-sections-tours-amount' => 'доступных экскурсий',
+    'main-sections-transport-amount' => 'доступных автомобилей',
+    'main-sections-hotels-amount' => 'доступных отелей',
+    'all-tours' => 'Все экскурсии'
 ];

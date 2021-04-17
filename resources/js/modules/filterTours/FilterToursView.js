@@ -8,6 +8,18 @@ class FilterToursView {
         this.showMoreButton = nodes.showMoreButton;
     }
 
+    toggleFiltersForm(btn) {
+        if (document.body.clientWidth < 1024) {
+            if (this.filtersContainer.parentElement.classList.contains('hidden')) {
+                this.filtersContainer.parentElement.classList.remove('hidden');
+                btn.innerText = LocaleHelper.translate('close');
+            } else {
+                this.filtersContainer.parentElement.classList.add('hidden');
+                btn.innerText = LocaleHelper.translate('filters');
+            }
+        }
+    }
+
     clearContainer() {
         this.toursContainer.innerHTML = '';
     }
@@ -77,8 +89,17 @@ class FilterToursView {
             }
 
             tourCard.innerHTML = `
-                <div class="bg-center bg-cover bg-no-repeat bg-gray-50 rounded-md"
-                     style="height: 180px; background-image: url(${tour.image})"></div>
+                <div class="flex justify-end items-start p-3 bg-center bg-cover bg-no-repeat bg-gray-50 rounded-md"
+                     style="height: 180px; background-image: url(${tour.image})">
+                     <div class="flex justify-center items-center w-8 h-8 bg-white rounded-full cursor-pointer">
+                         <svg class="w-5 h-4" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M10.4998 3.76675L9.61235 2.86746C8.74862 1.99218 7.57715 1.50045 6.35566 1.50045C5.13416 1.50045 3.96269 1.99218 3.09897
+                                   2.86746C2.23524 3.74274 1.75 4.92987 1.75 6.1677C1.75 9.58687 6.99955 15.5 10.4998 15.5C14 15.5 19.2498 9.58641 19.2498 6.16725C19.2498
+                                   4.92942 18.7645 3.74228 17.9008 2.867C17.0371 1.99173 15.8656 1.5 14.6441 1.5C13.7927 1.5 12.9655 1.73892 12.25 2.18012"
+                                   stroke="#5C5C5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                         </svg>
+                     </div>
+                </div>
                 <div class="flex flex-col px-4 pb-2 h-full" style="flex: 1">
                     <div class="flex items-center py-3 text-xs 2xl:text-sm text-blue font-semibold">
                         <div class="flex items-center mr-4">

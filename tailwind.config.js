@@ -164,8 +164,8 @@ module.exports = {
             8: '8px',
         },
         boxShadow: {
-            sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-            DEFAULT: '0px 2px 4px rgba(130, 130, 130, 0.4)',
+            sm: '0px 2px 4px rgba(130, 130, 130, 0.4)', // used
+            DEFAULT: '0px 2px 4px rgba(130, 130, 130, 0.4)', // used
             md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
             lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
             xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
@@ -505,6 +505,7 @@ module.exports = {
             4: '1rem',
             5: '1.25rem',
             6: '1.5rem',
+            20: '5rem',
             full: '100%',
             screen: '100vh',
         },
@@ -513,6 +514,7 @@ module.exports = {
             4: '1rem',
             5: '1.25rem',
             6: '1.5rem',
+            20: '5rem',
             full: '100%',
             min: 'min-content',
             max: 'max-content',

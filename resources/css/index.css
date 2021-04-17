@@ -38,12 +38,18 @@ select::-ms-expand {
     height: 250px;
 }
 
+@media (max-width: 640px) {
+    #heroSection {
+        height: 180px;
+    }
+}
+
 #regionsSection .region-card:hover {
     top: -5px !important;
 }
 
 #toursSection .left-side {
-    width: 450px;
+    width: 300px;
 }
 
 .filters .filter-item,

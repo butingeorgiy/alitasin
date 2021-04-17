@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', _ => {
             toursContainer: document.querySelector('#toursSection .tours-container'),
             resetFiltersButton: document.querySelector('#toursSection .reset-filters-button'),
             filtersContainer: document.querySelector('#toursSection .filters'),
-            showMoreButton: document.querySelector('#toursSection .show-more-tours-button')
+            showMoreButton: document.querySelector('#toursSection .show-more-tours-button'),
+            showFiltersButton: document.querySelector('#toursSection .show-filters-button')
         });
     }
 });

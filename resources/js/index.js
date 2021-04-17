@@ -1,4 +1,4 @@
-import './modules/reviewsSlider';
+import './modules/slider';
 import './modules/createTour';
 import './modules/updateTour';
 import './modules/popup';

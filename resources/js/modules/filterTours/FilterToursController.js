@@ -27,6 +27,7 @@ class FilterToursController extends EventHandler {
 
         this.changeFiltersAttachHandlers();
         this.addEvent(nodes.resetFiltersButton, 'click', _ => this.resetFilters());
+        this.addEvent(nodes.showFiltersButton, 'click', e => this.view.toggleFiltersForm(e.currentTarget));
         this.addEvent(nodes.showMoreButton, 'click', _ => {
             if (!this.loading && this.shoudShowMore) {
                 this.fetchTours();

@@ -1,10 +1,12 @@
 <section id="toursSection" class="mb-10 pb-6 border-b border-gray-200">
     <div class="container mx-auto px-5">
-        <p class="mb-4 text-center text-black text-2xl font-bold text-black">{{ __('short-phrases.popular-tours') }}
-            <span class="text-blue">.</span></p>
-        <div class="flex items-start">
-            <div class="left-side mr-5">
-                <div class="filters mb-5 shadow rounded-md">
+        <div class="flex justify-between items-center lg:justify-center mb-4">
+            <p class="inline text-black text-2xl font-bold text-black">{{ __('short-phrases.all-tours') }}<span class="text-blue">.</span></p>
+            <span class="show-filters-button block lg:hidden px-5 py-1 text-sm text-blue border-2 border-blue rounded-md cursor-pointer">{{ __('short-phrases.filters') }}</span>
+        </div>
+        <div class="flex items-start relative">
+            <div class="hidden lg:block right-0 absolute lg:relative left-side mr-0 lg:mr-5">
+                <div class="filters mb-0 lg:mb-5 bg-white shadow rounded-md">
                     <div class="flex flex-col py-4">
                         <p class="mb-3 px-3 text-xl text-black font-bold">{{ __('short-phrases.filters') }}</p>
                         <div class="flex flex-wrap mb-4 px-3 pb-4 gap-2 border-b border-gray-200">
@@ -88,7 +90,7 @@
                             disabled>{{ __('buttons.reset-filters') }}</button>
                     </div>
                 </div>
-                <div class="p-3 bg-gray-100 shadow rounded-md">
+                <div class="hidden lg:block p-3 bg-gray-100 shadow rounded-md">
                     <p class="mb-3 text-black font-semibold leading-5">{{ __('short-phrases.connect-with-us-title') }}</p>
                     <a href="#" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
                        style="background-color: #77E75B">
@@ -161,7 +163,7 @@
                     </a>
                 </div>
             </div>
-            <div class="tours-container w-full grid grid-cols-2 xl:grid-cols-3 gap-5">
+            <div class="tours-container w-full grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 @foreach($tours as $tour)
                     @include('components.tours.tour-card', compact('tour'))
                 @endforeach
