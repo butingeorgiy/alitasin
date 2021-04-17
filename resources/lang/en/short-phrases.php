@@ -8,7 +8,7 @@ return [
     'choose-region' => 'Choose region',
     'choose-manager' => 'Choose manager',
     'tours-in-turkey' => 'Excursions in Turkey',
-    'tours-around-turkey' => 'Excursions in cities of Turkey',
+    'popular-turkey-regions' => 'Popular regions of Turkey',
     'popular-tours' => 'Popular excursions',
     'clients-reviews' => 'Customer reviews',
     'date' => 'Date',
@@ -46,6 +46,7 @@ return [
     'amount' => 'Amount',
     'hours' => 'Hours',
     'days' => 'Days',
+    'day' => 'Day',
     'conducted-days' => 'Conducted days',
 
     // Days of the week
@@ -77,5 +78,6 @@ return [
     'main-sections-tours-amount' => 'available excursions',
     'main-sections-transport-amount' => 'available vehicles',
     'main-sections-hotels-amount' => 'available hotels',
-    'all-tours' => 'All excursions'
+    'all-tours' => 'All excursions',
+    'other-turkey-regions' => 'Other regions of Turkey'
 ];

@@ -66,6 +66,13 @@ class FilterToursView {
     }
 
     render(tours) {
+        if (tours.length === 0) {
+            this.toursContainer.innerHTML = `
+                <p class="lg:m-3 text-xl text-gray-600 font-light">${LocaleHelper.translate('no-results')}!</p>
+            `;
+            return;
+        }
+
         tours.forEach(tour => {
             const tourCard = document.createElement('div');
             tourCard.className = 'flex flex-col shadow rounded-md';

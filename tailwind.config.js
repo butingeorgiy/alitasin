@@ -46,7 +46,9 @@ module.exports = {
                 800: '#991b1b',
                 900: '#7f1d1d',
             },
-            yellow: colors.amber,
+            yellow: {
+                DEFAULT: '#FFC11E' // used
+            },
             green: {
                 50: '#f0fdf4',
                 100: '#dcfce7',

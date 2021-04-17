@@ -1,6 +1,7 @@
 <?php
 
 Route::get('', 'PageController@showIndex')->name('index');
+Route::get('regions/{id}', 'PageController@showRegion')->name('region');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('', 'PageController@adminIndex')->middleware('auth:5')->name('admin-index');

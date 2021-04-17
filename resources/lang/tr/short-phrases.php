@@ -8,7 +8,7 @@ return [
     'choose-region' => 'Bölge seçin',
     'choose-manager' => 'Yönetici seçin',
     'tours-in-turkey' => 'Türkiye gezileri',
-    'tours-around-turkey' => 'Türkiye şehirlerinde geziler',
+    'popular-turkey-regions' => 'Türkiye\'nin popüler bölgeleri',
     'popular-tours' => 'Popüler geziler',
     'clients-reviews' => 'Musteri degerlendirmeleri',
     'date' => 'Tarih',
@@ -46,6 +46,7 @@ return [
     'amount' => 'Miktar',
     'hours' => 'Saatler',
     'days' => 'Günler',
+    'day' => 'Gün',
     'conducted-days' => 'Yürütülen günler',
 
     // Days of the week
@@ -77,5 +78,6 @@ return [
     'main-sections-tours-amount' => 'mevcut geziler',
     'main-sections-transport-amount' => 'mevcut araçlar',
     'main-sections-hotels-amount' => 'müsait oteller',
-    'all-tours' => 'Tüm geziler'
+    'all-tours' => 'Tüm geziler',
+    'other-turkey-regions' => 'Türkiye\'nin diğer bölgeleri'
 ];

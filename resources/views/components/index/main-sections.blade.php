@@ -9,7 +9,7 @@
                 {{ __('short-phrases.tours') }}<span class="text-blue">.</span>
             </p>
             <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-tours-description') }}</p>
-            <p class="mt-auto font-semibold">0 {{ __('short-phrases.main-sections-tours-amount') }}</p>
+            <p class="mt-auto font-semibold">{{ \App\Models\Tour::count() }} {{ __('short-phrases.main-sections-tours-amount') }}</p>
         </div>
 
         <div

@@ -12,4 +12,8 @@ document.addEventListener('DOMContentLoaded', _ => {
     if (document.querySelector('#regionsSection .swiper-container')) {
         SliderController.initRegionsSlider();
     }
+
+    if (document.querySelector('#popularToursSection .swiper-container')) {
+        SliderController.initPopularToursSlider();
+    }
 });
