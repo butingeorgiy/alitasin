@@ -71,13 +71,14 @@ return [
 
     'tours' => 'Экскурсии',
     'transport' => 'Транспорт',
-    'hotels' => 'Отели',
+    'property' => 'Недвижимость',
     'main-sections-tours-description' => 'Любые экскурсии на ваш вкус',
     'main-sections-transport-description' => 'Выберите автомобиль для совместных поездок',
-    'main-sections-hotels-description' => 'Рейтинг самых лучших отелей Турции',
+    'main-sections-property-description' => 'Элитная недвижимость Турции',
     'main-sections-tours-amount' => 'доступных экскурсий',
     'main-sections-transport-amount' => 'доступных автомобилей',
-    'main-sections-hotels-amount' => 'доступных отелей',
+    'main-sections-property-amount' => 'доступных позиций',
     'all-tours' => 'Все экскурсии',
-    'other-turkey-regions' => 'Другие регионы Турции'
+    'other-turkey-regions' => 'Другие регионы Турции',
+    'tour-description' => 'Описание экскурсии'
 ];

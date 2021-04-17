@@ -159,3 +159,11 @@ select::-ms-expand {
 .ts-dropdown {
     @apply rounded-md shadow overflow-hidden;
 }
+
+.book-tour-button {
+    @apply flex justify-center sm:self-start lg:ml-8 px-8 py-4 text-white font-semibold bg-blue rounded-md cursor-pointer;
+}
+
+.book-tour-button.disabled {
+    @apply cursor-not-allowed opacity-60;
+}

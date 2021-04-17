@@ -9,5 +9,6 @@ return [
     'show-all' => 'Show all',
     'reset-filters' => 'Reset filters',
     'make-main' => 'Make main',
-    'exit' => 'Exit'
+    'exit' => 'Exit',
+    'book-now' => 'Book now'
 ];

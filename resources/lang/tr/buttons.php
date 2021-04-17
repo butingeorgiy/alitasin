@@ -9,5 +9,6 @@ return [
     'show-all' => 'Hepsini gör',
     'reset-filters' => 'Filtreyi sıfırla',
     'make-main' => 'Ana yap',
-    'exit' => 'Çıkış'
+    'exit' => 'Çıkış',
+    'book-now' => 'Rezervasyon yap'
 ];

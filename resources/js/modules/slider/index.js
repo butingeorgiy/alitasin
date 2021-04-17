@@ -16,4 +16,8 @@ document.addEventListener('DOMContentLoaded', _ => {
     if (document.querySelector('#popularToursSection .swiper-container')) {
         SliderController.initPopularToursSlider();
     }
+
+    if (document.querySelector('#tourInfoSection .swiper-container')) {
+        SliderController.initTourGallerySlider();
+    }
 });

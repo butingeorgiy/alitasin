@@ -176,4 +176,25 @@ class PageController extends Controller
 
         return view('region', compact('tours', 'regions', 'currentRegion', 'filterCounter', 'popularTours'));
     }
+
+    public function showTour($id)
+    {
+        $tour = Tour::findOrFail($id);
+        $mainImage = null;
+
+        foreach ($tour->images as $image) {
+            $path = 'tour_pictures/' . $image->link;
+
+            if (Storage::exists($path)) {
+                if ($image->isMain()) {
+                    $mainImage = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                    continue;
+                }
+
+                $image->data = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+            }
+        }
+
+        return view('tour', compact('tour', 'mainImage'));
+    }
 }
