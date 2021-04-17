@@ -74,8 +74,9 @@ class FilterToursView {
         }
 
         tours.forEach(tour => {
-            const tourCard = document.createElement('div');
+            const tourCard = document.createElement('a');
             tourCard.className = 'flex flex-col shadow rounded-md';
+            tourCard.setAttribute('href', `/tours/${tour.id}`);
 
             let durationNode = '';
 
@@ -161,7 +162,7 @@ class FilterToursView {
                                 <div class="min-w-4 min-w-4 w-4 h-4 mr-1 bg-contain bg-no-repeat bg-center" style="background-image: url(/images/active-start.svg)"></div>
                                 <div class="min-w-4 min-w-4 w-4 h-4 bg-contain bg-no-repeat bg-center" style="background-image: url(/images/active-start.svg)"></div>
                             </div>
-                            <a href="#" class="text-sm text-gray-600 font-medium hover:underline">${LocaleHelper.translate('reviews')} (0)</a>
+                            <span class="text-sm text-gray-600 font-medium hover:underline">${LocaleHelper.translate('reviews')} (0)</span>
                         </div>
                     </div>
                 </div>

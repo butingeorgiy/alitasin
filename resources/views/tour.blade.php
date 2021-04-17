@@ -69,14 +69,16 @@
 
         </div>
 
-        <div class="block sm:hidden swiper-container -ml-1 mb-2">
-            <div class="swiper-wrapper pl-1 pb-2">
-                @foreach($tour->images->where('is_main', '0')->values() as $i => $image)
-                    <div class="swiper-slide w-72 h-32 bg-cover bg-center bg-no-repeat shadow-sm rounded-md"
-                         style="background-image: url({{ $image['data'] }})"></div>
-                @endforeach
+        @if(count($images) > 0)
+            <div class="block sm:hidden swiper-container -ml-1 mb-2">
+                <div class="swiper-wrapper pl-1 pb-2">
+                    @foreach($images as $i => $image)
+                        <div class="swiper-slide w-72 h-32 bg-cover bg-center bg-no-repeat shadow-sm rounded-md"
+                             style="background-image: url({{ $image['data'] }})"></div>
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
 
         <div class="bg-white shadow-md rounded-md">
             <div class="flex flex-col lg:flex-row px-4 py-5 border-b border-gray-200">
