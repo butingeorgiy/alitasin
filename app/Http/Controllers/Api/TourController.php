@@ -496,7 +496,11 @@ class TourController extends Controller
 
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $row['image'] = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
+                    $path = 'tour_pictures/' . $image->link;
+
+                    if (Storage::exists($path)) {
+                        $row['image'] = Storage::get($path);
+                    }
                 }
             }
 

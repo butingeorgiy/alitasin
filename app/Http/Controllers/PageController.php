@@ -31,7 +31,11 @@ class PageController extends Controller
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
+                    $path = 'tour_pictures/' . $image->link;
+
+                    if (Storage::exists($path)) {
+                        $tour->image = Storage::get($path);
+                    }
                 }
             }
 
