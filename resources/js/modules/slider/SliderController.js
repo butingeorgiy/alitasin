@@ -29,12 +29,23 @@ class SliderController {
         new Swiper('#regionsSection .swiper-container', {
             spaceBetween: 16,
             loop: true,
-            slidesPerView: 'auto'
+            slidesPerView: 'auto',
+            mousewheel: {
+                releaseOnEdges: true
+            }
         });
     }
 
     static initPopularToursSlider() {
         new Swiper('#popularToursSection .swiper-container', {
+            spaceBetween: 16,
+            loop: true,
+            slidesPerView: 'auto'
+        });
+    }
+
+    static initTourGallerySlider() {
+        new Swiper('#tourInfoSection .swiper-container', {
             spaceBetween: 16,
             loop: true,
             slidesPerView: 'auto'

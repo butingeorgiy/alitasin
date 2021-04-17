@@ -30,10 +30,10 @@
             <div class="self-end min-w-20 min-h-20 w-20 h-20 mb-3 bg-contain bg-center bg-no-repeat"
                  style="background-image: url({{ asset('images/main-sections-icon-hotels.svg') }})"></div>
             <p class="mb-2 text-2xl font-bold">
-                {{ __('short-phrases.hotels') }}<span class="text-blue">.</span>
+                {{ __('short-phrases.property') }}<span class="text-blue">.</span>
             </p>
-            <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-hotels-description') }}</p>
-            <p class="mt-auto font-semibold">0 {{ __('short-phrases.main-sections-hotels-amount') }}</p>
+            <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-property-description') }}</p>
+            <p class="mt-auto font-semibold">0 {{ __('short-phrases.main-sections-property-amount') }}</p>
         </div>
     </div>
 </section>

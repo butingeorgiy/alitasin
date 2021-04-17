@@ -71,13 +71,14 @@ return [
 
     'tours' => 'Geziler',
     'transport' => 'Ulaşım',
-    'hotels' => 'Oteller',
+    'property' => 'Özellikler',
     'main-sections-tours-description' => 'Zevkinize göre herhangi bir gezi',
     'main-sections-transport-description' => 'Gezileri paylaşmak için bir araba seçin',
-    'main-sections-hotels-description' => 'Türkiye\'deki en iyi otellerin değerlendirmesi',
+    'main-sections-property-description' => 'Türkiye\'de lüks gayrimenkul',
     'main-sections-tours-amount' => 'mevcut geziler',
     'main-sections-transport-amount' => 'mevcut araçlar',
-    'main-sections-hotels-amount' => 'müsait oteller',
+    'main-sections-property-amount' => 'uygun pozisyonlar',
     'all-tours' => 'Tüm geziler',
-    'other-turkey-regions' => 'Türkiye\'nin diğer bölgeleri'
+    'other-turkey-regions' => 'Türkiye\'nin diğer bölgeleri',
+    'tour-description' => 'Gezi açıklaması'
 ];

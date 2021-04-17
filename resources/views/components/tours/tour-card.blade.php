@@ -1,4 +1,4 @@
-<div class="flex flex-col shadow rounded-md">
+<a href="{{ route('tour', $tour->id) }}" class="flex flex-col shadow rounded-md">
     <div class="flex justify-end items-start p-3 bg-center bg-cover bg-no-repeat bg-gray-50 rounded-md"
          style="height: 180px; background-image: url({{ $tour->image }})">
         <div class="flex justify-center items-center w-8 h-8 bg-white rounded-full cursor-pointer">
@@ -81,9 +81,9 @@
                     <div class="min-w-4 min-w-4 w-4 h-4 bg-contain bg-no-repeat bg-center"
                          style="background-image: url({{ asset('images/active-start.svg') }})"></div>
                 </div>
-                <a href="#" class="text-sm text-gray-600 font-medium hover:underline">{{ __('short-phrases.reviews') }}
-                    (0)</a>
+                <span class="text-sm text-gray-600 font-medium hover:underline">{{ __('short-phrases.reviews') }}
+                    (0)</span>
             </div>
         </div>
     </div>
-</div>
+</a>

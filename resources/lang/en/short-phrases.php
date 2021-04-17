@@ -71,13 +71,14 @@ return [
 
     'tours' => 'Excursions',
     'transport' => 'Transport',
-    'hotels' => 'Hotels',
+    'property' => 'Real estate',
     'main-sections-tours-description' => 'Any excursions to your taste',
     'main-sections-transport-description' => 'Choose a car for sharing trips',
-    'main-sections-hotels-description' => 'Rating of the best hotels in Turkey',
+    'main-sections-property-description' => 'Luxury real estate in Turkey',
     'main-sections-tours-amount' => 'available excursions',
     'main-sections-transport-amount' => 'available vehicles',
-    'main-sections-hotels-amount' => 'available hotels',
+    'main-sections-property-amount' => 'available positions',
     'all-tours' => 'All excursions',
-    'other-turkey-regions' => 'Other regions of Turkey'
+    'other-turkey-regions' => 'Other regions of Turkey',
+    'tour-description' => 'Excursion\'s description'
 ];
