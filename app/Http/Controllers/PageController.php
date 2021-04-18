@@ -21,7 +21,10 @@ class PageController extends Controller
             $path = 'region_pictures/region-' . $region->id . '-s.jpg';
 
             if (Storage::exists($path)) {
-                $region->image = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                $region->image = route('get-image', [
+                    'fileName' => 'region-' . $region->id . '-s.jpg',
+                    'entity' => 'region'
+                ]);
             }
         }
 
@@ -34,7 +37,7 @@ class PageController extends Controller
                     $path = 'tour_pictures/' . $image->link;
 
                     if (Storage::exists($path)) {
-                        $tour->image = Storage::get($path);
+                        $tour->image = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
                     }
                 }
             }
@@ -103,7 +106,10 @@ class PageController extends Controller
             $path = 'vehicle_pictures/vehicle-s-' . $vehicle['id'] . '.png';
 
             if (Storage::exists($path)) {
-                $vehicles[$i]['image'] = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                $vehicles[$i]['image'] = route('get-image', [
+                    'fileName' => 'vehicle-s-' . $vehicle['id'] . '.png',
+                    'entity' => 'vehicle'
+                ]);
             } else {
                 $vehicles[$i]['image'] = null;
             }
@@ -187,11 +193,11 @@ class PageController extends Controller
 
             if (Storage::exists($path)) {
                 if ($image->isMain()) {
-                    $mainImage = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                    $mainImage = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
                     continue;
                 }
 
-                $image->data = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+                $image->data = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
             }
         }
 
