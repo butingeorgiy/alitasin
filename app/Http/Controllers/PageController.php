@@ -18,11 +18,10 @@ class PageController extends Controller
         $regions = Region::where('show_at_index_page', '1')->get();
 
         foreach ($regions as $region) {
-            $path = 'region_pictures/region-' . $region->id . '-s.jpg';
-
-            if (Storage::exists($path)) {
-                $region->image = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
-            }
+            $region->image = route('get-image', [
+                'fileName' => 'region-' . $region->id . '-s.jpg',
+                'entity' => 'region'
+            ]);
         }
 
         $tours = Tour::with(['title', 'description', 'images', 'type', 'filters'])->limit(15)->get();
@@ -31,11 +30,7 @@ class PageController extends Controller
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $path = 'tour_pictures/' . $image->link;
-
-                    if (Storage::exists($path)) {
-                        $tour->image = Storage::get($path);
-                    }
+                    $tour->image = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
                 }
             }
 
@@ -100,13 +95,10 @@ class PageController extends Controller
         ];
 
         foreach ($vehicles as $i => $vehicle) {
-            $path = 'vehicle_pictures/vehicle-s-' . $vehicle['id'] . '.png';
-
-            if (Storage::exists($path)) {
-                $vehicles[$i]['image'] = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
-            } else {
-                $vehicles[$i]['image'] = null;
-            }
+            $vehicles[$i]['image'] = route('get-image', [
+                'fileName' => 'vehicle-s-' . $vehicle['id'] . '.png',
+                'entity' => 'vehicle'
+            ]);
         }
 
         return view('index', compact('regions', 'tours', 'filterCounter', 'vehicles'));
@@ -142,11 +134,10 @@ class PageController extends Controller
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $path = 'tour_pictures/' . $image->link;
-
-                    if (Storage::exists($path)) {
-                        $tour->image = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
-                    }
+                    $tour->image = route('get-image', [
+                        'fileName' => $image->link,
+                        'entity' => 'tour'
+                    ]);
                 }
             }
 
@@ -167,11 +158,10 @@ class PageController extends Controller
         $regions = Region::where('id', '!=', $id)->get();
 
         foreach ($regions as $region) {
-            $path = 'region_pictures/region-' . $region->id . '-s.jpg';
-
-            if (Storage::exists($path)) {
-                $region->image = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
-            }
+            $region->image = route('get-image', [
+                'fileName' => 'region-' . $region->id . '-s.jpg',
+                'entity' => 'region'
+            ]);
         }
 
         return view('region', compact('tours', 'regions', 'currentRegion', 'filterCounter', 'popularTours'));
@@ -183,16 +173,12 @@ class PageController extends Controller
         $mainImage = null;
 
         foreach ($tour->images as $image) {
-            $path = 'tour_pictures/' . $image->link;
-
-            if (Storage::exists($path)) {
-                if ($image->isMain()) {
-                    $mainImage = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
-                    continue;
-                }
-
-                $image->data = 'data:image/jpg;base64,' . base64_encode(Storage::get($path));
+            if ($image->isMain()) {
+                $mainImage = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
+                continue;
             }
+
+            $image->data = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
         }
 
         return view('tour', compact('tour', 'mainImage'));
