@@ -50,4 +50,16 @@ class User extends Model
 
         return null;
     }
+
+    public function getFullNameAttribute(): string
+    {
+        $firstName = $this->first_name;
+        $lastName = $this->last_name;
+
+        if (!$lastName) {
+            return $firstName;
+        } else {
+            return $lastName . ' ' . $firstName;
+        }
+    }
 }
