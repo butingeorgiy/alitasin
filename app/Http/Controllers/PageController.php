@@ -14,7 +14,7 @@ class PageController extends Controller
      */
     public function showIndex()
     {
-        $regions = Region::where('show_at_index_page', '1')->get();
+        $regions = collect(Region::where('show_at_index_page', '1')->get())->random(6);
 
         foreach ($regions as $region) {
             $region->image = route('get-image', [
@@ -154,11 +154,11 @@ class PageController extends Controller
         }
 
 
-        $regions = Region::where('id', '!=', $id)->get();
+        $regions = collect(Region::where('id', '!=', $id)->get())->random(6)->shuffle();
 
         foreach ($regions as $region) {
-            $region->image = route('get-image', [
-                'fileName' => 'region-' . $region->id . '-s.jpg',
+            $region['image'] = route('get-image', [
+                'fileName' => 'region-' . $region['id'] . '-s.jpg',
                 'entity' => 'region'
             ]);
         }
