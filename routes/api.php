@@ -6,9 +6,9 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'users'], function () {
+    Route::post('update/profile-photo', 'Api\UserController@uploadProfilePhoto')->middleware('auth:1');
     Route::post('create', 'Api\UserController@create');
-//    Route::post('update', 'Api\UserController@update');
-    Route::post('update/{id?}', 'Api\UserController@update');
+    Route::post('update', 'Api\UserController@update')->middleware('auth:1');
 });
 
 Route::group(['prefix' => 'tours', 'middleware' => 'auth:5'], function () {

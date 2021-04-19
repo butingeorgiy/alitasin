@@ -642,6 +642,11 @@ video {
   border-color: rgba(35, 31, 32, var(--tw-border-opacity));
 }
 
+.border-white{
+  --tw-border-opacity: 1;
+  border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+}
+
 .border-gray-100{
   --tw-border-opacity: 1;
   border-color: rgba(239, 240, 247, var(--tw-border-opacity));
@@ -694,6 +699,10 @@ video {
 
 .border-2{
   border-width: 2px;
+}
+
+.border-6{
+  border-width: 6px;
 }
 
 .border{
@@ -828,8 +837,16 @@ video {
   height: 3rem;
 }
 
+.h-16{
+  height: 4rem;
+}
+
 .h-20{
   height: 5rem;
+}
+
+.h-24{
+  height: 6rem;
 }
 
 .h-32{
@@ -909,6 +926,11 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.my-10{
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -938,6 +960,10 @@ video {
 
 .mb-1{
   margin-bottom: 0.25rem;
+}
+
+.mt-2{
+  margin-top: 0.5rem;
 }
 
 .mr-2{
@@ -974,6 +1000,10 @@ video {
 
 .mb-5{
   margin-bottom: 1.25rem;
+}
+
+.ml-5{
+  margin-left: 1.25rem;
 }
 
 .mt-6{
@@ -1028,12 +1058,20 @@ video {
   margin-left: -0.25rem;
 }
 
+.-mb-2{
+  margin-bottom: -0.5rem;
+}
+
 .-mt-3{
   margin-top: -0.75rem;
 }
 
 .-ml-3{
   margin-left: -0.75rem;
+}
+
+.min-h-4{
+  min-height: 1rem;
 }
 
 .min-h-5{
@@ -1155,6 +1193,10 @@ video {
 
 .pb-0{
   padding-bottom: 0px;
+}
+
+.pb-1{
+  padding-bottom: 0.25rem;
 }
 
 .pl-1{
@@ -1313,8 +1355,16 @@ video {
   left: -0.25rem;
 }
 
+.-top-5{
+  top: -1.25rem;
+}
+
 .-bottom-6{
   bottom: -1.5rem;
+}
+
+.-bottom-8{
+  bottom: -2rem;
 }
 
 .-bottom-0\.5{
@@ -1474,6 +1524,10 @@ video {
 
 .w-12{
   width: 3rem;
+}
+
+.w-16{
+  width: 4rem;
 }
 
 .w-20{
@@ -1689,7 +1743,7 @@ select::-ms-expand {
   height: 250px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   #heroSection {
     height: 180px;
   }
@@ -1741,7 +1795,7 @@ select::-ms-expand {
 
 /* Show more tours button modes (start) */
 
-.show-more-tours-button, .update-tour-button, .save-tour-button{
+.show-more-tours-button, .update-tour-button, .save-personal-info-button, .save-tour-button{
   border-radius: 0.375rem;
   cursor: pointer;
   display: flex;
@@ -1749,19 +1803,18 @@ select::-ms-expand {
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  margin-top: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-.show-more-tours-button.loading, .show-more-tours-button.disabled, .login-button.loading, .login-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
+.show-more-tours-button.loading, .show-more-tours-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .login-button.loading, .login-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.show-more-tours-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
+.show-more-tours-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
   display: block;
 }
 
@@ -2077,6 +2130,10 @@ select::-ms-expand {
     justify-content: center;
   }
 
+  .lg\:h-32{
+    height: 8rem;
+  }
+
   .lg\:text-6xl{
     font-size: 3.75rem;
     line-height: 1;
@@ -2114,13 +2171,25 @@ select::-ms-expand {
     left: 0px;
   }
 
+  .lg\:-bottom-12{
+    bottom: -3rem;
+  }
+
   .lg\:text-center{
     text-align: center;
+  }
+
+  .lg\:w-32{
+    width: 8rem;
   }
 
   .lg\:gap-x-10{
     -moz-column-gap: 2.5rem;
          column-gap: 2.5rem;
+  }
+
+  .lg\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-3{

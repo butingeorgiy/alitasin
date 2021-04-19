@@ -81,5 +81,11 @@ return [
     'all-tours' => 'Tüm geziler',
     'other-turkey-regions' => 'Türkiye\'nin diğer bölgeleri',
     'tour-description' => 'Gezi açıklaması',
-    'available-time' => 'Müsait zaman'
+    'available-time' => 'Müsait zaman',
+    'welcome' => 'Hoşgeldiniz',
+    'personal-info' => 'Kişisel bilgi',
+    'first-name' => 'İsim',
+    'last-name' => 'Soyadı',
+    'phone' => 'Telefon',
+    'nothing-entered' => 'Hiçbir şey girilmedi'
 ];

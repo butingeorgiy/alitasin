@@ -5,3 +5,4 @@ import './modules/popup';
 import './modules/authorization';
 import './modules/languageSwitcher';
 import './modules/filterTours';
+import './modules/updateProfileInfo';
