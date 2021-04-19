@@ -38,7 +38,7 @@ select::-ms-expand {
     height: 250px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     #heroSection {
         height: 180px;
     }
@@ -77,12 +77,15 @@ select::-ms-expand {
 
 .show-more-tours-button,
 .update-tour-button,
+.save-personal-info-button,
 .save-tour-button {
-    @apply flex justify-center mt-6 py-2 text-sm text-white font-medium rounded-md cursor-pointer;
+    @apply flex justify-center py-2 text-sm text-white font-medium rounded-md cursor-pointer;
 }
 
 .show-more-tours-button.loading,
 .show-more-tours-button.disabled,
+.save-personal-info-button.loading,
+.save-personal-info-button.disabled,
 .login-button.loading,
 .login-button.disabled,
 .update-tour-button.loading,
@@ -93,6 +96,7 @@ select::-ms-expand {
 }
 
 .show-more-tours-button.loading .animate-spin,
+.save-personal-info-button.loading .animate-spin,
 .login-button.loading .animate-spin,
 .update-tour-button.loading .animate-spin,
 .save-tour-button.loading .animate-spin {

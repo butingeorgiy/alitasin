@@ -260,8 +260,7 @@
             <span></span>
         </div>
 
-        <div
-            class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
+        <div class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
             <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -270,7 +269,7 @@
             <span></span>
         </div>
 
-        <div class="update-tour-button bg-green-600">
+        <div class="update-tour-button mt-6 bg-green-600">
             <svg class="animate-spin mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

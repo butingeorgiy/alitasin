@@ -81,5 +81,11 @@ return [
     'all-tours' => 'All excursions',
     'other-turkey-regions' => 'Other regions of Turkey',
     'tour-description' => 'Excursion\'s description',
-    'available-time' => 'Available time'
+    'available-time' => 'Available time',
+    'welcome' => 'Welcome',
+    'personal-info' => 'Personal information',
+    'first-name' => 'First name',
+    'last-name' => 'Last name',
+    'phone' => 'Phone',
+    'nothing-entered' => 'Nothing entered'
 ];

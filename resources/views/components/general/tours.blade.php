@@ -174,7 +174,9 @@
             </div>
         </div>
 
-        <div class="show-more-tours-button bg-blue {{ count($tours) < 15 ? 'disabled' : '' }}">
+
+
+        <div class="show-more-tours-button mt-6 bg-blue {{ count($tours) < 15 ? 'disabled' : '' }}">
             <svg class="animate-spin mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

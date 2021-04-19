@@ -81,5 +81,11 @@ return [
     'all-tours' => 'Все экскурсии',
     'other-turkey-regions' => 'Другие регионы Турции',
     'tour-description' => 'Описание экскурсии',
-    'available-time' => 'Доступное время'
+    'available-time' => 'Доступное время',
+    'welcome' => 'Добро пожаловать',
+    'personal-info' => 'Личная информация',
+    'first-name' => 'Имя',
+    'last-name' => 'Фамилия',
+    'phone' => 'Телефон',
+    'nothing-entered' => 'Ничего не указано'
 ];

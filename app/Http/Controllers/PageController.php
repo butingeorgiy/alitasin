@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Models\Region;
 use App\Models\Tour;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -122,7 +123,13 @@ class PageController extends Controller
 
     public function profileIndex()
     {
-        dd('Profile Index Action Executed...');
+        $user = Auth::user();
+
+        if ($user->account_type_id === '1') {
+            return redirect()->route('client-profile');
+        }
+
+        return redirect()->route('index');
     }
 
     /**
@@ -199,6 +206,15 @@ class PageController extends Controller
 
     public function showClientProfile()
     {
-        return view('client');
+        $user = Auth::user();
+
+        if (Storage::exists('profile_pictures/' . $user->id . '.jpg')) {
+            $user->profile = route('get-image', [
+                'dir' => 'profile_pictures',
+                'file' => $user->id . '.jpg'
+            ]);
+        }
+
+        return view('profile.client', compact('user'));
     }
 }

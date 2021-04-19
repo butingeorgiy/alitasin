@@ -26,6 +26,16 @@ const langConfig = {
             'en': 'Add time',
             'ru': 'Добавить время',
             'tr': 'Zaman ekle'
+        },
+        'file-uploading-success': {
+            'en': 'File was uploaded successfully',
+            'ru': 'Файл успешно загружен',
+            'tr': 'Dosya başarıyla kaydedildi'
+        },
+        'you-are-sure': {
+            'en': 'You are sure?',
+            'ru': 'Вы уверены?',
+            'tr': 'Emin misiniz?'
         }
     }
 };

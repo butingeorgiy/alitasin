@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('phone_code', 4);
             $table->char('phone', 10);
             $table->char('password', 64);
-            $table->string('full_name', 128);
+            $table->string('first_name', 32);
+            $table->string('last_name', 32)->nullable();
             $table->string('email', 128)->unique();
             $table->enum('account_type_id', ['1', '2', '3', '4', '5']);
             $table->timestamp('created_at')->useCurrent();

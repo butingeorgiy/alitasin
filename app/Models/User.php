@@ -34,4 +34,20 @@ class User extends Model
     {
         return $query->where('account_type_id', '4');
     }
+
+    public function getPhoneAttribute(): ?string
+    {
+        $phoneCode = $this->phone_code;
+        $phone = $this->getOriginal('phone');
+
+        if (!$phoneCode or !$phone) {
+            return null;
+        }
+
+        if(preg_match( '/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone,  $matches)) {
+            return $matches[1] . ' ' . $matches[2] . ' ' .$matches[3] . ' ' . $matches[4];
+        }
+
+        return null;
+    }
 }

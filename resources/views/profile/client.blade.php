@@ -12,8 +12,8 @@
 </head>
 <body class="bg-gray-50">
 @include('components.general.header')
-
+@include('components.general.profile-hero')
+@include('components.profile.personal-info')
 @include('components.general.footer')
-
 </body>
 </html>
