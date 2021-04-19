@@ -21,4 +21,4 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('tours/update/{id}', 'TourController@showEditForm')->middleware('auth:5')->name('edit-form-tour');
 });
 
-Route::get('cdn/images/{fileName}', 'ImageController@get')->name('get-image');
+Route::get('cdn/images/{dir}/{file}', 'ImageController@get')->name('get-image');

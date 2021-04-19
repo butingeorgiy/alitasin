@@ -7,31 +7,12 @@ use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller
 {
-    public function get(Request $request, $fileName)
+    public function get($dir, $file)
     {
-        $directory = '';
-        $entity = $request->input('entity');
-
-        switch ($entity) {
-            case 'tour':
-                $directory = 'tour_pictures/';
-                break;
-            case 'region':
-                $directory = 'region_pictures/';
-                break;
-            case 'vehicle':
-                $directory = 'vehicle_pictures/';
-                break;
-            default:
-                abort(404);
-        }
-
-        $filePath = $directory . $fileName;
-
-        if (!\Storage::exists($filePath)) {
+        if (!\Storage::exists($dir . '/' .  $file)) {
             abort(404);
         }
 
-        return Image::make(\Storage::get($filePath))->response();
+        return Image::make(\Storage::get($dir . '/' .  $file))->response();
     }
 }

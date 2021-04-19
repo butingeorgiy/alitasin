@@ -18,8 +18,8 @@ class PageController extends Controller
 
         foreach ($regions as $region) {
             $region->image = route('get-image', [
-                'fileName' => 'region-' . $region->id . '-s.jpg',
-                'entity' => 'region'
+                'dir' => 'region_pictures',
+                'file' => 'region-' . $region->id . '-s.jpg'
             ]);
         }
 
@@ -29,7 +29,10 @@ class PageController extends Controller
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
+                    $tour->image = route('get-image', [
+                        'dir' => 'tour_pictures',
+                        'file' => $image->link
+                    ]);
                 }
             }
 
@@ -95,8 +98,8 @@ class PageController extends Controller
 
         foreach ($vehicles as $i => $vehicle) {
             $vehicles[$i]['image'] = route('get-image', [
-                'fileName' => 'vehicle-s-' . $vehicle['id'] . '.png',
-                'entity' => 'vehicle'
+                'dir' => 'vehicle_pictures',
+                'file' => 'vehicle-s-' . $vehicle['id'] . '.png'
             ]);
         }
 
@@ -139,8 +142,8 @@ class PageController extends Controller
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
                     $tour->image = route('get-image', [
-                        'fileName' => $image->link,
-                        'entity' => 'tour'
+                        'dir' => 'tour_pictures',
+                        'file' => $image->link
                     ]);
                 }
             }
@@ -163,8 +166,8 @@ class PageController extends Controller
 
         foreach ($regions as $region) {
             $region['image'] = route('get-image', [
-                'fileName' => 'region-' . $region['id'] . '-s.jpg',
-                'entity' => 'region'
+                'dir' => 'region_pictures',
+                'file' => 'region-' . $region['id'] . '-s.jpg'
             ]);
         }
 
@@ -178,11 +181,17 @@ class PageController extends Controller
 
         foreach ($tour->images as $image) {
             if ($image->isMain()) {
-                $mainImage = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
+                $mainImage = route('get-image', [
+                    'dir' => 'tour_pictures',
+                    'file' => $image->link
+                ]);
                 continue;
             }
 
-            $image->data = route('get-image', ['fileName' => $image->link, 'entity' => 'tour']);
+            $image->data = route('get-image', [
+                'dir' => 'tour_pictures',
+                'file' => $image->link
+            ]);
         }
 
         return view('tour', compact('tour', 'mainImage'));
