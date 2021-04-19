@@ -176,12 +176,8 @@
             </div>
 
             <div>
-                <p class="mb-2 font-semibold">{{ __('short-phrases.address') }}</p>
-                <input type="text"
-                       name="address"
-                       maxlength="256"
-                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                       placeholder="{{ __('short-phrases.departure-place') }}">
+                <p class="mb-2 font-semibold">{{ __('short-phrases.available-time') }}</p>
+                <select name="available_time" multiple placeholder="{{ __('short-phrases.search') }}"></select>
             </div>
         </div>
 

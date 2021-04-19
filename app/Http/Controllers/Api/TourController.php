@@ -90,6 +90,19 @@ class TourController extends Controller
             }
         }
 
+        // Available time validation
+        $availableTime = json_decode($request->input('available_time'));
+
+        if (count($availableTime) === 0) {
+            throw new Exception(__('messages.tour-available-time-min'));
+        }
+
+        foreach ($availableTime as $time) {
+            if (!preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $time)) {
+                throw new Exception(__('messages.time-invalid'));
+            }
+        }
+
         // Creating tour
         $tour = new Tour();
 
@@ -110,9 +123,9 @@ class TourController extends Controller
         $tour->region()->associate($region);
         $tour->manager()->associate($manager);
         $tour->type()->associate($tourType);
-        $tour->address = $request->input('address');
         $tour->price = $request->input('price');
         $tour->conducted_at = implode('~', $days);
+        $tour->available_time = implode('~', $availableTime);
 
         if ($request->has('duration')) {
             $tour->duration = $request->input('duration');
@@ -184,6 +197,19 @@ class TourController extends Controller
             throw new Exception(__('messages.tour-conducted-at-min'));
         }
 
+        // Available time validation
+        $availableTime = json_decode($request->input('available_time'));
+
+        if (count($availableTime) === 0) {
+            throw new Exception(__('messages.tour-available-time-min'));
+        }
+
+        foreach ($availableTime as $time) {
+            if (!preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $time)) {
+                throw new Exception(__('messages.time-invalid'));
+            }
+        }
+
         // Title updating
         if ($tour->title->en !== $request->input('en_title')) {
             $tour->title->en = $request->input('en_title');
@@ -251,8 +277,8 @@ class TourController extends Controller
         $tour->filters()->sync($filters);
 
         // Other tour's fields updating
-        if ($tour->address !== $request->input('address')) {
-            $tour->address = $request->input('address');
+        if ($tour->available_time !== implode('~', json_decode($request->input('available_time')))) {
+            $tour->available_time = implode('~', json_decode($request->input('available_time')));
         }
 
         if ($tour->conducted_at !== implode('~', json_decode($request->input('conducted_at')))) {

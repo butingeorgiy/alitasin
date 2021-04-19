@@ -15,6 +15,7 @@ class UpdateTourController extends TourFormBaseController {
 
         this.initFiltersSelect('#editTourForm select[name="filters"]');
         this.initWeekDaysSelect('#editTourForm select[name="conduct_at"]');
+        this.initAvailableTimeSelect('#editTourForm select[name="available_time"]');
     }
 
     initImageBoxes(items) {
@@ -123,6 +124,7 @@ class UpdateTourController extends TourFormBaseController {
 
         formData.append('filters', JSON.stringify(this.filtersSelect.getValue()));
         formData.append('conducted_at', JSON.stringify(this.weekDaysSelect.getValue()));
+        formData.append('available_time', JSON.stringify(this.availableTimeSelect.getValue()));
 
         const durationInput = form.querySelector('input[name="duration"]');
         const durationSelect = form.querySelector('select[name="duration-mode"]');

@@ -21,6 +21,11 @@ const langConfig = {
             'en': 'Filters',
             'ru': 'Фильтры',
             'tr': 'Filtreler'
+        },
+        'add-time': {
+            'en': 'Add time',
+            'ru': 'Добавить время',
+            'tr': 'Zaman ekle'
         }
     }
 };

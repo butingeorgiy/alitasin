@@ -19,22 +19,26 @@
             <p class="mb-2 font-semibold">{{ __('short-phrases.choose-images') }}</p>
             <div class="grid grid-cols-5 gap-5">
                 <?php
-                    /**
-                     * @var $tour
-                     */
+                /**
+                 * @var $tour
+                 */
 
-                    $images = $tour->images->sortByDesc('is_main')->values();
+                $images = $tour->images->sortByDesc('is_main')->values();
                 ?>
                 @for($i = 1; $i <= 5; $i++)
                     @if(isset($images[$i-1]))
-                        <label class="image-item filled" style="background-image: url(data:image/jpg;base64,{{ base64_encode(\Illuminate\Support\Facades\Storage::get('tour_pictures/' . $images[$i-1]->link)) }})" data-image-id="{{ $images[$i-1]->id }}">
+                        <label class="image-item filled"
+                               style="background-image: url(data:image/jpg;base64,{{ base64_encode(\Illuminate\Support\Facades\Storage::get('tour_pictures/' . $images[$i-1]->link)) }})"
+                               data-image-id="{{ $images[$i-1]->id }}">
                             @if($i !== 1)
-                                <div class="make-image-main-button absolute -bottom-6 text-sm text-gray-600 font-light hover:underline">{{ __('buttons.make-main') }}</div>
+                                <div class="make-image-main-button absolute -bottom-6 text-sm text-gray-600 font-light hover:underline">
+                                    {{ __('buttons.make-main') }}
+                                </div>
                             @endif
-                    @else
-                        <label class="image-item">
-                    @endif
-                        <span class="empty flex flex-col items-center">
+                            @else
+                                <label class="image-item">
+                                    @endif
+                                    <span class="empty flex flex-col items-center">
                             <svg class="w-12 h-12 mb-3" viewBox="0 0 83 83" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -66,11 +70,10 @@
                                             8.9346 79.719 8.5 78.625 8.5Z"
                                     fill="#231F20"/>
                             </svg>
-                            <span
-                                class="text-center text-sm text-black font-light leading-4">{{ __('short-phrases.choose-image') }}</span>
+                            <span class="text-center text-sm text-black font-light leading-4">{{ __('short-phrases.choose-image') }}</span>
                         </span>
-                        @if($i !== 1)
-                            <span class="remove-image-button">
+                                    @if($i !== 1)
+                                        <span class="remove-image-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -78,10 +81,11 @@
                                           7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </span>
-                        @endif
-                        <input hidden type="file" name="image-{{ $i }}" accept="image/jpeg,image/jpg,image/png">
-                    </label>
-                @endfor
+                                    @endif
+                                    <input hidden type="file" name="image-{{ $i }}"
+                                           accept="image/jpeg,image/jpg,image/png">
+                                </label>
+                        @endfor
             </div>
         </div>
 
@@ -150,13 +154,20 @@
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.conducted-days') }}</p>
                 <select name="conduct_at" multiple placeholder="{{ __('short-phrases.search') }}">
-                    <option value="mon" {{ collect($tour->conducted_at)->contains('mon') ? 'selected' : '' }}>{{ __('short-phrases.monday') }}</option>
-                    <option value="tue" {{ collect($tour->conducted_at)->contains('tue') ? 'selected' : '' }}>{{ __('short-phrases.tuesday') }}</option>
-                    <option value="wed" {{ collect($tour->conducted_at)->contains('wed') ? 'selected' : '' }}>{{ __('short-phrases.wednesday') }}</option>
-                    <option value="thu" {{ collect($tour->conducted_at)->contains('thu') ? 'selected' : '' }}>{{ __('short-phrases.thursday') }}</option>
-                    <option value="fri" {{ collect($tour->conducted_at)->contains('fri') ? 'selected' : '' }}>{{ __('short-phrases.friday') }}</option>
-                    <option value="sat" {{ collect($tour->conducted_at)->contains('sat') ? 'selected' : '' }}>{{ __('short-phrases.saturday') }}</option>
-                    <option value="sun" {{ collect($tour->conducted_at)->contains('sun') ? 'selected' : '' }}>{{ __('short-phrases.sunday') }}</option>
+                    <option
+                        value="mon" {{ collect($tour->conducted_at)->contains('mon') ? 'selected' : '' }}>{{ __('short-phrases.monday') }}</option>
+                    <option
+                        value="tue" {{ collect($tour->conducted_at)->contains('tue') ? 'selected' : '' }}>{{ __('short-phrases.tuesday') }}</option>
+                    <option
+                        value="wed" {{ collect($tour->conducted_at)->contains('wed') ? 'selected' : '' }}>{{ __('short-phrases.wednesday') }}</option>
+                    <option
+                        value="thu" {{ collect($tour->conducted_at)->contains('thu') ? 'selected' : '' }}>{{ __('short-phrases.thursday') }}</option>
+                    <option
+                        value="fri" {{ collect($tour->conducted_at)->contains('fri') ? 'selected' : '' }}>{{ __('short-phrases.friday') }}</option>
+                    <option
+                        value="sat" {{ collect($tour->conducted_at)->contains('sat') ? 'selected' : '' }}>{{ __('short-phrases.saturday') }}</option>
+                    <option
+                        value="sun" {{ collect($tour->conducted_at)->contains('sun') ? 'selected' : '' }}>{{ __('short-phrases.sunday') }}</option>
                 </select>
             </div>
 
@@ -166,7 +177,8 @@
                         class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
                     <option value="">{{ __('short-phrases.choose-type') }}</option>
                     @foreach(\App\Models\TourType::all() as $type)
-                        <option value="{{ $type->id }}" {{ $tour->type->id === $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                        <option
+                            value="{{ $type->id }}" {{ $tour->type->id === $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -179,7 +191,8 @@
                         class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
                     <option value="">{{ __('short-phrases.choose-region') }}</option>
                     @foreach(\App\Models\Region::all() as $region)
-                        <option value="{{ $region->id }}" {{ $tour->region->id === $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+                        <option
+                            value="{{ $region->id }}" {{ $tour->region->id === $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -190,25 +203,26 @@
                         class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
                     <option value="">@lang('short-phrases.choose-manager')</option>
                     @foreach(\App\Models\User::managers()->get() as $manager)
-                        <option value="{{ $manager->id }}" {{ $tour->manager->id === $manager->id ? 'selected' : '' }}>{{ $manager->full_name }}</option>
+                        <option
+                            value="{{ $manager->id }}" {{ $tour->manager->id === $manager->id ? 'selected' : '' }}>{{ $manager->full_name }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div>
-                <p class="mb-2 font-semibold">{{ __('short-phrases.address') }}</p>
-                <input type="text"
-                       name="address"
-                       maxlength="256"
-                       value="{{ $tour->address }}"
-                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                       placeholder="{{ __('short-phrases.departure-place') }}">
+                <p class="mb-2 font-semibold">{{ __('short-phrases.available-time') }}</p>
+                <select name="available_time" multiple placeholder="{{ __('short-phrases.search') }}">
+                    @foreach($tour->available_time as $item)
+                        <option selected>{{ $item }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
         <div class="grid grid-cols-3 gap-5 mt-6">
             <div>
-                <p class="mb-2 font-semibold">{{ __('short-phrases.duration') }} ({{ __('short-phrases.unnecessary') }})</p>
+                <p class="mb-2 font-semibold">{{ __('short-phrases.duration') }} ({{ __('short-phrases.unnecessary') }}
+                    )</p>
                 <div class="w-full flex items-center mb-5 px-4 py-3 text-sm bg-white shadow rounded-md">
                     <input type="text"
                            name="duration"
@@ -217,8 +231,10 @@
                            value="{{ explode('~', $tour->getOriginal('duration'))[0] ?? '' }}"
                            placeholder="{{ __('short-phrases.amount') }}">
                     <select name="duration-mode" class="cursor-pointer">
-                        <option value="h" {{ (explode('~', $tour->getOriginal('duration'))[1] ?? '') === 'h' ? 'selected' : '' }}>{{ __('short-phrases.hours') }}</option>
-                        <option value="d" {{ (explode('~', $tour->getOriginal('duration'))[1] ?? '') === 'd' ? 'selected' : '' }}>{{ __('short-phrases.days') }}</option>
+                        <option
+                            value="h" {{ (explode('~', $tour->getOriginal('duration'))[1] ?? '') === 'h' ? 'selected' : '' }}>{{ __('short-phrases.hours') }}</option>
+                        <option
+                            value="d" {{ (explode('~', $tour->getOriginal('duration'))[1] ?? '') === 'd' ? 'selected' : '' }}>{{ __('short-phrases.days') }}</option>
                     </select>
                 </div>
             </div>
@@ -227,7 +243,9 @@
                 <p class="mb-2 font-semibold">{{ __('short-phrases.filters') }}</p>
                 <select name="filters" multiple placeholder="{{ __('short-phrases.search') }}">
                     @foreach(\App\Models\Filter::all() as $filter)
-                        <option value="{{ $filter->id }}" {{ $tour->filters->contains($filter->id) ? 'selected' : '' }}>{{ $filter->name }}</option>
+                        <option value="{{ $filter->id }}" {{ $tour->filters->contains($filter->id) ? 'selected' : '' }}>
+                            {{ $filter->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -242,7 +260,8 @@
             <span></span>
         </div>
 
-        <div class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
+        <div
+            class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
             <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
