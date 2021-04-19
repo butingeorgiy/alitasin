@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Models\Region;
 use App\Models\Tour;
-use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {

@@ -80,5 +80,6 @@ return [
     'main-sections-property-amount' => 'доступных позиций',
     'all-tours' => 'Все экскурсии',
     'other-turkey-regions' => 'Другие регионы Турции',
-    'tour-description' => 'Описание экскурсии'
+    'tour-description' => 'Описание экскурсии',
+    'available-time' => 'Доступное время'
 ];

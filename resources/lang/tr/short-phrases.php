@@ -80,5 +80,6 @@ return [
     'main-sections-property-amount' => 'uygun pozisyonlar',
     'all-tours' => 'Tüm geziler',
     'other-turkey-regions' => 'Türkiye\'nin diğer bölgeleri',
-    'tour-description' => 'Gezi açıklaması'
+    'tour-description' => 'Gezi açıklaması',
+    'available-time' => 'Müsait zaman'
 ];

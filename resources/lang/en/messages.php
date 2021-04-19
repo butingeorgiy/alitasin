@@ -50,9 +50,9 @@ return [
     'tour-tr-description-required' => 'Must specify a description of the tour in Turkish!',
     'tour-tr-description-min' => 'The tour description in Turkish must not be shorter than 10 characters!',
     'tour-tr-description-max' => 'The tour description in Turkish must not be longer than 2048 characters!',
-    'tour-address-required' => 'Must specify the address of the tour!',
-    'tour-address-min' => 'The address must not be shorter than 10 characters!',
-    'tour-address-max' => 'The address must not be longer than 256 characters!',
+    'tour-available-time-required' => 'Must specify available time of excursion!',
+    'tour-available-time-json' => 'Invalid available time! JSON must be sent!',
+    'tour-available-time-min' => 'Must specify at least one available time!',
     'tour-manager-require' => 'Must specify the manager of the tour!',
     'tour-manager-id-numeric' => 'Invalid manager ID! ID is a number!',
     'tour-region-require' => 'Must specify the region of the tour!',
@@ -69,5 +69,6 @@ return [
     'tour-filters-json' => 'Invalid filters format! JSON must be sent!',
     'tour-filters-min' => 'Must specify at least one filter!',
     'tour-duration-format' => 'Invalid duration format!',
-    'week-day-invalid' => 'Invalid day of the week!'
+    'week-day-invalid' => 'Invalid day of the week!',
+    'time-invalid' => 'Invalid time format!'
 ];

@@ -1,6 +1,5 @@
 import CreateTourView from './CreateTourView';
 import CreateTourModel from './CreateTourModel';
-import DateHelper from '../../helpers/DateHelper';
 import TourFormBaseController from '../../extenders/controllers/TourFormBaseController';
 
 class CreateTourController extends TourFormBaseController {
@@ -16,6 +15,7 @@ class CreateTourController extends TourFormBaseController {
 
         this.initFiltersSelect('#createTourForm select[name="filters"]');
         this.initWeekDaysSelect('#createTourForm select[name="conduct_at"]');
+        this.initAvailableTimeSelect('#createTourForm select[name="available_time"]');
     }
 
     initImageBoxes(items) {
@@ -55,6 +55,7 @@ class CreateTourController extends TourFormBaseController {
 
         formData.append('filters', JSON.stringify(this.filtersSelect.getValue()));
         formData.append('conducted_at', JSON.stringify(this.weekDaysSelect.getValue()));
+        formData.append('available_time', JSON.stringify(this.availableTimeSelect.getValue()));
 
         const durationInput = form.querySelector('input[name="duration"]');
         const durationSelect = form.querySelector('select[name="duration-mode"]');

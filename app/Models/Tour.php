@@ -141,7 +141,22 @@ class Tour extends Model
     public function getConductedAtAttribute($value): ?array
     {
         if (!$value) {
-            return null;
+            return [];
+        }
+
+        return explode('~', $value);
+    }
+
+    /**
+     * Convert available_time field to array
+     *
+     * @param $value
+     * @return array|null
+     */
+    public function getAvailableTimeAttribute($value): ?array
+    {
+        if (!$value) {
+            return [];
         }
 
         return explode('~', $value);

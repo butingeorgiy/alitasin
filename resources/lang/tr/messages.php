@@ -50,9 +50,9 @@ return [
     'tour-tr-description-required' => 'Turun açıklamasını Türkçe olarak belirttiğinizden emin olun!',
     'tour-tr-description-min' => 'Türkçe tur açıklaması 10 karakterden kısa olmamalıdır!',
     'tour-tr-description-max' => 'Türkçe tur açıklaması 2048 karakterden uzun olmamalıdır!',
-    'tour-address-required' => 'Turun adresini belirtmeniz gerekir!',
-    'tour-address-min' => 'Adres 10 karakterden kısa olmamalıdır!',
-    'tour-address-max' => 'Adres 256 karakterden uzun olmamalıdır!',
+    'tour-available-time-required' => 'Mevcut gezi zamanını belirtmelidir!',
+    'tour-available-time-json' => 'Geçersiz kullanılabilir zaman! JSON gönderilmelidir!',
+    'tour-available-time-min' => 'En az bir kullanılabilir zaman belirtmelidir!',
     'tour-manager-require' => 'Tur Yöneticisini belirtmeniz gerekir!',
     'tour-manager-id-numeric' => 'Geçersiz yönetici kimliği! Kimlik bir sayıdır!',
     'tour-region-require' => 'Turun bölgesini belirtmeniz gerekir!',
@@ -69,5 +69,6 @@ return [
     'tour-filters-json' => 'Geçersiz filtre biçimi! JSON gönderilmelidir!',
     'tour-filters-min' => 'En az bir filtre belirtmeniz gerekir!',
     'tour-duration-format' => 'Geçersiz süre biçimi!',
-    'week-day-invalid' => 'Geçersiz gün!'
+    'week-day-invalid' => 'Geçersiz gün!',
+    'time-invalid' => 'Geçersiz saat biçimi!'
 ];
