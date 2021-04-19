@@ -10,5 +10,7 @@ return [
     'reset-filters' => 'Reset filters',
     'make-main' => 'Make main',
     'exit' => 'Exit',
-    'book-now' => 'Book now'
+    'book-now' => 'Book now',
+    'move-to-cabinet' => 'Cabinet',
+    'admin-panel' => 'Admin Panel'
 ];

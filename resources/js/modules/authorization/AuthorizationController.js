@@ -58,7 +58,7 @@ class AuthorizationController extends EventHandler {
                     this.view.hideLoader();
                 } else {
                     this.setAuthCookie(result.cookies);
-                    location.replace(`${location.origin}/admin`)
+                    location.assign(result.redirect_to);
                 }
             })
             .catch(error => alert(`Error: ${error}`));
@@ -67,12 +67,6 @@ class AuthorizationController extends EventHandler {
     setAuthCookie(cookies) {
         Cookies.set('id', cookies.id, { expires: 7 });
         Cookies.set('token', cookies.token, { expires: 7 });
-    }
-
-    static logout() {
-        Cookies.remove('id');
-        Cookies.remove('token');
-        location.replace(location.origin);
     }
 }
 

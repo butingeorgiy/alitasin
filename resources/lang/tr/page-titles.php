@@ -4,5 +4,6 @@ return [
     'main' => 'Türkiye şehirlerindeki gezileri toplayıcı',
     'create-tour' => 'Gezi oluşturma',
     'edit-tour' => 'Gezi düzenleme',
-    'tours' => 'Gezi'
+    'tours' => 'Gezi',
+    'personal-client-cabinet' => 'Kişisel müşteri dolabı'
 ];

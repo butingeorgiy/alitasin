@@ -3,11 +3,21 @@
         <a href="{{ route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
         <div class="flex items-center">
             @if(\App\Facades\Auth::check())
-                <div class="logout-button text-base text-red hover:underline">{{ __('buttons.exit') }}</div>
+                @if(!request()->is('admin/*', 'profile/*'))
+                    @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
+                        <a href="{{ route('profile-index') }}" class="text-black hover:underline">
+                            {{ __('buttons.move-to-cabinet') }}
+                        </a>
+                    @else
+                        <a href="{{ route('admin-index') }}" class="text-black hover:underline">
+                            {{ __('buttons.admin-panel') }}
+                        </a>
+                    @endif
+                @endif
+                <a href="{{ route('logout') }}" class="logout-button ml-8 text-red hover:underline">{{ __('buttons.exit') }}</a>
             @else
-                <div class="show-login-popup-button mr-8 text-base hover:underline">{{ __('buttons.login') }}</div>
-                <a href="#" class="text-base hover:underline">{{ __('buttons.reg') }}</a>
-{{--                <a href="#" class="text-base hover:underline">{{ __('buttons.about-us') }}</a>--}}
+                <div class="show-login-popup-button mr-8 text-black hover:underline">{{ __('buttons.login') }}</div>
+                <a href="#" class="text-black hover:underline">{{ __('buttons.reg') }}</a>
             @endif
                 <select class="language-switch-select ml-8 cursor-pointer" name="language">
                     @foreach(['ru', 'en', 'tr'] as $lang)

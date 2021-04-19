@@ -117,6 +117,11 @@ class PageController extends Controller
         return redirect()->route('index');
     }
 
+    public function profileIndex()
+    {
+        dd('Profile Index Action Executed...');
+    }
+
     /**
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -181,5 +186,10 @@ class PageController extends Controller
         }
 
         return view('tour', compact('tour', 'mainImage'));
+    }
+
+    public function showClientProfile()
+    {
+        return view('client');
     }
 }

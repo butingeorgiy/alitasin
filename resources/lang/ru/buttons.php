@@ -10,5 +10,7 @@ return [
     'reset-filters' => 'Сбросить фильтры',
     'make-main' => 'Сделать основной',
     'exit' => 'Выйти',
-    'book-now' => 'Забронировать'
+    'book-now' => 'Забронировать',
+    'move-to-cabinet' => 'Кабинет',
+    'admin-panel' => 'Админ панель'
 ];

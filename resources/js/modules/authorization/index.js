@@ -2,10 +2,10 @@ import AuthorizationController from './AuthorizationController';
 
 document.addEventListener('DOMContentLoaded', _ => {
     const loginPopup = document.querySelector('#loginPopup');
-    const showLoginPopupButton = document.querySelector('header .show-login-popup-button');
 
-    if (loginPopup && showLoginPopupButton) {
+    if (loginPopup) {
         const loginButton = document.querySelector('.login-button');
+        const showLoginPopupButton = document.querySelector('header .show-login-popup-button');
 
         const controller = new AuthorizationController({
             popup: loginPopup,
@@ -13,19 +13,14 @@ document.addEventListener('DOMContentLoaded', _ => {
             btn: loginButton
         });
 
-        showLoginPopupButton.addEventListener('click', _ => controller.showForm());
+        if (showLoginPopupButton) {
+            showLoginPopupButton.addEventListener('click', _ => controller.showForm());
+        }
 
         loginButton.addEventListener('click', e => {
             if (!e.currentTarget.classList.contains('loading')) {
                 controller.login(loginPopup);
             }
         });
-    }
-
-    // Logout
-    const logoutButton = document.querySelector('header .logout-button');
-
-    if (logoutButton) {
-        logoutButton.addEventListener('click', AuthorizationController.logout);
     }
 });

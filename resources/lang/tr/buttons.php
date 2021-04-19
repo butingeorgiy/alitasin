@@ -10,5 +10,7 @@ return [
     'reset-filters' => 'Filtreyi sıfırla',
     'make-main' => 'Ana yap',
     'exit' => 'Çıkış',
-    'book-now' => 'Rezervasyon yap'
+    'book-now' => 'Rezervasyon yap',
+    'move-to-cabinet' => 'Kabine',
+    'admin-panel' => 'Admin Paneli'
 ];

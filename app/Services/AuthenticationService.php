@@ -22,7 +22,7 @@ class AuthenticationService
      */
     public function login(string $email, string $password): array
     {
-        $user = User::where('email', $email)->select(['id', 'email', 'password'])->get()->first();
+        $user = User::where('email', $email)->select(['id', 'email', 'password', 'account_type_id'])->get()->first();
 
         if (!$user) {
             throw new Exception(__('messages.user-not-found'));
@@ -35,10 +35,13 @@ class AuthenticationService
         }
 
         $token = Token::create($user);
-        $redirectTo = '';
 
         if(in_array($user->account_type_id, ['3', '4', '5'])) {
-            $redirectTo = 'admin';
+            $redirectTo = route('admin-index');
+        } else if (in_array($user->account_type_id, ['1', '2'])) {
+            $redirectTo = route('profile-index');
+        } else {
+            $redirectTo = route('index');
         }
 
         return [

@@ -61,6 +61,23 @@ class TokenService
         return $isTokenHasAccess;
     }
 
+    public function getId($user): ?int
+    {
+        $token = request()->cookie('token');
+        $tokens = $user->tokens()->get();
+
+        foreach ($tokens as $item) {
+            $hash = self::createHash($user, $item->token);
+
+            if ($hash === $token) {
+                $id = $item->id;
+                break;
+            }
+        }
+
+        return $id ?? null;
+    }
+
     private function generate(): string
     {
         return Str::random(32);
