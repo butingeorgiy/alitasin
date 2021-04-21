@@ -130,13 +130,13 @@
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.conducted-days') }}</p>
                 <select name="conduct_at" multiple placeholder="{{ __('short-phrases.search') }}">
-                    <option value="mon">{{ __('short-phrases.monday') }}</option>
-                    <option value="tue">{{ __('short-phrases.tuesday') }}</option>
-                    <option value="wed">{{ __('short-phrases.wednesday') }}</option>
-                    <option value="thu">{{ __('short-phrases.thursday') }}</option>
-                    <option value="fri">{{ __('short-phrases.friday') }}</option>
-                    <option value="sat">{{ __('short-phrases.saturday') }}</option>
-                    <option value="sun">{{ __('short-phrases.sunday') }}</option>
+                    <option value="mon">{{ __('short-phrases.mon') }}</option>
+                    <option value="tue">{{ __('short-phrases.tue') }}</option>
+                    <option value="wed">{{ __('short-phrases.wed') }}</option>
+                    <option value="thu">{{ __('short-phrases.thu') }}</option>
+                    <option value="fri">{{ __('short-phrases.fri') }}</option>
+                    <option value="sat">{{ __('short-phrases.sat') }}</option>
+                    <option value="sun">{{ __('short-phrases.sun') }}</option>
                 </select>
             </div>
 

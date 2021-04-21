@@ -54,6 +54,25 @@ return [
     'user-email-unique' => 'Belirtilen E-email zaten kayıtlı',
     'user-phone-required' => 'Telefonu belirtmeli!',
     'user-phone-regex' => 'Geçersiz telefon!',
+    'user-creating-failed' => 'Kullanıcı oluşturulamadı!',
+
+    // Tour reservation validation messages
+    'hotel-name-min' => 'Otel adının minimum uzunluğu 4 karakterdir!',
+    'hotel-name-max' => 'Maksimum otel adı uzunluğu 64 karakter!',
+    'communication_type-min' => 'Minimum iletişim yöntemi uzunluğu 4 karakter!',
+    'communication_type-max' => 'Maksimum iletişim yöntemi uzunluğu 32 karakter!',
+    'time-format' => 'Yanlış saat biçimi!',
+    'date-format' => 'Yanlış tarih biçimi!',
+    'promo-code-min' => 'Promosyon kodu boş olamaz!',
+    'promo-code-max' => 'Maksimum promosyon kodu uzunluğu 32 karakter!',
+    'tickets-required' => 'Biletler belirtilmelidir!',
+    'tickets-json' => 'Yanlış bilet biçimi! JSON gönderilmelidir',
+    'ticket-not-found' => 'Bilet bulunamadı!',
+    'tickets-min' => 'En az bir bilet belirtmeli!',
+    'reservation-creating-failed' => 'Tur rezervasyonu başarısız oldu!',
+    'reservation-creating-success' => 'Tur başarıyla rezerve edildi!',
+    'reservation->time-not-available' => 'Belirtilen zaman rezervasyon için uygun değil!',
+    'reservation->date-not-available' => 'Rezervasyon için belirtilen tarih mevcut değil!',
 
     // General messages
     'tour-not-found' => 'Tur bulunamadı!',
@@ -85,5 +104,7 @@ return [
     'week-day-invalid' => 'Geçersiz gün!',
     'time-invalid' => 'Geçersiz saat biçimi!',
     'profile-photo-size-max' => 'Maksimum resim boyutu 500 KB!',
-    'file-required' => 'Bir dosya yüklemelisiniz!!'
+    'file-required' => 'Bir dosya yüklemelisiniz!',
+    'promo-code-required' => 'Promosyon kodunu belirtmelidir!',
+    'promo-code-not-found' => 'Promosyon kodu bulunamadı!'
 ];

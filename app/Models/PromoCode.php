@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @method static where(string $string, array|string|null $input)
+ * @property integer id
+ * @property integer sale_percent
+ */
+class PromoCode extends Model
+{
+    public $timestamps = false;
+}

@@ -9,7 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 
+/**
+ * @method static Tour|null find(mixed $tourId)
+ * @property array conducted_at
+ * @property mixed manager_id
+ */
 class Tour extends Model
 {
     use SoftDeletes;
@@ -138,7 +145,7 @@ class Tour extends Model
      * @param $value
      * @return array|null
      */
-    public function getConductedAtAttribute($value): ?array
+    public function getConductedAtAttribute($value): array
     {
         if (!$value) {
             return [];
@@ -153,12 +160,70 @@ class Tour extends Model
      * @param $value
      * @return array|null
      */
-    public function getAvailableTimeAttribute($value): ?array
+    public function getAvailableTimeAttribute($value): array
     {
         if (!$value) {
             return [];
         }
 
         return explode('~', $value);
+    }
+
+    /**
+     * Check if time available for reservation
+     *
+     * @param string $time
+     * @return bool
+     */
+    public function isTimeAvailable(string $time): bool
+    {
+        return collect(explode('~', $this->getOriginal('available_time')))->contains($time);
+    }
+
+    public function isDateAvailable(string $date): bool
+    {
+        $parsedDate = Carbon::parse($date)->dayOfWeek;
+
+        foreach ($this->conducted_at as $day) {
+            switch ($day) {
+                case 'mon':
+                    if ($parsedDate === 1) {
+                        return true;
+                    }
+                    break;
+                case 'tue':
+                    if ($parsedDate === 2) {
+                        return true;
+                    }
+                    break;
+                case 'wed':
+                    if ($parsedDate === 3) {
+                        return true;
+                    }
+                    break;
+                case 'thu':
+                    if ($parsedDate === 4) {
+                        return true;
+                    }
+                    break;
+                case 'fri':
+                    if ($parsedDate === 5) {
+                        return true;
+                    }
+                    break;
+                case 'sat':
+                    if ($parsedDate === 6) {
+                        return true;
+                    }
+                    break;
+                case 'sun':
+                    if ($parsedDate === 0) {
+                        return true;
+                    }
+                    break;
+            }
+        }
+
+        return false;
     }
 }

@@ -211,7 +211,8 @@ Correct the inability to style clickable types in iOS and Safari.
 */
 
 button,
-[type='button'] {
+[type='button'],
+[type='reset'] {
   -webkit-appearance: button;
 }
 
@@ -662,6 +663,11 @@ video {
   border-color: rgba(92, 92, 92, var(--tw-border-opacity));
 }
 
+.border-gray-700{
+  --tw-border-opacity: 1;
+  border-color: rgba(196, 196, 196, var(--tw-border-opacity));
+}
+
 .border-blue{
   --tw-border-opacity: 1;
   border-color: rgba(0, 148, 255, var(--tw-border-opacity));
@@ -713,12 +719,20 @@ video {
   border-bottom-width: 2px;
 }
 
+.border-t{
+  border-top-width: 1px;
+}
+
 .border-b{
   border-bottom-width: 1px;
 }
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.cursor-not-allowed{
+  cursor: not-allowed;
 }
 
 .disabled\:cursor-not-allowed:disabled{
@@ -916,14 +930,14 @@ video {
   line-height: 1;
 }
 
+.mx-2{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-4{
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-.my-6{
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
 }
 
 .my-10{
@@ -974,6 +988,14 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.ml-2{
+  margin-left: 0.5rem;
+}
+
+.mt-3{
+  margin-top: 0.75rem;
+}
+
 .mr-3{
   margin-right: 0.75rem;
 }
@@ -992,6 +1014,10 @@ video {
 
 .mb-4{
   margin-bottom: 1rem;
+}
+
+.mt-5{
+  margin-top: 1.25rem;
 }
 
 .mr-5{
@@ -1014,6 +1040,10 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.mt-8{
+  margin-top: 2rem;
+}
+
 .mr-8{
   margin-right: 2rem;
 }
@@ -1026,12 +1056,20 @@ video {
   margin-left: 2rem;
 }
 
+.mr-10{
+  margin-right: 2.5rem;
+}
+
 .mb-10{
   margin-bottom: 2.5rem;
 }
 
 .mt-12{
   margin-top: 3rem;
+}
+
+.mb-12{
+  margin-bottom: 3rem;
 }
 
 .mb-16{
@@ -1048,6 +1086,10 @@ video {
 
 .mb-auto{
   margin-bottom: auto;
+}
+
+.ml-auto{
+  margin-left: auto;
 }
 
 .mb-1\.5{
@@ -1104,6 +1146,10 @@ video {
 
 .opacity-25{
   opacity: 0.25;
+}
+
+.opacity-50{
+  opacity: 0.5;
 }
 
 .opacity-75{
@@ -1177,16 +1223,6 @@ video {
   padding-right: 2rem;
 }
 
-.py-10{
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.px-10{
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
 .pt-0{
   padding-top: 0px;
 }
@@ -1215,12 +1251,20 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.pt-4{
+  padding-top: 1rem;
+}
+
 .pb-4{
   padding-bottom: 1rem;
 }
 
 .pt-5{
   padding-top: 1.25rem;
+}
+
+.pb-5{
+  padding-bottom: 1.25rem;
 }
 
 .pt-6{
@@ -1347,8 +1391,16 @@ video {
   top: 0.125rem;
 }
 
+.-top-0{
+  top: 0px;
+}
+
 .-bottom-0{
   bottom: 0px;
+}
+
+.-right-1{
+  right: -0.25rem;
 }
 
 .-left-1{
@@ -1367,6 +1419,10 @@ video {
   bottom: -2rem;
 }
 
+.-top-0\.5{
+  top: -0.125rem;
+}
+
 .-bottom-0\.5{
   bottom: -0.125rem;
 }
@@ -1376,7 +1432,7 @@ video {
 }
 
 .shadow-sm{
-  --tw-shadow: 0px 2px 4px rgba(130, 130, 130, 0.4);
+  --tw-shadow: 0px 4px 4px #EFEFF7;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1550,6 +1606,10 @@ video {
   width: 18rem;
 }
 
+.w-80{
+  width: 20rem;
+}
+
 .w-192{
   width: 48rem;
 }
@@ -1584,6 +1644,15 @@ video {
 
 .gap-5{
   gap: 1.25rem;
+}
+
+.gap-x-10{
+  -moz-column-gap: 2.5rem;
+       column-gap: 2.5rem;
+}
+
+.gap-y-4{
+  row-gap: 1rem;
 }
 
 .gap-y-6{
@@ -1795,7 +1864,7 @@ select::-ms-expand {
 
 /* Show more tours button modes (start) */
 
-.show-more-tours-button, .update-tour-button, .save-personal-info-button, .save-tour-button{
+.show-more-tours-button, .update-tour-button, .save-personal-info-button, .save-book-button, .save-tour-button{
   border-radius: 0.375rem;
   cursor: pointer;
   display: flex;
@@ -1809,12 +1878,12 @@ select::-ms-expand {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-.show-more-tours-button.loading, .show-more-tours-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .login-button.loading, .login-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
+.show-more-tours-button.loading, .show-more-tours-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.show-more-tours-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
+.show-more-tours-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
   display: block;
 }
 
@@ -2052,6 +2121,10 @@ select::-ms-expand {
     margin-bottom: 1rem;
   }
 
+  .sm\:p-10{
+    padding: 2.5rem;
+  }
+
   .sm\:pb-6{
     padding-bottom: 1.5rem;
   }
@@ -2078,13 +2151,29 @@ select::-ms-expand {
 }
 
 @media (min-width: 768px){
+  .md\:flex-row{
+    flex-direction: row;
+  }
+
   .md\:text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
 
+  .md\:mt-0{
+    margin-top: 0px;
+  }
+
+  .md\:mr-10{
+    margin-right: 2.5rem;
+  }
+
   .md\:text-center{
     text-align: center;
+  }
+
+  .md\:w-auto{
+    width: auto;
   }
 
   .md\:gap-x-4{
@@ -2210,6 +2299,10 @@ select::-ms-expand {
 }
 
 @media (min-width: 1280px){
+  .xl\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .xl\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

@@ -7,7 +7,7 @@
 
         <div class="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4">
             @foreach($vehicles as $vehicle)
-                <div class="flex flex-col px-3 pt-5 pb-3 bg-gray-100 shadow-sm rounded-md">
+                <div class="flex flex-col px-3 pt-5 pb-3 bg-gray-100 shadow rounded-md">
                     <div class="w-44 h-20 self-center mb-4 bg-contain bg-center bg-no-repeat" style="background-image: url({{ $vehicle['image'] }})"></div>
                     <div class="flex items-end mt-auto text-sm font-medium">
                         <p class="mr-auto leading-4 text-black">{{ $vehicle['brand'] }} <span class="text-gray-600 font-light">{{ $vehicle['model'] }}</span></p>
@@ -20,7 +20,7 @@
         <div class="block sm:hidden swiper-container -mx-3">
             <div class="swiper-wrapper -mx-2 px-5 py-2">
                 @foreach($vehicles as $vehicle)
-                    <div class="swiper-slide flex flex-col w-72 px-3 pt-5 pb-3 bg-gray-100 shadow-sm rounded-md">
+                    <div class="swiper-slide flex flex-col w-72 px-3 pt-5 pb-3 bg-gray-100 shadow rounded-md">
                         <div class="w-44 h-20 self-center mb-4 bg-contain bg-center bg-no-repeat" style="background-image: url({{ $vehicle['image'] }})"></div>
                         <div class="flex items-end mt-auto text-sm font-medium">
                             <p class="mr-auto leading-4 text-black">{{ $vehicle['brand'] }} <span class="text-gray-600 font-light">{{ $vehicle['model'] }}</span></p>

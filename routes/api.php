@@ -19,4 +19,8 @@ Route::group(['prefix' => 'tours', 'middleware' => 'auth:5'], function () {
     Route::post('update/{id}', 'Api\TourController@update');
 });
 
+Route::post('tours/reserve/{tourId}', 'Api\TourController@reserve');
+
+Route::get('promo-codes/check', 'Api\PromoCodeController@get');
+
 Route::get('tours', 'Api\TourController@get');

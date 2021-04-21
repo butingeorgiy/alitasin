@@ -2,20 +2,33 @@
 
 namespace App\Models;
 
+use App\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
+/**
+ * @method static isEmailUnique($email)
+ * @method static find(array|string $id)
+ * @property string first_name
+ * @property string account_type_id
+ * @property string last_name
+ * @property string phone_code
+ * @property string password
+ * @property integer id
+ */
 class User extends Model
 {
     public $timestamps = false;
 
+    protected $guarded = [];
 
-    public function scopeByPhone($query, $phone)
+    public function scopeIsEmailUnique($query, $email): bool
     {
-        return $query->where(DB::raw('CONCAT(phone_code, phone)'), $phone);
+        return $query->where('email', $email)->get()->first() === null;
     }
 
-    public function tokens()
+    public function tokens(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AuthToken::class)->where(
             DB::raw('UNIX_TIMESTAMP() - UNIX_TIMESTAMP(created_at)'),
@@ -30,7 +43,7 @@ class User extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeManagers($query)
+    public function scopeManagers($query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where('account_type_id', '4');
     }
@@ -51,6 +64,9 @@ class User extends Model
         return null;
     }
 
+    /**
+     * @return string
+     */
     public function getFullNameAttribute(): string
     {
         $firstName = $this->first_name;
@@ -61,5 +77,12 @@ class User extends Model
         } else {
             return $lastName . ' ' . $firstName;
         }
+    }
+
+    public function generatePassword(): string
+    {
+        $randomPassword = Str::random(10);
+        $this->password = Hash::make($randomPassword, $this);
+        return $randomPassword;
     }
 }

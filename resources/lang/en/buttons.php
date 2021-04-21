@@ -12,5 +12,7 @@ return [
     'exit' => 'Exit',
     'book-now' => 'Book now',
     'move-to-cabinet' => 'Cabinet',
-    'admin-panel' => 'Admin Panel'
+    'admin-panel' => 'Admin Panel',
+    'accept' => 'Accept',
+    'reset' => 'Reset'
 ];

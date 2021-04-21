@@ -201,7 +201,13 @@ class PageController extends Controller
             ]);
         }
 
-        return view('tour', compact('tour', 'mainImage'));
+        $user = null;
+
+        if (Auth::check(['1'])) {
+            $user = Auth::user();
+        }
+
+        return view('tour', compact('tour', 'mainImage', 'user'));
     }
 
     public function showClientProfile()

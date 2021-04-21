@@ -54,6 +54,25 @@ return [
     'user-email-unique' => 'Specified E-mail have already registered',
     'user-phone-required' => 'Must specify phone!',
     'user-phone-regex' => 'Invalid phone!',
+    'user-creating-failed' => 'Failed to create user!',
+
+    // Tour reservation validation messages
+    'hotel-name-min' => 'Minimum length of the hotel name is 4 characters!',
+    'hotel-name-max' => 'Maximum length of hotel name 64 characters!',
+    'communication_type-min' => 'Minimum communication method length 4 characters!',
+    'communication_type-max' => 'Maximum communication method length 32 characters!',
+    'time-format' => 'Incorrect time format!',
+    'date-format' => 'Incorrect date format!',
+    'promo-code-min' => 'Promo code cannot be empty!',
+    'promo-code-max' => 'Maximum length of promo code 32 characters!',
+    'tickets-required' => 'Must specify tickets!',
+    'tickets-json' => 'Incorrect tickets format! JSON must be sent',
+    'ticket-not-found' => 'Ticket not found!',
+    'tickets-min' => 'Must specify at least one ticket!',
+    'reservation-creating-failed' => 'Tour reservation was failed!',
+    'reservation-creating-success' => 'Tour was reserved successfully!',
+    'reservation->time-not-available' => 'Specified time is not available for reservation!',
+    'reservation->date-not-available' => 'Specified date is not available for reservation!',
 
     // General messages
     'tour-not-found' => 'Tour not found!',
@@ -85,5 +104,7 @@ return [
     'week-day-invalid' => 'Invalid day of the week!',
     'time-invalid' => 'Invalid time format!',
     'profile-photo-size-max' => 'Max size of image 500 KB!',
-    'file-required' => 'Must upload a file!'
+    'file-required' => 'Must upload a file!',
+    'promo-code-required' => 'Must specify promo code!',
+    'promo-code-not-found' => 'Promo code was not found!'
 ];

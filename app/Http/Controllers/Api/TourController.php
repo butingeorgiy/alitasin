@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Facades\Auth;
+use App\Facades\Reg;
 use App\Http\Requests\TourRequest;
+use App\Http\Requests\TourReserveRequest;
 use App\Models\Filter;
+use App\Models\PromoCode;
 use App\Models\Region;
+use App\Models\Reservation;
+use App\Models\Ticket;
 use App\Models\Tour;
 use App\Models\TourDescription;
 use App\Models\TourImage;
@@ -533,5 +539,133 @@ class TourController extends Controller
         }
 
         return $response ?? [];
+    }
+
+    /**
+     * Reserve a new tour
+     *
+     * @param TourReserveRequest $request
+     * @param $tourId
+     * @return array
+     * @throws Exception
+     */
+    public function reserve(TourReserveRequest $request, $tourId): array
+    {
+        $tour = Tour::find($tourId);
+
+        if (!$tour) {
+            throw new Exception(__('messages.tour-not-found'));
+        }
+
+        // Tickets validation
+        $tickets = [];
+
+        foreach (json_decode($request->input('tickets')) ?: [] as $item) {
+            if (intval($item->amount ?? 0) === 0) {
+                continue;
+            }
+
+            $ticket = Ticket::find($item->id);
+
+            if (!$ticket) {
+                throw new Exception(__('messages.ticket-not-found'));
+            }
+
+            $tickets[$ticket->id] = [
+                'amount' => intval($item->amount),
+                'percent_from_init_cost' => $ticket->getPercent()
+            ];
+        }
+
+        if (count($tickets) === 0) {
+            throw new Exception(__('messages.tickets-min'));
+        }
+
+        // Promo code validation
+        $promoCode = null;
+
+        if ($request->has('promo_code')) {
+            $promoCode = PromoCode::where('code', $request->input('promo_code'))->get()->first();
+
+            if (!$promoCode) {
+                throw new Exception(__('messages.promo-code-not-found'));
+            }
+        }
+
+        // Time validation
+        if ($request->has('time')) {
+            if (!$tour->isTimeAvailable($request->input('time'))) {
+                throw new Exception(__('messages.reservation->time-not-available'));
+            }
+        }
+
+        // Date validation
+        if ($request->has('date')) {
+            if (!$tour->isDateAvailable($request->input('date'))) {
+                throw new Exception(__('messages.reservation->date-not-available'));
+            }
+        }
+
+        // Total cost counting
+        $totalCostWithoutSale = 0;
+
+        foreach ($tickets as $ticket) {
+            $totalCostWithoutSale += $ticket['amount'] * $ticket['percent_from_init_cost'] * $tour->price / 100;
+        }
+
+        // User validation
+        if (Auth::check(['1'])) {
+            $user = Auth::user();
+        } else {
+            if (!$request->has('email')) {
+                throw new Exception(__('messages.user-email-required'));
+            }
+
+            if (!$request->has('phone')) {
+                throw new Exception(__('messages.user-phone-required'));
+            }
+
+            $firstName = $request->input('first_name', 'Unnamed');
+            $email = $request->input('email');
+            $phone = substr($request->input('phone'), -10);
+            $phoneCode = Str::before($request->input('phone'), $phone);
+
+            $registrationResponse = Reg::reg($phone, $phoneCode, $email, $firstName);
+
+            $user = $registrationResponse['user'];
+            $accessCookies = $registrationResponse['cookies'];
+        }
+
+        $reservation = new Reservation([
+            'tour_id' => $tourId,
+            'user_id' => $user->id,
+            'manager_id' => $tour->manager_id,
+            'total_cost_without_sale' => $totalCostWithoutSale
+        ]);
+
+        if ($promoCode) {
+            $reservation->attachPromoCode($promoCode);
+        }
+
+        $reservation->hotel_name = $request->input('hotel_name');
+        $reservation->communication_type = $request->input('communication_type');
+        $reservation->time = $request->input('time');
+        $reservation->date = $request->input('date');
+
+        if (!$reservation->save()) {
+            throw new Exception(__('messages.reservation-creating-failed'));
+        }
+
+        $reservation->tickets()->attach($tickets);
+        $response = [
+            'status' => true,
+            'message' => __('messages.reservation-creating-success')
+        ];
+
+        if (isset($accessCookies)) {
+            $response['cookies'] = $accessCookies;
+        }
+
+        return $response;
     }
 }

@@ -29,7 +29,7 @@ module.exports = {
                 400: '#979797', // used
                 500: '#747474', // used
                 600: '#5C5C5C', // used
-                700: '#374151',
+                700: '#C4C4C4', // used
                 800: '#1f2937',
                 900: '#111827'
             },
@@ -167,7 +167,7 @@ module.exports = {
             8: '8px',
         },
         boxShadow: {
-            sm: '0px 2px 4px rgba(130, 130, 130, 0.4)', // used
+            sm: '0px 4px 4px #EFEFF7', // used
             DEFAULT: '0px 2px 4px rgba(130, 130, 130, 0.4)', // used
             md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
             lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',

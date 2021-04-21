@@ -1,5 +1,5 @@
 <div id="loginPopup" class="fixed hidden w-screen h-screen top-0 left-0 flex justify-center items-center z-50 bg-black bg-opacity-60">
-    <div class="popup flex flex-col relative top-0 top-80 px-10 py-10 bg-white rounded-xl duration-300">
+    <div class="popup flex flex-col relative top-0 top-80 p-5 sm:p-10 bg-white rounded-xl duration-300">
         <div class="flex items-center mb-8">
             <p class="mr-auto text-2xl text-black font-bold tracking-wider">{{ __('short-phrases.enter-into-account') }}</p>
 

@@ -52,8 +52,27 @@ return [
     'user-email-email' => 'Некорректный формат E-mail!',
     'user-email-max' => 'Максимальная длина E-mail 128 символа',
     'user-email-unique' => 'Указанный E-mail уже зарегистрирован',
-    'user-phone-required' => 'Укажите телефона!',
+    'user-phone-required' => 'Укажите телефон!',
     'user-phone-regex' => 'Некорректный формат телефона!',
+    'user-creating-failed' => 'Не удалось создать пользователя!',
+
+    // Tour reservation validation messages
+    'hotel-name-min' => 'Минимальная длина названия отеля 4 символа!',
+    'hotel-name-max' => 'Максимальная длина названия отеля 64 символа!',
+    'communication_type-min' => 'Минимальная длина способа связи 4 символа!',
+    'communication_type-max' => 'Максимальная длина способа связи 32 символа!',
+    'time-format' => 'Некорректный формат времени!',
+    'date-format' => 'Некорректный формат даты!',
+    'promo-code-min' => 'Промо код не может быть пустым!',
+    'promo-code-max' => 'Максимальная длина промо кода 32 символа!',
+    'tickets-required' => 'Необходимо указать билеты!',
+    'tickets-json' => 'Некорректный формат билетов! Необходимо отправить JSON',
+    'ticket-not-found' => 'Билет не найден!',
+    'tickets-min' => 'Укажите хотя бы один билет!',
+    'reservation-creating-failed' => 'Не удалось забронировать экскурсию!',
+    'reservation-creating-success' => 'Экскурсия успешно забронирована!',
+    'reservation->time-not-available' => 'Указанное время недоступно для бронирования!',
+    'reservation->date-not-available' => 'Указанная дата недоступна для бронирования!',
 
     // General messages
     'tour-not-found' => 'Экскурсия не найдена!',
@@ -86,5 +105,7 @@ return [
     'week-day-invalid' => 'Некорректный день недели!',
     'time-invalid' => 'Некорректный формат времени!',
     'profile-photo-size-max' => 'Максимальный размер изображения 500 KB!',
-    'file-required' => 'Необходимо загрузить файл!'
+    'file-required' => 'Необходимо загрузить файл!',
+    'promo-code-required' => 'Укажите промо код!',
+    'promo-code-not-found' => 'Промо код не найден!'
 ];

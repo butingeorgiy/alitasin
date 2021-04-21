@@ -18,7 +18,8 @@ class UsersSeeder extends Seeder
                 public $phone_code = 7;
                 public $phone = 7475051903;
                 public $password = 'example1';
-                public $full_name = 'Бутин Георгий Юрьевич';
+                public $first_name = 'Георгий';
+                public $last_name = 'Бутин';
                 public $email = 'example1@gmail.com';
                 public $account_type_id = '1';
             },
@@ -26,7 +27,7 @@ class UsersSeeder extends Seeder
                 public $phone_code = 7;
                 public $phone = 7776824163;
                 public $password = 'example2';
-                public $full_name = 'Иванов Иван Иванович';
+                public $first_name = 'Иван';
                 public $email = 'example2@gmail.com';
                 public $account_type_id = '2';
             },
@@ -34,7 +35,7 @@ class UsersSeeder extends Seeder
                 public $phone_code = 1;
                 public $phone = 2223334455;
                 public $password = 'example3';
-                public $full_name = 'Петров Пётр Петрович';
+                public $first_name = 'Пётр';
                 public $email = 'example3@gmail.com';
                 public $account_type_id = '3';
             },
@@ -42,7 +43,7 @@ class UsersSeeder extends Seeder
                 public $phone_code = 38;
                 public $phone = 4445556677;
                 public $password = 'example4';
-                public $full_name = 'Сидоров Василий Евгеньевич';
+                public $first_name = 'Василий';
                 public $email = 'example4@gmail.com';
                 public $account_type_id = '4';
             },
@@ -50,10 +51,10 @@ class UsersSeeder extends Seeder
                 public $phone_code = 7;
                 public $phone = 1234567890;
                 public $password = 'example5';
-                public $full_name = 'Фёдорова Ксения Витальевна';
+                public $first_name = 'Ксения';
                 public $email = 'example5@gmail.com';
                 public $account_type_id = '5';
-            },
+            }
         ];
 
         foreach ($rows as $index => $row) {

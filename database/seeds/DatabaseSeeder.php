@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
              UsersSeeder::class,
              RegionsSeeder::class,
              TourTypesSeeder::class,
-             FiltersSeeder::class
+             FiltersSeeder::class,
+             TicketsSeeder::class,
+             ReservationStatusesSeeder::class
          ]);
     }
 }

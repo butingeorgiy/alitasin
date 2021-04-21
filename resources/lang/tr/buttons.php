@@ -12,5 +12,7 @@ return [
     'exit' => 'Çıkış',
     'book-now' => 'Rezervasyon yap',
     'move-to-cabinet' => 'Kabine',
-    'admin-panel' => 'Admin Paneli'
+    'admin-panel' => 'Admin Paneli',
+    'accept' => 'Kabul etmek',
+    'reset' => 'Sıfırla'
 ];
