@@ -36,6 +36,11 @@ const langConfig = {
             'en': 'You are sure?',
             'ru': 'Вы уверены?',
             'tr': 'Emin misiniz?'
+        },
+        'activated': {
+            'en': 'Activated',
+            'ru': 'Активен',
+            'tr': 'Aktif'
         }
     }
 };

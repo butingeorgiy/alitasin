@@ -37,7 +37,7 @@ return [
     'address' => 'Address',
     'reviews' => 'Reviews',
     'enter-into-account' => 'Enter into account',
-    'email' => 'Email',
+    'email' => 'E-mail',
     'password' => 'Password',
     'search' => 'Search',
     'tour-duration' => 'Tour duration',
@@ -51,21 +51,21 @@ return [
 
     // Days of the week
 
-    'monday-shorten' => 'Mon',
-    'tuesday-shorten' => 'Tue',
-    'wednesday-shorten' => 'Wed',
-    'thursday-shorten' => 'Thu',
-    'friday-shorten' => 'Fri',
-    'saturday-shorten' => 'Sat',
-    'sunday-shorten' => 'Sun',
+    'mon-shorten' => 'Mon',
+    'tue-shorten' => 'Tue',
+    'wed-shorten' => 'Wed',
+    'thu-shorten' => 'Thu',
+    'fri-shorten' => 'Fri',
+    'sat-shorten' => 'Sat',
+    'sun-shorten' => 'Sun',
 
-    'monday' => 'Monday',
-    'tuesday' => 'Tuesday',
-    'wednesday' => 'Wednesday',
-    'thursday' => 'Thursday',
-    'friday' => 'Friday',
-    'saturday' => 'Saturday',
-    'sunday' => 'Sunday',
+    'mon' => 'Monday',
+    'tue' => 'Tuesday',
+    'wed' => 'Wednesday',
+    'thu' => 'Thursday',
+    'fri' => 'Friday',
+    'sat' => 'Saturday',
+    'sun' => 'Sunday',
 
     // Days of the week (end)
 
@@ -87,5 +87,18 @@ return [
     'first-name' => 'First name',
     'last-name' => 'Last name',
     'phone' => 'Phone',
-    'nothing-entered' => 'Nothing entered'
+    'nothing-entered' => 'Nothing entered',
+    'book-tour' => 'Book excursions',
+    'enter-first-name' => 'Enter first name',
+    'enter-last-name' => 'Enter last name',
+    'enter-hotel' => 'Enter hotel name',
+    'enter-email' => 'Enter E-mail',
+    'enter-phone' => 'Enter phone',
+    'hotel' => 'Hotel',
+    'convenient-way-communication' => 'Convenient way of communication',
+    'select-way' => 'Select way',
+    'select-time' => 'Select time',
+    'promo-code' => 'Promo code',
+    'if-have' => 'If you have',
+    'total-cost' => 'Total'
 ];

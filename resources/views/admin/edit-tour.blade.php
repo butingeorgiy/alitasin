@@ -28,7 +28,7 @@
                 @for($i = 1; $i <= 5; $i++)
                     @if(isset($images[$i-1]))
                         <label class="image-item filled"
-                               style="background-image: url(data:image/jpg;base64,{{ base64_encode(\Illuminate\Support\Facades\Storage::get('tour_pictures/' . $images[$i-1]->link)) }})"
+                               style="background-image: url({{ route('get-image', ['dir' => 'tour_pictures', 'file' => $images[$i-1]->link]) }})"
                                data-image-id="{{ $images[$i-1]->id }}">
                             @if($i !== 1)
                                 <div class="make-image-main-button absolute -bottom-6 text-sm text-gray-600 font-light hover:underline">
@@ -155,19 +155,19 @@
                 <p class="mb-2 font-semibold">{{ __('short-phrases.conducted-days') }}</p>
                 <select name="conduct_at" multiple placeholder="{{ __('short-phrases.search') }}">
                     <option
-                        value="mon" {{ collect($tour->conducted_at)->contains('mon') ? 'selected' : '' }}>{{ __('short-phrases.monday') }}</option>
+                        value="mon" {{ collect($tour->conducted_at)->contains('mon') ? 'selected' : '' }}>{{ __('short-phrases.mon') }}</option>
                     <option
-                        value="tue" {{ collect($tour->conducted_at)->contains('tue') ? 'selected' : '' }}>{{ __('short-phrases.tuesday') }}</option>
+                        value="tue" {{ collect($tour->conducted_at)->contains('tue') ? 'selected' : '' }}>{{ __('short-phrases.tue') }}</option>
                     <option
-                        value="wed" {{ collect($tour->conducted_at)->contains('wed') ? 'selected' : '' }}>{{ __('short-phrases.wednesday') }}</option>
+                        value="wed" {{ collect($tour->conducted_at)->contains('wed') ? 'selected' : '' }}>{{ __('short-phrases.wed') }}</option>
                     <option
-                        value="thu" {{ collect($tour->conducted_at)->contains('thu') ? 'selected' : '' }}>{{ __('short-phrases.thursday') }}</option>
+                        value="thu" {{ collect($tour->conducted_at)->contains('thu') ? 'selected' : '' }}>{{ __('short-phrases.thu') }}</option>
                     <option
-                        value="fri" {{ collect($tour->conducted_at)->contains('fri') ? 'selected' : '' }}>{{ __('short-phrases.friday') }}</option>
+                        value="fri" {{ collect($tour->conducted_at)->contains('fri') ? 'selected' : '' }}>{{ __('short-phrases.fri') }}</option>
                     <option
-                        value="sat" {{ collect($tour->conducted_at)->contains('sat') ? 'selected' : '' }}>{{ __('short-phrases.saturday') }}</option>
+                        value="sat" {{ collect($tour->conducted_at)->contains('sat') ? 'selected' : '' }}>{{ __('short-phrases.sat') }}</option>
                     <option
-                        value="sun" {{ collect($tour->conducted_at)->contains('sun') ? 'selected' : '' }}>{{ __('short-phrases.sunday') }}</option>
+                        value="sun" {{ collect($tour->conducted_at)->contains('sun') ? 'selected' : '' }}>{{ __('short-phrases.sun') }}</option>
                 </select>
             </div>
 

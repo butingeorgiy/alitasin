@@ -12,5 +12,7 @@ return [
     'exit' => 'Выйти',
     'book-now' => 'Забронировать',
     'move-to-cabinet' => 'Кабинет',
-    'admin-panel' => 'Админ панель'
+    'admin-panel' => 'Админ панель',
+    'accept' => 'Применить',
+    'reset' => 'Сбросить'
 ];

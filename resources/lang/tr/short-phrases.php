@@ -37,7 +37,7 @@ return [
     'address' => 'Adres',
     'reviews' => 'Yorumlar',
     'enter-into-account' => 'Hesabınıza giriş yapın',
-    'email' => 'E-posta adresi',
+    'email' => 'E-mail',
     'password' => 'Parola',
     'search' => 'Aramak',
     'tour-duration' => 'Tur süresi',
@@ -51,21 +51,21 @@ return [
 
     // Days of the week
 
-    'monday-shorten' => 'Pzt',
-    'tuesday-shorten' => 'Sal',
-    'wednesday-shorten' => 'Çar',
-    'thursday-shorten' => 'Per',
-    'friday-shorten' => 'Cum',
-    'saturday-shorten' => 'Cmt',
-    'sunday-shorten' => 'Paz',
+    'mon-shorten' => 'Pzt',
+    'tue-shorten' => 'Sal',
+    'wed-shorten' => 'Çar',
+    'thu-shorten' => 'Per',
+    'fri-shorten' => 'Cum',
+    'sat-shorten' => 'Cmt',
+    'sun-shorten' => 'Paz',
 
-    'monday' => 'Pazartesi',
-    'tuesday' => 'Salı',
-    'wednesday' => 'Çarşamba',
-    'thursday' => 'Perşembe',
-    'friday' => 'Cuma',
-    'saturday' => 'Cumartesi',
-    'sunday' => 'Pazar',
+    'mon' => 'Pazartesi',
+    'tue' => 'Salı',
+    'wed' => 'Çarşamba',
+    'thu' => 'Perşembe',
+    'fri' => 'Cuma',
+    'sat' => 'Cumartesi',
+    'sun' => 'Pazar',
 
     // Days of the week (end)
 
@@ -87,5 +87,18 @@ return [
     'first-name' => 'İsim',
     'last-name' => 'Soyadı',
     'phone' => 'Telefon',
-    'nothing-entered' => 'Hiçbir şey girilmedi'
+    'nothing-entered' => 'Hiçbir şey girilmedi',
+    'book-tour' => 'Geziler için rezervasyon yapın',
+    'enter-first-name' => 'Adı girin',
+    'enter-last-name' => 'Soy adını gir',
+    'enter-hotel' => 'Otel adını girin',
+    'enter-email' => 'E-mail girin',
+    'enter-phone' => 'Telefon girin',
+    'hotel' => 'Otel',
+    'convenient-way-communication' => 'Uygun iletişim yolu',
+    'select-way' => 'Bir yol seçin',
+    'select-time' => 'Saati seçin',
+    'promo-code' => 'Promosyon kodu',
+    'if-have' => 'Eğer varsa',
+    'total-cost' => 'Toplam'
 ];

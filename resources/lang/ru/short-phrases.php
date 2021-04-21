@@ -37,7 +37,7 @@ return [
     'address' => 'Адрес',
     'reviews' => 'Отзывы',
     'enter-into-account' => 'Вход в аккаунт',
-    'email' => 'Email',
+    'email' => 'E-mail',
     'password' => 'Пароль',
     'search' => 'Поиск',
     'tour-duration' => 'Продолжительность экскурсии',
@@ -51,21 +51,21 @@ return [
 
     // Days of the week
 
-    'monday-shorten' => 'Пн',
-    'tuesday-shorten' => 'Вт',
-    'wednesday-shorten' => 'Ср',
-    'thursday-shorten' => 'Чт',
-    'friday-shorten' => 'Пт',
-    'saturday-shorten' => 'Сб',
-    'sunday-shorten' => 'Вс',
+    'mon-shorten' => 'Пн',
+    'tue-shorten' => 'Вт',
+    'wed-shorten' => 'Ср',
+    'thu-shorten' => 'Чт',
+    'fri-shorten' => 'Пт',
+    'sat-shorten' => 'Сб',
+    'sun-shorten' => 'Вс',
 
-    'monday' => 'Понедельник',
-    'tuesday' => 'Вторник',
-    'wednesday' => 'Среда',
-    'thursday' => 'Четверг',
-    'friday' => 'Пятница',
-    'saturday' => 'Суббота',
-    'sunday' => 'Воскресенье',
+    'mon' => 'Понедельник',
+    'tue' => 'Вторник',
+    'wed' => 'Среда',
+    'thu' => 'Четверг',
+    'fri' => 'Пятница',
+    'sat' => 'Суббота',
+    'sun' => 'Воскресенье',
 
     // Days of the week (end)
 
@@ -87,5 +87,18 @@ return [
     'first-name' => 'Имя',
     'last-name' => 'Фамилия',
     'phone' => 'Телефон',
-    'nothing-entered' => 'Ничего не указано'
+    'nothing-entered' => 'Ничего не указано',
+    'book-tour' => 'Забронировать экскурсию',
+    'enter-first-name' => 'Введите имя',
+    'enter-last-name' => 'Введите фамилию',
+    'enter-hotel' => 'Введите название отеля',
+    'enter-email' => 'Введите E-mail',
+    'enter-phone' => 'Введите телефон',
+    'hotel' => 'Отель',
+    'convenient-way-communication' => 'Удобный способ связи',
+    'select-way' => 'Выберите способ',
+    'select-time' => 'Выберите время',
+    'promo-code' => 'Промо код',
+    'if-have' => 'Если имеется',
+    'total-cost' => 'Итог'
 ];
