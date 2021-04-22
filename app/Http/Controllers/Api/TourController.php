@@ -6,7 +6,6 @@ use App\Facades\Auth;
 use App\Facades\Reg;
 use App\Http\Requests\TourRequest;
 use App\Http\Requests\TourReserveRequest;
-use App\Models\Filter;
 use App\Models\PromoCode;
 use App\Models\Region;
 use App\Models\Reservation;
@@ -18,10 +17,10 @@ use App\Models\TourTitle;
 use App\Models\TourType;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -308,14 +307,29 @@ class TourController extends Controller
         }
     }
 
-    public function delete(Request $request, $id)
+    /**
+     * Delete tour
+     *
+     * @param $id
+     * @return array
+     * @throws Exception
+     */
+    public function delete($id): array
     {
-        //
-    }
+        $tour = Tour::find($id);
 
-    public function hide(Request $request, $id)
-    {
-        //
+        if (!$tour) {
+            throw new Exception(__('messages.tour-not-found'));
+        }
+
+        if ($tour->delete() !== true) {
+            throw new Exception(__('messages.tour-deleting-failed'));
+        }
+
+        return [
+            'status' => true,
+            'message' => __('messages.tour-deleting-success')
+        ];
     }
 
     /**
@@ -478,7 +492,14 @@ class TourController extends Controller
         ];
     }
 
-    public function get(Request $request)
+    /**
+     * Get tours by title, filters, price, region and types
+     *
+     * @param Request $request
+     * @return array
+     * @throws Exception
+     */
+    public function get(Request $request): array
     {
         $tours = Tour::with(['title', 'description', 'type', 'filters', 'images']);
 
@@ -514,6 +535,17 @@ class TourController extends Controller
 
         if ($request->has('region_id')) {
             $tours->where('region_id', $request->input('region_id'));
+        }
+
+        if ($request->input('search_string')) {
+            $searchString = preg_replace('/\s+/', '|', trim($request->input('search_string')));
+
+            $tours->whereHas('title', function (Builder $query) use ($searchString) {
+                $query->selectRaw(
+                    'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(' . \App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+                    [$searchString]
+                )->having('frequency', '>', 0)->orderByDesc('frequency');
+            });
         }
 
         $tours = $tours->offset($request->input('offset') ?? 0)->limit(15)->get();

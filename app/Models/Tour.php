@@ -9,13 +9,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 
 /**
- * @method static Tour|null find(mixed $tourId)
+ * @method static Tour find(mixed $tourId)
+ * @method static findOrFail($id)
  * @property array conducted_at
  * @property mixed manager_id
+ * @property array|mixed|string|null price
+ * @property mixed|string available_time
+ * @property array|mixed|string|null duration
+ * @property mixed images
+ * @property mixed title
+ * @property mixed description
+ * @property mixed type
+ * @property mixed region
+ * @property mixed manager
  */
 class Tour extends Model
 {
@@ -225,5 +234,13 @@ class Tour extends Model
         }
 
         return false;
+    }
+
+    public function scopeSearch($query, string $searchString)
+    {
+        return $query->selectRaw(
+            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . \App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+            [str_replace(' ', '|', $searchString)]
+        )->having('frequency', '>', 0)->orderByDesc('frequency');
     }
 }

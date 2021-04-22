@@ -15,5 +15,6 @@ return [
     'admin-panel' => 'Admin Paneli',
     'accept' => 'Kabul etmek',
     'reset' => 'Sıfırla',
-    'create-account' => 'Hesap oluşturmak'
+    'create-account' => 'Hesap oluşturmak',
+    'add-excursion' => 'Gezi ekle'
 ];

@@ -12,7 +12,8 @@
 </head>
 <body>
     @include('components.general.header')
-    <h1>Tours</h1>
+    @include('components.general.profile-hero')
+    @include('components.general.tours')
     @include('components.general.footer')
 </body>
 </html>

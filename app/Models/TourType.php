@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find(array|string|null $input)
+ */
 class TourType extends Model
 {
     public $timestamps = false;

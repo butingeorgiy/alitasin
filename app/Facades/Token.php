@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static create($user)
+ * @method static getId($user)
  */
 class Token extends Facade
 {

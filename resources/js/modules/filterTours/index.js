@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', _ => {
 
     if (toursSection) {
         new FilterToursController({
+            toursSection,
             filterButtons: document.querySelectorAll('#toursSection .filter-item'),
             typeButtons: document.querySelectorAll('#toursSection .type-items'),
             minPriceInput: document.querySelector('#toursSection input[name="price_from"]'),
@@ -13,7 +14,8 @@ document.addEventListener('DOMContentLoaded', _ => {
             resetFiltersButton: document.querySelector('#toursSection .reset-filters-button'),
             filtersContainer: document.querySelector('#toursSection .filters'),
             showMoreButton: document.querySelector('#toursSection .show-more-tours-button'),
-            showFiltersButton: document.querySelector('#toursSection .show-filters-button')
+            showFiltersButton: document.querySelector('#toursSection .show-filters-button'),
+            searchInput: document.querySelector('#toursSection input[name="search"]')
         });
     }
 });

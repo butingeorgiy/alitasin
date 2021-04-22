@@ -1,6 +1,7 @@
 import TourFormBaseController from '../../extenders/controllers/TourFormBaseController';
 import UpdateTourView from './UpdateTourView';
 import UpdateTourModel from './UpdateTourModel';
+import LocaleHelper from "../../helpers/LocaleHelper";
 
 class UpdateTourController extends TourFormBaseController {
     constructor(nodes) {
@@ -91,7 +92,7 @@ class UpdateTourController extends TourFormBaseController {
     }
 
     removeImageHandler(imageId) {
-        if (!confirm('You are sure?')) {
+        if (!confirm(LocaleHelper.translate('you-are-sure'))) {
             return;
         }
 

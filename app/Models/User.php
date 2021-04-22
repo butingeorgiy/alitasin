@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 /**
  * @method static isEmailUnique($email)
  * @method static find(array|string $id)
+ * @method static where(string $string, array|string|null $input)
+ * @method static managers()
  * @property string first_name
  * @property string account_type_id
  * @property string last_name
