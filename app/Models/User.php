@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
  * @property string phone_code
  * @property string password
  * @property integer id
+ * @property string email
  */
 class User extends Model
 {

@@ -5,8 +5,10 @@ namespace App\Services;
 
 
 use App\Facades\Token;
+use App\Mail\PasswordGenerated;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationService
 {
@@ -46,7 +48,7 @@ class RegistrationService
             throw new Exception(__('messages.user-creating-failed'));
         }
 
-        $this->notify($email, $password);
+        $this->notify($user, $password);
 
         $response = [
             'status' => true,
@@ -65,8 +67,9 @@ class RegistrationService
     }
 
 
-    public function notify(string $email, string $password): void
+    public function notify(User $user, string $password): void
     {
-        //
+        Mail::to($user->email)
+            ->send(new PasswordGenerated($password, $user->first_name));
     }
 }
