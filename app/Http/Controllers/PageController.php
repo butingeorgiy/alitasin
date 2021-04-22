@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Models\Region;
 use App\Models\Tour;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
@@ -108,9 +109,9 @@ class PageController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function adminIndex()
+    public function adminIndex(): RedirectResponse
     {
         $user = Auth::user();
 
@@ -121,7 +122,10 @@ class PageController extends Controller
         return redirect()->route('index');
     }
 
-    public function profileIndex()
+    /**
+     * @return RedirectResponse
+     */
+    public function profileIndex(): RedirectResponse
     {
         $user = Auth::user();
 
@@ -181,6 +185,10 @@ class PageController extends Controller
         return view('region', compact('tours', 'regions', 'currentRegion', 'filterCounter', 'popularTours'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showTour($id)
     {
         $tour = Tour::findOrFail($id);

@@ -13,55 +13,6 @@ use Illuminate\Support\Str;
 
 class AuthenticationController extends Controller
 {
-//    /**
-//     * @param Request $request
-//     * @return JsonResponse
-//     * @throws Exception
-//     */
-//    public function sendSmsCode(Request $request): JsonResponse
-//    {
-//        $validator = Validator::make($request->all(), [
-//            'phone' => 'required|numeric'
-//        ], [
-//            'phone.required' => 'Необходимо указать номер телефона!',
-//            'phone.numeric' => 'Номер телефона должен состоять только из цифр!'
-//        ]);
-//
-//        if ($validator->fails()) {
-//            throw new Exception($validator->errors()->first());
-//        }
-//
-//        $phone = $request->input('phone');
-//        $secureCode = '';
-//
-//        if (strlen($phone) < 11 or strlen($phone) > 14) {
-//            throw new Exception('В номере телефона должно быть от 11 до 14 цифр!');
-//        }
-//
-//        try {
-//            while (true) {
-//                $secureCode .= random_int(0, 9);
-//
-//                if (strlen($secureCode) >= 6) {
-//                    break;
-//                }
-//            }
-//        } catch (Throwable $e) {
-//            throw new Exception('Не удалось сгенерировать SMS-код! Повторите попытку заново!');
-//        }
-//
-//        try {
-//            $phoneUuid = SafeVar::add($phone);
-//            $secureCodeUuid = SafeVar::add($secureCode);
-//        } catch (Throwable $e) {
-//            throw new Exception('Не удалось сохранить номер телефона или SMS-код! Повторите попытку заново!');
-//        }
-//
-//        return response()->json([
-//            'phone_uuid' => encrypt($phoneUuid, false),
-//            'code_uuid' => encrypt($secureCodeUuid, false)
-//        ]);
-//    }
 
     /**
      * @param Request $request

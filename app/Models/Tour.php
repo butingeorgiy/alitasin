@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @method static Tour find(mixed $tourId)
+ * @method static findOrFail($id)
  * @property array conducted_at
  * @property mixed manager_id
  * @property array|mixed|string|null price
