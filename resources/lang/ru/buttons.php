@@ -14,5 +14,6 @@ return [
     'move-to-cabinet' => 'Кабинет',
     'admin-panel' => 'Админ панель',
     'accept' => 'Применить',
-    'reset' => 'Сбросить'
+    'reset' => 'Сбросить',
+    'create-account' => 'Создать аккаунт'
 ];

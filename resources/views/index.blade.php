@@ -22,5 +22,6 @@
     @include('components.general.footer')
 
     @include('popups.login')
+    @include('popups.reg')
 </body>
 </html>

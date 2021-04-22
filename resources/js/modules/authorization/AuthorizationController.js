@@ -1,15 +1,11 @@
-import EventHandler from '../../core/EventHandler';
 import PopupObserver from '../../observers/PopupObserver';
 import AuthorizationView from './AuthorizationView';
 import AuthorizationModel from './AuthorizationModel';
-import Cookies from 'js-cookie';
+import AuthenticationBaseController from '../../extenders/controllers/AuthenticationBaseController';
 
-class AuthorizationController extends EventHandler {
+class AuthorizationController extends AuthenticationBaseController {
     constructor(nodes) {
-        super();
-
-        this.nodes = nodes;
-        this.initPopup();
+        super(nodes);
 
         this.view = new AuthorizationView({
             error: nodes.error,
@@ -26,10 +22,6 @@ class AuthorizationController extends EventHandler {
         if (location.hash === '#login') {
             history.replaceState(null, null, '/');
         }
-    }
-
-    showForm() {
-        this.popup.open();
     }
 
     login(form) {
@@ -53,20 +45,17 @@ class AuthorizationController extends EventHandler {
                 if (typeof result === 'string') {
                     alert(`Error: ${result}`)
                     this.view.hideLoader();
+                    this.loading = false;
                 } else if (result.error) {
                     this.view.showError(result.message);
                     this.view.hideLoader();
+                    this.loading = false;
                 } else {
                     this.setAuthCookie(result.cookies);
                     location.assign(result.redirect_to);
                 }
             })
             .catch(error => alert(`Error: ${error}`));
-    }
-
-    setAuthCookie(cookies) {
-        Cookies.set('id', cookies.id, { expires: 7 });
-        Cookies.set('token', cookies.token, { expires: 7 });
     }
 }
 

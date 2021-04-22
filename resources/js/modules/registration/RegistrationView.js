@@ -1,9 +1,9 @@
 import AuthenticationBaseView from '../../extenders/views/AuthenticationBaseView';
 
-class AuthorizationView extends AuthenticationBaseView {
+class RegistrationView extends AuthenticationBaseView {
     constructor(nodes) {
         super(nodes);
     }
 }
 
-export default AuthorizationView;
+export default RegistrationView;

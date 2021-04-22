@@ -100,5 +100,6 @@ return [
     'select-time' => 'Saati seçin',
     'promo-code' => 'Promosyon kodu',
     'if-have' => 'Eğer varsa',
-    'total-cost' => 'Toplam'
+    'total-cost' => 'Toplam',
+    'registration' => 'Kayıt'
 ];

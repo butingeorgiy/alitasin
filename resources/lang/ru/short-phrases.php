@@ -100,5 +100,6 @@ return [
     'select-time' => 'Выберите время',
     'promo-code' => 'Промо код',
     'if-have' => 'Если имеется',
-    'total-cost' => 'Итог'
+    'total-cost' => 'Итог',
+    'registration' => 'Регистрация'
 ];
