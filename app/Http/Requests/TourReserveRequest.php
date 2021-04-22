@@ -31,7 +31,7 @@ class TourReserveRequest extends FormRequest
             'email' => 'bail|nullable|email',
             'hotel_name' => 'bail|nullable|min:4|max:64',
             'communication_type' => 'bail|nullable|min:4|max:32',
-            'time' => 'bail|nullable|date_format:H:i',
+            'time' => ['bail', 'nullable', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/'],
             'date' => 'bail|nullable|date_format:Y-m-d',
             'promo_code' => 'bail|nullable|min:1|max:32',
             'tickets' => 'bail|required|json'
@@ -53,7 +53,7 @@ class TourReserveRequest extends FormRequest
             'hotel_name.max' => __('messages.hotel-name-max'),
             'communication_type.min' => __('messages.communication_type-min'),
             'communication_type.max' => __('messages.communication_type-max'),
-            'time.date_format' => __('messages.time-format'),
+            'time.regex' => __('messages.time-format'),
             'date.date_format' => __('messages.date-format'),
             'promo_code.min' => __('messages.promo-code-min'),
             'promo_code.max' => __('messages.promo-code-max'),
