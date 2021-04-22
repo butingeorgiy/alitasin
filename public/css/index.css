@@ -1878,12 +1878,12 @@ select::-ms-expand {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-.show-more-tours-button.loading, .show-more-tours-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
+.show-more-tours-button.loading, .show-more-tours-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .create-account-button.loading, .create-account-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.show-more-tours-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
+.show-more-tours-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .create-account-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
   display: block;
 }
 

@@ -87,9 +87,12 @@ class UpdateProfileInfoController extends EventHandler {
         const formData = new FormData();
 
         formData.append('first_name', values.firstName);
-        formData.append('last_name', values.lastName);
         formData.append('email', values.email);
         formData.append('phone', values.phone);
+
+        if (values.lastName) {
+            formData.append('last_name', values.lastName);
+        }
 
         UpdateProfileInfoModel.update(formData)
             .then(result => {

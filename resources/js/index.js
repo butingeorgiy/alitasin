@@ -7,3 +7,4 @@ import './modules/languageSwitcher';
 import './modules/filterTours';
 import './modules/updateProfileInfo';
 import './modules/bookTour';
+import './modules/registration';

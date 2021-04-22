@@ -141,7 +141,7 @@
             <input type="text"
                    name="phone"
                    {{ $user ? 'readonly' : '' }}
-                   value="{{ $user ? '+' . $user->phone : '' }}"
+                   value="{{ $user ? $user->phone : '' }}"
                    placeholder="{{ __('short-phrases.enter-phone') }}"
                    class="w-80 mb-3 px-4 py-3 text-sm text-gray-600 placeholder-gray-400 border border-gray-200 bg-white rounded-md {{ $user ? ' cursor-not-allowed' : '' }}">
 

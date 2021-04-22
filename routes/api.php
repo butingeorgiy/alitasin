@@ -3,6 +3,7 @@
 Route::group(['prefix' => 'auth'], function () {
     Route::post('send-code', 'Api\AuthenticationController@sendSmsCode');
     Route::post('login', 'Api\AuthenticationController@login');
+    Route::post('reg', 'Api\AuthenticationController@reg');
 });
 
 Route::group(['prefix' => 'users'], function () {

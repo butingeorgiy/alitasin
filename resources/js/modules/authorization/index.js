@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', _ => {
             showLoginPopupButton.addEventListener('click', _ => controller.showForm());
         }
 
-        loginButton.addEventListener('click', e => {
-            if (!e.currentTarget.classList.contains('loading')) {
+        loginButton.addEventListener('click', _ => {
+            if (!controller.loading) {
+                controller.loading = true;
                 controller.login(loginPopup);
             }
         });

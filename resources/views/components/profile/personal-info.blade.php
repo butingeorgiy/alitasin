@@ -43,7 +43,6 @@
                     <label class="col-span-1">
                         <span class="mb-3 text-sm text-gray-500">{{ __('short-phrases.phone') }}</span>
                         <span class="flex items-center pb-1 border-b border-black cursor-pointer">
-                            <span class="mr-1 text-sm text-black font-semibold">+</span>
                             <input class="mr-auto text-sm text-black font-semibold" type="text" name="phone" value="{{ $user->phone }}" placeholder="{{ __('short-phrases.nothing-entered') }}">
                             <svg class="min-w-4 min-h-4 w-4 h-4 ml-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 4.1917C16.0006 4.08642 15.9804 3.98206 15.9406 3.8846C15.9008 3.78714 15.8421 3.69849 15.768 3.62374L12.376

@@ -14,5 +14,6 @@ return [
     'move-to-cabinet' => 'Kabine',
     'admin-panel' => 'Admin Paneli',
     'accept' => 'Kabul etmek',
-    'reset' => 'Sıfırla'
+    'reset' => 'Sıfırla',
+    'create-account' => 'Hesap oluşturmak'
 ];

@@ -100,5 +100,6 @@ return [
     'select-time' => 'Select time',
     'promo-code' => 'Promo code',
     'if-have' => 'If you have',
-    'total-cost' => 'Total'
+    'total-cost' => 'Total',
+    'registration' => 'Registration'
 ];

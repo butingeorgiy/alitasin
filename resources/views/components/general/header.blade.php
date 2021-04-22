@@ -17,7 +17,7 @@
                 <a href="{{ route('logout') }}" class="logout-button ml-8 text-red hover:underline">{{ __('buttons.exit') }}</a>
             @else
                 <div class="show-login-popup-button mr-8 text-black hover:underline">{{ __('buttons.login') }}</div>
-                <a href="#" class="text-black hover:underline">{{ __('buttons.reg') }}</a>
+                <div class="show-reg-popup-button text-black hover:underline">{{ __('buttons.reg') }}</div>
             @endif
                 <select class="language-switch-select ml-8 cursor-pointer" name="language">
                     @foreach(['ru', 'en', 'tr'] as $lang)

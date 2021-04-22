@@ -14,5 +14,6 @@ return [
     'move-to-cabinet' => 'Cabinet',
     'admin-panel' => 'Admin Panel',
     'accept' => 'Accept',
-    'reset' => 'Reset'
+    'reset' => 'Reset',
+    'create-account' => 'Create account'
 ];
