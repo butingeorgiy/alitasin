@@ -1,6 +1,7 @@
 import EventHandler from '../../core/EventHandler';
 import FilterToursModel from './FilterToursModel';
 import FilterToursView from "./FilterToursView";
+import LocaleHelper from '../../helpers/LocaleHelper';
 
 class FilterToursController extends EventHandler {
     constructor(nodes) {
@@ -9,29 +10,80 @@ class FilterToursController extends EventHandler {
         this.nodes = nodes;
         this.loading = false;
         this.shoudShowMore = !nodes.showMoreButton.classList.contains('disabled');
+        this.isAdmin = nodes.toursSection.getAttribute('data-is-admin') === '1';
         this.offsetStep = 15;
         this.offset = 0;
         this.filters = {
             'filters': [],
             'types': [],
             'min-price': null,
-            'max-price': null
+            'max-price': null,
+            'search-string': null
         };
 
         this.view = new FilterToursView({
             toursContainer: nodes.toursContainer,
             resetFiltersButton: nodes.resetFiltersButton,
             filtersContainer: nodes.filtersContainer,
-            showMoreButton: nodes.showMoreButton
+            showMoreButton: nodes.showMoreButton,
+            searchInput: nodes.searchInput
         });
 
         this.changeFiltersAttachHandlers();
+        this.initSearchInput();
         this.addEvent(nodes.resetFiltersButton, 'click', _ => this.resetFilters());
         this.addEvent(nodes.showFiltersButton, 'click', e => this.view.toggleFiltersForm(e.currentTarget));
         this.addEvent(nodes.showMoreButton, 'click', _ => {
             if (!this.loading && this.shoudShowMore) {
                 this.fetchTours();
             }
+        });
+
+        nodes.toursContainer.querySelectorAll('.move-to-update-page').forEach(btn => {
+            this.addEvent(btn, 'click', e => {
+                e.preventDefault();
+                this.moveToUpdateTourPage(btn.getAttribute('data-tour-id'));
+            });
+        });
+
+        nodes.toursContainer.querySelectorAll('.delete-tour-button').forEach(btn => {
+            this.addEvent(btn, 'click', e => {
+                e.preventDefault();
+                this.deleteTour(btn.getAttribute('data-tour-id'), btn.parentNode.parentNode);
+            });
+        });
+
+        this.deleteTour = this.deleteTour.bind(this);
+    }
+
+    initSearchInput() {
+        let timer, searchString;
+
+        this.addEvent(this.nodes.searchInput, 'input', _ => {
+            clearTimeout(timer);
+            searchString = this.nodes.searchInput.value;
+            this.view.enableShowMoreButton();
+            this.offset = -this.offsetStep;
+            this.shoudShowMore = true;
+
+            if (!searchString.replace(/\s/g, '') && searchString !== '') {
+                this.view.hideSearchLoading();
+                return;
+            }
+
+            this.view.showSearchLoading();
+
+            if (!searchString) {
+                this.filters['search-string'] = null;
+                this.view.hideSearchLoading();
+                this.fetchTours('search');
+                return;
+            }
+
+            timer = setTimeout(_ => {
+                this.filters['search-string'] = this.nodes.searchInput.value;
+                this.fetchTours('search');
+            }, 500);
         });
     }
 
@@ -98,6 +150,10 @@ class FilterToursController extends EventHandler {
             uri += `max_price=${this.filters['max-price']}&`;
         }
 
+        if (this.filters['search-string']) {
+            uri += `search_string=${this.filters['search-string']}&`;
+        }
+
         if (this.offset !== 0) {
             uri += `offset=${this.offset}&`;
         }
@@ -113,6 +169,7 @@ class FilterToursController extends EventHandler {
         this.shoudShowMore = true;
         this.offset = -this.offsetStep;
         this.filters = {
+            ...this.filters,
             'filters': [],
             'types': [],
             'min-price': null,
@@ -154,12 +211,7 @@ class FilterToursController extends EventHandler {
                 console.error('Undefined filter field!');
         }
 
-        if (JSON.stringify(this.filters) === JSON.stringify({
-            'filters': [],
-            'types': [],
-            'min-price': null,
-            'max-price': null
-        })) {
+        if (!this.isFiltersHasChanges()) {
             this.view.disableResetFiltersButton();
         } else {
             this.view.enableResetFiltersButton();
@@ -168,10 +220,46 @@ class FilterToursController extends EventHandler {
         this.fetchTours('filter');
     }
 
+    isFiltersHasChanges() {
+        return this.filters['filters'].length !== 0 ||
+            this.filters['types'].length !== 0 ||
+            this.filters['min-price'] !== null ||
+            this.filters['max-price'] !== null;
+    }
+
+    moveToUpdateTourPage(tourId) {
+        window.open(`${location.origin}/admin/tours/update/${tourId}`);
+    }
+
+    deleteTour(tourId, tourCardNode) {
+        if (!confirm(LocaleHelper.translate('you-are-sure'))) {
+            return;
+        }
+
+        FilterToursModel.delete(tourId)
+            .then(result => {
+                if (typeof result === 'string') {
+                    alert(`Error: ${result}`);
+                    return;
+                }
+
+                if (result.error) {
+                    alert(`Error: ${result.message}`);
+                    return;
+                }
+
+                alert(result.message);
+                this.view.removeTourCard(tourCardNode);
+            })
+            .catch(error => alert(`Error: ${error}`));
+    }
+
     fetchTours(mode = 'show-more') {
         this.loading = true;
         this.view.setLoadingModeShowMoreButton();
         this.offset += this.offsetStep;
+
+        console.log(this.convertFiltersToUri());
 
         FilterToursModel.search(this.convertFiltersToUri())
             .then(result => {
@@ -185,7 +273,7 @@ class FilterToursController extends EventHandler {
                     return;
                 }
 
-                if (mode === 'filter') {
+                if (mode === 'filter' || mode === 'search') {
                     this.view.clearContainer();
                 }
 
@@ -194,11 +282,16 @@ class FilterToursController extends EventHandler {
                     this.view.disableShowMoreButton();
                 }
 
-                this.view.render(result);
+                this.view.render(result, this.isAdmin, this.moveToUpdateTourPage, this.deleteTour);
+
+                if (this.view.getCardsAmount() === 0) {
+                    this.view.showEmptyIndicator();
+                }
             })
             .catch(error => alert(`Error: ${error}`))
             .finally(_ => {
                 this.view.removeLoadingModeShowMoreButton();
+                this.view.hideSearchLoading();
                 this.loading = false;
             });
     }

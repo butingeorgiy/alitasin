@@ -49,7 +49,8 @@ select::-ms-expand {
 }
 
 #toursSection .left-side {
-    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
 }
 
 .filters .filter-item,

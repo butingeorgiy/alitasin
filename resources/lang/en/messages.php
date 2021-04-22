@@ -106,5 +106,7 @@ return [
     'profile-photo-size-max' => 'Max size of image 500 KB!',
     'file-required' => 'Must upload a file!',
     'promo-code-required' => 'Must specify promo code!',
-    'promo-code-not-found' => 'Promo code was not found!'
+    'promo-code-not-found' => 'Promo code was not found!',
+    'tour-deleting-success' => 'Excursion was deleted successfully!',
+    'tour-deleting-failed' => 'Excursion deleting was failed!'
 ];

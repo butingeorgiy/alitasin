@@ -106,5 +106,7 @@ return [
     'profile-photo-size-max' => 'Maksimum resim boyutu 500 KB!',
     'file-required' => 'Bir dosya yüklemelisiniz!',
     'promo-code-required' => 'Promosyon kodunu belirtmelidir!',
-    'promo-code-not-found' => 'Promosyon kodu bulunamadı!'
+    'promo-code-not-found' => 'Promosyon kodu bulunamadı!',
+    'tour-deleting-success' => 'Gezi başarıyla silindi!',
+    'tour-deleting-failed' => 'Gezi silinemedi!'
 ];

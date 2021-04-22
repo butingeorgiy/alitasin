@@ -107,5 +107,7 @@ return [
     'profile-photo-size-max' => 'Максимальный размер изображения 500 KB!',
     'file-required' => 'Необходимо загрузить файл!',
     'promo-code-required' => 'Укажите промо код!',
-    'promo-code-not-found' => 'Промо код не найден!'
+    'promo-code-not-found' => 'Промо код не найден!',
+    'tour-deleting-success' => 'Экскурсия успешно удалена!',
+    'tour-deleting-failed' => 'Не удалось удалить экскурсию!'
 ];

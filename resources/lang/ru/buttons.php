@@ -15,5 +15,6 @@ return [
     'admin-panel' => 'Админ панель',
     'accept' => 'Применить',
     'reset' => 'Сбросить',
-    'create-account' => 'Создать аккаунт'
+    'create-account' => 'Создать аккаунт',
+    'add-excursion' => 'Добавить экскурсию'
 ];

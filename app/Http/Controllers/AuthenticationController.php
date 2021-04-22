@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Facades\Token;
 use App\Models\AuthToken;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cookie;
 
 class AuthenticationController extends Controller
 {
-    public function logout()
+    /**
+     * Logout user
+     *
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
     {
         $user = Auth::user();
 

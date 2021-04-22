@@ -6,6 +6,7 @@ class FilterToursView {
         this.resetFiltersButton = nodes.resetFiltersButton;
         this.filtersContainer = nodes.filtersContainer;
         this.showMoreButton = nodes.showMoreButton;
+        this.searchInput = nodes.searchInput;
     }
 
     toggleFiltersForm(btn) {
@@ -17,6 +18,18 @@ class FilterToursView {
                 this.filtersContainer.parentElement.classList.add('hidden');
                 btn.innerText = LocaleHelper.translate('filters');
             }
+        }
+    }
+
+    showSearchLoading() {
+        if (this.searchInput) {
+            this.searchInput.parentElement.querySelector('.animate-spin').classList.remove('hidden');
+        }
+    }
+
+    hideSearchLoading() {
+        if (this.searchInput) {
+            this.searchInput.parentElement.querySelector('.animate-spin').classList.add('hidden');
         }
     }
 
@@ -65,20 +78,28 @@ class FilterToursView {
         this.showMoreButton.classList.remove('loading');
     }
 
-    render(tours) {
-        if (tours.length === 0) {
-            this.toursContainer.innerHTML = `
-                <p class="lg:m-3 text-xl text-gray-600 font-light">${LocaleHelper.translate('no-results')}!</p>
-            `;
-            return;
-        }
+    removeTourCard(node) {
+        node.remove();
+    }
 
+    getCardsAmount() {
+        return this.toursContainer.querySelectorAll('.tour-card').length;
+    }
+
+    showEmptyIndicator() {
+        this.toursContainer.innerHTML = `
+            <p class="lg:m-3 text-xl text-gray-600 font-light">${LocaleHelper.translate('no-results')}!</p>
+        `;
+    }
+
+    render(tours, isAdmin, moveToUpdateTourPageHandler = null, deleteTourHandler = null) {
         tours.forEach(tour => {
             const tourCard = document.createElement('a');
-            tourCard.className = 'flex flex-col shadow rounded-md';
+            tourCard.className = 'tour-card flex flex-col shadow rounded-md';
             tourCard.setAttribute('href', `/tours/${tour.id}`);
+            tourCard.setAttribute('target', isAdmin ? '_blank' : '_self');
 
-            let durationNode = '';
+            let durationNode = '', buttons = '';
 
             if (tour.duration) {
                 durationNode = `
@@ -96,10 +117,39 @@ class FilterToursView {
                 `;
             }
 
-            tourCard.innerHTML = `
-                <div class="flex justify-end items-start p-3 bg-center bg-cover bg-no-repeat bg-gray-50 rounded-md"
-                     style="height: 180px; background-image: url(${tour.image})">
-                     <div class="flex justify-center items-center w-8 h-8 bg-white rounded-full cursor-pointer">
+            if (isAdmin === true) {
+                buttons = `
+                    <div class="move-to-update-page flex justify-center items-center w-8 h-8 mr-2 bg-white rounded-full cursor-pointer" data-tour-id="{{ $tour->id }}">
+                        <svg class="min-w-4 min-h-4 w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 4.1917C16.0006 4.08642 15.9804 3.98206 15.9406 3.8846C15.9008 3.78714 15.8421 3.69849 15.768 3.62374L12.376
+                                              0.231996C12.3012 0.157856 12.2126 0.0992007 12.1151 0.0593919C12.0176 0.0195832 11.9133 -0.000595299 11.808 1.33704e-05C11.7027
+                                              -0.000595299 11.5983 0.0195832 11.5009 0.0593919C11.4034 0.0992007 11.3147 0.157856 11.24 0.231996L8.976 2.49583L0.232013
+                                              11.2392C0.157868 11.3139 0.0992079 11.4026 0.0593963 11.5C0.0195847 11.5975 -0.000595342 11.7019 1.33714e-05 11.8071V15.1989C1.33714e-05
+                                              15.411 0.0842987 15.6145 0.234328 15.7645C0.384356 15.9145 0.587839 15.9988 0.800012 15.9988H4.19201C4.30395 16.0049 4.41592 15.9874
+                                              4.52066 15.9474C4.6254 15.9075 4.72057 15.8459 4.8 15.7668L13.496 7.02349L15.768 4.79965C15.841 4.72213 15.9005 4.63289
+                                              15.944 4.53568C15.9517 4.47191 15.9517 4.40745 15.944 4.34369C15.9477 4.30645 15.9477 4.26893 15.944 4.2317L16
+                                              4.1917ZM3.86401 14.3989H1.60001V12.1351L9.544 4.1917L11.808 6.45553L3.86401 14.3989ZM12.936 5.32762L10.672 3.06378L11.808
+                                              1.93587L14.064 4.1917L12.936 5.32762Z" fill="#5C5C5C"/>
+                        </svg>
+                    </div>
+
+                    <div class="delete-tour-button flex justify-center items-center w-8 h-8 bg-white rounded-full cursor-pointer">
+                        <svg class="min-w-4 min-h-4 w-4 h-4" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.625 5.25H4.375H18.375" stroke="#FF3D3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7 5.25V3.5C7 3.03587 7.18437 2.59075 7.51256 2.26256C7.84075 1.93437 8.28587 1.75 8.75 1.75H12.25C12.7141 1.75 13.1592 1.93437 13.4874
+                                     2.26256C13.8156 2.59075 14 3.03587 14 3.5V5.25M16.625 5.25V17.5C16.625 17.9641 16.4406 18.4092 16.1124 18.7374C15.7842 19.0656 15.3391 19.25 14.875
+                                     19.25H6.125C5.66087 19.25 5.21575 19.0656 4.88756 18.7374C4.55937 18.4092 4.375 17.9641 4.375 17.5V5.25H16.625Z"
+                                  stroke="#FF3D3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.25 9.625V14.875" stroke="#FF3D3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.75 9.625V14.875" stroke="#FF3D3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                `;
+
+
+            } else {
+                buttons = `
+                    <div class="flex justify-center items-center w-8 h-8 bg-white rounded-full cursor-pointer">
                          <svg class="w-5 h-4" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                              <path d="M10.4998 3.76675L9.61235 2.86746C8.74862 1.99218 7.57715 1.50045 6.35566 1.50045C5.13416 1.50045 3.96269 1.99218 3.09897
                                    2.86746C2.23524 3.74274 1.75 4.92987 1.75 6.1677C1.75 9.58687 6.99955 15.5 10.4998 15.5C14 15.5 19.2498 9.58641 19.2498 6.16725C19.2498
@@ -107,6 +157,13 @@ class FilterToursView {
                                    stroke="#5C5C5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                          </svg>
                      </div>
+                `;
+            }
+
+            tourCard.innerHTML = `
+                <div class="flex justify-end items-start p-3 bg-center bg-cover bg-no-repeat bg-gray-50 rounded-md"
+                     style="height: 180px; background-image: url(${tour.image})">
+                    ${buttons}
                 </div>
                 <div class="flex flex-col px-4 pb-2 h-full" style="flex: 1">
                     <div class="flex items-center py-3 text-xs 2xl:text-sm text-blue font-semibold">
@@ -167,6 +224,18 @@ class FilterToursView {
                     </div>
                 </div>
             `;
+
+            if (isAdmin) {
+                tourCard.querySelector('.move-to-update-page').addEventListener('click', e => {
+                    e.preventDefault();
+                    moveToUpdateTourPageHandler(tour.id);
+                });
+
+                tourCard.querySelector('.delete-tour-button').addEventListener('click', e => {
+                    e.preventDefault();
+                    deleteTourHandler(tour.id, tourCard);
+                });
+            }
 
             this.toursContainer.append(tourCard);
         });

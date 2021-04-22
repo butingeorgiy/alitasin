@@ -114,8 +114,8 @@ class PageController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->account_type_id === '5') {
-            return redirect()->route('create-form-tour');
+        if (in_array($user->account_type_id, ['3', '5'])) {
+            return redirect()->route('tours');
         }
 
         return redirect()->route('index');

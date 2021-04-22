@@ -1,6 +1,6 @@
 <header class="bg-white">
     <div class="container flex mx-auto px-5 py-4">
-        <a href="{{ route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
+        <a href="{{ request()->is('admin/*') ? route('admin-index') : route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
         <div class="flex items-center">
             @if(\App\Facades\Auth::check())
                 @if(!request()->is('admin/*', 'profile/*'))
