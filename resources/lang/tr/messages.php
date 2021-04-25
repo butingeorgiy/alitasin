@@ -108,5 +108,7 @@ return [
     'promo-code-required' => 'Promosyon kodunu belirtmelidir!',
     'promo-code-not-found' => 'Promosyon kodu bulunamadı!',
     'tour-deleting-success' => 'Gezi başarıyla silindi!',
-    'tour-deleting-failed' => 'Gezi silinemedi!'
+    'tour-deleting-failed' => 'Gezi silinemedi!',
+    'reservation-status-not-found' => 'Belirtilen durum mevcut değil!',
+    'reservation-not-found' => 'Rezervasyon bulunamadı!'
 ];

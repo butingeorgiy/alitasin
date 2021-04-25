@@ -108,5 +108,7 @@ return [
     'promo-code-required' => 'Must specify promo code!',
     'promo-code-not-found' => 'Promo code was not found!',
     'tour-deleting-success' => 'Excursion was deleted successfully!',
-    'tour-deleting-failed' => 'Excursion deleting was failed!'
+    'tour-deleting-failed' => 'Excursion deleting was failed!',
+    'reservation-status-not-found' => 'Specified status is not exist!',
+    'reservation-not-found' => 'Reservation was not found!'
 ];

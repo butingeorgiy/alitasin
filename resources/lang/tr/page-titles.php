@@ -5,5 +5,6 @@ return [
     'create-tour' => 'Gezi oluşturma',
     'edit-tour' => 'Gezi düzenleme',
     'tours' => 'Gezi',
-    'personal-client-cabinet' => 'Kişisel müşteri dolabı'
+    'personal-client-cabinet' => 'Kişisel müşteri dolabı',
+    'reserves' => 'Rezervler'
 ];

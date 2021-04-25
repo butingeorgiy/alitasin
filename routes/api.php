@@ -19,7 +19,10 @@ Route::group(['prefix' => 'tours'], function () {
     Route::post('update/{id}', 'Api\TourController@update')->middleware('auth:3,5');
     Route::post('delete/{id}', 'Api\TourController@delete')->middleware('auth:3,5');
     Route::post('reserve/{tourId}', 'Api\TourController@reserve');
+});
 
+Route::group(['prefix' => 'reserves'], function () {
+    Route::post('/update/{reservationId}/status', 'Api\ReservationController@updateStatus')->middleware('auth:4');
 });
 
 Route::get('promo-codes/check', 'Api\PromoCodeController@get');

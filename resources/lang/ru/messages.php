@@ -109,5 +109,7 @@ return [
     'promo-code-required' => 'Укажите промо код!',
     'promo-code-not-found' => 'Промо код не найден!',
     'tour-deleting-success' => 'Экскурсия успешно удалена!',
-    'tour-deleting-failed' => 'Не удалось удалить экскурсию!'
+    'tour-deleting-failed' => 'Не удалось удалить экскурсию!',
+    'reservation-status-not-found' => 'Указанного статуса не существует!',
+    'reservation-not-found' => 'Брони не найдено!'
 ];

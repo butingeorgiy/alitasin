@@ -18,9 +18,8 @@ module.exports = {
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
-
-            black: '#231F20',
-            white: colors.white,
+            black: '#231F20', // used
+            white: colors.white, // used
             gray: {
                 50: '#F7F7FC', // used
                 100: '#EFF0F7', // used
@@ -30,18 +29,18 @@ module.exports = {
                 500: '#747474', // used
                 600: '#5C5C5C', // used
                 700: '#C4C4C4', // used
-                800: '#1f2937',
-                900: '#111827'
+                800: '#9FA2B4', // used
+                900: '#4B506D' // used
             },
             red: {
                 DEFAULT: '#FF3D3D', // used
                 50: '#fef2f2',
-                100: '#fee2e2',
-                200: '#fecaca',
+                100: '#F12B2C', // used
+                200: '#fecaca', // used
                 300: '#fca5a5',
                 400: '#f87171',
                 500: '#ef4444',
-                600: '#dc2626',
+                600: '#dc2626', // used
                 700: '#b91c1c',
                 800: '#991b1b',
                 900: '#7f1d1d',
@@ -51,16 +50,14 @@ module.exports = {
             },
             green: {
                 DEFAULT: '#0ECB38',
+                100: '#6FCF97', // used
                 200: '#bbf7d0', // used
                 500: '#22c55e', // used
                 600: '#0ECB38', // used
             },
             blue: {
                 DEFAULT: '#0094FF' // used
-            },
-            indigo: colors.indigo,
-            purple: colors.violet,
-            pink: colors.pink,
+            }
         },
         spacing: {
             px: '1px',
@@ -360,6 +357,8 @@ module.exports = {
             10: 'repeat(10, minmax(0, 1fr))',
             11: 'repeat(11, minmax(0, 1fr))',
             12: 'repeat(12, minmax(0, 1fr))',
+            'reserve-table': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
+            'reserve-table-filters': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))'
         },
         gridTemplateRows: {
             none: 'none',
@@ -502,6 +501,7 @@ module.exports = {
             4: '1rem',
             5: '1.25rem',
             6: '1.5rem',
+            11: '2.75rem',
             20: '5rem',
             full: '100%',
             screen: '100vh',
@@ -511,6 +511,7 @@ module.exports = {
             4: '1rem',
             5: '1.25rem',
             6: '1.5rem',
+            11: '2.75rem',
             20: '5rem',
             full: '100%',
             min: 'min-content',

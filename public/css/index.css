@@ -437,7 +437,8 @@ textarea::placeholder {
   color: #979797;
 }
 
-button {
+button,
+[role="button"] {
   cursor: pointer;
 }
 
@@ -564,6 +565,12 @@ video {
   }
 }
 
+.appearance-none{
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
 .bg-black{
   --tw-bg-opacity: 1;
   background-color: rgba(35, 31, 32, var(--tw-bg-opacity));
@@ -584,9 +591,24 @@ video {
   background-color: rgba(239, 240, 247, var(--tw-bg-opacity));
 }
 
+.bg-red-100{
+  --tw-bg-opacity: 1;
+  background-color: rgba(241, 43, 44, var(--tw-bg-opacity));
+}
+
 .bg-red-200{
   --tw-bg-opacity: 1;
   background-color: rgba(254, 202, 202, var(--tw-bg-opacity));
+}
+
+.bg-yellow{
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 193, 30, var(--tw-bg-opacity));
+}
+
+.bg-green-100{
+  --tw-bg-opacity: 1;
+  background-color: rgba(111, 207, 151, var(--tw-bg-opacity));
 }
 
 .bg-green-200{
@@ -612,6 +634,11 @@ video {
 .focus-within\:bg-white:focus-within{
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-100:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgba(239, 240, 247, var(--tw-bg-opacity));
 }
 
 .focus\:bg-white:focus{
@@ -857,6 +884,10 @@ video {
   height: 2.5rem;
 }
 
+.h-11{
+  height: 2.75rem;
+}
+
 .h-12{
   height: 3rem;
 }
@@ -1050,6 +1081,10 @@ video {
   margin-top: 1.5rem;
 }
 
+.mr-6{
+  margin-right: 1.5rem;
+}
+
 .mb-6{
   margin-bottom: 1.5rem;
 }
@@ -1068,6 +1103,10 @@ video {
 
 .ml-8{
   margin-left: 2rem;
+}
+
+.mt-10{
+  margin-top: 2.5rem;
 }
 
 .mr-10{
@@ -1142,6 +1181,10 @@ video {
   min-height: 1.5rem;
 }
 
+.min-h-11{
+  min-height: 2.75rem;
+}
+
 .min-h-20{
   min-height: 5rem;
 }
@@ -1158,8 +1201,16 @@ video {
   min-width: 1.5rem;
 }
 
+.min-w-11{
+  min-width: 2.75rem;
+}
+
 .min-w-20{
   min-width: 5rem;
+}
+
+.opacity-0{
+  opacity: 0;
 }
 
 .opacity-25{
@@ -1174,6 +1225,10 @@ video {
   opacity: 0.75;
 }
 
+.opacity-100{
+  opacity: 1;
+}
+
 .disabled\:opacity-60:disabled{
   opacity: 0.6;
 }
@@ -1181,6 +1236,10 @@ video {
 .focus\:outline-none:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.overflow-hidden{
+  overflow: hidden;
 }
 
 .p-3{
@@ -1241,6 +1300,11 @@ video {
   padding-right: 2rem;
 }
 
+.py-1\.5{
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
 .pt-0{
   padding-top: 0px;
 }
@@ -1263,6 +1327,10 @@ video {
 
 .pb-2{
   padding-bottom: 0.5rem;
+}
+
+.pt-3{
+  padding-top: 0.75rem;
 }
 
 .pb-3{
@@ -1369,6 +1437,21 @@ video {
   color: rgba(92, 92, 92, var(--tw-placeholder-opacity));
 }
 
+.placeholder-gray-800::-moz-placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgba(159, 162, 180, var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-800:-ms-input-placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgba(159, 162, 180, var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-800::placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgba(159, 162, 180, var(--tw-placeholder-opacity));
+}
+
 .static{
   position: static;
 }
@@ -1425,6 +1508,14 @@ video {
   left: -0.25rem;
 }
 
+.-right-2{
+  right: -0.5rem;
+}
+
+.-right-4{
+  right: -1rem;
+}
+
 .-top-5{
   top: -1.25rem;
 }
@@ -1445,6 +1536,10 @@ video {
   bottom: -0.125rem;
 }
 
+.top-full{
+  top: 100%;
+}
+
 *{
   --tw-shadow: 0 0 #0000;
 }
@@ -1461,6 +1556,11 @@ video {
 
 .shadow-md{
   --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-lg{
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1512,6 +1612,16 @@ video {
   color: rgba(92, 92, 92, var(--tw-text-opacity));
 }
 
+.text-gray-800{
+  --tw-text-opacity: 1;
+  color: rgba(159, 162, 180, var(--tw-text-opacity));
+}
+
+.text-gray-900{
+  --tw-text-opacity: 1;
+  color: rgba(75, 80, 109, var(--tw-text-opacity));
+}
+
 .text-red-600{
   --tw-text-opacity: 1;
   color: rgba(220, 38, 38, var(--tw-text-opacity));
@@ -1535,6 +1645,12 @@ video {
 .text-blue{
   --tw-text-opacity: 1;
   color: rgba(0, 148, 255, var(--tw-text-opacity));
+}
+
+.truncate{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .uppercase{
@@ -1596,8 +1712,16 @@ video {
   width: 2.5rem;
 }
 
+.w-11{
+  width: 2.75rem;
+}
+
 .w-12{
   width: 3rem;
+}
+
+.w-14{
+  width: 3.5rem;
 }
 
 .w-16{
@@ -1616,6 +1740,10 @@ video {
   width: 11rem;
 }
 
+.w-56{
+  width: 14rem;
+}
+
 .w-60{
   width: 15rem;
 }
@@ -1630,6 +1758,10 @@ video {
 
 .w-192{
   width: 48rem;
+}
+
+.w-4\/5{
+  width: 80%;
 }
 
 .w-full{
@@ -1701,6 +1833,10 @@ video {
   grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
+.grid-cols-reserve-table{
+  grid-template-columns: minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+}
+
 .col-span-1{
   grid-column: span 1 / span 1;
 }
@@ -1719,6 +1855,45 @@ video {
 
 .row-span-2{
   grid-row: span 2 / span 2;
+}
+
+.transform{
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.origin-top-right{
+  transform-origin: top right;
+}
+
+.scale-95{
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
+}
+
+.scale-100{
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+}
+
+.transition{
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.ease-out{
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.duration-100{
+  transition-duration: 100ms;
 }
 
 .duration-300{
@@ -1881,9 +2056,7 @@ select::-ms-expand {
   user-select: text !important;
 }
 
-/* Show more tours button modes (start) */
-
-.show-more-tours-button, .update-tour-button, .save-personal-info-button, .save-book-button, .save-tour-button{
+.show-more-tours-button, .update-tour-button, .update-status-button, .save-personal-info-button, .save-book-button, .save-tour-button{
   border-radius: 0.375rem;
   cursor: pointer;
   display: flex;
@@ -1897,18 +2070,14 @@ select::-ms-expand {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-.show-more-tours-button.loading, .show-more-tours-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .create-account-button.loading, .create-account-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
+.show-more-tours-button.loading, .show-more-tours-button.disabled, .update-status-button.loading, .update-status-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .create-account-button.loading, .create-account-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled{
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.show-more-tours-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .create-account-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
+.show-more-tours-button.loading .animate-spin, .update-status-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .create-account-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-tour-button.loading .animate-spin{
   display: block;
 }
-
-/* Show more tours button modes (end) */
-
-/* Shaking an */
 
 @-webkit-keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg);

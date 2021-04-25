@@ -101,5 +101,18 @@ return [
     'promo-code' => 'Promosyon kodu',
     'if-have' => 'Eğer varsa',
     'total-cost' => 'Toplam',
-    'registration' => 'Kayıt'
+    'registration' => 'Kayıt',
+    'reserves' => 'Rezervler',
+
+    // Reserves table
+    'reserves-title-offered-by' => 'Tarafından sunulan',
+    'reserves-title-tour' => 'Gezinin adı, tarihi ve saati',
+    'reserves-title-offered-at' => 'Teklif edilen',
+    'reserves-title-status' => 'Durum',
+
+    'time' => 'Zaman',
+    'excursion' => 'Gezi',
+    'select-date' => 'Tarih seç',
+    'details' => 'Detaylar',
+    'change-status' => 'Изменить статус'
 ];

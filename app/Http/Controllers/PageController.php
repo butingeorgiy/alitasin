@@ -117,6 +117,8 @@ class PageController extends Controller
 
         if (in_array($user->account_type_id, ['3', '5'])) {
             return redirect()->route('tours');
+        } else if ($user->account_type_id === '4') {
+            return redirect()->route('reserves');
         }
 
         return redirect()->route('index');

@@ -5,5 +5,6 @@ return [
     'create-tour' => 'Excursion creation',
     'edit-tour' => 'Excursion editing',
     'tours' => 'Excursions',
-    'personal-client-cabinet' => 'Personal client cabinet'
+    'personal-client-cabinet' => 'Personal client cabinet',
+    'reserves' => 'Reserves',
 ];

@@ -101,5 +101,18 @@ return [
     'promo-code' => 'Промо код',
     'if-have' => 'Если имеется',
     'total-cost' => 'Итог',
-    'registration' => 'Регистрация'
+    'registration' => 'Регистрация',
+    'reserves' => 'Бронирование',
+
+    // Reserves table
+    'reserves-title-offered-by' => 'Оформили заказ',
+    'reserves-title-tour' => 'Название и дата экскурсии',
+    'reserves-title-offered-at' => 'Дата брони',
+    'reserves-title-status' => 'Статус',
+
+    'time' => 'Время',
+    'excursion' => 'Экскурсия',
+    'select-date' => 'Выберите дату',
+    'details' => 'Подробности',
+    'change-status' => 'Изменить статус'
 ];
