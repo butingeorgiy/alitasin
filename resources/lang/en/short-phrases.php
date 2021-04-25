@@ -101,5 +101,18 @@ return [
     'promo-code' => 'Promo code',
     'if-have' => 'If you have',
     'total-cost' => 'Total',
-    'registration' => 'Registration'
+    'registration' => 'Registration',
+    'reserves' => 'Reserves',
+
+    // Reserves table
+    'reserves-title-offered-by' => 'Offered by',
+    'reserves-title-tour' => 'Name and date of excursion',
+    'reserves-title-offered-at' => 'Offered at',
+    'reserves-title-status' => 'Status',
+
+    'time' => 'Time',
+    'excursion' => 'Excursion',
+    'select-date' => 'Select date',
+    'details' => 'Detaylar',
+    'change-status' => 'Durum değiştirmek'
 ];

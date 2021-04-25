@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 /**
  * @method static Tour find(mixed $tourId)
  * @method static findOrFail($id)
+ * @method static byManager($managerId)
  * @property array conducted_at
  * @property mixed manager_id
  * @property array|mixed|string|null price
@@ -33,6 +34,18 @@ class Tour extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+
+    /**
+     * Tours that belong to specific manager
+     *
+     * @param $query
+     * @param $managerId
+     */
+    public function scopeByManager($query, $managerId)
+    {
+        $query->where('manager_id', $managerId);
+    }
 
     /**
      * Get tour's title

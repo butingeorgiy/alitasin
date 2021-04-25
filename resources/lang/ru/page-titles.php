@@ -5,5 +5,6 @@ return [
     'create-tour' => 'Создание экскурсии',
     'edit-tour' => 'Редактирование экскурсии',
     'tours' => 'Экскурсии',
-    'personal-client-cabinet' => 'Личный кабинет клиента'
+    'personal-client-cabinet' => 'Личный кабинет клиента',
+    'reserves' => 'Брони'
 ];

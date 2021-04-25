@@ -1,8 +1,8 @@
 import PopupController from '../modules/popup/PopupController';
 
 class PopupObserver {
-    static init(node, needToOpen = false) {
-        const popup = new PopupController(node);
+    static init(node, needToOpen = false, afterCloseHandler = null) {
+        const popup = new PopupController(node, afterCloseHandler);
 
         if (needToOpen) {
             popup.open();
