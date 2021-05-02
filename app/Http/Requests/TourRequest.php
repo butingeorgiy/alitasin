@@ -39,7 +39,8 @@ class TourRequest extends FormRequest
             'conducted_at' => 'bail|required|json',
             'tour_type_id' => 'bail|required|numeric',
             'filters' => 'bail|required|json',
-            'duration' => ['bail', 'nullable', 'regex:/^\d*~(h|d)$/']
+            'duration' => ['bail', 'nullable', 'regex:/^\d*~(h|d)$/'],
+            'additions' => 'bail|nullable|json'
         ];
     }
 
@@ -82,7 +83,8 @@ class TourRequest extends FormRequest
             'tour_type_id.numeric' => __('messages.tour-type-id-numeric'),
             'filters.required' => __('messages.tour-filters-require'),
             'filters.json' => __('messages.tour-filters-json'),
-            'duration.regex' => __('messages.tour-duration-format')
+            'duration.regex' => __('messages.tour-duration-format'),
+            'additions.json' => __('messages.tour-additions-json')
         ];
     }
 

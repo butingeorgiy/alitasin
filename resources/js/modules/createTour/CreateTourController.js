@@ -10,7 +10,10 @@ class CreateTourController extends TourFormBaseController {
         this.view = new CreateTourView({
             error: nodes.error,
             success: nodes.success,
-            btn: nodes.saveTourButton
+            btn: nodes.saveTourButton,
+            additionPopupError: nodes.additionPopup.querySelector('.error-message'),
+            includesAdditionsContainer: nodes.includesAdditionsContainer,
+            notIncludesAdditionsContainer: nodes.notIncludesAdditionsContainer
         });
 
         this.initFiltersSelect('#createTourForm select[name="filters"]');
@@ -56,6 +59,10 @@ class CreateTourController extends TourFormBaseController {
         formData.append('filters', JSON.stringify(this.filtersSelect.getValue()));
         formData.append('conducted_at', JSON.stringify(this.weekDaysSelect.getValue()));
         formData.append('available_time', JSON.stringify(this.availableTimeSelect.getValue()));
+
+        if (this.additions.length > 0) {
+            formData.append('additions', JSON.stringify(this.additions));
+        }
 
         const durationInput = form.querySelector('input[name="duration"]');
         const durationSelect = form.querySelector('select[name="duration-mode"]');

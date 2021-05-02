@@ -117,5 +117,10 @@ return [
     'change-status' => 'Change status',
     'recently-viewed' => 'Recently viewed',
     'reserved-tours' => 'Reserved tours',
-    'favorite-tours' => 'Favorite tours'
+    'favorite-tours' => 'Favorite tours',
+    'included' => 'Included',
+    'not-included' => 'Not included',
+    'additions' => 'Additions',
+    'nothing-chosen' => 'Nothing chosen',
+    'empty-list' => 'Empty list'
 ];

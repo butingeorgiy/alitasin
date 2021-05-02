@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @method static Tour find(mixed $tourId)
  * @method static findOrFail($id)
  * @method static byManager($managerId)
+ * @property mixed id
  * @property array conducted_at
  * @property mixed manager_id
  * @property array|mixed|string|null price
@@ -26,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property mixed type
  * @property mixed region
  * @property mixed manager
+ * @property mixed additions
  */
 class Tour extends Model
 {
@@ -115,6 +117,16 @@ class Tour extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(TourType::class, 'tour_type_id');
+    }
+
+    /**
+     * Get tour's additions
+     *
+     * @return BelongsToMany
+     */
+    public function additions(): BelongsToMany
+    {
+        return $this->belongsToMany(Addition::class, 'tours_has_additions')->withPivot('is_include', 'en_description', 'ru_description', 'tr_description');
     }
 
     /**

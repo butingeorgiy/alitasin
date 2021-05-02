@@ -26,7 +26,17 @@ class TourController extends Controller
      */
     public function showEditForm($id)
     {
-        $tour = Tour::with(['title', 'description', 'images', 'type', 'manager', 'region', 'filters'])->findOrFail($id);
+        $tour = Tour::with(['title', 'description', 'images', 'type', 'manager', 'region', 'filters', 'additions'])->findOrFail($id);
+
+        foreach ($tour->additions as $addition) {
+            $addition->title = $addition[\App::getLocale() . '_title'];
+            $addition->en_description = $addition->getOriginal('pivot_en_description');
+            $addition->ru_description = $addition->getOriginal('pivot_ru_description');
+            $addition->tr_description = $addition->getOriginal('pivot_tr_description');
+            $addition->is_include = $addition->getOriginal('pivot_is_include');
+        }
+
+        $tour->additions = $tour->additions->groupBy('is_include')->toArray();
 
         return view('admin.edit-tour', compact('tour'));
     }

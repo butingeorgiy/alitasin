@@ -41,6 +41,26 @@ const langConfig = {
             'en': 'Activated',
             'ru': 'Активен',
             'tr': 'Aktif'
+        },
+        'empty-list': {
+            'en': 'Empty list',
+            'ru': 'Список пуст',
+            'tr': 'Boş liste'
+        },
+        'edit': {
+            'en': 'Edit',
+            'ru': 'Редактировать',
+            'tr': 'Düzenle'
+        },
+        'delete': {
+            'en': 'Delete',
+            'ru': 'Удалить',
+            'tr': 'Sil'
+        },
+        'choose-addition': {
+            'en': 'Choose addition',
+            'ru': 'Выберите дополнение',
+            'tr': 'Eklemeyi seçin'
         }
     }
 };
