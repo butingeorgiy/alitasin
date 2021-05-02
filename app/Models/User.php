@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,9 @@ use Illuminate\Support\Str;
  * @property string password
  * @property integer id
  * @property string email
+ * @property mixed recentViewed
+ * @property mixed reservedTours
+ * @property mixed favoriteTours
  */
 class User extends Model
 {
@@ -87,5 +91,20 @@ class User extends Model
         $randomPassword = Str::random(10);
         $this->password = Hash::make($randomPassword, $this);
         return $randomPassword;
+    }
+
+    public function recentViewed(): BelongsToMany
+    {
+        return $this->belongsToMany(Tour::class, 'recent_viewed_tours');
+    }
+
+    public function reservedTours(): BelongsToMany
+    {
+        return $this->belongsToMany(Tour::class, 'reservations');
+    }
+
+    public function favoriteTours(): BelongsToMany
+    {
+        return $this->belongsToMany(Tour::class, 'favorite_tours');
     }
 }

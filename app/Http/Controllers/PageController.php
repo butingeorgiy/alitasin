@@ -27,6 +27,7 @@ class PageController extends Controller
 
         $tours = Tour::with(['title', 'description', 'images', 'type', 'filters'])->limit(15)->get();
         $filterCounter = [];
+        $user = Auth::check(['1']) ? Auth::user() : null;
 
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
@@ -45,6 +46,13 @@ class PageController extends Controller
                     $filterCounter[$filter->id] = 1;
                 }
             }
+
+            if (!$user) {
+                $tour->is_favorite = '0';
+                continue;
+            }
+
+            $tour->is_favorite = $user->favoriteTours->contains($tour) ? '1' : '0';
         }
 
         $vehicles = [
@@ -215,6 +223,18 @@ class PageController extends Controller
 
         if (Auth::check(['1'])) {
             $user = Auth::user();
+            $recentViewed = $user->recentViewed;
+
+            if (!$recentViewed->contains($tour)) {
+                if (count($recentViewed) >= 5) {
+                    $user->recentViewed()->detach(
+                        $user->recentViewed()->orderBy('created_at')
+                            ->take(count($recentViewed) - 4)->get()->pluck('id')->toArray()
+                    );
+                }
+
+                $user->recentViewed()->attach($tour->id);
+            }
         }
 
         return view('tour', compact('tour', 'mainImage', 'user'));
@@ -231,6 +251,45 @@ class PageController extends Controller
             ]);
         }
 
-        return view('profile.client', compact('user'));
+        $recentViewed = $user->recentViewed;
+
+        foreach ($recentViewed as $tour) {
+            foreach ($tour->images as $image) {
+                if ($image->isMain()) {
+                    $tour->image = route('get-image', [
+                        'dir' => 'tour_pictures',
+                        'file' => $image->link
+                    ]);
+                }
+            }
+        }
+
+        $reservedTours = $user->reservedTours;
+
+        foreach ($reservedTours as $tour) {
+            foreach ($tour->images as $image) {
+                if ($image->isMain()) {
+                    $tour->image = route('get-image', [
+                        'dir' => 'tour_pictures',
+                        'file' => $image->link
+                    ]);
+                }
+            }
+        }
+
+        $favoriteTours = $user->favoriteTours()->with(['title', 'description', 'images', 'type', 'filters'])->get();
+
+        foreach ($favoriteTours as $tour) {
+            foreach ($tour->images as $image) {
+                if ($image->isMain()) {
+                    $tour->image = route('get-image', [
+                        'dir' => 'tour_pictures',
+                        'file' => $image->link
+                    ]);
+                }
+            }
+        }
+
+        return view('profile.client', compact('user', 'recentViewed', 'reservedTours', 'favoriteTours'));
     }
 }

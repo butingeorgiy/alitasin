@@ -13,11 +13,15 @@ document.addEventListener('DOMContentLoaded', _ => {
         SliderController.initRegionsSlider();
     }
 
-    if (document.querySelector('#popularToursSection .swiper-container')) {
-        SliderController.initPopularToursSlider();
+    if (document.querySelector('#toursSliderSection .swiper-container')) {
+        SliderController.initToursSlider();
     }
 
     if (document.querySelector('#tourInfoSection .swiper-container')) {
         SliderController.initTourGallerySlider();
+    }
+
+    if (document.querySelector('#favoritesSection')) {
+        SliderController.initFavoritesSlider();
     }
 });

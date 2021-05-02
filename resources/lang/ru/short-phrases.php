@@ -114,5 +114,8 @@ return [
     'excursion' => 'Экскурсия',
     'select-date' => 'Выберите дату',
     'details' => 'Подробности',
-    'change-status' => 'Изменить статус'
+    'change-status' => 'Изменить статус',
+    'recently-viewed' => 'Недавно просмотренные',
+    'reserved-tours' => 'Забронированные туры',
+    'favorite-tours' => 'Понравившиеся экскурсии'
 ];

@@ -110,5 +110,6 @@ return [
     'tour-deleting-success' => 'Excursion was deleted successfully!',
     'tour-deleting-failed' => 'Excursion deleting was failed!',
     'reservation-status-not-found' => 'Specified status is not exist!',
-    'reservation-not-found' => 'Reservation was not found!'
+    'reservation-not-found' => 'Reservation was not found!',
+    'user-not-authorized' => 'User not authorized!'
 ];

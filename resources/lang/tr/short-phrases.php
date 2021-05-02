@@ -114,5 +114,8 @@ return [
     'excursion' => 'Gezi',
     'select-date' => 'Tarih seç',
     'details' => 'Detaylar',
-    'change-status' => 'Изменить статус'
+    'change-status' => 'Durum değiştirmek',
+    'recently-viewed' => 'Son Görüntülenen',
+    'reserved-tours' => 'Ayrılmış turlar',
+    'favorite-tours' => 'Favori turlar'
 ];

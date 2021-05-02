@@ -8,3 +8,4 @@ import './modules/updateProfileInfo';
 import './modules/bookTour';
 import './modules/registration';
 import './modules/reservationList';
+import './modules/favorites';

@@ -113,6 +113,9 @@ return [
     'time' => 'Time',
     'excursion' => 'Excursion',
     'select-date' => 'Select date',
-    'details' => 'Detaylar',
-    'change-status' => 'Durum değiştirmek'
+    'details' => 'Details',
+    'change-status' => 'Change status',
+    'recently-viewed' => 'Recently viewed',
+    'reserved-tours' => 'Reserved tours',
+    'favorite-tours' => 'Favorite tours'
 ];

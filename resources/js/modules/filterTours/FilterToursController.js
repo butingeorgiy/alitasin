@@ -259,8 +259,6 @@ class FilterToursController extends EventHandler {
         this.view.setLoadingModeShowMoreButton();
         this.offset += this.offsetStep;
 
-        console.log(this.convertFiltersToUri());
-
         FilterToursModel.search(this.convertFiltersToUri())
             .then(result => {
                 if (typeof result === 'string') {
