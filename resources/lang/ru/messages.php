@@ -111,5 +111,6 @@ return [
     'tour-deleting-success' => 'Экскурсия успешно удалена!',
     'tour-deleting-failed' => 'Не удалось удалить экскурсию!',
     'reservation-status-not-found' => 'Указанного статуса не существует!',
-    'reservation-not-found' => 'Брони не найдено!'
+    'reservation-not-found' => 'Брони не найдено!',
+    'user-not-authorized' => 'Пользователь не авторизован!'
 ];

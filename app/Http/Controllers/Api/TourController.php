@@ -549,6 +549,7 @@ class TourController extends Controller
         }
 
         $tours = $tours->offset($request->input('offset') ?? 0)->limit(15)->get();
+        $user = Auth::check(['1']) ? Auth::user() : null;
 
         foreach ($tours as $tour) {
             $row = $tour->only(['id', 'price']);
@@ -557,6 +558,11 @@ class TourController extends Controller
             $row['description'] = Str::limit($tour->description[\App::getLocale()]);
             $row['duration'] = $tour->duration;
             $row['type'] = $tour->type->name;
+            $row['is_favorite'] = '0';
+
+            if ($user) {
+                $row['is_favorite'] = $user->favoriteTours->contains($tour) ? '1' : '0';
+            }
 
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
@@ -699,5 +705,25 @@ class TourController extends Controller
         }
 
         return $response;
+    }
+
+    /**
+     * Toggle tour at favorite
+     *
+     * @param $tourId
+     * @return bool[]
+     * @throws Exception
+     */
+    public function toggleFavorite($tourId): array
+    {
+        if (!Tour::find($tourId)) {
+            throw new Exception(__('messages.tour-not-found'));
+        }
+
+        Auth::user()->favoriteTours()->toggle($tourId);
+
+        return [
+            'status' => true
+        ];
     }
 }

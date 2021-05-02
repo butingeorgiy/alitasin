@@ -110,5 +110,6 @@ return [
     'tour-deleting-success' => 'Gezi başarıyla silindi!',
     'tour-deleting-failed' => 'Gezi silinemedi!',
     'reservation-status-not-found' => 'Belirtilen durum mevcut değil!',
-    'reservation-not-found' => 'Rezervasyon bulunamadı!'
+    'reservation-not-found' => 'Rezervasyon bulunamadı!',
+    'user-not-authorized' => 'Kullanıcı yetkili değil!'
 ];

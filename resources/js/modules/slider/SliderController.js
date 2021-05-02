@@ -36,10 +36,9 @@ class SliderController {
         });
     }
 
-    static initPopularToursSlider() {
-        new Swiper('#popularToursSection .swiper-container', {
+    static initToursSlider() {
+        new Swiper('#toursSliderSection .swiper-container', {
             spaceBetween: 16,
-            loop: true,
             slidesPerView: 'auto'
         });
     }
@@ -49,6 +48,24 @@ class SliderController {
             spaceBetween: 16,
             loop: true,
             slidesPerView: 'auto'
+        });
+    }
+
+    static initFavoritesSlider() {
+        new Swiper('#favoritesSection .swiper-container', {
+            spaceBetween: 16,
+            slidesPerView: 1,
+            breakpoints: {
+                1024: {
+                    slidesPerView: 4
+                },
+                768: {
+                    slidesPerView: 3
+                },
+                640: {
+                    slidesPerView: 2
+                }
+            }
         });
     }
 }

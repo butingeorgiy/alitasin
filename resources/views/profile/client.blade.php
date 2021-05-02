@@ -11,9 +11,12 @@
     <title>{{ __('page-titles.personal-client-cabinet') }}</title>
 </head>
 <body class="bg-gray-50">
-@include('components.general.header')
-@include('components.general.profile-hero')
-@include('components.profile.personal-info')
-@include('components.general.footer')
+    @include('components.general.header')
+    @include('components.general.profile-hero')
+    @include('components.profile.personal-info')
+    @include('components.profile.favorite-tours')
+    @include('components.profile.recent-tours')
+    @include('components.profile.reserved-tours')
+    @include('components.general.footer')
 </body>
 </html>

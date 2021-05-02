@@ -24,7 +24,7 @@ class Authenticate
 
         if ($authStatus !== true) {
             if ($request->is('api/*')) {
-                throw new Exception('Api request forbidden!');
+                throw new Exception(__('messages.user-not-authorized'));
             } else {
                 return redirect('/#login');
             }

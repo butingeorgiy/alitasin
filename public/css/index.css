@@ -820,6 +820,10 @@ video {
   align-items: center;
 }
 
+.items-stretch{
+  align-items: stretch;
+}
+
 .self-start{
   align-self: flex-start;
 }

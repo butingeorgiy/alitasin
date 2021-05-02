@@ -19,6 +19,7 @@ Route::group(['prefix' => 'tours'], function () {
     Route::post('update/{id}', 'Api\TourController@update')->middleware('auth:3,5');
     Route::post('delete/{id}', 'Api\TourController@delete')->middleware('auth:3,5');
     Route::post('reserve/{tourId}', 'Api\TourController@reserve');
+    Route::post('toggle-favorite/{tourId}', 'Api\TourController@toggleFavorite')->middleware('auth:1');
 });
 
 Route::group(['prefix' => 'reserves'], function () {
