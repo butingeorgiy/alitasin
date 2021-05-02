@@ -41,6 +41,7 @@ return [
     'tour-duration-format' => 'Invalid duration format!',
     'tour-filters-parse-error' => 'Incorrect format of filters for searching for excursions!',
     'tour-types-parse-error' => 'Incorrect format of types for searching for excursions!',
+    'tour-additions-json' => 'Incorrect type of additions! JSON must be sent!',
 
     // User validation messages
     'user-first-name-required' => 'Must specify first name!',

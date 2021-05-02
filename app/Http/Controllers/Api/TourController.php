@@ -108,6 +108,20 @@ class TourController extends Controller
             }
         }
 
+        if ($request->has('additions')) {
+            $additions = [];
+            $parsedAdditions = json_decode($request->input('additions'));
+
+            foreach ($parsedAdditions as $addition) {
+                $additions[$addition->id] = [
+                    'en_description' => $addition->en_description ?: null,
+                    'ru_description' => $addition->ru_description ?: null,
+                    'tr_description' => $addition->tr_description ?: null,
+                    'is_include' => $addition->is_include
+                ];
+            }
+        }
+
         // Creating tour
         $tour = new Tour();
 
@@ -166,6 +180,10 @@ class TourController extends Controller
 
         $tour->images()->saveMany($tourImages);
         $tour->filters()->attach($filters);
+
+        if (isset($additions)) {
+            $tour->additions()->attach($additions);
+        }
 
         return [
             'message' => __('messages.tour-created')
@@ -296,6 +314,24 @@ class TourController extends Controller
 
         if ($tour->getOriginal('duration') !== $request->input('duration')) {
             $tour->duration = $request->input('duration');
+        }
+
+        if ($request->has('additions')) {
+            $additions = [];
+            $parsedAdditions = json_decode($request->input('additions'));
+
+            foreach ($parsedAdditions as $addition) {
+                $additions[$addition->id] = [
+                    'en_description' => $addition->en_description ?: null,
+                    'ru_description' => $addition->ru_description ?: null,
+                    'tr_description' => $addition->tr_description ?: null,
+                    'is_include' => $addition->is_include
+                ];
+            }
+
+            $tour->additions()->sync($additions);
+        } else {
+            $tour->additions()->detach();
         }
 
         if ($tour->save()) {

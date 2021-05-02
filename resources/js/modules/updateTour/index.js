@@ -9,7 +9,11 @@ document.addEventListener('DOMContentLoaded', _ => {
             error: document.querySelector('#editTourForm .error-message'),
             success: document.querySelector('#editTourForm .success-message'),
             updateTourButton,
-            datePickerTextInput: document.querySelector('#createTourForm input[name="date"]')
+            datePickerTextInput: document.querySelector('#createTourForm input[name="date"]'),
+            additionPopup: document.querySelector('#additionPopup'),
+            openAdditionPopupButtons: form.querySelectorAll('.open-addition-popup-button'),
+            includesAdditionsContainer: form.querySelector('.tour-includes-container'),
+            notIncludesAdditionsContainer: form.querySelector('.tour-not-includes-container')
         });
 
         // Image boxes initialization

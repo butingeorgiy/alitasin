@@ -201,7 +201,7 @@ class PageController extends Controller
      */
     public function showTour($id)
     {
-        $tour = Tour::findOrFail($id);
+        $tour = Tour::with(['title', 'description', 'region', 'additions'])->findOrFail($id);
         $mainImage = null;
 
         foreach ($tour->images as $image) {
@@ -236,6 +236,14 @@ class PageController extends Controller
                 $user->recentViewed()->attach($tour->id);
             }
         }
+
+        foreach ($tour->additions as $addition) {
+            $addition->title = $addition[\App::getLocale() . '_title'];
+            $addition->description = $addition->getOriginal('pivot_' . \App::getLocale() . '_description');
+            $addition->is_include = $addition->getOriginal('pivot_is_include');
+        }
+
+        $tour->additions = $tour->additions->groupBy('is_include')->toArray();
 
         return view('tour', compact('tour', 'mainImage', 'user'));
     }

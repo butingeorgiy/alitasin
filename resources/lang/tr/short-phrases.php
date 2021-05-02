@@ -117,5 +117,10 @@ return [
     'change-status' => 'Durum değiştirmek',
     'recently-viewed' => 'Son Görüntülenen',
     'reserved-tours' => 'Ayrılmış turlar',
-    'favorite-tours' => 'Favori turlar'
+    'favorite-tours' => 'Favori turlar',
+    'included' => 'Dahil',
+    'not-included' => 'İçermez',
+    'additions' => 'Eklemeler',
+    'nothing-chosen' => 'Hiçbir şey seçilmedi',
+    'empty-list' => 'Boş liste'
 ];

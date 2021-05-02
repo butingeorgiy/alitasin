@@ -62,8 +62,7 @@
                                 <span
                                     class="relative top-0.5 mr-10 text-black font-semibold">$ {{ $ticket->getCost($tour->price) }}</span>
                                 <span class="flex items-center">
-                                    <svg
-                                        class="minus-ticket-button min-w-6 min-h-6 w-6 h-6 cursor-pointer opacity-50 cursor-not-allowed"
+                                    <svg class="minus-ticket-button min-w-6 min-h-6 w-6 h-6 cursor-pointer opacity-50 cursor-not-allowed"
                                         viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M29.2917 4.625H7.70833C6.00546 4.625 4.625 6.00546 4.625 7.70833V29.2917C4.625 30.9945 6.00546 32.375 7.70833 32.375H29.2917C30.9945
                                                  32.375 32.375 30.9945 32.375 29.2917V7.70833C32.375 6.00546 30.9945 4.625 29.2917 4.625Z"
@@ -97,8 +96,7 @@
                     </div>
 
                     <div class="flex items-end px-4 pt-4 pb-3 bg-white shadow-sm rounded-md">
-                        <span
-                            class="relative -top-0.5 mr-4 text-black font-light">{{ __('short-phrases.total-cost') }}:</span>
+                        <span class="relative -top-0.5 mr-4 text-black font-light">{{ __('short-phrases.total-cost') }}:</span>
                         <span class="text-3xl text-blue font-bold">$<span class="relative -right-1 total-cost">0</span></span>
                     </div>
                 </div>

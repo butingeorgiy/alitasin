@@ -41,6 +41,7 @@ return [
     'tour-duration-format' => 'Geçersiz süre biçimi!',
     'tour-filters-parse-error' => 'Gezileri aramak için yanlış filtre formatı!',
     'tour-types-parse-error' => 'Gezileri aramak için yanlış tür biçimi!',
+    'tour-additions-json' => 'Yanlış türde eklemeler! JSON gönderilmelidir!!',
 
     // User validation messages
     'user-first-name-required' => 'İlk adı belirtmelidir!',

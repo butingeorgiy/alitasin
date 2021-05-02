@@ -117,5 +117,10 @@ return [
     'change-status' => 'Изменить статус',
     'recently-viewed' => 'Недавно просмотренные',
     'reserved-tours' => 'Забронированные туры',
-    'favorite-tours' => 'Понравившиеся экскурсии'
+    'favorite-tours' => 'Понравившиеся экскурсии',
+    'included' => 'Входит',
+    'not-included' => 'Не входит',
+    'additions' => 'Дополнения',
+    'nothing-chosen' => 'Ничего не выбрано',
+    'empty-list' => 'Список пуст'
 ];

@@ -184,7 +184,7 @@
         <div class="grid grid-cols-3 gap-5 mt-6">
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.duration') }} ({{ __('short-phrases.unnecessary') }})</p>
-                <div class="w-full flex items-center mb-5 px-4 py-3 text-sm bg-white shadow rounded-md">
+                <div class="w-full flex items-center px-4 py-3 text-sm bg-white shadow rounded-md">
                     <input type="text"
                            name="duration"
                            class="mr-3 text-gray-400 placeholder-gray-400"
@@ -207,7 +207,29 @@
             </div>
         </div>
 
-        <div class="error-message hidden flex items-center px-4 py-3 text-red-600 font-medium bg-red-200 rounded-md">
+        <div class="grid grid-cols-2 gap-5 mt-12">
+            <div class="flex flex-col">
+                <div class="flex items-center mb-2">
+                    <p class="mr-4 font-semibold">{{ __('short-phrases.included') }} ({{ __('short-phrases.unnecessary') }})</p>
+                    <span class="open-addition-popup-button text-sm text-blue cursor-pointer whitespace-nowrap hover:underline" data-is-include="1">{{ __('buttons.add') }}</span>
+                </div>
+                <div class="tour-includes-container">
+                    <p class="text-sm text-black font-light italic">{{ __('short-phrases.empty-list') }}</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col">
+                <div class="flex items-center mb-2">
+                    <p class="mr-4 font-semibold">{{ __('short-phrases.not-included') }} ({{ __('short-phrases.unnecessary') }})</p>
+                    <span class="open-addition-popup-button text-sm text-blue cursor-pointer whitespace-nowrap hover:underline" data-is-include="0">{{ __('buttons.add') }}</span>
+                </div>
+                <div class="tour-not-includes-container">
+                    <p class="text-sm text-black font-light italic">{{ __('short-phrases.empty-list') }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message hidden flex items-center mt-6 px-4 py-3 text-red-600 font-medium bg-red-200 rounded-md">
             <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -216,7 +238,7 @@
             <span></span>
         </div>
 
-        <div class="success-message hidden flex items-center px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
+        <div class="success-message hidden flex items-center mt-6 px-4 py-3 text-green-500 font-medium bg-green-200 rounded-md">
             <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -237,5 +259,8 @@
         </div>
     </form>
 </div>
+
+@include('popups.addition')
+
 </body>
 </html>

@@ -16,5 +16,8 @@ return [
     'accept' => 'Kabul etmek',
     'reset' => 'Sıfırla',
     'create-account' => 'Hesap oluşturmak',
-    'add-excursion' => 'Gezi ekle'
+    'add-excursion' => 'Gezi ekle',
+    'add' => 'Ekle',
+    'edit' => 'Düzenle',
+    'delete' => 'Sil'
 ];

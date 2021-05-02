@@ -41,6 +41,7 @@ return [
     'tour-duration-format' => 'Некорректный формат продолжительности экскурсии!',
     'tour-filters-parse-error' => 'Некорректный формат фильтров для поиска экскурсий!',
     'tour-types-parse-error' => 'Некорректный формат типов для поиска экскурсий!',
+    'tour-additions-json' => 'Некорректный формат дополнений! Необходимо отправить JSON!',
 
     // User validation messages
     'user-first-name-required' => 'Укажите имя!',

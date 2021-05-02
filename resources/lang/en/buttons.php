@@ -16,5 +16,8 @@ return [
     'accept' => 'Accept',
     'reset' => 'Reset',
     'create-account' => 'Create account',
-    'add-excursion' => 'Add excursion'
+    'add-excursion' => 'Add excursion',
+    'add' => 'Add',
+    'edit' => 'Edit',
+    'delete' => 'Delete'
 ];

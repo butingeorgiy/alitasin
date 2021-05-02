@@ -1,7 +1,8 @@
 import TourFormBaseController from '../../extenders/controllers/TourFormBaseController';
 import UpdateTourView from './UpdateTourView';
 import UpdateTourModel from './UpdateTourModel';
-import LocaleHelper from "../../helpers/LocaleHelper";
+import LocaleHelper from '../../helpers/LocaleHelper';
+import JsonHelper from '../../helpers/JsonHelper';
 
 class UpdateTourController extends TourFormBaseController {
     constructor(nodes) {
@@ -11,12 +12,54 @@ class UpdateTourController extends TourFormBaseController {
         this.view = new UpdateTourView({
             error: nodes.error,
             success: nodes.success,
-            btn: nodes.updateTourButton
+            btn: nodes.updateTourButton,
+            additionPopupError: nodes.additionPopup.querySelector('.error-message'),
+            includesAdditionsContainer: nodes.includesAdditionsContainer,
+            notIncludesAdditionsContainer: nodes.notIncludesAdditionsContainer
         });
+
+        this.additions = this.getInitAdditions();
 
         this.initFiltersSelect('#editTourForm select[name="filters"]');
         this.initWeekDaysSelect('#editTourForm select[name="conduct_at"]');
         this.initAvailableTimeSelect('#editTourForm select[name="available_time"]');
+
+        document.querySelectorAll('.dettach-addition-button').forEach(buttonNode => {
+            this.dettachAdditionHandler(buttonNode, buttonNode.getAttribute('data-id'));
+        });
+
+        document.querySelectorAll('.edit-addition-button').forEach(buttonNode => {
+            this.editAdditionHandler(buttonNode, JsonHelper.parse(buttonNode.getAttribute('data-addition')));
+        });
+    }
+
+    getInitAdditions() {
+        let additions = JsonHelper.parse(this.nodes.includesAdditionsContainer.getAttribute('data-additions')),
+            output = [];
+
+        additions['0']?.forEach(addition => {
+            output.push({
+                id: addition.id.toString(),
+                title: addition.title,
+                en_description: addition.en_description,
+                ru_description: addition.ru_description,
+                tr_description: addition.tr_description,
+                is_include: '0'
+            });
+        });
+
+        additions['1']?.forEach(addition => {
+            output.push({
+                id: addition.id.toString(),
+                title: addition.title,
+                en_description: addition.en_description,
+                ru_description: addition.ru_description,
+                tr_description: addition.tr_description,
+                is_include: '1'
+            });
+        });
+
+        return output;
     }
 
     initImageBoxes(items) {
@@ -132,6 +175,10 @@ class UpdateTourController extends TourFormBaseController {
 
         if (durationInput && durationSelect) {
             formData.append('duration', durationInput.value ? `${durationInput.value}~${durationSelect.value}` : '')
+        }
+
+        if (this.additions.length > 0) {
+            formData.append('additions', JSON.stringify(this.additions));
         }
 
         UpdateTourModel.update(UpdateTourController.getCurrentTourId(), formData)
