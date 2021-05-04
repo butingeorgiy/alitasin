@@ -129,4 +129,5 @@ return [
     'rental-yachts' => 'Yachts rental',
     'transfers' => 'Transfers',
     'medical-tourism' => 'Medical tourism',
+    'rental-cars-and-yachts' => 'Cars and yachts rental'
 ];
