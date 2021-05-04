@@ -1,4 +1,4 @@
-<footer>
+<footer id="contacts">
     <div class="bg-blue rounded-t-3xl">
         <div class="container flex justify-between items-center mx-auto px-5 py-3">
             <a href="#" class="sm:text-xl md:text-3xl text-white font-bold hover:underline">+7 (123) 456 78 90</a>

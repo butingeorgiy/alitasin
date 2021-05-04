@@ -9,3 +9,4 @@ import './modules/bookTour';
 import './modules/registration';
 import './modules/reservationList';
 import './modules/favorites';
+import './modules/mobileMenu';

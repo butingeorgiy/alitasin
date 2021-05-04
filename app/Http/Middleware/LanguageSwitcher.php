@@ -15,10 +15,10 @@ class LanguageSwitcher
      */
     public function handle($request, Closure $next)
     {
-        $locale = $request->cookie('locale', 'en');
+        $locale = $request->cookie('locale', 'ru');
 
         if (!in_array($locale, ['en', 'ru', 'tr'])) {
-            $locale = 'en';
+            $locale = 'ru';
         }
 
         \App::setLocale($locale);

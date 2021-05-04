@@ -122,5 +122,11 @@ return [
     'not-included' => 'İçermez',
     'additions' => 'Eklemeler',
     'nothing-chosen' => 'Hiçbir şey seçilmedi',
-    'empty-list' => 'Boş liste'
+    'empty-list' => 'Boş liste',
+    'popular-regions' => 'Popüler bölgeler',
+    'main' => 'Ana sayfa',
+    'rental-cars' => 'Araç kiralama',
+    'rental-yachts' => 'Yat kiralama',
+    'transfers' => 'Transferler',
+    'medical-tourism' => 'Sağlık turizmi',
 ];
