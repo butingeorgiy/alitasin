@@ -1,7 +1,7 @@
-<header class="bg-white">
-    <div class="container flex mx-auto px-5 py-4">
+<header class="relative bg-white">
+    <div class="container flex items-center mx-auto px-5 py-4">
         <a href="{{ request()->is('admin/*') ? route('admin-index') : route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
-        <div class="flex items-center">
+        <div class="hidden sm:flex items-center">
             @if(\App\Facades\Auth::check())
                 @if(!request()->is('admin/*', 'profile/*'))
                     @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
@@ -14,16 +14,67 @@
                         </a>
                     @endif
                 @endif
-                <a href="{{ route('logout') }}" class="logout-button ml-8 text-red hover:underline">{{ __('buttons.exit') }}</a>
+                <a href="{{ route('logout') }}" class="ml-8 text-red hover:underline">{{ __('buttons.exit') }}</a>
             @else
                 <div class="show-login-popup-button mr-8 text-black hover:underline">{{ __('buttons.login') }}</div>
                 <div class="show-reg-popup-button text-black hover:underline">{{ __('buttons.reg') }}</div>
             @endif
-                <select class="language-switch-select ml-8 cursor-pointer" name="language">
+                <select class="ml-8 cursor-pointer" name="language">
                     @foreach(['ru', 'en', 'tr'] as $lang)
                         <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
                     @endforeach
                 </select>
+        </div>
+        <div class="burger-menu-icon block sm:hidden cursor-pointer">
+            <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 18L14 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 6L10 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 12L4 12" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="mobile-menu hidden absolute top-full left-0 z-50 w-full pb-10 bg-white shadow-md transition-all duration-150 transform opacity-0 scale-95">
+            <div class="grid grid-cols-2 gap-5 px-5 py-6 bg-gray-1000">
+                @if(\App\Facades\Auth::check())
+                    @if(!request()->is('admin/*', 'profile/*'))
+                        @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
+                            <a href="{{ route('profile-index') }}" class="flex justify-center px-3 py-1.5 text-sm text-black font-medium bg-white border border-gray-1100 rounded-md">
+                                {{ __('buttons.move-to-cabinet') }}
+                            </a>
+                        @else
+                            <a href="{{ route('admin-index') }}" class="flex justify-center px-3 py-1.5 text-sm text-black font-medium bg-white border border-gray-1100 rounded-md">
+                                {{ __('buttons.admin-panel') }}
+                            </a>
+                        @endif
+                    @endif
+                    <a href="{{ route('logout') }}" class="{{ request()->is('admin/*', 'profile/*') ? 'col-span-2' : '' }} flex justify-center px-3 py-1.5 text-sm text-red font-medium bg-white border border-gray-1100 rounded-md">{{ __('buttons.exit') }}</a>
+                @else
+                    <div class="show-login-popup-button close-after-click flex justify-center px-3 py-1.5 text-sm text-black font-medium bg-white border border-gray-1100 rounded-md">{{ __('buttons.login') }}</div>
+                    <div class="show-reg-popup-button close-after-click flex justify-center px-3 py-1.5 text-sm text-black font-medium bg-white border border-gray-1100 rounded-md">{{ __('buttons.reg') }}</div>
+                @endif
+            </div>
+            <div class="flex flex-col items-center mb-5 p-5">
+                <a href="{{ route('index') }}" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.main') }}</a>
+                <a href="/#regionsSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.popular-regions') }}</a>
+                <a href="/#toursSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.tours') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.rental-cars') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.rental-yachts') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.transfers') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.property') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.medical-tourism') }}</a>
+                <a href="#reviewsSliderSection" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.reviews') }}</a>
+                <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.contacts') }}</a>
+                <select class="text-sm text-black font-light" name="language">
+                    @foreach(['ru', 'en', 'tr'] as $lang)
+                        <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex justify-center">
+                <a href="https://wa.me/+905350303054" target="_blank" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/whatsapp-icon.svg') }})"></a>
+                <a href="https://t.me/+905350303054" target="_blank" class="w-8 h-8 mx-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/telegram-icon.svg') }})"></a>
+                <a href="tel:+905350303054" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/phone-icon.svg') }})"></a>
+            </div>
         </div>
     </div>
 </header>

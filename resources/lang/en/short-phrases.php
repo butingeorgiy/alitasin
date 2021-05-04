@@ -122,5 +122,11 @@ return [
     'not-included' => 'Not included',
     'additions' => 'Additions',
     'nothing-chosen' => 'Nothing chosen',
-    'empty-list' => 'Empty list'
+    'empty-list' => 'Empty list',
+    'popular-regions' => 'Popular regions',
+    'main' => 'Home',
+    'rental-cars' => 'Cars rental',
+    'rental-yachts' => 'Yachts rental',
+    'transfers' => 'Transfers',
+    'medical-tourism' => 'Medical tourism',
 ];

@@ -30,7 +30,9 @@ module.exports = {
                 600: '#5C5C5C', // used
                 700: '#C4C4C4', // used
                 800: '#9FA2B4', // used
-                900: '#4B506D' // used
+                900: '#4B506D', // used
+                1000: '#F5F5F5', // used
+                1100: '#E4E4E4', // used
             },
             red: {
                 DEFAULT: '#FF3D3D', // used

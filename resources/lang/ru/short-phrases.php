@@ -122,5 +122,12 @@ return [
     'not-included' => 'Не входит',
     'additions' => 'Дополнения',
     'nothing-chosen' => 'Ничего не выбрано',
-    'empty-list' => 'Список пуст'
+    'empty-list' => 'Список пуст',
+    'popular-regions' => 'Популярные регионы',
+    'main' => 'Главная',
+    'rental-cars' => 'Аренда автомобилей',
+    'rental-yachts' => 'Аренда яхты',
+    'transfers' => 'Трансферы',
+    'medical-tourism' => 'Мед. туризм',
+
 ];

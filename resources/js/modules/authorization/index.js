@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', _ => {
 
     if (loginPopup) {
         const loginButton = document.querySelector('.login-button');
-        const showLoginPopupButton = document.querySelector('header .show-login-popup-button');
+        const showLoginPopupButtons = document.querySelectorAll('header .show-login-popup-button');
 
         const controller = new AuthorizationController({
             popup: loginPopup,
@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', _ => {
             btn: loginButton
         });
 
-        if (showLoginPopupButton) {
-            showLoginPopupButton.addEventListener('click', _ => controller.showForm());
+        if (showLoginPopupButtons.length > 0) {
+            showLoginPopupButtons.forEach(node => {
+                node.addEventListener('click', _ => controller.showForm());
+            });
         }
 
         loginButton.addEventListener('click', _ => {

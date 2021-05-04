@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', _ => {
 
     if (regPopup) {
         const regButton = document.querySelector('#regPopup .create-account-button');
-        const showRegPopupButton = document.querySelector('.show-reg-popup-button');
+        const showRegPopupButtons = document.querySelectorAll('.show-reg-popup-button');
 
         const controller = new RegistrationController({
             popup: regPopup,
@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', _ => {
             btn: regButton
         });
 
-        if (showRegPopupButton) {
-            showRegPopupButton.addEventListener('click', _ => controller.showForm());
+        if (showRegPopupButtons.length > 0) {
+            showRegPopupButtons.forEach(node => {
+                node.addEventListener('click', _ => controller.showForm());
+            });
         }
 
         regButton.addEventListener('click', _ => {
