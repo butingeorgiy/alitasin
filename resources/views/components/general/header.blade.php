@@ -19,7 +19,7 @@
                 <div class="show-login-popup-button mr-8 text-black hover:underline">{{ __('buttons.login') }}</div>
                 <div class="show-reg-popup-button text-black hover:underline">{{ __('buttons.reg') }}</div>
             @endif
-                <select class="ml-8 cursor-pointer" name="language">
+                <select class="ml-8 cursor-pointer bg-white" name="language">
                     @foreach(['ru', 'en', 'tr'] as $lang)
                         <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
                     @endforeach
@@ -62,9 +62,9 @@
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.transfers') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.property') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.medical-tourism') }}</a>
-                <a href="#reviewsSliderSection" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.reviews') }}</a>
+                <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.reviews') }}</a>
                 <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.contacts') }}</a>
-                <select class="text-sm text-black font-light" name="language">
+                <select class="text-sm text-black font-light bg-white" name="language">
                     @foreach(['ru', 'en', 'tr'] as $lang)
                         <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
                     @endforeach
