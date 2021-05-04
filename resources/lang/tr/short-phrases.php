@@ -129,4 +129,5 @@ return [
     'rental-yachts' => 'Yat kiralama',
     'transfers' => 'Transferler',
     'medical-tourism' => 'Sağlık turizmi',
+    'rental-cars-and-yachts' => 'Otomobil ve yat kiralama'
 ];

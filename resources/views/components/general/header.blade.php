@@ -2,6 +2,13 @@
     <div class="container flex items-center mx-auto px-5 py-4">
         <a href="{{ request()->is('admin/*') ? route('admin-index') : route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
         <div class="hidden sm:flex items-center">
+            <a href="/#toursSection" class="mr-8 text-black hover:underline">{{ __('short-phrases.tours') }}</a>
+            <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-cars-and-yachts') }}</a>
+            <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.transfers') }}</a>
+            <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.property') }}</a>
+            <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.medical-tourism') }}</a>
+            <a href="/#reviewsSliderSection" class="mr-8 text-black hover:underline">{{ __('short-phrases.reviews') }}</a>
+            <a href="/#contacts" class="mr-8 text-black hover:underline">{{ __('short-phrases.contacts') }}</a>
             @if(\App\Facades\Auth::check())
                 @if(!request()->is('admin/*', 'profile/*'))
                     @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
@@ -57,8 +64,7 @@
                 <a href="{{ route('index') }}" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.main') }}</a>
                 <a href="/#regionsSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.popular-regions') }}</a>
                 <a href="/#toursSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.tours') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.rental-cars') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.rental-yachts') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.rental-cars-and-yachts') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.transfers') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.property') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.medical-tourism') }}</a>

@@ -129,5 +129,6 @@ return [
     'rental-yachts' => 'Аренда яхты',
     'transfers' => 'Трансферы',
     'medical-tourism' => 'Мед. туризм',
+    'rental-cars-and-yachts' => 'Аренда авто и яхт'
 
 ];
