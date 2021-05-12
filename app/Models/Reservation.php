@@ -141,7 +141,7 @@ class Reservation extends Model
     public function costWithSale(): int
     {
         if ($this->isUsedPromoCode()) {
-            return $this->costWithoutSale() * $this->promoCodeSalePercent() / 100;
+            return $this->costWithoutSale() * (100 - $this->promoCodeSalePercent()) / 100;
         }
 
         return $this->costWithoutSale();
@@ -194,4 +194,13 @@ class Reservation extends Model
     {
         return Carbon::parse($this->created_at)->format('H:i');
     }
+
+//    public function getPartnerProfit(): int
+//    {
+//        if ($this->isUsedPromoCode()) {
+//            return 0;
+//        }
+//
+//        return ;
+//    }
 }

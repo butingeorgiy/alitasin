@@ -1,5 +1,18 @@
+@php $isAdmin = (\App\Facades\Auth::check(['3', '5']) and request()->is('admin/*')); @endphp
+
+@if($isAdmin)
+    <div class="mt-10 -mb-10 border-b border-gray-200">
+        <div class="container flex items-center mx-auto px-5 pb-5">
+            <a href="{{ route('partners') }}" class="mr-5 inline text-black text-2xl font-bold text-black">{{ __('short-phrases.partners') }}</a>
+            <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#231F20" stroke-width="4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+@endif
+
 <section id="toursSection" class="mb-10 pb-6 border-b border-gray-200" data-is-admin="{{ \App\Facades\Auth::check(['3', '5']) and request()->is('admin/*') ? '1' : '0' }}">
-    @php $isAdmin = (\App\Facades\Auth::check(['3', '5']) and request()->is('admin/*')); @endphp
     <div class="container mx-auto px-5 {{ $isAdmin ? 'mt-16' : '' }}">
         @if(!$isAdmin)
             <div class="flex justify-between items-center lg:justify-center mb-4">

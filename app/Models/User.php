@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -13,6 +16,8 @@ use Illuminate\Support\Str;
  * @method static find(array|string $id)
  * @method static where(string $string, array|string|null $input)
  * @method static managers()
+ * @method static partners()
+ * @method static create(string[] $array)
  * @property string first_name
  * @property string account_type_id
  * @property string last_name
@@ -23,9 +28,15 @@ use Illuminate\Support\Str;
  * @property mixed recentViewed
  * @property mixed reservedTours
  * @property mixed favoriteTours
+ * @property int total_profit
+ * @property int total_payment_amount
+ * @property int total_income
  */
 class User extends Model
 {
+    use SoftDeletes;
+
+
     public $timestamps = false;
 
     protected $guarded = [];
@@ -35,7 +46,7 @@ class User extends Model
         return $query->where('email', $email)->get()->first() === null;
     }
 
-    public function tokens(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function tokens(): HasMany
     {
         return $this->hasMany(AuthToken::class)->where(
             DB::raw('UNIX_TIMESTAMP() - UNIX_TIMESTAMP(created_at)'),
@@ -47,12 +58,23 @@ class User extends Model
     /**
      * Get users with manager's access
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param $query
+     * @return mixed
      */
-    public function scopeManagers($query): \Illuminate\Database\Eloquent\Builder
+    public function scopeManagers($query)
     {
         return $query->where('account_type_id', '4');
+    }
+
+    /**
+     * Get users with partner's access
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopePartners($query)
+    {
+        return $query->where('account_type_id', '2');
     }
 
     public function getPhoneAttribute(): ?string
@@ -106,5 +128,82 @@ class User extends Model
     public function favoriteTours(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'favorite_tours');
+    }
+
+    // Partner methods
+
+    /**
+     * Get attracted reservations by partner
+     *
+     * @return HasManyThrough
+     */
+    public function attractedReservations(): HasManyThrough
+    {
+        return $this->hasManyThrough(Reservation::class, PromoCode::class);
+    }
+
+    /**
+     * Get partner payments
+     *
+     * @return HasMany
+     */
+    public function partnerPayments(): HasMany
+    {
+        return $this->hasMany(PartnerPayment::class, 'partner_id');
+    }
+
+    /**
+     * Get total income attracted by partner
+     *
+     * @return int
+     */
+    public function getTotalIncomeAttribute(): int
+    {
+        /**
+         * @var $attractedReservations Reservation[]
+         */
+        $attractedReservations = $this->attractedReservations()->get();
+        $totalIncome = 0;
+
+        foreach ($attractedReservations as $item) {
+            $totalIncome += $item->costWithSale();
+        }
+
+        return $totalIncome;
+    }
+
+    /**
+     * Get partner profit
+     *
+     * @return int
+     */
+    public function getTotalProfitAttribute(): int
+    {
+        /**
+         * @var $attractedReservations Reservation[]
+         */
+        $attractedReservations = $this->attractedReservations()->get();
+        $totalProfit = 0;
+
+        foreach ($attractedReservations as $item) {
+            $totalProfit += $item->costWithSale() * 0.3;
+        }
+
+        return $totalProfit;
+    }
+
+    public function getTotalPaymentAmountAttribute(): int
+    {
+        /**
+         * @var $partnerPayments PartnerPayment[]
+         */
+        $partnerPayments = $this->partnerPayments()->get();
+        $amount = 0;
+
+        foreach ($partnerPayments as $item) {
+            $amount += $item->amount;
+        }
+
+        return $amount;
     }
 }

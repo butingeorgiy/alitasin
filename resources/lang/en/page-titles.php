@@ -7,4 +7,5 @@ return [
     'tours' => 'Excursions',
     'personal-client-cabinet' => 'Personal client cabinet',
     'reserves' => 'Reserves',
+    'partners' => 'Partners'
 ];

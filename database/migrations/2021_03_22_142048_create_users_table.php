@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 128)->unique();
             $table->enum('account_type_id', ['1', '2', '3', '4', '5']);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('deleted_at')->nullable();
 
 
             $table->foreign('account_type_id')

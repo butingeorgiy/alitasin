@@ -129,5 +129,13 @@ return [
     'rental-yachts' => 'Yat kiralama',
     'transfers' => 'Transferler',
     'medical-tourism' => 'Sağlık turizmi',
-    'rental-cars-and-yachts' => 'Otomobil ve yat kiralama'
+    'rental-cars-and-yachts' => 'Otomobil ve yat kiralama',
+    'partners' => 'Ortaklar',
+    'add-partner' => 'Partner ekle',
+    'sale-percent' => 'Satış yüzdesi',
+    'make-payment' => 'Ödeme yapmak',
+    'activate' => 'Etkinleştir',
+    'block' => 'Yasaklamak',
+    'payment-amount' => 'Ödeme miktarı',
+    'partner' => 'Ortak'
 ];
