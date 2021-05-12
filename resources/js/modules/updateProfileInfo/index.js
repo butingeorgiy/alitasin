@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', _ => {
         });
     }
 
-    // Upload profile phot
+    // Upload profile photo
     const profilePhotoInput = document.querySelector('input[name="profile_picture"]');
 
     if (profilePhotoInput) {
