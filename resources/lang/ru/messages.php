@@ -113,5 +113,19 @@ return [
     'tour-deleting-failed' => 'Не удалось удалить экскурсию!',
     'reservation-status-not-found' => 'Указанного статуса не существует!',
     'reservation-not-found' => 'Брони не найдено!',
-    'user-not-authorized' => 'Пользователь не авторизован!'
+    'user-not-authorized' => 'Пользователь не авторизован!',
+    'sale-percent-required' => 'Укажите процент скидки!',
+    'percent-numeric' => 'Процент должен быть числом!',
+    'percent-min' => 'Процент не может быть меньше 0!',
+    'percent-max' => 'Процент не может быть больше 100!',
+    'partner-creating-success' => 'Новый партнёр успешно создан!',
+    'partner-ban-failed' => 'Не удалось заблокировать партнёра!',
+    'partner-ban-success' => 'Партнёр успешно заблокирован!',
+    'partner-restore-failed' => 'Не удалось восстановить партнёра!',
+    'partner-restore-success' => 'Партнёр успешно восстановлен!',
+    'payment-amount-required' => 'Укажите сумму выплаты!',
+    'payment-amount-numeric' => 'Сумма выплаты должна быть числом!',
+    'payment-amount-min' => 'Сумма выплаты не может быть меньше 0!',
+    'partner-payment-amount-max' => 'Сумма выплаты не может быть больше, чем остаток прибыли партнёра!',
+    'partner-payment-saving-success' => 'Выплата успешно сохранена!'
 ];

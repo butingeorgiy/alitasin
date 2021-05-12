@@ -133,4 +133,15 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL', 'mail'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin address
+    |--------------------------------------------------------------------------
+    |
+    | Administrator email address for important mails. For example, creating
+    | a new partner.
+    |
+    */
+
+    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'butingeorgiy48@gmail.com'),
 ];

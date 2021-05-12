@@ -112,5 +112,19 @@ return [
     'tour-deleting-failed' => 'Gezi silinemedi!',
     'reservation-status-not-found' => 'Belirtilen durum mevcut değil!',
     'reservation-not-found' => 'Rezervasyon bulunamadı!',
-    'user-not-authorized' => 'Kullanıcı yetkili değil!'
+    'user-not-authorized' => 'Kullanıcı yetkili değil!',
+    'sale-percent-required' => 'Satış yüzdesi belirtilmelidir!',
+    'percent-numeric' => 'Yüzde bir sayı olmalıdır!',
+    'percent-min' => 'Yüzde 0\'dan küçük olamaz!',
+    'percent-max' => 'Yüzde 100\'den fazla olamaz!',
+    'partner-creating-success' => 'Yeni ortak başarıyla oluşturuldu!',
+    'partner-ban-failed' => 'İş ortağı yasaklama başarısız oldu!',
+    'partner-ban-success' => 'İş ortağı başarıyla yasaklandı!',
+    'partner-restore-failed' => 'İş ortağı geri yükleme başarısız oldu!',
+    'partner-restore-success' => 'İş ortağı başarıyla geri yüklendi!',
+    'payment-amount-required' => 'Ödeme tutarını belirtmelidir!',
+    'payment-amount-numeric' => 'Ödeme miktarı bir sayı olmalıdır!',
+    'payment-amount-min' => 'Ödeme miktarı 0\'dan az olamaz!',
+    'partner-payment-amount-max' => 'Ödeme tutarı, iş ortağı kar bakiyesinden fazla olamaz!',
+    'partner-payment-saving-success' => 'Ödeme başarıyla kaydediliyordu!'
 ];

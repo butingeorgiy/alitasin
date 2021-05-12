@@ -83,6 +83,7 @@ select::-ms-expand {
 .update-status-button,
 .save-personal-info-button,
 .save-book-button,
+.save-partner-button,
 .save-tour-button {
     @apply flex justify-center py-2 text-sm text-white font-medium rounded-md cursor-pointer;
 }
@@ -102,7 +103,9 @@ select::-ms-expand {
 .update-tour-button.loading,
 .update-tour-button.disabled,
 .save-tour-button.loading,
-.save-tour-button.disabled {
+.save-tour-button.disabled,
+.save-partner-button.loading,
+.make-partner-payment-button.loading {
     @apply cursor-not-allowed opacity-60;
 }
 
@@ -113,7 +116,9 @@ select::-ms-expand {
 .create-account-button.loading .animate-spin,
 .login-button.loading .animate-spin,
 .update-tour-button.loading .animate-spin,
-.save-tour-button.loading .animate-spin {
+.save-partner-button.loading .animate-spin,
+.save-tour-button.loading .animate-spin,
+.make-partner-payment-button.loading .animate-spin {
     @apply block;
 }
 

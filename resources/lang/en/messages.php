@@ -112,5 +112,19 @@ return [
     'tour-deleting-failed' => 'Excursion deleting was failed!',
     'reservation-status-not-found' => 'Specified status is not exist!',
     'reservation-not-found' => 'Reservation was not found!',
-    'user-not-authorized' => 'User not authorized!'
+    'user-not-authorized' => 'User not authorized!',
+    'sale-percent-required' => 'Must specify sale percent!',
+    'percent-numeric' => 'Percent must be a number!',
+    'percent-min' => 'Percent cannot be less than 0!',
+    'percent-max' => 'Percent cannot be more than 100!',
+    'partner-creating-success' => 'New partner was created successfully!',
+    'partner-ban-failed' => 'Partner banning was failed!',
+    'partner-ban-success' => 'Partner was banned successfully!',
+    'partner-restore-failed' => 'Partner restoring was failed!',
+    'partner-restore-success' => 'Partner was restored successfully!',
+    'payment-amount-required' => 'Must specify amount of payment!',
+    'payment-amount-numeric' => 'Amount of payment must be a number!',
+    'payment-amount-min' => 'Amount of payment cannot be less than 0!',
+    'partner-payment-amount-max' => 'Payment amount cannot be more than partner profit remainder!',
+    'partner-payment-saving-success' => 'Payment was saving successfully!'
 ];

@@ -360,7 +360,8 @@ module.exports = {
             11: 'repeat(11, minmax(0, 1fr))',
             12: 'repeat(12, minmax(0, 1fr))',
             'reserve-table': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
-            'reserve-table-filters': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))'
+            'reserve-table-filters': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
+            'partners-table': 'minmax(0, 6fr) repeat(4, minmax(0, 1fr))'
         },
         gridTemplateRows: {
             none: 'none',
@@ -800,7 +801,7 @@ module.exports = {
         borderOpacity: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
         borderRadius: ['responsive'],
         borderStyle: ['responsive'],
-        borderWidth: ['responsive'],
+        borderWidth: ['responsive', 'last'],
         boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
         boxSizing: ['responsive'],
         clear: ['responsive'],

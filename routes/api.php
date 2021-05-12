@@ -10,6 +10,13 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('update', 'Api\UserController@update')->middleware('auth:1');
 });
 
+Route::group(['prefix' => 'partners'], function () {
+    Route::post('create', 'Api\PartnerController@create')->middleware('auth:5');
+    Route::post('delete/{id}', 'Api\PartnerController@delete')->middleware('auth:5');
+    Route::post('restore/{id}', 'Api\PartnerController@restore')->middleware('auth:5');
+    Route::post('make-payment/{id}', 'Api\PartnerController@makePayment')->middleware('auth:5');
+});
+
 Route::group(['prefix' => 'tours'], function () {
     Route::get('', 'Api\TourController@get');
     Route::post('create', 'Api\TourController@create')->middleware('auth:5');

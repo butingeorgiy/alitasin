@@ -1,4 +1,4 @@
-import FavoritesController from "../modules/favorites/FavoritesController";
+import FavoritesController from '../modules/favorites/FavoritesController';
 
 
 class FavoritesTogglingObserver {

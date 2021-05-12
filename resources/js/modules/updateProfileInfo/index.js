@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', _ => {
     const personalInfoSection = document.querySelector('#personalInfoSection');
 
     if (personalInfoSection) {
-        const controller = new UpdateProfileInfoController({
+        new UpdateProfileInfoController({
             form: document.querySelector('#personalInfoSection .personal-info-form'),
             saveButton: document.querySelector('#personalInfoSection .save-personal-info-button'),
             error: document.querySelector('#personalInfoSection .error-message'),

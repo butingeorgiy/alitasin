@@ -129,5 +129,13 @@ return [
     'rental-yachts' => 'Yachts rental',
     'transfers' => 'Transfers',
     'medical-tourism' => 'Medical tourism',
-    'rental-cars-and-yachts' => 'Cars and yachts rental'
+    'rental-cars-and-yachts' => 'Cars and yachts rental',
+    'partners' => 'Partners',
+    'add-partner' => 'Add partner',
+    'sale-percent' => 'Sale percent',
+    'make-payment' => 'Make payment',
+    'activate' => 'Activate',
+    'block' => 'Block',
+    'payment-amount' => 'Payment amount',
+    'partner' => 'Partner'
 ];

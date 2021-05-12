@@ -129,6 +129,13 @@ return [
     'rental-yachts' => 'Аренда яхты',
     'transfers' => 'Трансферы',
     'medical-tourism' => 'Мед. туризм',
-    'rental-cars-and-yachts' => 'Аренда авто и яхт'
-
+    'rental-cars-and-yachts' => 'Аренда авто и яхт',
+    'partners' => 'Партнёры',
+    'add-partner' => 'Добавить партнёра',
+    'sale-percent' => 'Процент скидки',
+    'make-payment' => 'Сделать выплату',
+    'activate' => 'Активировать',
+    'block' => 'Заблокировать',
+    'payment-amount' => 'Сумма выплаты',
+    'partner' => 'Партнёр'
 ];

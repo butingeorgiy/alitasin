@@ -26,7 +26,7 @@
         @if($reservation->status->id === 1)
             <div class="flex justify-center w-14 py-1 text-sm font-medium text-white bg-yellow rounded-full" title="{{ $reservation->status[App::getLocale() . '_name'] }}">New</div>
         @elseif($reservation->status->id === 2)
-            <div class="flex justify-center w-14 py-1 text-sm text-white bg-green-100 rounded-full" title="Прибыл на экскурсию">
+            <div class="flex justify-center w-14 py-1 text-sm text-white bg-green-100 rounded-full" title="{{ $reservation->status[App::getLocale() . '_name'] }}">
                 <svg class="min-w-5 min-h-5 w-5 h-5" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14.7099 1.20998C14.617 1.11625 14.5064 1.04186 14.3845 0.991091C14.2627 0.940323 14.132 0.914185
                           13.9999 0.914185C13.8679 0.914185 13.7372 0.940323 13.6154 0.991091C13.4935 1.04186 13.3829 1.11625

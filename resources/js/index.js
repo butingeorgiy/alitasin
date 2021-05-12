@@ -10,3 +10,5 @@ import './modules/registration';
 import './modules/reservationList';
 import './modules/favorites';
 import './modules/mobileMenu';
+import './modules/createPartner';
+import './modules/partnerList';
