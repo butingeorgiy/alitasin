@@ -127,5 +127,6 @@ return [
     'payment-amount-numeric' => 'Сумма выплаты должна быть числом!',
     'payment-amount-min' => 'Сумма выплаты не может быть меньше 0!',
     'partner-payment-amount-max' => 'Сумма выплаты не может быть больше, чем остаток прибыли партнёра!',
-    'partner-payment-saving-success' => 'Выплата успешно сохранена!'
+    'partner-payment-saving-success' => 'Выплата успешно сохранена!',
+    'hotel-room-number-max' => 'Максимальная длина номера комнаты 8 символов!'
 ];

@@ -137,5 +137,9 @@ return [
     'activate' => 'Etkinleştir',
     'block' => 'Yasaklamak',
     'payment-amount' => 'Ödeme miktarı',
-    'partner' => 'Ortak'
+    'partner' => 'Ortak',
+    'hotel-room' => 'Otel odası',
+    'enter-hotel-room-number' => 'Otel odası numarasını girin',
+    'location-region' => 'Konum bölgesi',
+    'select-location-region' => 'Konum bölgesini seçin'
 ];

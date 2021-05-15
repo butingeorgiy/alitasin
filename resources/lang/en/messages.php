@@ -126,5 +126,6 @@ return [
     'payment-amount-numeric' => 'Amount of payment must be a number!',
     'payment-amount-min' => 'Amount of payment cannot be less than 0!',
     'partner-payment-amount-max' => 'Payment amount cannot be more than partner profit remainder!',
-    'partner-payment-saving-success' => 'Payment was saving successfully!'
+    'partner-payment-saving-success' => 'Payment was saving successfully!',
+    'hotel-room-number-max' => 'Maximum hotel room number length 8 characters!'
 ];
