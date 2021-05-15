@@ -16,6 +16,8 @@ use Illuminate\Support\Carbon;
  * @property mixed date
  * @property mixed total_cost_without_sale
  * @property mixed created_at
+ * @property string|null hotel_room_number
+ * @property int|null region_id
  * @method static limit(int $int)
  * @method static Reservation find($reservationId)
  */
@@ -121,6 +123,16 @@ class Reservation extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(ReservationStatus::class, 'reservation_status_id');
+    }
+
+    /**
+     * Reservation's region
+     *
+     * @return BelongsTo
+     */
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
     }
 
     /**

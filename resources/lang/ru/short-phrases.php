@@ -137,5 +137,9 @@ return [
     'activate' => 'Активировать',
     'block' => 'Заблокировать',
     'payment-amount' => 'Сумма выплаты',
-    'partner' => 'Партнёр'
+    'partner' => 'Партнёр',
+    'hotel-room' => 'Номер в отеле',
+    'enter-hotel-room-number' => 'Введите номер комнаты в отеле',
+    'location-region' => 'Регион нахождения',
+    'select-location-region' => 'Выберите регион нахождения'
 ];

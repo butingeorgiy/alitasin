@@ -126,5 +126,6 @@ return [
     'payment-amount-numeric' => 'Ödeme miktarı bir sayı olmalıdır!',
     'payment-amount-min' => 'Ödeme miktarı 0\'dan az olamaz!',
     'partner-payment-amount-max' => 'Ödeme tutarı, iş ortağı kar bakiyesinden fazla olamaz!',
-    'partner-payment-saving-success' => 'Ödeme başarıyla kaydediliyordu!'
+    'partner-payment-saving-success' => 'Ödeme başarıyla kaydediliyordu!',
+    'hotel-room-number-max' => 'Maksimum otel odası numarası uzunluğu 8 karakter!'
 ];

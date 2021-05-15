@@ -721,7 +721,17 @@ class TourController extends Controller
             $reservation->attachPromoCode($promoCode);
         }
 
+        if ($request->has('region_id')) {
+            /** @var Region|null $region */
+            if (!$region = Region::find($request->input('region_id'))) {
+                throw new Exception(__('messages.region-not-found'));
+            }
+
+            $reservation->region_id = $region->id;
+        }
+
         $reservation->hotel_name = $request->input('hotel_name');
+        $reservation->hotel_room_number = $request->input('hotel_room_number');
         $reservation->communication_type = $request->input('communication_type');
         $reservation->time = $request->input('time');
         $reservation->date = $request->input('date');

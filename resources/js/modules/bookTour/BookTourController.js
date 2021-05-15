@@ -69,12 +69,20 @@ class BookTourController extends EventHandler {
             formData.append('hotel_name', this.nodes.form.querySelector('input[name="hotel_name"]').value)
         }
 
+        if (this.nodes.form.querySelector('input[name="hotel_room_number"]').value) {
+            formData.append('hotel_room_number', this.nodes.form.querySelector('input[name="hotel_room_number"]').value)
+        }
+
         if (this.nodes.form.querySelector('select[name="communication_type"]').value) {
             formData.append('communication_type', this.nodes.form.querySelector('select[name="communication_type"]').value);
         }
 
         if (this.nodes.form.querySelector('select[name="time"]').value) {
             formData.append('time', this.nodes.form.querySelector('select[name="time"]').value);
+        }
+
+        if (this.nodes.form.querySelector('select[name="region_id"]').value) {
+            formData.append('region_id', this.nodes.form.querySelector('select[name="region_id"]').value);
         }
 
         if (this.datePicker.selectedDates.length !== 0) {

@@ -137,5 +137,9 @@ return [
     'activate' => 'Activate',
     'block' => 'Block',
     'payment-amount' => 'Payment amount',
-    'partner' => 'Partner'
+    'partner' => 'Partner',
+    'hotel-room' => 'Hotel room',
+    'enter-hotel-room-number' => 'Enter hotel room number',
+    'location-region' => 'Location region',
+    'select-location-region' => 'Select location region'
 ];

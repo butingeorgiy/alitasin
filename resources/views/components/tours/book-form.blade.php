@@ -16,6 +16,26 @@
                     </label>
 
                     <label class="flex flex-col col-span-1">
+                        <span class="mb-1 font-semibold">{{ __('short-phrases.hotel-room') }}</span>
+                        <input type="text"
+                               name="hotel_room_number"
+                               maxlength="64"
+                               placeholder="{{ __('short-phrases.enter-hotel-room-number') }}"
+                               class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md">
+                    </label>
+
+                    <label class="flex flex-col col-span-1">
+                        <span class="mb-1 font-semibold">{{ __('short-phrases.location-region') }}</span>
+                        <select name="region_id"
+                                class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md cursor-pointer">
+                            <option value="">{{ __('short-phrases.select-location-region') }}</option>
+                            @foreach(\App\Models\Region::all() as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+
+                    <label class="flex flex-col col-span-1">
                         <span class="mb-1 font-semibold">{{ __('short-phrases.promo-code') }}</span>
                         <span
                             class="promo-code flex items-center w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md">
