@@ -8,21 +8,40 @@ class TourFormBaseController extends EventHandler {
         super();
         this.nodes = {
             ...nodes,
-            attachAdditionButton: nodes.additionPopup.querySelector('.save-addition-button')
+            attachAdditionButton: nodes.additionPopup.querySelector('.save-addition-button'),
+            attachParameterButton: nodes.additionPopup.querySelector('.save-parameter-button'),
         };
         this.additions = [];
 
-        this.initAdditionPopup();
+        if (this.nodes.attachAdditionButton) {
+            this.initAdditionPopup();
 
-        this.nodes.openAdditionPopupButtons.forEach(buttonNode => {
-            this.addEvent(buttonNode, 'click', _ => {
-                this.additionPopup.open(_ => this.beforeAdditionPopupOpenHandler(buttonNode.getAttribute('data-is-include')));
+            this.nodes.openAdditionPopupButtons.forEach(buttonNode => {
+                this.addEvent(buttonNode, 'click', _ => {
+                    this.additionPopup.open(_ => this.beforeAdditionPopupOpenHandler(buttonNode.getAttribute('data-is-include')));
+                });
             });
-        });
+        }
+
+        if (this.nodes.attachParameterButton) {
+            this.initParamsPopup();
+        }
     }
 
     initAdditionPopup() {
-        this.additionPopup = PopupObserver.init(this.nodes.additionPopup, false, _ => this.afterAdditionPopupCloseHandler());
+        this.additionPopup = PopupObserver.init(
+            this.nodes.additionPopup,
+            false,
+                _ => this.afterAdditionPopupCloseHandler()
+        );
+    }
+
+    initParamsPopup() {
+        this.paramPopup = PopupObserver.init(
+            this.nodes.paramPopup,
+            false,
+            _ => this.afterParamPopupCloseHandler()
+        );
     }
 
     afterAdditionPopupCloseHandler() {
@@ -32,6 +51,15 @@ class TourFormBaseController extends EventHandler {
         this.nodes.additionPopup.querySelector('input[name="tr_description"]').value = '';
         this.view.hideAdditionPopupError();
         this.removeAllListeners(this.nodes.attachAdditionButton, 'click');
+    }
+
+    afterParamPopupCloseHandler() {
+        this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value = '';
+        this.nodes.paramPopup.querySelector('input[name="en_description"]').value = '';
+        this.nodes.paramPopup.querySelector('input[name="ru_description"]').value = '';
+        this.nodes.paramPopup.querySelector('input[name="tr_description"]').value = '';
+        this.view.hideAdditionPopupError();
+        this.removeAllListeners(this.nodes.attachParameterButton, 'click');
     }
 
     beforeAdditionPopupOpenHandler(isInclude) {
@@ -75,6 +103,52 @@ class TourFormBaseController extends EventHandler {
                 ru_description,
                 tr_description,
                 is_include: isInclude
+            });
+        }
+
+        this.additionPopup.close(_ => this.afterAdditionPopupCloseHandler());
+        this.view.renderAdditions(
+            this.additions,
+            (buttonNode, additionId) => this.dettachAdditionHandler(buttonNode, additionId),
+            (buttonNode, addition) => this.editAdditionHandler(buttonNode, addition)
+        );
+    }
+
+    attachParam() {
+        this.view.hideAdditionPopupError();
+
+        if (this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value === '') {
+            this.view.showAdditionPopupError(LocaleHelper.translate('choose-param'));
+            return;
+        }
+
+        let id = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[0],
+            title = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[1],
+            en_description = this.nodes.paramPopup.querySelector('input[name="en_description"]').value,
+            ru_description = this.nodes.paramPopup.querySelector('input[name="ru_description"]').value,
+            tr_description = this.nodes.paramPopup.querySelector('input[name="tr_description"]').value,
+            needToCreate = true;
+
+        // Check if this addition already attached
+        this.additions.forEach((item, index) => {
+            if (item.id === id) {
+                needToCreate = false;
+                this.additions[index] = {
+                    ...item,
+                    en_description,
+                    ru_description,
+                    tr_description
+                };
+            }
+        });
+
+        if (needToCreate) {
+            this.additions.push({
+                id,
+                title,
+                en_description,
+                ru_description,
+                tr_description
             });
         }
 

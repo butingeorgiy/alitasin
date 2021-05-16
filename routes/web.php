@@ -4,6 +4,7 @@ Route::get('', 'PageController@showIndex')->name('index');
 Route::get('logout', 'AuthenticationController@logout')->name('logout');
 Route::get('regions/{id}', 'PageController@showRegion')->name('region');
 Route::get('tours/{id}', 'PageController@showTour')->name('tour');
+Route::get('vehicles', 'PageController@showVehicles')->name('vehicles');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('', 'PageController@profileIndex')->middleware('auth:1,2')->name('profile-index');
@@ -18,6 +19,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('reserves', 'ReservationController@showAll')->middleware('auth:4')->name('reserves');
     Route::get('partners', 'PartnerController@showAll')->middleware('auth:5')->name('partners');
     Route::get('partners/{id}', 'PartnerController@show')->middleware('auth:5')->name('partner');
+    Route::get('vehicles/create', 'VehicleController@showCreateForm')->middleware('auth:5')->name('create-vehicle');
 });
 
 Route::get('cdn/images/{dir}/{file}', 'ImageController@get')->middleware('cache')->name('get-image');
+
+//Route::get('hash', function () {
+//    dd(\App\Facades\Hash::make('Ibra@2131_tours', (object) [
+//        'email' => 'Ibragimov.tut@gmail.com',
+//    ]));
+//});

@@ -7,5 +7,8 @@ return [
     'tours' => 'Excursions',
     'personal-client-cabinet' => 'Personal client cabinet',
     'reserves' => 'Reserves',
-    'partners' => 'Partners'
+    'partners' => 'Partners',
+    'vehicles' => 'Vehicles',
+    'real-estate' => 'Real estate',
+    'create-vehicle' => 'Create vehicle'
 ];

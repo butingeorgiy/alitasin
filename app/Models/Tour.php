@@ -28,6 +28,9 @@ use Illuminate\Support\Carbon;
  * @property mixed region
  * @property mixed manager
  * @property mixed additions
+ * @property string|null departure_time
+ * @property string|null check_out_time
+ * @property string|null execution_period
  */
 class Tour extends Model
 {
@@ -267,5 +270,33 @@ class Tour extends Model
             'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . \App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
             [str_replace(' ', '|', $searchString)]
         )->having('frequency', '>', 0)->orderByDesc('frequency');
+    }
+
+    public function getDepartureTimeAttribute(): ?string
+    {
+        if (!$this->getOriginal('departure_time')) {
+            return null;
+        }
+
+        return Carbon::parse($this->getOriginal('departure_time'))->format('H:i');
+    }
+
+    public function getCheckOutTimeAttribute(): ?string
+    {
+        if (!$this->getOriginal('check_out_time')) {
+            return null;
+        }
+
+        return Carbon::parse($this->getOriginal('check_out_time'))->format('H:i');
+    }
+
+    public function getExecutionPeriodAttribute(): ?string
+    {
+        if (!$this->departure_time or !$this->check_out_time) {
+            return null;
+        }
+
+        return Carbon::parse($this->departure_time)->format('H:i') . ' – ' .
+            Carbon::parse($this->check_out_time)->format('H:i');
     }
 }

@@ -24,4 +24,8 @@ document.addEventListener('DOMContentLoaded', _ => {
     if (document.querySelector('#favoritesSection')) {
         SliderController.initFavoritesSlider();
     }
+
+    if (document.querySelector('#vehicleTypesSection')) {
+        SliderController.initVehicleTypesSlider();
+    }
 });

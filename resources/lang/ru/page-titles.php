@@ -7,5 +7,8 @@ return [
     'tours' => 'Экскурсии',
     'personal-client-cabinet' => 'Личный кабинет клиента',
     'reserves' => 'Брони',
-    'partners' => 'Партнёры'
+    'partners' => 'Партнёры',
+    'vehicles' => 'Транспорт',
+    'real-estate' => 'Недвижимость',
+    'create-vehicle' => 'Создать транспортное средство'
 ];

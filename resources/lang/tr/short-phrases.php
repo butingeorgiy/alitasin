@@ -141,5 +141,10 @@ return [
     'hotel-room' => 'Otel odası',
     'enter-hotel-room-number' => 'Otel odası numarasını girin',
     'location-region' => 'Konum bölgesi',
-    'select-location-region' => 'Konum bölgesini seçin'
+    'select-location-region' => 'Konum bölgesini seçin',
+    'vehicle-categories' => 'Araç kategorileri',
+    'parameters' => 'Parametreler',
+    'departure-time' => 'Hareket saati',
+    'check-out-time' => 'Kontrol zamanı',
+    'enter-time' => 'Saati girin'
 ];

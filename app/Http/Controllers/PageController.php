@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Models\Region;
 use App\Models\Tour;
+use App\Models\VehicleType;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
@@ -299,5 +301,18 @@ class PageController extends Controller
         }
 
         return view('profile.client', compact('user', 'recentViewed', 'reservedTours', 'favoriteTours'));
+    }
+
+    public function showVehicles(Request $request)
+    {
+        if (!$request->has('vehicle_type_id')) {
+            return redirect()->route('vehicles', [
+                'vehicle_type_id' => 1
+            ]);
+        }
+
+        $vehicleType = VehicleType::findOrFail($request->input('vehicle_type_id'));
+
+        return view('vehicles');
     }
 }

@@ -84,6 +84,7 @@ select::-ms-expand {
 .save-personal-info-button,
 .save-book-button,
 .save-partner-button,
+.save-vehicle-button,
 .save-tour-button {
     @apply flex justify-center py-2 text-sm text-white font-medium rounded-md cursor-pointer;
 }
@@ -104,6 +105,8 @@ select::-ms-expand {
 .update-tour-button.disabled,
 .save-tour-button.loading,
 .save-tour-button.disabled,
+.save-vehicle-button.disabled,
+.save-vehicle-button.loading,
 .save-partner-button.loading,
 .make-partner-payment-button.loading {
     @apply cursor-not-allowed opacity-60;
@@ -118,6 +121,7 @@ select::-ms-expand {
 .update-tour-button.loading .animate-spin,
 .save-partner-button.loading .animate-spin,
 .save-tour-button.loading .animate-spin,
+.save-vehicle-button.loading .animate-spin,
 .make-partner-payment-button.loading .animate-spin {
     @apply block;
 }
@@ -137,26 +141,31 @@ select::-ms-expand {
 }
 
 #createTourForm .image-item,
+#createVehicleForm .image-item,
 #editTourForm .image-item {
     @apply flex justify-center relative px-10 py-5 border-2 border-dashed border-black rounded-md cursor-pointer;
 }
 
 #createTourForm .image-item .remove-image-button,
+#createVehicleForm .image-item .remove-image-button,
 #editTourForm .image-item .remove-image-button{
     @apply hidden min-w-4 min-h-4 w-4 h-4 absolute -top-3 -right-1 text-red-500;
 }
 
 #createTourForm .image-item.filled,
+#createVehicleForm .image-item.filled,
 #editTourForm .image-item.filled {
     @apply border-none bg-cover bg-center bg-no-repeat;
 }
 
 #createTourForm .image-item.filled .empty,
+#createVehicleForm .image-item.filled .empty,
 #editTourForm .image-item.filled .empty {
     @apply opacity-0;
 }
 
 #createTourForm .image-item.filled .remove-image-button,
+#createVehicleForm .image-item.filled .remove-image-button,
 #editTourForm .image-item.filled .remove-image-button {
     @apply block;
 }

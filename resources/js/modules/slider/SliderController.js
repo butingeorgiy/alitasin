@@ -68,6 +68,16 @@ class SliderController {
             }
         });
     }
+
+    static initVehicleTypesSlider() {
+        new Swiper('#vehicleTypesSection .swiper-container', {
+            spaceBetween: 16,
+            slidesPerView: 'auto',
+            mousewheel: {
+                releaseOnEdges: true
+            }
+        });
+    }
 }
 
 export default SliderController;

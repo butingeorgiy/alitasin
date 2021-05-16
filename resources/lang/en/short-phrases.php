@@ -141,5 +141,10 @@ return [
     'hotel-room' => 'Hotel room',
     'enter-hotel-room-number' => 'Enter hotel room number',
     'location-region' => 'Location region',
-    'select-location-region' => 'Select location region'
+    'select-location-region' => 'Select location region',
+    'vehicle-categories' => 'Vehicle categories',
+    'parameters' => 'Parameters',
+    'departure-time' => 'Departure time',
+    'check-out-time' => 'Check out time',
+    'enter-time' => 'Enter time'
 ];
