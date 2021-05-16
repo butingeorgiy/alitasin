@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static VehicleType findOrFail(int|string|null $input)
+ * @method static VehicleType find(int|string|null $input)
  */
 class VehicleType extends Model
 {

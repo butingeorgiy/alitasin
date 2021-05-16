@@ -18,17 +18,17 @@
 
         <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
             <input type="text" name="en_value" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.en-description') . ' (' . __('short-phrases.unnecessary') . ')' }}">
+                   placeholder="{{ __('short-phrases.en-description') }}">
         </label>
 
         <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
             <input type="text" name="ru_value" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.ru-description') . ' (' . __('short-phrases.unnecessary') . ')' }}">
+                   placeholder="{{ __('short-phrases.ru-description') }}">
         </label>
 
         <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
             <input type="text" name="tr_value" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.tr-description') . ' (' . __('short-phrases.unnecessary') . ')' }}">
+                   placeholder="{{ __('short-phrases.tr-description') }}">
         </label>
 
         <div class="error-message hidden flex items-center mt-6 px-4 py-3 text-red-600 font-medium bg-red-200 rounded-md">

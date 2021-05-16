@@ -146,5 +146,14 @@ return [
     'parameters' => 'Parameters',
     'departure-time' => 'Departure time',
     'check-out-time' => 'Check out time',
-    'enter-time' => 'Enter time'
+    'enter-time' => 'Enter time',
+    'brand-name' => 'Brand name',
+    'model-name' => 'Model name',
+    'price-per-day' => 'Price per day',
+    'enter-price' => 'Enter price',
+    'vehicle-type' => 'Vehicle type',
+    'choose-vehicle-type' => 'Choose vehicle type',
+    'is-show-at-index-page' => 'Should show at index page?',
+    'yes' => 'Yes',
+    'no' => 'No'
 ];

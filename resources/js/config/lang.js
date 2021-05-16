@@ -66,6 +66,11 @@ const langConfig = {
             'en': 'Choose parameter',
             'ru': 'Выберите параметр',
             'tr': 'Parametre seçin',
+        },
+        'not-all-fields-filled': {
+            'en': 'Not all fields filled',
+            'ru': 'Не все поля заполнены',
+            'tr': 'Tüm alanlar doldurulmadı'
         }
     }
 };

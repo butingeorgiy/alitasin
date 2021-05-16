@@ -47,7 +47,7 @@
 
     <section id="vehicleSection" class="pb-10">
         <div class="container flex flex-col mx-auto px-5">
-            @foreach([1, 2, 3, 4] as $vehicle)
+            @forelse([] as $vehicle)
                 <div class="grid grid-cols-12 mb-5 last:mb-0 bg-gray-1200 rounded-md shadow">
                     <div class="col-span-full lg:col-span-5 flex flex-col items-center px-8 sm:px-16 pt-8 sm:pt-12 lg:pb-4 lg:border-r border-gray-1300">
                         <div class="w-full h-44 mb-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/vehicle-image.png') }})"></div>
@@ -71,7 +71,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <p>{{ __('short-phrases.empty-list') }}</p>
+            @endforelse
         </div>
     </section>
 
