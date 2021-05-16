@@ -141,5 +141,10 @@ return [
     'hotel-room' => 'Номер в отеле',
     'enter-hotel-room-number' => 'Введите номер комнаты в отеле',
     'location-region' => 'Регион нахождения',
-    'select-location-region' => 'Выберите регион нахождения'
+    'select-location-region' => 'Выберите регион нахождения',
+    'vehicle-categories' => 'Категории транспорта',
+    'parameters' => 'Параметры',
+    'departure-time' => 'Время отъезда',
+    'check-out-time' => 'Время выезда',
+    'enter-time' => 'Введите время'
 ];

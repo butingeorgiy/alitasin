@@ -20,7 +20,7 @@
             <div class="grid grid-cols-5 gap-5">
                 <?php
                 /**
-                 * @var $tour
+                 * @var App\Models\Tour $tour
                  */
 
                 $images = $tour->images->sortByDesc('is_main')->values();
@@ -216,6 +216,26 @@
                         <option selected>{{ $item }}</option>
                     @endforeach
                 </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 mt-6">
+            <div>
+                <p class="mb-2 font-semibold">{{ __('short-phrases.departure-time') }}</p>
+                <input type="text"
+                       name="departure_time"
+                       value="{{ $tour->departure_time }}"
+                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                       placeholder="{{ __('short-phrases.enter-time') }}">
+            </div>
+
+            <div>
+                <p class="mb-2 font-semibold">{{ __('short-phrases.check-out-time') }}</p>
+                <input type="text"
+                       name="check_out_time"
+                       value="{{ $tour->check_out_time }}"
+                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                       placeholder="{{ __('short-phrases.enter-time') }}">
             </div>
         </div>
 

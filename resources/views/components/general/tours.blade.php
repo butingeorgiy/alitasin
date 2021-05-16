@@ -2,12 +2,38 @@
 
 @if($isAdmin)
     <div class="mt-10 -mb-10 border-b border-gray-200">
-        <div class="container flex items-center mx-auto px-5 pb-5">
-            <a href="{{ route('partners') }}" class="mr-5 inline text-black text-2xl font-bold text-black">{{ __('short-phrases.partners') }}</a>
-            <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#231F20" stroke-width="4"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="container flex mx-auto px-5 pb-5">
+{{--            <a href="#" class="flex flex items-center mr-16 group">--}}
+{{--                <span class="mr-4 inline text-blue text-2xl font-medium group-hover:underline">Регионы</span>--}}
+{{--                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"--}}
+{{--                          stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                </svg>--}}
+{{--            </a>--}}
+
+            <a href="{{ route('partners') }}" class="flex flex items-center mr-16 group">
+                <span class="mr-4 inline text-blue text-2xl font-medium group-hover:underline">{{ __('short-phrases.partners') }}</span>
+                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <a href="{{ route('create-vehicle') }}" class="flex flex items-center mr-16 group">
+                <span class="mr-4 inline text-blue text-2xl font-medium group-hover:underline">Добавить ТС</span>
+                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+{{--            <a href="#" class="flex flex items-center group">--}}
+{{--                <span class="mr-4 inline text-blue text-2xl font-medium group-hover:underline">Недвижимость</span>--}}
+{{--                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"--}}
+{{--                          stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                </svg>--}}
+{{--            </a>--}}
         </div>
     </div>
 @endif

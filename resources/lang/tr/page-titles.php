@@ -7,5 +7,8 @@ return [
     'tours' => 'Gezi',
     'personal-client-cabinet' => 'Kişisel müşteri dolabı',
     'reserves' => 'Rezervler',
-    'partners' => 'Ortaklar'
+    'partners' => 'Ortaklar',
+    'vehicles' => 'Araçlar',
+    'real-estate' => 'Emlak',
+    'create-vehicle' => 'Araç oluştur'
 ];

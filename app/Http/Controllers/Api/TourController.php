@@ -334,6 +334,28 @@ class TourController extends Controller
             $tour->additions()->detach();
         }
 
+        if ($request->has('departure_time')) {
+            if (
+                preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $request->input('departure_time')) !== 1 and
+                $request->input('departure_time')
+            ) {
+                throw new Exception(__('messages.time-invalid'));
+            }
+
+            $tour->departure_time = $request->input('departure_time');
+        }
+
+        if ($request->has('check_out_time')) {
+            if (
+                preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $request->input('check_out_time')) !== 1 and
+                $request->input('check_out_time')
+            ) {
+                throw new Exception(__('messages.time-invalid'));
+            }
+
+            $tour->check_out_time = $request->input('check_out_time');
+        }
+
         if ($tour->save()) {
             return [
                 'message' => __('messages.updating-success')

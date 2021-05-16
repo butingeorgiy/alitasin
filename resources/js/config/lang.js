@@ -61,6 +61,11 @@ const langConfig = {
             'en': 'Choose addition',
             'ru': 'Выберите дополнение',
             'tr': 'Eklemeyi seçin'
+        },
+        'choose-param': {
+            'en': 'Choose parameter',
+            'ru': 'Выберите параметр',
+            'tr': 'Parametre seçin',
         }
     }
 };

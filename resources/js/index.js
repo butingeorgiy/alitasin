@@ -12,3 +12,4 @@ import './modules/favorites';
 import './modules/mobileMenu';
 import './modules/createPartner';
 import './modules/partnerList';
+import './modules/createVehicle';

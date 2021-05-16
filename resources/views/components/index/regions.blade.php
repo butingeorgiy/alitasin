@@ -3,7 +3,8 @@
         <p class="mb-2 sm:mb-4 lg:text-center text-black text-2xl font-bold text-black">{{ $title }}<span class="text-blue">.</span></p>
         <div class="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($regions as $region)
-                <a href="{{ route('region', $region->id) }}" class="region-card relative top-0 flex justify-center items-center text-white text-3xl font-bold tracking-wide bg-center bg-cover bg-no-repeat rounded-md duration-300 hover:shadow-xl"
+                <a href="{{ route('region', $region->id) }}" class="region-card relative top-0 flex justify-center items-center text-white text-3xl
+                   font-bold tracking-wide bg-center bg-cover bg-no-repeat rounded-md duration-300 hover:shadow-xl"
                    style="height: 180px; background-image: url({{ $region->image }})">
                     {{ $region->name }}
                 </a>
