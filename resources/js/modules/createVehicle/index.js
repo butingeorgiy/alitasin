@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', _ => {
             success: form.querySelector('.success-message'),
             saveVehicleButton,
             paramPopup: document.querySelector('#parameterPopup'),
-            openAdditionPopupButtons: form.querySelectorAll('.open-param-popup-button'),
+            openParamPopupButton: form.querySelector('.open-param-popup-button'),
             paramsContainer: form.querySelector('.params-container')
         });
 
         // Image boxes initialization
-        const imageItems = document.querySelectorAll('#createTourForm .image-item');
+        const imageItems = document.querySelectorAll('#createVehicleForm .image-item');
 
         if (imageItems.length !== 0) {
             controller.initImageBoxes(imageItems);

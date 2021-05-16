@@ -70,28 +70,51 @@
         </div>
 
         <div class="mt-12">
-            <p class="mb-2 font-semibold">Название бренда</p>
+            <p class="mb-2 font-semibold">{{ __('short-phrases.brand-name') }}</p>
             <input type="text"
-                   name="en_title"
+                   name="brand"
                    class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                    maxlength="256"
-                   placeholder="{{ __('short-phrases.max-allowed-characters') }} - 128">
+                   placeholder="{{ __('short-phrases.max-allowed-characters') }} - 64">
 
-            <p class="mb-2 font-semibold">Название модели</p>
+            <p class="mb-2 font-semibold">{{ __('short-phrases.model-name') }}</p>
             <input type="text"
-                   name="en_title"
+                   name="model"
                    class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                    maxlength="256"
-                   placeholder="{{ __('short-phrases.max-allowed-characters') }} - 128">
+                   placeholder="{{ __('short-phrases.max-allowed-characters') }} - 64">
 
             <p class="mb-2 font-semibold">{{ __('short-phrases.region') }}</p>
             <select name="region_id"
-                    class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
+                    class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
                 <option value="">{{ __('short-phrases.choose-region') }}</option>
                 @foreach(\App\Models\Region::all() as $region)
                     <option value="{{ $region->id }}">{{ $region->name }}</option>
                 @endforeach
             </select>
+
+            <p class="mb-2 font-semibold">{{ __('short-phrases.vehicle-type') }}</p>
+            <select name="vehicle_type_id"
+                    class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
+                <option value="">{{ __('short-phrases.choose-vehicle-type') }}</option>
+                @foreach(\App\Models\VehicleType::all() as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+
+            <p class="mb-2 font-semibold">{{ __('short-phrases.is-show-at-index-page') }}</p>
+            <select name="show_at_index_page"
+                    class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md cursor-pointer">
+                <option value="0">{{ __('short-phrases.no') }}</option>
+                <option value="1">{{ __('short-phrases.yes') }}</option>
+            </select>
+
+            <p class="mb-2 font-semibold">{{ __('short-phrases.price-per-day') }}, $</p>
+            <input type="text"
+                   name="cost"
+                   class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                   maxlength="256"
+                   placeholder="{{ __('short-phrases.enter-price') }}">
         </div>
 
         <div class="grid grid-cols-2 gap-5 mt-12">
@@ -137,7 +160,6 @@
     </form>
 </div>
 
-@include('popups.addition')
-
+@include('popups.parameter')
 </body>
 </html>

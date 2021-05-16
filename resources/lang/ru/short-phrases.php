@@ -146,5 +146,14 @@ return [
     'parameters' => 'Параметры',
     'departure-time' => 'Время отъезда',
     'check-out-time' => 'Время выезда',
-    'enter-time' => 'Введите время'
+    'enter-time' => 'Введите время',
+    'brand-name' => 'Название бренда',
+    'model-name' => 'Название модели',
+    'price-per-day' => 'Цена за сутки',
+    'enter-price' => 'Введите цену',
+    'vehicle-type' => 'Тип ТС',
+    'choose-vehicle-type' => 'Выберите тип ТС',
+    'is-show-at-index-page' => 'Отображать на главной странице?',
+    'yes' => 'Да',
+    'no' => 'Нет'
 ];

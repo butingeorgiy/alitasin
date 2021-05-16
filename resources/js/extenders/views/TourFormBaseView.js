@@ -6,8 +6,10 @@ class TourFormBaseView {
         this.success = nodes.success;
         this.btn = nodes.btn;
         this.additionPopupError = nodes.additionPopupError;
+        this.paramPopupError = nodes.paramPopupError;
         this.includesAdditionsContainer = nodes.includesAdditionsContainer;
         this.notIncludesAdditionsContainer = nodes.notIncludesAdditionsContainer;
+        this.paramsContainer = nodes.paramsContainer;
     }
 
     static renderImage(node, image) {
@@ -51,12 +53,22 @@ class TourFormBaseView {
 
     showAdditionPopupError(msg) {
         this.additionPopupError.classList.remove('hidden');
-        this.additionPopupError.querySelector('span').innerText = msg;
+        this.additionPopupError.querySelector('span').innerText = msg + '!';
+    }
+
+    showParamPopupError(msg) {
+        this.paramPopupError.classList.remove('hidden');
+        this.paramPopupError.querySelector('span').innerText = msg + '!';
     }
 
     hideAdditionPopupError() {
         this.additionPopupError.classList.add('hidden');
         this.additionPopupError.querySelector('span').innerText = '';
+    }
+
+    hideParamPopupError() {
+        this.paramPopupError.classList.add('hidden');
+        this.paramPopupError.querySelector('span').innerText = '';
     }
 
     renderAdditions(additions, dettachAdditionHandler, editAdditionHandler) {
@@ -136,6 +148,56 @@ class TourFormBaseView {
 
         if (notIncludeCount === 0) {
             this.notIncludesAdditionsContainer.innerHTML = `
+                <p class="text-sm text-black font-light italic">${LocaleHelper.translate('empty-list')}</p>
+            `;
+        }
+    }
+
+    renderParams(params, dettachParamHandler, editParamHandler) {
+        let count = 0;
+
+        this.paramsContainer.innerHTML = '';
+
+        params.forEach(param => {
+            let paramNode = document.createElement('div'), icon = '';
+
+            paramNode.className = 'flex items-start ml-2 mb-3 last:mb-0';
+            count++;
+            icon = `
+                <svg class="relative top-1 min-w-4 w-4 mr-3" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.7319 0.295798C13.639 0.20207 13.5284 0.127675 13.4065 0.0769067C13.2846 0.026138 13.1539 0 13.0219 0C12.8899 0 12.7592 0.026138
+                          12.6373 0.0769067C12.5155 0.127675 12.4049 0.20207 12.3119 0.295798L4.86192 7.7558L1.73192 4.6158C1.6354 4.52256 1.52146 4.44925 1.3966
+                          4.40004C1.27175 4.35084 1.13843 4.32671 1.00424 4.32903C0.870064 4.33135 0.737655 4.36008 0.614576 4.41357C0.491498 4.46706 0.380161
+                          4.54428 0.286922 4.6408C0.193684 4.73732 0.12037 4.85126 0.0711659 4.97612C0.0219619 5.10097 -0.00216855 5.2343 0.000152918 5.36848C0.00247438
+                          5.50266 0.0312022 5.63507 0.0846957 5.75814C0.138189 5.88122 0.215401 5.99256 0.311922 6.0858L4.15192 9.9258C4.24489 10.0195 4.35549 10.0939
+                          4.47735 10.1447C4.59921 10.1955 4.72991 10.2216 4.86192 10.2216C4.99393 10.2216 5.12464 10.1955 5.2465 10.1447C5.36836 10.0939 5.47896
+                          10.0195 5.57192 9.9258L13.7319 1.7658C13.8334 1.67216 13.9144 1.5585 13.9698 1.432C14.0252 1.30551 14.0539 1.1689 14.0539 1.0308C14.0539
+                          0.892697 14.0252 0.756092 13.9698 0.629592C13.9144 0.503092 13.8334 0.389441 13.7319 0.295798V0.295798Z" fill="#0094FF"/>
+                </svg>
+            `;
+
+            paramNode.innerHTML = `
+                ${icon}
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <p class="mr-5 text-black font-medium">${param.title}</p>
+                        <span class="edit-param-button mr-2 text-sm text-gray-500 cursor-pointer whitespace-nowrap hover:underline">${LocaleHelper.translate('edit')}</span>
+                        <span class="dettach-param-button text-sm text-red-500 cursor-pointer whitespace-nowrap hover:underline">${LocaleHelper.translate('delete')}</span>
+                    </div>
+                    <p class="text-sm text-gray-400 italic">En:&nbsp;&nbsp;${param.en_value || 'Ничего не указано'}</p>
+                    <p class="text-sm text-gray-400 italic">Ru:&nbsp;&nbsp;${param.ru_value || 'Ничего не указано'}</p>
+                    <p class="text-sm text-gray-400 italic">Tr:&nbsp;&nbsp;${param.tr_value || 'Ничего не указано'}</p>
+                </div>
+            `;
+
+            dettachParamHandler(paramNode.querySelector('.dettach-param-button'), param.id);
+            editParamHandler(paramNode.querySelector('.edit-param-button'), param);
+
+            this.paramsContainer.append(paramNode);
+        });
+
+        if (count === 0) {
+            this.paramsContainer.innerHTML = `
                 <p class="text-sm text-black font-light italic">${LocaleHelper.translate('empty-list')}</p>
             `;
         }

@@ -68,7 +68,7 @@ class CreateTourController extends TourFormBaseController {
         const durationSelect = form.querySelector('select[name="duration-mode"]');
 
         if (durationInput && durationSelect) {
-            formData.append('duration', durationInput.value ? `${durationInput.value}~${durationSelect.value}` : '')
+            formData.append('duration', durationInput.value ? `${durationInput.value}~${durationSelect.value}` : '');
         }
 
         CreateTourModel.create(formData)

@@ -6,14 +6,20 @@ import PopupObserver from '../../observers/PopupObserver';
 class TourFormBaseController extends EventHandler {
     constructor(nodes) {
         super();
-        this.nodes = {
-            ...nodes,
-            attachAdditionButton: nodes.additionPopup.querySelector('.save-addition-button'),
-            attachParameterButton: nodes.additionPopup.querySelector('.save-parameter-button'),
-        };
-        this.additions = [];
+        this.nodes = nodes;
 
-        if (this.nodes.attachAdditionButton) {
+        if (nodes?.additionPopup) {
+            this.nodes.attachAdditionButton = nodes.additionPopup.querySelector('.save-addition-button');
+        }
+
+        if (nodes?.paramPopup) {
+            this.nodes.attachParameterButton = nodes.paramPopup.querySelector('.save-parameter-button');
+        }
+
+        this.additions = [];
+        this.params = [];
+
+        if (this.nodes?.attachAdditionButton) {
             this.initAdditionPopup();
 
             this.nodes.openAdditionPopupButtons.forEach(buttonNode => {
@@ -23,8 +29,12 @@ class TourFormBaseController extends EventHandler {
             });
         }
 
-        if (this.nodes.attachParameterButton) {
+        if (this.nodes?.attachParameterButton) {
             this.initParamsPopup();
+
+            this.addEvent(this.nodes.openParamPopupButton, 'click', _ => {
+                this.paramPopup.open(_ => this.beforeParamPopupOpenHandler());
+            });
         }
     }
 
@@ -55,15 +65,19 @@ class TourFormBaseController extends EventHandler {
 
     afterParamPopupCloseHandler() {
         this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value = '';
-        this.nodes.paramPopup.querySelector('input[name="en_description"]').value = '';
-        this.nodes.paramPopup.querySelector('input[name="ru_description"]').value = '';
-        this.nodes.paramPopup.querySelector('input[name="tr_description"]').value = '';
-        this.view.hideAdditionPopupError();
+        this.nodes.paramPopup.querySelector('input[name="en_value"]').value = '';
+        this.nodes.paramPopup.querySelector('input[name="ru_value"]').value = '';
+        this.nodes.paramPopup.querySelector('input[name="tr_value"]').value = '';
+        this.view.hideParamPopupError();
         this.removeAllListeners(this.nodes.attachParameterButton, 'click');
     }
 
     beforeAdditionPopupOpenHandler(isInclude) {
         this.addEvent(this.nodes.attachAdditionButton, 'click', _ => this.attachAddition(isInclude));
+    }
+
+    beforeParamPopupOpenHandler() {
+        this.addEvent(this.nodes.attachParameterButton, 'click', _ => this.attachParam());
     }
 
     attachAddition(isInclude) {
@@ -109,54 +123,59 @@ class TourFormBaseController extends EventHandler {
         this.additionPopup.close(_ => this.afterAdditionPopupCloseHandler());
         this.view.renderAdditions(
             this.additions,
-            (buttonNode, additionId) => this.dettachAdditionHandler(buttonNode, additionId),
-            (buttonNode, addition) => this.editAdditionHandler(buttonNode, addition)
+            (buttonNode, paramId) => this.dettachAdditionHandler(buttonNode, paramId),
+            (buttonNode, param) => this.editAdditionHandler(buttonNode, param)
         );
     }
 
     attachParam() {
-        this.view.hideAdditionPopupError();
+        this.view.hideParamPopupError();
 
         if (this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value === '') {
-            this.view.showAdditionPopupError(LocaleHelper.translate('choose-param'));
+            this.view.showParamPopupError(LocaleHelper.translate('choose-param'));
             return;
         }
 
         let id = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[0],
             title = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[1],
-            en_description = this.nodes.paramPopup.querySelector('input[name="en_description"]').value,
-            ru_description = this.nodes.paramPopup.querySelector('input[name="ru_description"]').value,
-            tr_description = this.nodes.paramPopup.querySelector('input[name="tr_description"]').value,
+            en_value = this.nodes.paramPopup.querySelector('input[name="en_value"]').value,
+            ru_value = this.nodes.paramPopup.querySelector('input[name="ru_value"]').value,
+            tr_value = this.nodes.paramPopup.querySelector('input[name="tr_value"]').value,
             needToCreate = true;
 
+        if (!en_value || !ru_value || !tr_value) {
+            this.view.showParamPopupError(LocaleHelper.translate('not-all-fields-filled'));
+            return;
+        }
+
         // Check if this addition already attached
-        this.additions.forEach((item, index) => {
+        this.params.forEach((item, index) => {
             if (item.id === id) {
                 needToCreate = false;
-                this.additions[index] = {
+                this.params[index] = {
                     ...item,
-                    en_description,
-                    ru_description,
-                    tr_description
+                    en_value,
+                    ru_value,
+                    tr_value
                 };
             }
         });
 
         if (needToCreate) {
-            this.additions.push({
+            this.params.push({
                 id,
                 title,
-                en_description,
-                ru_description,
-                tr_description
+                en_value,
+                ru_value,
+                tr_value
             });
         }
 
-        this.additionPopup.close(_ => this.afterAdditionPopupCloseHandler());
-        this.view.renderAdditions(
-            this.additions,
-            (buttonNode, additionId) => this.dettachAdditionHandler(buttonNode, additionId),
-            (buttonNode, addition) => this.editAdditionHandler(buttonNode, addition)
+        this.paramPopup.close(_ => this.afterParamPopupCloseHandler());
+        this.view.renderParams(
+            this.params,
+            (buttonNode, additionId) => this.dettachParamHandler(buttonNode, additionId),
+            (buttonNode, addition) => this.editParamHandler(buttonNode, addition)
         );
     }
 
@@ -176,6 +195,22 @@ class TourFormBaseController extends EventHandler {
         });
     }
 
+    dettachParamHandler(buttonNode, paramId) {
+        this.addEvent(buttonNode, 'click', _ => {
+            this.params.forEach(item => {
+                if (item.id === paramId) {
+                    this.params.splice(this.params.indexOf(item), 1);
+                }
+            });
+
+            this.view.renderParams(
+                this.params,
+                (buttonNode, paramId) => this.dettachParamHandler(buttonNode, paramId),
+                (buttonNode, param) => this.editParamHandler(buttonNode, param)
+            );
+        });
+    }
+
     editAdditionHandler(buttonNode, addition) {
         this.addEvent(buttonNode, 'click', _ => {
             this.additionPopup.open(_ => {
@@ -184,6 +219,18 @@ class TourFormBaseController extends EventHandler {
                 this.nodes.additionPopup.querySelector('input[name="ru_description"]').value = addition.ru_description;
                 this.nodes.additionPopup.querySelector('input[name="tr_description"]').value = addition.tr_description;
                 this.addEvent(this.nodes.attachAdditionButton, 'click', _ => this.attachAddition(addition.is_include));
+            });
+        });
+    }
+
+    editParamHandler(buttonNode, param) {
+        this.addEvent(buttonNode, 'click', _ => {
+            this.paramPopup.open(_ => {
+                this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value = `${param.id}~${param.title}`;
+                this.nodes.paramPopup.querySelector('input[name="en_value"]').value = param.en_value;
+                this.nodes.paramPopup.querySelector('input[name="ru_value"]').value = param.ru_value;
+                this.nodes.paramPopup.querySelector('input[name="tr_value"]').value = param.tr_value;
+                this.addEvent(this.nodes.attachParameterButton, 'click', _ => this.attachParam());
             });
         });
     }

@@ -146,5 +146,14 @@ return [
     'parameters' => 'Parametreler',
     'departure-time' => 'Hareket saati',
     'check-out-time' => 'Kontrol zamanı',
-    'enter-time' => 'Saati girin'
+    'enter-time' => 'Saati girin',
+    'brand-name' => 'Marka adı',
+    'model-name' => 'Model adı',
+    'price-per-day' => 'Günlük fiyat',
+    'enter-price' => 'Fiyat girin',
+    'vehicle-type' => 'Araç tipi',
+    'choose-vehicle-type' => 'Araç tipini seçin',
+    'is-show-at-index-page' => 'Dizin sayfasında gösterilmeli?',
+    'yes' => 'Evet',
+    'no' => 'Hayır'
 ];
