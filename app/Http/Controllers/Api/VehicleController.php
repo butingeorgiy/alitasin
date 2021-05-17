@@ -98,7 +98,7 @@ class VehicleController extends Controller
                 }
             }
 
-            $tourImages[] = new VehicleImage([
+            $vehicleImages[] = new VehicleImage([
                 'image' => $name,
                 'is_main' => $i === 0 ? '1' : '0'
             ]);
@@ -110,6 +110,10 @@ class VehicleController extends Controller
         }
 
         $vehicle->images()->saveMany($vehicleImages);
+
+        if (isset($params)) {
+            $vehicle->params()->attach($params);
+        }
 
         return [
             'status' => true,

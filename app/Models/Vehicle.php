@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,10 +12,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $model
  * @property string $show_at_index_page
  * @property int $cost
+ * @property VehicleImage[] images
  */
 class Vehicle extends Model
 {
     public $timestamps = false;
+
+    protected $guarded = [];
 
 
     /**
@@ -38,6 +42,21 @@ class Vehicle extends Model
     }
 
     /**
+     * Get vehicle's params
+     *
+     * @return BelongsToMany
+     */
+    public function params(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            VehicleParam::class,
+            'vehicle_has_param',
+            'vehicle_id',
+            'vehicle_param_id'
+        )->withPivot(\App::getLocale() . '_value');
+    }
+
+    /**
      * Need to show at index page
      *
      * @return bool
@@ -45,5 +64,24 @@ class Vehicle extends Model
     public function isShowAtIndexPage(): bool
     {
         return $this->show_at_index_page === '1';
+    }
+
+    /**
+     * Get vehicle's main image
+     *
+     * @return string|null
+     */
+    public function getMainImageAttribute(): ?string
+    {
+        foreach ($this->images as $image) {
+            if ($image->isMain()) {
+                return route('get-image', [
+                    'dir' => 'vehicle_pictures',
+                    'file' => $image->image
+                ]);
+            }
+        }
+
+        return null;
     }
 }

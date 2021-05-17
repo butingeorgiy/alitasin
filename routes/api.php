@@ -29,6 +29,10 @@ Route::group(['prefix' => 'tours'], function () {
     Route::post('toggle-favorite/{tourId}', 'Api\TourController@toggleFavorite')->middleware('auth:1');
 });
 
+Route::group(['prefix' => 'vehicles'], function() {
+    Route::post('create', 'Api\VehicleController@create')->middleware('auth:5');
+});
+
 Route::group(['prefix' => 'reserves'], function () {
     Route::post('/update/{reservationId}/status', 'Api\ReservationController@updateStatus')->middleware('auth:4');
 });

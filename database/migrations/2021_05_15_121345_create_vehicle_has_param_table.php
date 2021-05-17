@@ -16,6 +16,7 @@ class CreateVehicleHasParamTable extends Migration
         Schema::create('vehicle_has_param', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vehicle_id')->unsigned();
+            $table->integer('vehicle_param_id')->unsigned();
             $table->string('en_value', 128);
             $table->string('ru_value', 128);
             $table->string('tr_value', 128);
@@ -24,6 +25,10 @@ class CreateVehicleHasParamTable extends Migration
             $table->foreign('vehicle_id')
                 ->references('id')
                 ->on('vehicles');
+
+            $table->foreign('vehicle_param_id')
+                ->references('id')
+                ->on('vehicle_params');
         });
     }
 

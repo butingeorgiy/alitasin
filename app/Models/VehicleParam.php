@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleParam extends Model
 {
+    public $timestamps = false;
+
+    protected $guarded = [];
+
+
     /**
      * Get name
      *

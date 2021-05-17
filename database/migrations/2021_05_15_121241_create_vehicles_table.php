@@ -19,12 +19,17 @@ class CreateVehiclesTable extends Migration
             $table->enum('show_at_index_page', ['0', '1']);
             $table->string('brand', 64);
             $table->string('model', 64);
+            $table->integer('region_id')->unsigned();
             $table->integer('cost')->unsigned();
 
 
             $table->foreign('type_id')
                 ->references('id')
                 ->on('vehicle_types');
+
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions');
         });
     }
 
