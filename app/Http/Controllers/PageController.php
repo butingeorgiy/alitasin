@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Models\Region;
 use App\Models\Tour;
+use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -311,8 +312,12 @@ class PageController extends Controller
             ]);
         }
 
-        $vehicleType = VehicleType::findOrFail($request->input('vehicle_type_id'));
+        if (!VehicleType::find($request->input('vehicle_type_id'))) {
+            abort(404);
+        }
 
-        return view('vehicles');
+        $vehicles = Vehicle::where('type_id', $request->input('vehicle_type_id'))->get();
+
+        return view('vehicles', compact('vehicles'));
     }
 }

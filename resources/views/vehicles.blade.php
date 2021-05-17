@@ -47,26 +47,21 @@
 
     <section id="vehicleSection" class="pb-10">
         <div class="container flex flex-col mx-auto px-5">
-            @forelse([] as $vehicle)
+            @forelse($vehicles as $vehicle)
                 <div class="grid grid-cols-12 mb-5 last:mb-0 bg-gray-1200 rounded-md shadow">
                     <div class="col-span-full lg:col-span-5 flex flex-col items-center px-8 sm:px-16 pt-8 sm:pt-12 lg:pb-4 lg:border-r border-gray-1300">
-                        <div class="w-full h-44 mb-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/vehicle-image.png') }})"></div>
-                        <p class="mt-auto text-sm text-gray-500 hover:underline cursor-pointer">{{ __('buttons.show-all') }}</p>
+                        <div class="w-full h-44 mb-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ $vehicle->main_image }})"></div>
+{{--                        <p class="mt-auto text-sm text-gray-500 hover:underline cursor-pointer">{{ __('buttons.show-all') }}</p>--}}
                     </div>
                     <div class="col-span-full lg:col-span-7 flex flex-col px-6 sm:px-8 py-6">
-                        <p class="mb-4 text-2xl text-black font-medium">Audi A7&nbsp;<span class="text-gray-600">55 TFSI quattro S tronic</span></p>
+                        <p class="mb-4 text-2xl text-black font-medium">{{ $vehicle->brand }}&nbsp;<span class="text-gray-600">{{ $vehicle->model }}</span></p>
                         <div class="flex flex-wrap mb-auto">
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Тип двигателя:&nbsp;<span class="text-black font-semibold">Бензиновый</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Объём двигателя:&nbsp;<span class="text-black font-semibold">2995 см3</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Максимальная скорость:&nbsp;<span class="text-black font-semibold">250 км/ч</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Тип двигателя:&nbsp;<span class="text-black font-semibold">Бензиновый</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Тип двигателя:&nbsp;<span class="text-black font-semibold">Бензиновый</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Тип двигателя:&nbsp;<span class="text-black font-semibold">Бензиновый</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Тип двигателя:&nbsp;<span class="text-black font-semibold">Бензиновый</span></p>
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">Тип двигателя:&nbsp;<span class="text-black font-semibold">Бензиновый</span></p>
+                            @foreach($vehicle->params as $param)
+                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">{{ $param->name }}:&nbsp;<span class="text-black font-semibold">{{ $param->pivot[App::getLocale() . '_value'] }}</span></p>
+                            @endforeach
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mt-5">
-                            <p class="mb-2 sm:mb-0 text-xl text-black font-medium">$ 150&nbsp;<span class="text-gray-600">/ {{ __('short-phrases.day') }}</span></p>
+                            <p class="mb-2 sm:mb-0 text-xl text-black font-medium">$ {{ $vehicle->cost }}&nbsp;<span class="text-gray-600">/ {{ __('short-phrases.day') }}</span></p>
                             <div class="px-16 py-2 text-white text-center text-semibold bg-black rounded cursor-pointer">Заказать</div>
                         </div>
                     </div>
