@@ -44,7 +44,7 @@
                                    placeholder="{{ __('short-phrases.if-have') }}"
                                    class="w-full text-sm text-gray-400 placeholder-gray-400">
                             <span
-                                class="check-promo-code-button text-sm text-blue cursor-pointer whitespace-nowrap hover:underline">{{ __('buttons.accept') }}</span>
+                                class="check-promo-code-button text-sm text-blue font-medium cursor-pointer whitespace-nowrap hover:underline">{{ __('buttons.accept') }}</span>
                             <span class="active hidden text-sm text-green-500 whitespace-nowrap"></span>
                             <span
                                 class="reset-button hidden ml-2 text-sm text-red cursor-pointer hover:underline">{{ __('buttons.reset') }}</span>
