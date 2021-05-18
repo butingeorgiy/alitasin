@@ -213,7 +213,7 @@
                         </svg>
                         Telegram
                     </a>
-                    <a href="#" class="flex justify-center items-center py-2 text-white font-semibold rounded-md"
+                    <a href="viber://add?number=905350303054" class="flex justify-center items-center py-2 text-white font-semibold rounded-md"
                        style="background-color: #7527F5">
                         <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 29 29" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
