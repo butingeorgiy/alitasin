@@ -25,7 +25,7 @@
                     </label>
 
                     <label class="flex flex-col col-span-1">
-                        <span class="mb-1 font-semibold">{{ __('short-phrases.location-region') }}</span>
+                        <span class="mb-1 font-semibold">{{ __('short-phrases.location-region') . ' (' .__('short-phrases.unnecessary') . ')' }}</span>
                         <select name="region_id"
                                 class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md cursor-pointer">
                             <option value="">{{ __('short-phrases.select-location-region') }}</option>
@@ -44,7 +44,7 @@
                                    placeholder="{{ __('short-phrases.if-have') }}"
                                    class="w-full text-sm text-gray-400 placeholder-gray-400">
                             <span
-                                class="check-promo-code-button text-sm text-blue font-medium cursor-pointer whitespace-nowrap hover:underline">{{ __('buttons.accept') }}</span>
+                                class="check-promo-code-button text-sm text-blue font-semibold cursor-pointer whitespace-nowrap hover:underline">{{ __('buttons.accept') }}</span>
                             <span class="active hidden text-sm text-green-500 whitespace-nowrap"></span>
                             <span
                                 class="reset-button hidden ml-2 text-sm text-red cursor-pointer hover:underline">{{ __('buttons.reset') }}</span>
