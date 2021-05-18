@@ -2,6 +2,9 @@
     <div class="container flex items-center mx-auto px-5 py-4">
         <a href="{{ request()->is('admin/*') ? route('admin-index') : route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
         <div class="hidden sm:flex items-center">
+            <div class="relative flex flex-wrap">
+
+            </div>
             <a href="/#toursSection" class="mr-8 text-black hover:underline">{{ __('short-phrases.tours') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-cars-and-yachts') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.transfers') }}</a>
@@ -78,7 +81,7 @@
             </div>
             <div class="flex justify-center">
                 <a href="https://wa.me/+905350303054" target="_blank" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/whatsapp-icon.svg') }})"></a>
-                <a href="https://t.me/+905350303054" target="_blank" class="w-8 h-8 mx-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/telegram-icon.svg') }})"></a>
+                <a href="https://t.me/alitasin" target="_blank" class="w-8 h-8 mx-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/telegram-icon.svg') }})"></a>
                 <a href="tel:+905350303054" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/phone-icon.svg') }})"></a>
             </div>
         </div>

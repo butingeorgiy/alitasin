@@ -269,7 +269,7 @@
                     @endforeach
                 </select>
             </div>
-        </div>
+        </div>z
 
         <div class="grid grid-cols-2 gap-5 mt-12">
             <div class="flex flex-col">

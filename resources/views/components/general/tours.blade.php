@@ -171,7 +171,7 @@
                 </div>
                 <div class="hidden lg:block p-3 bg-gray-100 shadow rounded-md">
                     <p class="mb-3 text-black font-semibold leading-5">{{ __('short-phrases.connect-with-us-title') }}</p>
-                    <a href="#" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
+                    <a href="https://wa.me/+905350303054" target="_blank" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
                        style="background-color: #77E75B">
                         <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 33 33" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +200,7 @@
                         </svg>
                         WhatsApp
                     </a>
-                    <a href="#" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
+                    <a href="https://t.me/alitasin" target="_blank" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
                        style="background-color: #3CA3E6">
                         <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 33 29" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
