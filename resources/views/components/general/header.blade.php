@@ -2,10 +2,21 @@
     <div class="container flex items-center mx-auto px-5 py-4">
         <a href="{{ request()->is('admin/*') ? route('admin-index') : route('index') }}" class="mr-auto text-xl font-bold">Ali Tour<span class="text-blue">.</span></a>
         <div class="hidden sm:flex items-center">
-            <div class="relative flex flex-wrap">
+            <div class="relative flex flex-wrap group">
+                <a href="/#toursSection" class="mr-8 text-black hover:underline">{{ __('short-phrases.tours') }}</a>
 
+                <!-- Tours submenu -->
+                <div class="hidden group-hover:block origin-top-right absolute left-0 top-full z-10 w-56 rounded-md shadow-lg bg-white border border-gray-200"
+                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="py-1 rounded-md overflow-hidden" role="none">
+                        @foreach(\App\Models\Region::all() as $region)
+                            <a href="{{ route('region', $region->id) }}" class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100">
+                                {{ $region->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
             </div>
-            <a href="/#toursSection" class="mr-8 text-black hover:underline">{{ __('short-phrases.tours') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-cars-and-yachts') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.transfers') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.property') }}</a>
@@ -66,7 +77,20 @@
             <div class="flex flex-col items-center mb-5 p-5">
                 <a href="{{ route('index') }}" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.main') }}</a>
                 <a href="/#regionsSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.popular-regions') }}</a>
-                <a href="/#toursSection" class="close-after-click mb-4 text-sm text-black font-light">{{ __('short-phrases.tours') }}</a>
+                <div class="flex flex-col mb-4 group">
+                    <div class="flex items-center">
+                        <p class="mr-3 text-sm text-black font-light">{{ __('short-phrases.tours') }}</p>
+                        <svg width="11" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L5 5L9 1" stroke="#231F20" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="hidden group-hover:flex flex-col mt-4">
+                        @foreach(\App\Models\Region::all() as $region)
+                            <a href="{{ route('region', $region->id) }}" class="mb-4 text-sm text-center text-black font-light">{{ $region->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.rental-cars-and-yachts') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.transfers') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-light">{{ __('short-phrases.property') }}</a>
@@ -82,7 +106,7 @@
             <div class="flex justify-center">
                 <a href="https://wa.me/+905350303054" target="_blank" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/whatsapp-icon.svg') }})"></a>
                 <a href="https://t.me/alitasin" target="_blank" class="w-8 h-8 mx-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/telegram-icon.svg') }})"></a>
-                <a href="tel:+905350303054" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/phone-icon.svg') }})"></a>
+                <a href="viber://add?number=905350303054" class="w-8 h-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/phone-icon.svg') }})"></a>
             </div>
         </div>
     </div>

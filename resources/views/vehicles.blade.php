@@ -26,7 +26,7 @@
                     <a href="{{ route('vehicles', ['vehicle_type_id' => $item->id]) }}"
                        class="flex justify-center items-center text-white  text-3xl font-semibold tracking-wide bg-cover bg-center bg-no-repeat shadow rounded-md
                        {{ (int) request()->input('vehicle_type_id') === $item->id ? 'underline' : ''  }}"
-                       style="height: 180px; background-image: url({{ asset('images/main-sections-bg-transport.jpg') }})">
+                       style="height: 180px; background-image: url({{ $item->image }})">
                         <span>{{ $item->name }}</span>
                     </a>
                 @endforeach
@@ -35,10 +35,10 @@
             <div class="block sm:hidden swiper-container -mx-3">
                 <div class="swiper-wrapper -mx-2 px-5 py-2">
                     @foreach(\App\Models\VehicleType::all() as $item)
-                        <div class="swiper-slide relative flex justify-center items-center w-72 text-white text-3xl font-bold tracking-wide bg-center bg-cover bg-no-repeat rounded-md"
-                             style="height: 180px; background-image: url({{ asset('images/main-sections-bg-transport.jpg') }})">
-                            {{ $item->name }}
-                        </div>
+                        <a href="{{ route('vehicles', ['vehicle_type_id' => $item->id]) }}"
+                           class="swiper-slide relative flex justify-center items-center w-72 text-white text-3xl font-bold tracking-wide bg-center bg-cover bg-no-repeat rounded-md
+                           {{ (int) request()->input('vehicle_type_id') === $item->id ? 'underline' : ''  }}"
+                           style="height: 180px; background-image: url({{ $item->image }})">{{ $item->name }}</a>
                     @endforeach
                 </div>
             </div>

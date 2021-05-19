@@ -18,6 +18,7 @@ class CreateVehicleTypesTable extends Migration
             $table->string('en_name', 32);
             $table->string('ru_name', 32);
             $table->string('tr_name', 32);
+            $table->string('image', 20)->default('default.jpg');
         });
     }
 
