@@ -19,4 +19,12 @@ class VehicleType extends Model
     {
         return $this[\App::getLocale() . '_name'];
     }
+
+    public function getImageAttribute(): string
+    {
+        return route('get-image', [
+            'dir' => 'vehicle_types',
+            'file' => $this->getOriginal('image')
+        ]);
+    }
 }

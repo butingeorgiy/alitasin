@@ -13,3 +13,4 @@ import './modules/mobileMenu';
 import './modules/createPartner';
 import './modules/partnerList';
 import './modules/createVehicle';
+import './modules/multiNavigation';
