@@ -1,7 +1,7 @@
 <section id="transportSection" class="mb-10 pb-4 sm:pb-6 border-b border-gray-200">
     <div class="container mx-auto px-5">
         <div class="flex justify-between items-center lg:justify-center mb-2 sm:mb-4">
-            <p class="inline text-black text-2xl font-bold text-black">{{ __('short-phrases.transport') }}<span class="text-blue">.</span></p>
+            <p class="inline text-black text-2xl font-bold text-black">{{ __('short-phrases.transport-rental') }}<span class="text-blue">.</span></p>
             <a class="block sm:hidden px-5 py-1 text-sm text-blue border-2 border-blue rounded-md cursor-pointer">{{ __('buttons.show-all') }}</a>
         </div>
 
