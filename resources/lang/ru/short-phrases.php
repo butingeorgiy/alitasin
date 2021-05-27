@@ -155,5 +155,16 @@ return [
     'choose-vehicle-type' => 'Выберите тип ТС',
     'is-show-at-index-page' => 'Отображать на главной странице?',
     'yes' => 'Да',
-    'no' => 'Нет'
+    'no' => 'Нет',
+    'shopping' => 'Шоппинг',
+    'individually-excursions' => 'Индивидуальные экскурсии',
+    'main-sections-personal-excursions-description' => 'Организовываем персональные экскурсии по самым красивым регионам Турции',
+    'cars-rental' => 'Аренда авто',
+    'yachts-rental' => 'Аренда яхт',
+    'main-sections-cars-rental-amount' => 'авто',
+    'main-sections-yachts-rental-amount' => 'яхт',
+    'main-sections-transfers-description' => 'Организуем VIP трансфер из любого аэропорта Турции',
+    'main-sections-shopping-description' => 'Шоппинг-тур по лучшим магазинам с корпоративными скидками',
+    'main-sections-medical-tourism-description' => 'Самая продвинутая медицина в лучших клиниках Турции',
+    'main-sections-yachts-rental-description' => 'Морские прогулки на роскошных яхтах'
 ];

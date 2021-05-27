@@ -155,5 +155,16 @@ return [
     'choose-vehicle-type' => 'Choose vehicle type',
     'is-show-at-index-page' => 'Should show at index page?',
     'yes' => 'Yes',
-    'no' => 'No'
+    'no' => 'No',
+    'shopping' => 'Shopping',
+    'individually-excursions' => 'Individually excursions',
+    'main-sections-personal-excursions-description' => 'We organize personal excursions to the most beautiful regions of Turkey',
+    'cars-rental' => 'Cars rental',
+    'yachts-rental' => 'Yachts rental',
+    'main-sections-cars-rental-amount' => 'cars',
+    'main-sections-yachts-rental-amount' => 'yachts',
+    'main-sections-transfers-description' => 'We organize a VIP transfer from any airport in Turkey',
+    'main-sections-shopping-description' => 'Shopping tour of the best shops with corporate discounts',
+    'main-sections-medical-tourism-description' => 'The most advanced medicine in the best clinics in Turkey',
+    'main-sections-yachts-rental-description' => 'Boat trips on luxury yachts'
 ];

@@ -155,5 +155,16 @@ return [
     'choose-vehicle-type' => 'Araç tipini seçin',
     'is-show-at-index-page' => 'Dizin sayfasında gösterilmeli?',
     'yes' => 'Evet',
-    'no' => 'Hayır'
+    'no' => 'Hayır',
+    'shopping' => 'Alışveriş yapmak',
+    'individually-excursions' => 'Bireysel geziler',
+    'main-sections-personal-excursions-description' => 'Türkiye\'nin en güzel bölgelerine kişisel geziler düzenliyoruz',
+    'cars-rental' => 'Araba kiralama',
+    'yachts-rental' => 'Yat kiralama',
+    'main-sections-cars-rental-amount' => 'arabalar',
+    'main-sections-yachts-rental-amount' => 'yatlar',
+    'main-sections-transfers-description' => 'Türkiye\'deki herhangi bir havalimanından VIP transfer organize ediyoruz',
+    'main-sections-shopping-description' => 'Kurumsal indirimlerle en iyi mağazaların alışveriş turu',
+    'main-sections-medical-tourism-description' => 'Türkiye\'nin en iyi kliniklerinde en gelişmiş tıp',
+    'main-sections-yachts-rental-description' => 'Lüks yatlarda tekne gezileri'
 ];
