@@ -70,7 +70,7 @@ return [
     // Days of the week (end)
 
     'tours' => 'Excursions',
-    'transport' => 'Transport',
+    'transport-rental' => 'Taşımacılık kiralama',
     'property' => 'Real estate',
     'main-sections-tours-description' => 'Any excursions to your taste',
     'main-sections-transport-description' => 'Choose a car for sharing trips',

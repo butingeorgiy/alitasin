@@ -16,10 +16,10 @@
             <div class="self-end min-w-20 min-h-20 w-20 h-20 mb-3 bg-contain bg-center bg-no-repeat"
                  style="background-image: url({{ asset('images/main-sections-icon-transport.svg') }})"></div>
             <p class="mb-2 text-2xl font-bold">
-                {{ __('short-phrases.transport') }}<span class="text-blue">.</span>
+                {{ __('short-phrases.transport-rental') }}<span class="text-blue">.</span>
             </p>
             <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-transport-description') }}</p>
-            <p class="mt-auto font-semibold">0 {{ __('short-phrases.main-sections-transport-amount') }}</p>
+            <p class="mt-auto font-semibold">{{ \App\Models\Vehicle::count() }} {{ __('short-phrases.main-sections-transport-amount') }}</p>
         </a>
 
         <div class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
