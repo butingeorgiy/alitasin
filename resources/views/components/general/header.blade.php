@@ -78,11 +78,11 @@
                 @endif
             </div>
             <div class="flex flex-col items-center mb-5 p-5">
-                <a href="{{ route('index') }}" class="mb-4 text-sm text-black font-medium">{{ __('short-phrases.main') }}</a>
-                <a href="/#regionsSection" class="close-after-click mb-4 text-sm text-black font-medium">{{ __('short-phrases.popular-regions') }}</a>
+                <a href="{{ route('index') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.main') }}</a>
+                <a href="/#regionsSection" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.popular-regions') }}</a>
                 <div class="flex flex-col mb-4 group">
                     <div class="flex items-center">
-                        <p class="mr-3 text-sm text-black font-medium">{{ __('short-phrases.tours') }}</p>
+                        <p class="mr-3 text-sm text-black font-semibold">{{ __('short-phrases.tours') }}</p>
                         <svg width="11" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1L5 5L9 1" stroke="#231F20" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -94,13 +94,14 @@
                         @endforeach
                     </div>
                 </div>
-                <a href="#" class="mb-4 text-sm text-black font-medium">{{ __('short-phrases.rental-cars-and-yachts') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-medium">{{ __('short-phrases.transfers') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-medium">{{ __('short-phrases.property') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-medium">{{ __('short-phrases.medical-tourism') }}</a>
-                <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-medium">{{ __('short-phrases.reviews') }}</a>
-                <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-medium">{{ __('short-phrases.contacts') }}</a>
-                <select class="text-sm text-black font-medium bg-white" name="language">
+                <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.cars-rental') }}</a>
+                <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.yachts-rental') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.transfers') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.property') }}</a>
+                <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.medical-tourism') }}</a>
+                <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.reviews') }}</a>
+                <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.contacts') }}</a>
+                <select class="text-sm text-black font-semibold bg-white" name="language">
                     @foreach(['ru', 'en', 'tr'] as $lang)
                         <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
                     @endforeach

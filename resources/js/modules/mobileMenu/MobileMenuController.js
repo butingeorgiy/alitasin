@@ -33,7 +33,6 @@ class MobileMenuController extends EventHandler {
     }
 
     show() {
-        alert('Была нажата кнопка!');
         this.isShown = true;
         this.nodes.mobileMenu.classList.remove('hidden');
         setTimeout(_ => {
