@@ -12,7 +12,7 @@
 </head>
 <body>
     @include('components.general.header')
-    @include('components.general.hero', ['title' => __('short-phrases.transport'), 'image' => asset('images/vehicles-hero-bg.png')])
+    @include('components.general.hero', ['title' => __('short-phrases.transport-rental'), 'image' => asset('images/vehicles-hero-bg.png')])
     @include('components.index.global-search', ['bottomBorder' => true])
 
     <section id="vehicleTypesSection" class="mb-10 pb-4 sm:pb-6 border-b border-gray-200">
