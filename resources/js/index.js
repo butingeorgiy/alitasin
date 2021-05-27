@@ -1,3 +1,4 @@
+import './modules/mobileMenu';
 import './modules/slider';
 import './modules/createTour';
 import './modules/updateTour';
@@ -9,7 +10,6 @@ import './modules/bookTour';
 import './modules/registration';
 import './modules/reservationList';
 import './modules/favorites';
-import './modules/mobileMenu';
 import './modules/createPartner';
 import './modules/partnerList';
 import './modules/createVehicle';
