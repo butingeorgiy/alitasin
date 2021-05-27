@@ -70,13 +70,13 @@ return [
     // Days of the week (end)
 
     'tours' => 'Экскурсии',
-    'transport' => 'Транспорт',
+    'transport-rental' => 'Аренда транспорта',
     'property' => 'Недвижимость',
     'main-sections-tours-description' => 'Любые экскурсии на ваш вкус',
     'main-sections-transport-description' => 'Выберите автомобиль для совместных поездок',
     'main-sections-property-description' => 'Элитная недвижимость Турции',
     'main-sections-tours-amount' => 'доступных экскурсий',
-    'main-sections-transport-amount' => 'доступных автомобилей',
+    'main-sections-transport-amount' => 'доступных ТС',
     'main-sections-property-amount' => 'доступных позиций',
     'all-tours' => 'Все экскурсии',
     'other-turkey-regions' => 'Другие регионы Турции',

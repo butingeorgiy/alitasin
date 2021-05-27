@@ -70,7 +70,7 @@ return [
     // Days of the week (end)
 
     'tours' => 'Geziler',
-    'transport' => 'Ulaşım',
+    'transport-rental' => 'Ulaşım',
     'property' => 'Özellikler',
     'main-sections-tours-description' => 'Zevkinize göre herhangi bir gezi',
     'main-sections-transport-description' => 'Gezileri paylaşmak için bir araba seçin',
