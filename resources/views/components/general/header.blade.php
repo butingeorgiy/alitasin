@@ -17,8 +17,8 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-cars') }}</a>
-            <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-yachts') }}</a>
+            <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-cars') }}</a>
+            <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mr-8 text-black hover:underline">{{ __('short-phrases.rental-yachts') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.transfers') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.property') }}</a>
             <a href="#" class="mr-8 text-black hover:underline">{{ __('short-phrases.medical-tourism') }}</a>
