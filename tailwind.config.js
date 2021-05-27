@@ -501,27 +501,12 @@ module.exports = {
             prose: '65ch',
             ...breakpoints(theme('screens')),
         }),
-        minHeight: {
-            0: '0px',
-            4: '1rem',
-            5: '1.25rem',
-            6: '1.5rem',
-            11: '2.75rem',
-            20: '5rem',
-            full: '100%',
-            screen: '100vh',
-        },
-        minWidth: {
-            0: '0px',
-            4: '1rem',
-            5: '1.25rem',
-            6: '1.5rem',
-            11: '2.75rem',
-            20: '5rem',
-            full: '100%',
-            min: 'min-content',
-            max: 'max-content',
-        },
+        minHeight: theme => ({
+            ...theme('spacing')
+        }),
+        minWidth: theme => ({
+            ...theme('spacing')
+        }),
         objectPosition: {
             bottom: 'bottom',
             center: 'center',

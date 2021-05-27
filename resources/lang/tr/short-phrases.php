@@ -8,7 +8,7 @@ return [
     'choose-region' => 'Bölge seçin',
     'choose-manager' => 'Yönetici seçin',
     'tours-in-turkey' => 'Türkiye gezileri',
-    'popular-turkey-regions' => 'Türkiye\'nin popüler bölgeleri',
+    'popular-turkey-regions' => 'Türkiye\'nin bölgeleri',
     'popular-tours' => 'Popüler geziler',
     'clients-reviews' => 'Musteri degerlendirmeleri',
     'date' => 'Tarih',

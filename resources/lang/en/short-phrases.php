@@ -8,7 +8,7 @@ return [
     'choose-region' => 'Choose region',
     'choose-manager' => 'Choose manager',
     'tours-in-turkey' => 'Excursions in Turkey',
-    'popular-turkey-regions' => 'Popular regions of Turkey',
+    'popular-turkey-regions' => 'Regions of Turkey',
     'popular-tours' => 'Popular excursions',
     'clients-reviews' => 'Customer reviews',
     'date' => 'Date',
