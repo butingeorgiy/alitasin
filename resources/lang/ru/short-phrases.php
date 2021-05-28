@@ -138,7 +138,7 @@ return [
     'block' => 'Заблокировать',
     'payment-amount' => 'Сумма выплаты',
     'partner' => 'Партнёр',
-    'hotel-room' => 'Номер в отеле',
+    'hotel-room' => 'Номер комнаты в отеле',
     'enter-hotel-room-number' => 'Введите номер комнаты в отеле',
     'location-region' => 'Регион нахождения',
     'select-location-region' => 'Выберите регион нахождения',

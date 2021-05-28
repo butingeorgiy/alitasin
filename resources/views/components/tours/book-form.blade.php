@@ -16,7 +16,7 @@
                     </label>
 
                     <label class="flex flex-col col-span-1">
-                        <span class="mb-1 font-semibold">{{ __('short-phrases.hotel-room') }}</span>
+                        <span class="mb-1 font-semibold">{{ __('short-phrases.hotel-room') }} ({{ __('short-phrases.unnecessary') }})</span>
                         <input type="text"
                                name="hotel_room_number"
                                maxlength="64"
