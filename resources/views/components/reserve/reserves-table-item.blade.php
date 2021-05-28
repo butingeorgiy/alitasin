@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \App\Models\Reservation $reservation
+ * @var App\Models\Reservation $reservation
  */
 
 ?>

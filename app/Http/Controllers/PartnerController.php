@@ -18,7 +18,7 @@ class PartnerController extends Controller
 
     public function show($id)
     {
-        $partner = User::partners()->findOrFail($id);
+        $partner = User::partners()->withTrashed()->findOrFail($id);
 
         return view('admin.partner', compact('partner'));
     }

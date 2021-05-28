@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \App\Models\User $partner
+ * @var App\Models\User $partner
  */
 
 ?>
@@ -10,7 +10,7 @@
     <div class="flex">
         <div class="min-w-11 min-h-11 w-11 h-11 mr-6 bg-contain bg-center bg-no-repeat bg-blue rounded-full"></div>
         <div class="flex flex-col justify-center">
-            <p class="text-black font-semibold">{{ $partner->full_name }}</p>
+            <a href="{{ route('partner', $partner->id) }}" class="text-black font-semibold">{{ $partner->full_name }}</a>
             <p class="text-sm text-gray-600 font-light">{{ $partner->email }}</p>
         </div>
     </div>

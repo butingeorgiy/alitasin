@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
  * @method static managers()
  * @method static partners()
  * @method static create(string[] $array)
+ * @property string full_name
  * @property string first_name
  * @property string account_type_id
  * @property string last_name
