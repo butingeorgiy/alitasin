@@ -128,5 +128,9 @@ return [
     'payment-amount-min' => 'Сумма выплаты не может быть меньше 0!',
     'partner-payment-amount-max' => 'Сумма выплаты не может быть больше, чем остаток прибыли партнёра!',
     'partner-payment-saving-success' => 'Выплата успешно сохранена!',
-    'hotel-room-number-max' => 'Максимальная длина номера комнаты 8 символов!'
+    'hotel-room-number-max' => 'Максимальная длина номера комнаты 8 символов!',
+    'profit-percent-required' => 'Укажите процент прибыли!',
+    'profit-percent-numeric' => 'Процент прибыли должен быть числом!',
+    'profit-percent-min' => 'Процент прибыли не может быть меньше 0!',
+    'profit-percent-max' => 'Процент прибыли не может быть больше 100!'
 ];

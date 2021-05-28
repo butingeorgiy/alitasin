@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -31,6 +32,7 @@ use Illuminate\Support\Str;
  * @property int total_profit
  * @property int total_payment_amount
  * @property int total_income
+ * @property int profit_percent
  */
 class User extends Model
 {
@@ -130,6 +132,11 @@ class User extends Model
         return $this->belongsToMany(Tour::class, 'favorite_tours');
     }
 
+    public function percent(): HasOne
+    {
+        return $this->hasOne(PartnerPercent::class, 'user_id');
+    }
+
     // Partner methods
 
     /**
@@ -184,14 +191,20 @@ class User extends Model
          */
         $attractedReservations = $this->attractedReservations()->get();
         $totalProfit = 0;
+        $profitPercent = $this->profit_percent;
 
         foreach ($attractedReservations as $item) {
-            $totalProfit += $item->costWithSale() * 0.3;
+            $totalProfit += $item->costWithSale() * $profitPercent / 100;
         }
 
         return $totalProfit;
     }
 
+    /**
+     * Get partner total payment amount
+     *
+     * @return int
+     */
     public function getTotalPaymentAmountAttribute(): int
     {
         /**
@@ -205,5 +218,19 @@ class User extends Model
         }
 
         return $amount;
+    }
+
+    /**
+     * Get personal partner profit percent
+     *
+     * @return int
+     */
+    public function getProfitPercentAttribute(): int
+    {
+        if (!$percent = $this->percent()->get()->first()) {
+            return 0;
+        }
+
+        return $percent->percent;
     }
 }

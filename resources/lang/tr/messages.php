@@ -127,5 +127,9 @@ return [
     'payment-amount-min' => 'Ödeme miktarı 0\'dan az olamaz!',
     'partner-payment-amount-max' => 'Ödeme tutarı, iş ortağı kar bakiyesinden fazla olamaz!',
     'partner-payment-saving-success' => 'Ödeme başarıyla kaydediliyordu!',
-    'hotel-room-number-max' => 'Maksimum otel odası numarası uzunluğu 8 karakter!'
+    'hotel-room-number-max' => 'Maksimum otel odası numarası uzunluğu 8 karakter!',
+    'profit-percent-required' => 'Kar yüzdesi belirtilmelidir!',
+    'profit-percent-numeric' => 'Kar yüzdesi sayısal olmalıdır!',
+    'profit-percent-min' => 'Kar yüzdesi 0\'dan az olamaz!',
+    'profit-percent-max' => 'Kar yüzdesi 100\'den fazla olamaz!'
 ];

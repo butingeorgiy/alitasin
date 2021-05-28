@@ -55,6 +55,10 @@ class CreatePartnerController extends EventHandler {
             formData.append('email', this.nodes.createPartnerPopup.querySelector('input[name="email"]')?.value);
         }
 
+        if (this.nodes.createPartnerPopup.querySelector('input[name="profit_percent"]')?.value) {
+            formData.append('profit_percent', this.nodes.createPartnerPopup.querySelector('input[name="profit_percent"]')?.value);
+        }
+
         if (this.nodes.createPartnerPopup.querySelector('input[name="promo_code"]')?.value) {
             formData.append('promo_code', this.nodes.createPartnerPopup.querySelector('input[name="promo_code"]')?.value);
         }

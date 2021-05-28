@@ -28,6 +28,11 @@
         </label>
 
         <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+            <input type="number" name="profit_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                   placeholder="{{ __('short-phrases.profit-percent')  }}">
+        </label>
+
+        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
             <input type="text" name="promo_code" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
                    placeholder="{{ __('short-phrases.promo-code')  }}">
         </label>

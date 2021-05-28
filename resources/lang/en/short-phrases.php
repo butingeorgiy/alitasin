@@ -166,5 +166,6 @@ return [
     'main-sections-transfers-description' => 'We organize a VIP transfer from any airport in Turkey',
     'main-sections-shopping-description' => 'Shopping tour of the best shops with corporate discounts',
     'main-sections-medical-tourism-description' => 'The most advanced medicine in the best clinics in Turkey',
-    'main-sections-yachts-rental-description' => 'Boat trips on luxury yachts'
+    'main-sections-yachts-rental-description' => 'Boat trips on luxury yachts',
+    'profit-percent' => 'Profit percent'
 ];

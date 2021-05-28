@@ -21,7 +21,8 @@ class PartnerCreatingRequest extends FormRequest
             'phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
             'email' => 'bail|required|email|unique:users|max:128',
             'promo_code' => 'bail|required|min:1|max:32',
-            'sale_percent' => 'bail|required|numeric|min:0|max:100'
+            'sale_percent' => 'bail|required|numeric|min:0|max:100',
+            'profit_percent' => 'bail|required|numeric|min:0|max:100'
         ];
     }
 
@@ -45,7 +46,11 @@ class PartnerCreatingRequest extends FormRequest
             'sale_percent.required' => __('messages.sale-percent-required'),
             'sale_percent.numeric' => __('messages.percent-numeric'),
             'sale_percent.min' => __('messages.percent-min'),
-            'sale_percent.max' => __('messages.percent-max')
+            'sale_percent.max' => __('messages.percent-max'),
+            'profit_percent.required' => __('messages.profit-percent-required'),
+            'profit_percent.numeric' => __('messages.profit-percent-numeric'),
+            'profit_percent.min' => __('messages.percent-min'),
+            'profit_percent.max' => __('messages.percent-max')
         ];
     }
 

@@ -166,5 +166,6 @@ return [
     'main-sections-transfers-description' => 'Организуем VIP трансфер из любого аэропорта Турции',
     'main-sections-shopping-description' => 'Шоппинг-тур по лучшим магазинам с корпоративными скидками',
     'main-sections-medical-tourism-description' => 'Самая продвинутая медицина в лучших клиниках Турции',
-    'main-sections-yachts-rental-description' => 'Морские прогулки на роскошных яхтах'
+    'main-sections-yachts-rental-description' => 'Морские прогулки на роскошных яхтах',
+    'profit-percent' => 'Процент прибыли'
 ];

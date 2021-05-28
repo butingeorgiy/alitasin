@@ -166,5 +166,6 @@ return [
     'main-sections-transfers-description' => 'Türkiye\'deki herhangi bir havalimanından VIP transfer organize ediyoruz',
     'main-sections-shopping-description' => 'Kurumsal indirimlerle en iyi mağazaların alışveriş turu',
     'main-sections-medical-tourism-description' => 'Türkiye\'nin en iyi kliniklerinde en gelişmiş tıp',
-    'main-sections-yachts-rental-description' => 'Lüks yatlarda tekne gezileri'
+    'main-sections-yachts-rental-description' => 'Lüks yatlarda tekne gezileri',
+    'profit-percent' => 'Kar yüzdesi'
 ];

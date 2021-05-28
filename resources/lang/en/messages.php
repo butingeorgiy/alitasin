@@ -127,5 +127,9 @@ return [
     'payment-amount-min' => 'Amount of payment cannot be less than 0!',
     'partner-payment-amount-max' => 'Payment amount cannot be more than partner profit remainder!',
     'partner-payment-saving-success' => 'Payment was saving successfully!',
-    'hotel-room-number-max' => 'Maximum hotel room number length 8 characters!'
+    'hotel-room-number-max' => 'Maximum hotel room number length 8 characters!',
+    'profit-percent-required' => 'Must specify profit percent!',
+    'profit-percent-numeric' => 'Profit percent must be a numeric!',
+    'profit-percent-min' => 'Profit percent cannot be less than 0!',
+    'profit-percent-max' => 'Profit percent cannot be more than 100!'
 ];

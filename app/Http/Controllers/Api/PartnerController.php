@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\PartnerCreatingRequest;
 use App\Models\PartnerPayment;
+use App\Models\PartnerPercent;
 use App\Models\PromoCode;
 use App\Models\User;
 use Exception;
@@ -43,6 +44,13 @@ class PartnerController extends Controller
         if (!$user->save()) {
             throw new Exception(__('messages.user-creating-failed'));
         }
+
+        // Percent attaching
+
+        PartnerPercent::create([
+            'user_id' => $user->id,
+            'percent' => $request->input('profit_percent')
+        ]);
 
         // Promo code creating
 
