@@ -62,17 +62,6 @@
                         </select>
                     </label>
 
-                    <label class="flex flex-col col-span-1">
-                        <span class="mb-1 font-semibold">{{ __('short-phrases.available-time') }}</span>
-                        <select name="time"
-                                class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md cursor-pointer">
-                            <option value="">{{ __('short-phrases.select-time') }}</option>
-                            @foreach($tour->available_time as $time)
-                                <option value="{{ $time }}">{{ $time }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-
                     <div class="flex flex-col col-span-full mt-5 pb-5 border-t border-gray-700">
                         @foreach(\App\Models\Ticket::all() as $ticket)
                             <div class="ticket-item flex items-center py-3 border-b border-gray-200"

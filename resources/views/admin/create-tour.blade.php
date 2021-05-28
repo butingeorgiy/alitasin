@@ -152,7 +152,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-5 mt-6">
+        <div class="grid grid-cols-2 gap-5 mt-6">
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.region') }}</p>
                 <select name="region_id"
@@ -173,11 +173,6 @@
                         <option value="{{ $manager->id }}">{{ $manager->full_name }}</option>
                     @endforeach
                 </select>
-            </div>
-
-            <div>
-                <p class="mb-2 font-semibold">{{ __('short-phrases.available-time') }}</p>
-                <select name="available_time" multiple placeholder="{{ __('short-phrases.search') }}"></select>
             </div>
         </div>
 

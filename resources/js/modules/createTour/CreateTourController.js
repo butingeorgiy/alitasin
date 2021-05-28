@@ -18,7 +18,6 @@ class CreateTourController extends TourFormBaseController {
 
         this.initFiltersSelect('#createTourForm select[name="filters"]');
         this.initWeekDaysSelect('#createTourForm select[name="conduct_at"]');
-        this.initAvailableTimeSelect('#createTourForm select[name="available_time"]');
     }
 
     initImageBoxes(items) {
@@ -58,7 +57,6 @@ class CreateTourController extends TourFormBaseController {
 
         formData.append('filters', JSON.stringify(this.filtersSelect.getValue()));
         formData.append('conducted_at', JSON.stringify(this.weekDaysSelect.getValue()));
-        formData.append('available_time', JSON.stringify(this.availableTimeSelect.getValue()));
 
         if (this.additions.length > 0) {
             formData.append('additions', JSON.stringify(this.additions));

@@ -28,11 +28,6 @@
                             <p class="communication-type w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md"></p>
                         </div>
 
-                        <div class="flex flex-col col-span-1">
-                            <span class="mb-1 font-semibold">{{ __('short-phrases.time') }}</span>
-                            <p class="available-time w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md"></p>
-                        </div>
-
                         <div class="tickets-container flex flex-col col-span-full mt-5 pb-5 border-t border-gray-700">
 {{--                            @foreach(\App\Models\Ticket::all() as $ticket)--}}
 {{--                                <div class="ticket-item flex items-center p-3 border-b border-gray-200">--}}

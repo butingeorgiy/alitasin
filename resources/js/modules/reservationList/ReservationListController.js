@@ -180,7 +180,6 @@ class ReservationListController extends EventHandler {
                 break;
             default:
                 console.error('Undefined option!', [key, options]);
-
         }
     }
 
@@ -191,7 +190,6 @@ class ReservationListController extends EventHandler {
 
         this.nodes.detailsPopup.querySelector('.hotel-name').innerText = details['hotel-name'];
         this.nodes.detailsPopup.querySelector('.communication-type').innerText = details['communication-type'];
-        this.nodes.detailsPopup.querySelector('.available-time').innerText = details['time'];
         this.nodes.detailsPopup.querySelector('.total-cost').innerText = details['total-cost'];
 
         if (details['promo-code']) {

@@ -95,19 +95,6 @@ class TourController extends Controller
             }
         }
 
-        // Available time validation
-        $availableTime = json_decode($request->input('available_time'));
-
-        if (count($availableTime) === 0) {
-            throw new Exception(__('messages.tour-available-time-min'));
-        }
-
-        foreach ($availableTime as $time) {
-            if (!preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $time)) {
-                throw new Exception(__('messages.time-invalid'));
-            }
-        }
-
         if ($request->has('additions')) {
             $additions = [];
             $parsedAdditions = json_decode($request->input('additions'));
@@ -144,7 +131,6 @@ class TourController extends Controller
         $tour->type()->associate($tourType);
         $tour->price = $request->input('price');
         $tour->conducted_at = implode('~', $days);
-        $tour->available_time = implode('~', $availableTime);
 
         if ($request->has('duration')) {
             $tour->duration = $request->input('duration');
@@ -220,19 +206,6 @@ class TourController extends Controller
             throw new Exception(__('messages.tour-conducted-at-min'));
         }
 
-        // Available time validation
-        $availableTime = json_decode($request->input('available_time'));
-
-        if (count($availableTime) === 0) {
-            throw new Exception(__('messages.tour-available-time-min'));
-        }
-
-        foreach ($availableTime as $time) {
-            if (!preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $time)) {
-                throw new Exception(__('messages.time-invalid'));
-            }
-        }
-
         // Title updating
         if ($tour->title->en !== $request->input('en_title')) {
             $tour->title->en = $request->input('en_title');
@@ -300,10 +273,6 @@ class TourController extends Controller
         $tour->filters()->sync($filters);
 
         // Other tour's fields updating
-        if ($tour->available_time !== implode('~', json_decode($request->input('available_time')))) {
-            $tour->available_time = implode('~', json_decode($request->input('available_time')));
-        }
-
         if ($tour->conducted_at !== implode('~', json_decode($request->input('conducted_at')))) {
             $tour->conducted_at = implode('~', json_decode($request->input('conducted_at')));
         }
@@ -688,13 +657,6 @@ class TourController extends Controller
             }
         }
 
-        // Time validation
-        if ($request->has('time')) {
-            if (!$tour->isTimeAvailable($request->input('time'))) {
-                throw new Exception(__('messages.reservation->time-not-available'));
-            }
-        }
-
         // Date validation
         if ($request->has('date')) {
             if (!$tour->isDateAvailable($request->input('date'))) {
@@ -755,7 +717,6 @@ class TourController extends Controller
         $reservation->hotel_name = $request->input('hotel_name');
         $reservation->hotel_room_number = $request->input('hotel_room_number');
         $reservation->communication_type = $request->input('communication_type');
-        $reservation->time = $request->input('time');
         $reservation->date = $request->input('date');
 
         if (!$reservation->save()) {

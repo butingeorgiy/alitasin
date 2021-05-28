@@ -77,10 +77,6 @@ class BookTourController extends EventHandler {
             formData.append('communication_type', this.nodes.form.querySelector('select[name="communication_type"]').value);
         }
 
-        if (this.nodes.form.querySelector('select[name="time"]').value) {
-            formData.append('time', this.nodes.form.querySelector('select[name="time"]').value);
-        }
-
         if (this.nodes.form.querySelector('select[name="region_id"]').value) {
             formData.append('region_id', this.nodes.form.querySelector('select[name="region_id"]').value);
         }
