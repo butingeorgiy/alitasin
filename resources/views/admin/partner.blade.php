@@ -64,7 +64,7 @@
                 @forelse($subPartners as $partner)
                     @include('components.partners.partner-table-item')
                 @empty
-                    <p>{{ __('short-phrases.empty-list') }}</p>
+                    <div class="flex justify-center py-3 text-black font-light">{{ __('short-phrases.empty-list') }}</div>
                 @endforelse
             </div>
         </div>
