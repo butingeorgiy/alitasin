@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller
 {
@@ -19,7 +20,15 @@ class PartnerController extends Controller
     public function show($id)
     {
         $partner = User::partners()->withTrashed()->findOrFail($id);
+        $subPartnerIds = [];
 
-        return view('admin.partner', compact('partner'));
+        foreach (DB::table('sub_partners')->select('user_id')
+                     ->where('parent_user_id', $partner->id)->get() as $item) {
+            $subPartnerIds[] = $item->user_id;
+        }
+
+        $subPartners = User::partners()->withTrashed()->whereIn('id', $subPartnerIds)->get();
+
+        return view('admin.partner', compact('partner', 'subPartners'));
     }
 }

@@ -167,5 +167,7 @@ return [
     'main-sections-shopping-description' => 'Шоппинг-тур по лучшим магазинам с корпоративными скидками',
     'main-sections-medical-tourism-description' => 'Самая продвинутая медицина в лучших клиниках Турции',
     'main-sections-yachts-rental-description' => 'Морские прогулки на роскошных яхтах',
-    'profit-percent' => 'Процент прибыли'
+    'profit-percent' => 'Процент прибыли',
+    'sub-partners' => 'Под партнёры',
+    'add-sub-partner' => 'Добавить под партнёра'
 ];

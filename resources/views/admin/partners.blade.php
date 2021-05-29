@@ -13,6 +13,7 @@
 <body class="bg-gray-50">
     @include('components.general.header')
     @include('components.general.profile-hero')
+
     <section id="partnersSection" class="mt-10 mb-10">
         <div class="container mx-auto px-5">
             <div class="flex items-center mb-5">
@@ -47,6 +48,7 @@
 
         </div>
     </section>
+
     @include('components.general.footer')
 
     @include('popups.create-partner')

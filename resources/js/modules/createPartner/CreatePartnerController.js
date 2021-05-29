@@ -67,6 +67,10 @@ class CreatePartnerController extends EventHandler {
             formData.append('sale_percent', this.nodes.createPartnerPopup.querySelector('input[name="sale_percent"]')?.value);
         }
 
+        if (/^\/admin\/partners\/\d+$/.test(location.pathname)) {
+            formData.append('parent_user_id', location.pathname.split('/')[3]);
+        }
+
         CreatePartnerModel.create(formData)
             .then(result => {
                 if (typeof result === 'string') {

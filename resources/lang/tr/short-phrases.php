@@ -167,5 +167,7 @@ return [
     'main-sections-shopping-description' => 'Kurumsal indirimlerle en iyi mağazaların alışveriş turu',
     'main-sections-medical-tourism-description' => 'Türkiye\'nin en iyi kliniklerinde en gelişmiş tıp',
     'main-sections-yachts-rental-description' => 'Lüks yatlarda tekne gezileri',
-    'profit-percent' => 'Kar yüzdesi'
+    'profit-percent' => 'Kar yüzdesi',
+    'sub-partners' => 'Alt ortaklar',
+    'add-sub-partner' => 'Alt ortak ekle'
 ];

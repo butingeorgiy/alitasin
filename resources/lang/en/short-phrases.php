@@ -167,5 +167,7 @@ return [
     'main-sections-shopping-description' => 'Shopping tour of the best shops with corporate discounts',
     'main-sections-medical-tourism-description' => 'The most advanced medicine in the best clinics in Turkey',
     'main-sections-yachts-rental-description' => 'Boat trips on luxury yachts',
-    'profit-percent' => 'Profit percent'
+    'profit-percent' => 'Profit percent',
+    'sub-partners' => 'Sub partners',
+    'add-sub-partner' => 'Add sub partner'
 ];

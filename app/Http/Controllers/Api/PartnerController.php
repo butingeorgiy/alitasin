@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -59,6 +60,20 @@ class PartnerController extends Controller
             'sale_percent' => $request->input('sale_percent'),
             'user_id' => $user->id
         ]);
+
+        // If has parent_user_id
+
+        if ($request->has('parent_user_id')) {
+            /** @var User $partner */
+            if (!$partner = User::partners()->find($request->input('parent_user_id'))) {
+                throw new Exception(__('messages.user-not-found'));
+            }
+
+            DB::table('sub_partners')->insert([
+                'parent_user_id' => $partner->id,
+                'user_id' => $user->id
+            ]);
+        }
 
         return [
             'status' => true,
