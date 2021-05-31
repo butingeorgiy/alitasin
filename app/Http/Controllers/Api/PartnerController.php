@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\PartnerCreatingRequest;
+use App\Mail\PasswordGenerated;
 use App\Models\PartnerPayment;
 use App\Models\PartnerPercent;
 use App\Models\PromoCode;
@@ -11,6 +12,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -40,7 +42,7 @@ class PartnerController extends Controller
             $user->last_name = $request->input('last_name');
         }
 
-        $user->generatePassword();
+        $generatedPassword = $user->generatePassword();
 
         if (!$user->save()) {
             throw new Exception(__('messages.user-creating-failed'));
@@ -83,6 +85,9 @@ class PartnerController extends Controller
                 'percent' => $subPartnerProfitPercent
             ]);
         }
+
+        Mail::to($user->email)
+            ->send(new PasswordGenerated($user->first_name, $generatedPassword));
 
         return [
             'status' => true,
