@@ -22,6 +22,7 @@
     </div>
     <div class="flex items-center">
         <p class="text-black font-semibold">$ {{ $partner->total_payment_amount }}</p>
+{{--        <p class="text-black font-semibold">{{ json_encode($partner->subPartnerIds()) }}</p>--}}
     </div>
     <div class="relative flex items-center">
         @if($partner->trashed())

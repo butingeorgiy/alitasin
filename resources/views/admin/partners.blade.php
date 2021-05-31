@@ -51,7 +51,6 @@
                     @include('components.partners.partner-table-item')
                 @endforeach
             </div>
-
         </div>
     </section>
 

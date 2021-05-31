@@ -132,5 +132,6 @@ return [
     'profit-percent-required' => 'Укажите процент прибыли!',
     'profit-percent-numeric' => 'Процент прибыли должен быть числом!',
     'profit-percent-min' => 'Процент прибыли не может быть меньше 0!',
-    'profit-percent-max' => 'Процент прибыли не может быть больше 100!'
+    'profit-percent-max' => 'Процент прибыли не может быть больше 100!',
+    'sub-partner-profit-percent-required' => 'Укажите процент прибыли от под партнёра!'
 ];

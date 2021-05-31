@@ -169,5 +169,6 @@ return [
     'main-sections-yachts-rental-description' => 'Boat trips on luxury yachts',
     'profit-percent' => 'Profit percent',
     'sub-partners' => 'Sub partners',
-    'add-sub-partner' => 'Add sub partner'
+    'add-sub-partner' => 'Add sub partner',
+    'sub-partner-profit-percent' => 'Profit percent form sub partners'
 ];

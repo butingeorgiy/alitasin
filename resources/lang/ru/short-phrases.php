@@ -169,5 +169,6 @@ return [
     'main-sections-yachts-rental-description' => 'Морские прогулки на роскошных яхтах',
     'profit-percent' => 'Процент прибыли',
     'sub-partners' => 'Под партнёры',
-    'add-sub-partner' => 'Добавить под партнёра'
+    'add-sub-partner' => 'Добавить под партнёра',
+    'sub-partner-profit-percent' => 'Процент прибыли от под партнёров'
 ];

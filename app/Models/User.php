@@ -34,6 +34,7 @@ use Illuminate\Support\Str;
  * @property int total_payment_amount
  * @property int total_income
  * @property int profit_percent
+ * @property int sub_partners_profit_percent
  */
 class User extends Model
 {
@@ -138,6 +139,11 @@ class User extends Model
         return $this->hasOne(PartnerPercent::class, 'user_id');
     }
 
+    public function subPartnerPercent(): HasOne
+    {
+        return $this->hasOne(SubPartnerPercent::class, 'user_id');
+    }
+
     // Partner methods
 
     /**
@@ -148,6 +154,16 @@ class User extends Model
     public function attractedReservations(): HasManyThrough
     {
         return $this->hasManyThrough(Reservation::class, PromoCode::class);
+    }
+
+    /**
+     * Get partner's promo codes
+     *
+     * @return HasMany
+     */
+    public function promoCodes(): HasMany
+    {
+        return $this->hasMany(PromoCode::class);
     }
 
     /**
@@ -193,9 +209,25 @@ class User extends Model
         $attractedReservations = $this->attractedReservations()->get();
         $totalProfit = 0;
         $profitPercent = $this->profit_percent;
+        $subPartnersProfitPercent = $this->sub_partners_profit_percent;
 
         foreach ($attractedReservations as $item) {
             $totalProfit += $item->costWithSale() * $profitPercent / 100;
+        }
+
+        if ($subPartnersProfitPercent) {
+
+            /** @var $subPartners User[] */
+            $subPartners = User::with(['attractedReservations'])
+                ->whereIn('id', $this->subPartnerIds())->get();
+
+            foreach ($subPartners as $subPartner) {
+                /** @var Reservation $item */
+                foreach ($subPartner->attractedReservations()->get() as $item) {
+                    $totalProfit += $item->costWithSale() * $subPartnersProfitPercent / 100;
+                }
+            }
+
         }
 
         return $totalProfit;
@@ -236,7 +268,21 @@ class User extends Model
     }
 
     /**
-     * Determine if user is sub partner.
+     * Get sub partner profit percent
+     *
+     * @return int|null
+     */
+    public function getSubPartnersProfitPercentAttribute(): ?int
+    {
+        if (!$subPartnerProfitPercent = $this->subPartnerPercent()->get()->first()) {
+            return null;
+        }
+
+        return $subPartnerProfitPercent->percent;
+    }
+
+    /**
+     * Determine if user is sub partner
      *
      * @return bool
      */
@@ -244,5 +290,22 @@ class User extends Model
     {
         return DB::table('sub_partners')
             ->where('user_id', $this->id)->exists();
+    }
+
+    /**
+     * Get ids of sub partners
+     *
+     * @return array
+     */
+    public function subPartnerIds(): array
+    {
+        $subPartnerIds = [];
+
+        foreach (DB::table('sub_partners')->select('user_id')
+                     ->where('parent_user_id', $this->id)->get() as $item) {
+            $subPartnerIds[] = $item->user_id;
+        }
+
+        return $subPartnerIds;
     }
 }

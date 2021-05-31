@@ -35,6 +35,32 @@
                                    name="email" value="{{ $partner->email }}" placeholder="{{ __('short-phrases.nothing-entered') }}">
                         </span>
                     </label>
+
+                    <label class="col-span-1">
+                        <span class="mb-3 text-sm text-gray-500">{{ __('short-phrases.promo-code') }}, %</span>
+                        <span class="flex items-center pb-1 border-b border-black cursor-pointer">
+                            <input class="w-full mr-auto text-sm text-black font-semibold" type="text" readonly
+                                   name="email" value="{{ $partner->promoCodes()->get()->first()->code }}, {{ $partner->promoCodes()->get()->first()->sale_percent }} %" placeholder="{{ __('short-phrases.nothing-entered') }}">
+                        </span>
+                    </label>
+
+                    <label class="col-span-1">
+                        <span class="mb-3 text-sm text-gray-500">{{ __('short-phrases.profit-percent') }}</span>
+                        <span class="flex items-center pb-1 border-b border-black cursor-pointer">
+                            <input class="w-full mr-auto text-sm text-black font-semibold" type="text" readonly
+                                   name="email" value="{{ $partner->profit_percent }} %" placeholder="{{ __('short-phrases.nothing-entered') }}">
+                        </span>
+                    </label>
+
+                    @if($partner->sub_partners_profit_percent)
+                        <label class="col-span-1">
+                            <span class="mb-3 text-sm text-gray-500">{{ __('short-phrases.sub-partner-profit-percent') }}</span>
+                            <span class="flex items-center pb-1 border-b border-black cursor-pointer">
+                                <input class="w-full mr-auto text-sm text-black font-semibold" type="text" readonly
+                                       name="email" value="{{ $partner->sub_partners_profit_percent }} %" placeholder="{{ __('short-phrases.nothing-entered') }}">
+                            </span>
+                        </label>
+                    @endif
                 </div>
             </div>
         </div>

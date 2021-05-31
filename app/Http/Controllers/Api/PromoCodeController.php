@@ -19,13 +19,13 @@ class PromoCodeController extends Controller
         $code = $request->input('code');
 
         if (!$code) {
-            throw new \Exception(__('messages.promo-code-required'));
+            throw new Exception(__('messages.promo-code-required'));
         }
 
         $promoCode = PromoCode::where('code', $code)->select('id', 'sale_percent')->get()->first();
 
         if (!$promoCode) {
-            throw new \Exception(__('messages.promo-code-not-found'));
+            throw new Exception(__('messages.promo-code-not-found'));
         }
 
         return $promoCode;

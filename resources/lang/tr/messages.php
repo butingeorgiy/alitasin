@@ -131,5 +131,6 @@ return [
     'profit-percent-required' => 'Kar yüzdesi belirtilmelidir!',
     'profit-percent-numeric' => 'Kar yüzdesi sayısal olmalıdır!',
     'profit-percent-min' => 'Kar yüzdesi 0\'dan az olamaz!',
-    'profit-percent-max' => 'Kar yüzdesi 100\'den fazla olamaz!'
+    'profit-percent-max' => 'Kar yüzdesi 100\'den fazla olamaz!',
+    'sub-partner-profit-percent-required' => 'Alt iş ortağından kar yüzdesi belirtilmelidir!'
 ];

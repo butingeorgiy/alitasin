@@ -169,5 +169,6 @@ return [
     'main-sections-yachts-rental-description' => 'Lüks yatlarda tekne gezileri',
     'profit-percent' => 'Kar yüzdesi',
     'sub-partners' => 'Alt ortaklar',
-    'add-sub-partner' => 'Alt ortak ekle'
+    'add-sub-partner' => 'Alt ortak ekle',
+    'sub-partner-profit-percent' => 'Alt ortaklardan kâr yüzdesi'
 ];

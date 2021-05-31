@@ -19,6 +19,7 @@ class PartnerController extends Controller
 
     public function show($id)
     {
+        /** @var User|null $partner */
         $partner = User::partners()->withTrashed()->findOrFail($id);
         $subPartnerIds = [];
 
@@ -28,7 +29,11 @@ class PartnerController extends Controller
         }
 
         $subPartners = User::partners()->withTrashed()->whereIn('id', $subPartnerIds)->get();
+        $isSubPartner = $partner->isSubPartner();
 
-        return view('admin.partner', compact('partner', 'subPartners'));
+        return view(
+            'admin.partner',
+            compact('partner', 'subPartners', 'isSubPartner')
+        );
     }
 }

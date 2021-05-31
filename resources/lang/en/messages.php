@@ -131,5 +131,6 @@ return [
     'profit-percent-required' => 'Must specify profit percent!',
     'profit-percent-numeric' => 'Profit percent must be a numeric!',
     'profit-percent-min' => 'Profit percent cannot be less than 0!',
-    'profit-percent-max' => 'Profit percent cannot be more than 100!'
+    'profit-percent-max' => 'Profit percent cannot be more than 100!',
+    'sub-partner-profit-percent-required' => 'Must specify profit percent from sub partner!'
 ];
