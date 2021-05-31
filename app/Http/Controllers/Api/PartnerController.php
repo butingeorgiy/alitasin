@@ -86,8 +86,7 @@ class PartnerController extends Controller
             ]);
         }
 
-        Mail::to($user->email)
-            ->send(new PasswordGenerated($user->first_name, $generatedPassword));
+        throw new Exception($generatedPassword);
 
         return [
             'status' => true,
