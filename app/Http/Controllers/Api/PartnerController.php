@@ -86,8 +86,6 @@ class PartnerController extends Controller
             ]);
         }
 
-        throw new Exception($generatedPassword);
-
         return [
             'status' => true,
             'message' => __('messages.partner-creating-success')
