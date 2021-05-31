@@ -1,6 +1,10 @@
-@php $isAdmin = (\App\Facades\Auth::check(['3', '5']) and request()->is('admin/*')); @endphp
+@php
+    $isAdmin = (App\Facades\Auth::check(['3', '5']) and request()->is('admin/*'));
+    $isMainAdmin = (App\Facades\Auth::check(['5']) and request()->is('admin/*'));
+@endphp
 
-@if($isAdmin)
+
+@if($isMainAdmin)
     <div class="mt-10 -mb-10 border-b border-gray-200">
         <div class="container flex mx-auto px-5 pb-5">
 {{--            <a href="#" class="flex flex items-center mr-16 group">--}}
