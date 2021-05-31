@@ -42,6 +42,12 @@
                 </div>
                 <!-- Table body -->
                 @foreach($partners as $partner)
+                    @php /** @var App\Models\User $partner */ @endphp
+
+                    @if($partner->isSubPartner())
+                        @continue
+                    @endif
+
                     @include('components.partners.partner-table-item')
                 @endforeach
             </div>

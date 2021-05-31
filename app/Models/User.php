@@ -234,4 +234,15 @@ class User extends Model
 
         return $percent->percent;
     }
+
+    /**
+     * Determine if user is sub partner.
+     *
+     * @return bool
+     */
+    public function isSubPartner(): bool
+    {
+        return DB::table('sub_partners')
+            ->where('user_id', $this->id)->exists();
+    }
 }
