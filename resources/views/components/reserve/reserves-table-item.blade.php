@@ -15,7 +15,14 @@
         </div>
     </div>
     <div class="flex flex-col">
-        <a href="{{ route('tour', $reservation->tour->id) }}" target="_blank" class="text-black font-semibold truncate" title="{{ $reservation->tour->title[App::getLocale()] }}">{{ $reservation->tour->title[App::getLocale()] }}</a>
+        @if($reservation->tour)
+            <a href="{{ route('tour', $reservation->tour->id) }}" target="_blank" class="text-black font-semibold truncate"
+               title="{{ $reservation->tour->title[App::getLocale()] }}">
+                {{ $reservation->tour->title[App::getLocale()] }}
+            </a>
+        @else
+            <p class="text-black font-semibold" >{{ __('messages.tour-not-found') }}</p>
+        @endif
         <p class="text-sm text-gray-600 font-light">{{ $reservation->date ?: '–' }} / {{ $reservation->time ?: '–' }}</p>
     </div>
     <div class="flex flex-col">
