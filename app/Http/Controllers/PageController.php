@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Facades\Auth;
 use App\Models\Region;
+use App\Models\Reservation;
 use App\Models\Tour;
+use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Illuminate\Http\RedirectResponse;
@@ -144,6 +146,8 @@ class PageController extends Controller
 
         if ($user->account_type_id === '1') {
             return redirect()->route('client-profile');
+        } else if ($user->account_type_id === '2') {
+            return redirect()->route('partner-profile');
         }
 
         return redirect()->route('index');
@@ -302,6 +306,23 @@ class PageController extends Controller
         }
 
         return view('profile.client', compact('user', 'recentViewed', 'reservedTours', 'favoriteTours'));
+    }
+
+    public function showPartnerProfile()
+    {
+        /** @var User|null $user */
+        $user = Auth::user();
+
+        if (Storage::exists('profile_pictures/' . $user->id . '.jpg')) {
+            $user->profile = route('get-image', [
+                'dir' => 'profile_pictures',
+                'file' => $user->id . '.jpg'
+            ]);
+        }
+
+        $reservations = $user->attractedReservations()->get();
+
+        return view('profile.partner', compact('user', 'reservations'));
     }
 
     public function showVehicles(Request $request)

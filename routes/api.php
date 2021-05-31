@@ -7,7 +7,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'users'], function () {
     Route::post('update/profile-photo', 'Api\UserController@uploadProfilePhoto')->middleware('auth:1,2,3,4,5');
-    Route::post('update', 'Api\UserController@update')->middleware('auth:1');
+    Route::post('update', 'Api\UserController@update')->middleware('auth:1,2');
 });
 
 Route::group(['prefix' => 'partners'], function () {

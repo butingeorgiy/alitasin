@@ -9,6 +9,7 @@ Route::get('vehicles', 'PageController@showVehicles')->name('vehicles');
 Route::group(['prefix' => 'profile'], function () {
     Route::get('', 'PageController@profileIndex')->middleware('auth:1,2')->name('profile-index');
     Route::get('client', 'PageController@showClientProfile')->middleware('auth:1')->name('client-profile');
+    Route::get('partner', 'PageController@showPartnerProfile')->middleware('auth:2')->name('partner-profile');
 });
 
 Route::group(['prefix' => 'admin'], function () {
