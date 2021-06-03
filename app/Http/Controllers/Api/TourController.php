@@ -104,6 +104,7 @@ class TourController extends Controller
                     'en_description' => $addition->en_description ?: null,
                     'ru_description' => $addition->ru_description ?: null,
                     'tr_description' => $addition->tr_description ?: null,
+                    'ua_description' => $addition->ua_description ?: null,
                     'is_include' => $addition->is_include
                 ];
             }
@@ -115,13 +116,15 @@ class TourController extends Controller
         $tourTitle = TourTitle::create([
             'ru' => $request->input('ru_title'),
             'en' => $request->input('en_title'),
-            'tr' => $request->input('tr_title')
+            'tr' => $request->input('tr_title'),
+            'ua' => $request->input('ua_title')
         ]);
 
         $tourDescription = TourDescription::create([
             'ru' => $request->input('ru_description'),
             'en' => $request->input('en_description'),
-            'tr' => $request->input('tr_description')
+            'tr' => $request->input('tr_description'),
+            'ua' => $request->input('ua_description')
         ]);
 
         $tour->title()->associate($tourTitle);
@@ -219,6 +222,10 @@ class TourController extends Controller
             $tour->title->tr = $request->input('tr_title');
         }
 
+        if ($tour->title->ua !== $request->input('ua_title')) {
+            $tour->title->ua = $request->input('ua_title');
+        }
+
         $tour->title->save();
 
         // Description updating
@@ -232,6 +239,10 @@ class TourController extends Controller
 
         if ($tour->description->tr !== $request->input('tr_description')) {
             $tour->description->tr = $request->input('tr_description');
+        }
+
+        if ($tour->description->ua !== $request->input('ua_description')) {
+            $tour->description->ua = $request->input('ua_description');
         }
 
         $tour->description->save();
@@ -294,6 +305,7 @@ class TourController extends Controller
                     'en_description' => $addition->en_description ?: null,
                     'ru_description' => $addition->ru_description ?: null,
                     'tr_description' => $addition->tr_description ?: null,
+                    'ua_description' => $addition->ua_description ?: null,
                     'is_include' => $addition->is_include
                 ];
             }

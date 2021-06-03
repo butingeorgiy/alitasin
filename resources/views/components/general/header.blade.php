@@ -44,7 +44,7 @@
                 <div class="show-reg-popup-button text-black font-medium hover:underline">{{ __('buttons.reg') }}</div>
             @endif
                 <select class="ml-8 cursor-pointer bg-white text-blue" name="language">
-                    @foreach(['ru', 'en', 'tr'] as $lang)
+                    @foreach(['ru', 'en', 'tr', 'ua'] as $lang)
                         <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
                     @endforeach
                 </select>
@@ -102,7 +102,7 @@
                 <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.reviews') }}</a>
                 <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.contacts') }}</a>
                 <select class="text-sm text-black font-semibold bg-white" name="language">
-                    @foreach(['ru', 'en', 'tr'] as $lang)
+                    @foreach(['ru', 'en', 'tr', 'ua'] as $lang)
                         <option value="{{ $lang }}" {{ App::getLocale() === $lang ? 'selected' : '' }}>{{ ucfirst($lang) }}</option>
                     @endforeach
                 </select>

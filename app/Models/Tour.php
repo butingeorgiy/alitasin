@@ -158,7 +158,7 @@ class Tour extends Model
             return null;
         }
 
-        if ($locale === 'ru') {
+        if ($locale === 'ru' || $locale === 'ua') {
             $vars = ($mode === 'h' ? ['час', 'часа', 'часов'] : ['день', 'дня', 'дней']);
             return RusDecl::resolve($int, $vars);
         } else if ($locale === 'tr') {

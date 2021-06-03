@@ -109,9 +109,17 @@
             <p class="mb-2 font-semibold">{{ __('short-phrases.tr-title') }}</p>
             <input type="text"
                    name="tr_title"
-                   class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                   class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                    maxlength="256"
                    value="{{ $tour->title->tr }}"
+                   placeholder="{{ __('short-phrases.max-allowed-characters') }} - 256">
+
+            <p class="mb-2 font-semibold">{{ __('short-phrases.ua-title') }}</p>
+            <input type="text"
+                   name="ua_title"
+                   class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                   maxlength="256"
+                   value="{{ $tour->title->ua }}"
                    placeholder="{{ __('short-phrases.max-allowed-characters') }} - 256">
         </div>
 
@@ -121,24 +129,32 @@
                 class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                 name="en_description"
                 rows="6"
-                maxlength="2048"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 2048">{{ $tour->description->en }}</textarea>
+                maxlength="10240"
+                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240">{{ $tour->description->en }}</textarea>
 
             <p class="mb-2 font-semibold">{{ __('short-phrases.ru-description') }}</p>
             <textarea
                 class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                 name="ru_description"
                 rows="6"
-                maxlength="2048"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 2048">{{ $tour->description->ru }}</textarea>
+                maxlength="10240"
+                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240">{{ $tour->description->ru }}</textarea>
 
             <p class="mb-2 font-semibold">{{ __('short-phrases.tr-description') }}</p>
             <textarea
-                class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                 name="tr_description"
                 rows="6"
-                maxlength="2048"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 2048">{{ $tour->description->tr }}</textarea>
+                maxlength="10240"
+                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240">{{ $tour->description->tr }}</textarea>
+
+            <p class="mb-2 font-semibold">{{ __('short-phrases.ua-description') }}</p>
+            <textarea
+                    class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                    name="ua_description"
+                    rows="6"
+                    maxlength="10240"
+                    placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240">{{ $tour->description->ua }}</textarea>
         </div>
 
         <div class="grid grid-cols-3 gap-5 mt-12">
