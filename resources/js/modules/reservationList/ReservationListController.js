@@ -14,35 +14,38 @@ class ReservationListController extends EventHandler {
     constructor(nodes) {
         super();
 
-        this.nodes = {
-            ...nodes,
-            statusSelect: nodes.statusPopup.querySelector('select[name="reservation_status"]'),
-            updateStatusButton: nodes.statusPopup.querySelector('.update-status-button'),
-            filtersContainer: nodes.container.querySelector('.reserves-filters'),
-            detailsDateInput: nodes.detailsPopup.querySelector('input[name="tour_date"]')
-        };
+        if (/^\/admin\/reserves$/.test(location.pathname) && nodes.statusPopup) {
+            this.nodes = {
+                ...this.nodes,
+                statusSelect: nodes.statusPopup.querySelector('select[name="reservation_status"]'),
+                updateStatusButton: nodes.statusPopup.querySelector('.update-status-button'),
+                filtersContainer: nodes.container.querySelector('.reserves-filters'),
+                detailsDateInput: nodes.detailsPopup.querySelector('input[name="tour_date"]')
+            };
 
-        this.view = new ReservationListView({
-            updateStatusButton: this.nodes.updateStatusButton,
-            updateStatusError: nodes.statusPopup.querySelector('.error-message'),
-            updateStatusSuccess: nodes.statusPopup.querySelector('.success-message'),
-            statusSelect: this.nodes.statusSelect
-        });
+            this.view = new ReservationListView({
+                updateStatusButton: this.nodes.updateStatusButton,
+                updateStatusError: nodes.statusPopup.querySelector('.error-message'),
+                updateStatusSuccess: nodes.statusPopup.querySelector('.success-message'),
+                statusSelect: this.nodes.statusSelect
+            });
 
-        this.filters = {
-            'tour_id': null,
-            'date_min': null,
-            'date_max': null,
-            'time': null
-        };
+            this.filters = {
+                'tour_id': null,
+                'date_min': null,
+                'date_max': null,
+                'time': null
+            };
 
-        this.statusUpdatingLoading = false;
-        this.statusUpdatingDisabled = true;
+            this.statusUpdatingLoading = false;
+            this.statusUpdatingDisabled = true;
 
-        this.initStatusPopup();
-        this.initDetailsPopup();
-        this.initFilters();
-        this.initDetailsDatePicker();
+            this.initStatusPopup();
+            this.initDetailsPopup();
+            this.initFilters();
+            this.initDetailsDatePicker();
+        }
+
         this.initShowReservationContextMenu(nodes.container.querySelectorAll('.reserves-item'));
     }
 

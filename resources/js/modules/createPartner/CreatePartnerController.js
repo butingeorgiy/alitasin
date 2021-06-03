@@ -72,7 +72,7 @@ class CreatePartnerController extends EventHandler {
         }
 
         if (
-            /^\/admin\/partners$/.test(location.pathname) &&
+            /^\/admin\/partners\/\d+$/.test(location.pathname) &&
             this.nodes.createPartnerPopup.querySelector('input[name="sub_partner_profit_percent"]')
         ) {
             formData.append(

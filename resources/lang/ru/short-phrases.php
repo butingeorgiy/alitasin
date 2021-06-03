@@ -170,5 +170,9 @@ return [
     'profit-percent' => 'Процент прибыли',
     'sub-partners' => 'Под партнёры',
     'add-sub-partner' => 'Добавить под партнёра',
-    'sub-partner-profit-percent' => 'Процент прибыли от под партнёров'
+    'sub-partner-profit-percent' => 'Процент прибыли от под партнёров',
+    'income' => 'Доход',
+    'earned' => 'Заработано',
+    'payed' => 'Оплачено',
+    'status' => 'Статус'
 ];

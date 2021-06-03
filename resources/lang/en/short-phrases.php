@@ -170,5 +170,9 @@ return [
     'profit-percent' => 'Profit percent',
     'sub-partners' => 'Sub partners',
     'add-sub-partner' => 'Add sub partner',
-    'sub-partner-profit-percent' => 'Profit percent form sub partners'
+    'sub-partner-profit-percent' => 'Profit percent form sub partners',
+    'income' => 'Income',
+    'earned' => 'Earned',
+    'payed' => 'Payed',
+    'status' => 'Status'
 ];

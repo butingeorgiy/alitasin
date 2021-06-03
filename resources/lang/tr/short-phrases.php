@@ -170,5 +170,9 @@ return [
     'profit-percent' => 'Kar yüzdesi',
     'sub-partners' => 'Alt ortaklar',
     'add-sub-partner' => 'Alt ortak ekle',
-    'sub-partner-profit-percent' => 'Alt ortaklardan kâr yüzdesi'
+    'sub-partner-profit-percent' => 'Alt ortaklardan kâr yüzdesi',
+    'income' => 'Gelir',
+    'earned' => 'kazanılan',
+    'payed' => 'Payed',
+    'status' => 'Status'
 ];
