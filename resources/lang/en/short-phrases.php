@@ -70,7 +70,7 @@ return [
     // Days of the week (end)
 
     'tours' => 'Excursions',
-    'transport-rental' => 'Taşımacılık kiralama',
+    'transport-rental' => 'Transport rental',
     'property' => 'Real estate',
     'main-sections-tours-description' => 'Any excursions to your taste',
     'main-sections-transport-description' => 'Choose a car for sharing trips',
@@ -109,7 +109,6 @@ return [
     'reserves-title-tour' => 'Name and date of excursion',
     'reserves-title-offered-at' => 'Offered at',
     'reserves-title-status' => 'Status',
-
     'time' => 'Time',
     'excursion' => 'Excursion',
     'select-date' => 'Select date',
