@@ -71,14 +71,14 @@ class PartnerController extends Controller
                 throw new Exception(__('messages.user-not-found'));
             }
 
+            if (!$subPartnerProfitPercent = $request->input('sub_partner_profit_percent')) {
+                throw new Exception(__('messages.sub-partner-profit-percent-required'));
+            }
+
             DB::table('sub_partners')->insert([
                 'parent_user_id' => $partner->id,
                 'user_id' => $user->id
             ]);
-        } else {
-            if (!$subPartnerProfitPercent = $request->input('sub_partner_profit_percent')) {
-                throw new Exception(__('messages.sub-partner-profit-percent-required'));
-            }
 
             DB::table('sub_partner_percents')->insert([
                 'user_id' => $user->id,

@@ -210,13 +210,12 @@ class User extends Model
         $attractedReservations = $this->attractedReservations()->get();
         $totalProfit = 0;
         $profitPercent = $this->profit_percent;
-        $subPartnersProfitPercent = $this->sub_partners_profit_percent;
 
         foreach ($attractedReservations as $item) {
             $totalProfit += $item->costWithSale() * $profitPercent / 100;
         }
 
-        if ($subPartnersProfitPercent) {
+        if ($this->hasSubPartners()) {
 
             /** @var $subPartners User[] */
             $subPartners = User::with(['attractedReservations'])
@@ -225,7 +224,7 @@ class User extends Model
             foreach ($subPartners as $subPartner) {
                 /** @var Reservation $item */
                 foreach ($subPartner->attractedReservations()->get() as $item) {
-                    $totalProfit += $item->costWithSale() * $subPartnersProfitPercent / 100;
+                    $totalProfit += $item->costWithSale() * $subPartner->sub_partners_profit_percent / 100;
                 }
             }
 
@@ -308,5 +307,16 @@ class User extends Model
         }
 
         return $subPartnerIds;
+    }
+
+    /**
+     * Determine if user has sub partners
+     *
+     * @return bool
+     */
+    public function hasSubPartners(): bool
+    {
+        return DB::table('sub_partners')
+            ->where('parent_user_id', $this->id)->exists();
     }
 }
