@@ -127,6 +127,7 @@ class TourFormBaseView {
                     <p class="text-sm text-gray-400 italic">En:&nbsp;&nbsp;${addition.en_description || 'Ничего не указано'}</p>
                     <p class="text-sm text-gray-400 italic">Ru:&nbsp;&nbsp;${addition.ru_description || 'Ничего не указано'}</p>
                     <p class="text-sm text-gray-400 italic">Tr:&nbsp;&nbsp;${addition.tr_description || 'Ничего не указано'}</p>
+                    <p class="text-sm text-gray-400 italic">Ua:&nbsp;&nbsp;${addition.ua_description || 'Ничего не указано'}</p>
                 </div>
             `;
 
@@ -187,6 +188,7 @@ class TourFormBaseView {
                     <p class="text-sm text-gray-400 italic">En:&nbsp;&nbsp;${param.en_value || 'Ничего не указано'}</p>
                     <p class="text-sm text-gray-400 italic">Ru:&nbsp;&nbsp;${param.ru_value || 'Ничего не указано'}</p>
                     <p class="text-sm text-gray-400 italic">Tr:&nbsp;&nbsp;${param.tr_value || 'Ничего не указано'}</p>
+                    <p class="text-sm text-gray-400 italic">Ua:&nbsp;&nbsp;${param.ua_value || 'Ничего не указано'}</p>
                 </div>
             `;
 

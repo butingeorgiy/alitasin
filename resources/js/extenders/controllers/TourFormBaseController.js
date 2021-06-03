@@ -59,6 +59,7 @@ class TourFormBaseController extends EventHandler {
         this.nodes.additionPopup.querySelector('input[name="en_description"]').value = '';
         this.nodes.additionPopup.querySelector('input[name="ru_description"]').value = '';
         this.nodes.additionPopup.querySelector('input[name="tr_description"]').value = '';
+        this.nodes.additionPopup.querySelector('input[name="ua_description"]').value = '';
         this.view.hideAdditionPopupError();
         this.removeAllListeners(this.nodes.attachAdditionButton, 'click');
     }
@@ -68,6 +69,7 @@ class TourFormBaseController extends EventHandler {
         this.nodes.paramPopup.querySelector('input[name="en_value"]').value = '';
         this.nodes.paramPopup.querySelector('input[name="ru_value"]').value = '';
         this.nodes.paramPopup.querySelector('input[name="tr_value"]').value = '';
+        this.nodes.paramPopup.querySelector('input[name="ua_value"]').value = '';
         this.view.hideParamPopupError();
         this.removeAllListeners(this.nodes.attachParameterButton, 'click');
     }
@@ -93,6 +95,7 @@ class TourFormBaseController extends EventHandler {
             en_description = this.nodes.additionPopup.querySelector('input[name="en_description"]').value,
             ru_description = this.nodes.additionPopup.querySelector('input[name="ru_description"]').value,
             tr_description = this.nodes.additionPopup.querySelector('input[name="tr_description"]').value,
+            ua_description = this.nodes.additionPopup.querySelector('input[name="ua_description"]').value,
             needToCreate = true;
 
         // Check if this addition already attached
@@ -104,6 +107,7 @@ class TourFormBaseController extends EventHandler {
                     en_description,
                     ru_description,
                     tr_description,
+                    ua_description,
                     is_include: isInclude
                 };
             }
@@ -116,6 +120,7 @@ class TourFormBaseController extends EventHandler {
                 en_description,
                 ru_description,
                 tr_description,
+                ua_description,
                 is_include: isInclude
             });
         }
@@ -141,9 +146,10 @@ class TourFormBaseController extends EventHandler {
             en_value = this.nodes.paramPopup.querySelector('input[name="en_value"]').value,
             ru_value = this.nodes.paramPopup.querySelector('input[name="ru_value"]').value,
             tr_value = this.nodes.paramPopup.querySelector('input[name="tr_value"]').value,
+            ua_value = this.nodes.paramPopup.querySelector('input[name="ua_value"]').value,
             needToCreate = true;
 
-        if (!en_value || !ru_value || !tr_value) {
+        if (!en_value || !ru_value || !tr_value || !ua_value) {
             this.view.showParamPopupError(LocaleHelper.translate('not-all-fields-filled'));
             return;
         }
@@ -156,7 +162,8 @@ class TourFormBaseController extends EventHandler {
                     ...item,
                     en_value,
                     ru_value,
-                    tr_value
+                    tr_value,
+                    ua_value
                 };
             }
         });
@@ -167,7 +174,8 @@ class TourFormBaseController extends EventHandler {
                 title,
                 en_value,
                 ru_value,
-                tr_value
+                tr_value,
+                ua_value
             });
         }
 
@@ -218,6 +226,7 @@ class TourFormBaseController extends EventHandler {
                 this.nodes.additionPopup.querySelector('input[name="en_description"]').value = addition.en_description;
                 this.nodes.additionPopup.querySelector('input[name="ru_description"]').value = addition.ru_description;
                 this.nodes.additionPopup.querySelector('input[name="tr_description"]').value = addition.tr_description;
+                this.nodes.additionPopup.querySelector('input[name="ua_description"]').value = addition.ua_description;
                 this.addEvent(this.nodes.attachAdditionButton, 'click', _ => this.attachAddition(addition.is_include));
             });
         });
@@ -230,6 +239,7 @@ class TourFormBaseController extends EventHandler {
                 this.nodes.paramPopup.querySelector('input[name="en_value"]').value = param.en_value;
                 this.nodes.paramPopup.querySelector('input[name="ru_value"]').value = param.ru_value;
                 this.nodes.paramPopup.querySelector('input[name="tr_value"]').value = param.tr_value;
+                this.nodes.paramPopup.querySelector('input[name="ua_value"]').value = param.ua_value;
                 this.addEvent(this.nodes.attachParameterButton, 'click', _ => this.attachParam());
             });
         });
