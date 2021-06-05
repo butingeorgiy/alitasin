@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\PartnerCreatingRequest;
-use App\Mail\PasswordGenerated;
+use App\Mail\AccountCreated;
 use App\Models\PartnerPayment;
 use App\Models\PartnerPercent;
 use App\Models\PromoCode;
@@ -86,6 +86,9 @@ class PartnerController extends Controller
                 'percent' => $subPartnerProfitPercent
             ]);
         }
+
+        Mail::to($user->email)
+            ->send(new AccountCreated($generatedPassword, $user->first_name, true));
 
         return [
             'status' => true,

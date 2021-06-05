@@ -5,10 +5,8 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use phpDocumentor\Reflection\Types\This;
 
-class PasswordGenerated extends Mailable
+class AccountCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,14 +26,22 @@ class PasswordGenerated extends Mailable
     public string $password;
 
     /**
+     * Determine if registered user is partner
+     *
+     * @var bool
+     */
+    public bool $isPartner;
+
+    /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $password, string $firstName)
+    public function __construct(string $password, string $firstName, bool $isPartner = false)
     {
         $this->firstName = $firstName;
         $this->password = $password;
+        $this->isPartner = $isPartner;
     }
 
     /**
@@ -43,9 +49,10 @@ class PasswordGenerated extends Mailable
      *
      * @return $this
      */
-    public function build(): PasswordGenerated
+    public function build(): AccountCreated
     {
+
         return $this->subject('You was registered successfully!')
-            ->view('emails.password');
+            ->view($this->isPartner ? 'emails.partner-account-created' : 'emails.user-account-created');
     }
 }

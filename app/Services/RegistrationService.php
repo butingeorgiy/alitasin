@@ -3,9 +3,8 @@
 
 namespace App\Services;
 
-
 use App\Facades\Token;
-use App\Mail\PasswordGenerated;
+use App\Mail\AccountCreated;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Mail;
@@ -70,6 +69,6 @@ class RegistrationService
     public function notify(User $user, string $password): void
     {
         Mail::to($user->email)
-            ->send(new PasswordGenerated($password, $user->first_name));
+            ->send(new AccountCreated($password, $user->first_name));
     }
 }
