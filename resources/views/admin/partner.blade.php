@@ -76,5 +76,6 @@
 
     @include('popups.create-partner')
     @include('popups.partner-payment')
+    @include('popups.update-profit-percent')
 </body>
 </html>

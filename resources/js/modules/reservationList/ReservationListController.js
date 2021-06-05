@@ -166,7 +166,11 @@ class ReservationListController extends EventHandler {
     }
 
     initStatusPopup() {
-        this.statusPopup = PopupObserver.init(this.nodes.statusPopup, false, _ => this.afterStatusPopupCloseHandler());
+        this.statusPopup = PopupObserver.init(
+            this.nodes.statusPopup,
+            false,
+                _ => this.afterStatusPopupCloseHandler()
+        );
     }
 
     initDetailsPopup() {
@@ -176,7 +180,9 @@ class ReservationListController extends EventHandler {
     onContextOptionClick(key, options) {
         switch (key) {
             case 'change-status':
-                this.statusPopup.open(_ => this.beforeStatusPopupOpenHandler(...JsonHelper.getFromJson(options, 'status_id', 'reservation_id')));
+                this.statusPopup.open(_ => this.beforeStatusPopupOpenHandler(
+                    ...JsonHelper.getFromJson(options, 'status_id', 'reservation_id')
+                ));
                 break;
             case 'show-info':
                 this.detailsPopup.open(_ => this.beforeDetailsPopupOpenHandler(JsonHelper.parse(options)));
@@ -197,10 +203,11 @@ class ReservationListController extends EventHandler {
 
         if (details['promo-code']) {
             this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = details['promo-code']['code'];
-            this.nodes.detailsPopup.querySelector('.promo-code .active').innerText = `Активен (-${details['promo-code']['percent']}%)`;
+            this.nodes.detailsPopup.querySelector('.promo-code .active').innerText =
+                `${LocaleHelper.translate('activated')} (-${details['promo-code']['percent']}%)`;
             this.nodes.detailsPopup.querySelector('.promo-code .active').classList.remove('hidden');
         } else {
-            this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = 'Ничего не указано';
+            this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = LocaleHelper.translate('nothing-entered');
             this.nodes.detailsPopup.querySelector('.promo-code .active').innerText = '';
             this.nodes.detailsPopup.querySelector('.promo-code .active').classList.add('hidden');
         }

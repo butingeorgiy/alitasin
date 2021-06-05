@@ -7,6 +7,7 @@ use App\Mail\PasswordGenerated;
 use App\Models\PartnerPayment;
 use App\Models\PartnerPercent;
 use App\Models\PromoCode;
+use App\Models\SubPartnerPercent;
 use App\Models\User;
 use Exception;
 use App\Http\Controllers\Controller;
@@ -189,6 +190,60 @@ class PartnerController extends Controller
         return [
             'status' => true,
             'message' => __('messages.partner-payment-saving-success')
+        ];
+    }
+
+    /**
+     * Update partner's profit percent
+     *
+     * @param Request $request
+     * @param $id
+     * @return array
+     * @throws Exception
+     */
+    public function updateProfitPercent(Request $request, $id): array
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'profit_percent' => 'bail|required|numeric|min:0|max:100',
+                'is_sub_partner_percent' => 'bail|required|string|in:0,1'
+            ],
+            [
+                'profit_percent.required' => __('messages.profit-percent-required'),
+                'profit_percent.numeric' => __('messages.profit-percent-numeric'),
+                'profit_percent.min' => __('messages.profit-percent-min'),
+                'profit_percent.max' => __('messages.profit-percent-max'),
+                'is_sub_partner_percent.required' => __('messages.is-sub-partner-percent-required'),
+                'is_sub_partner_percent.string' => __('messages.is-sub-partner-percent-string'),
+                'is_sub_partner_percent.in' => __('messages.is-sub-partner-percent-in')
+            ]
+        );
+
+        if ($validator->fails()) {
+            throw new Exception($validator->errors()->first());
+        }
+
+        /**
+         * @var $partner User
+         */
+        if (!$partner = User::partners()->find($id)) {
+            throw new Exception(__('messages.user-not-found'));
+        }
+
+        if ($request->input('is_sub_partner_percent') === '0') {
+            $isUpdated = $partner->updateProfitPercent((int) $request->input('profit_percent'));
+        } else {
+            $isUpdated = $partner->updateSubPartnerProfitPercent((int) $request->input('profit_percent'));
+        }
+
+        if (!$isUpdated) {
+            throw new Exception(__('messages.updating-failed'));
+        }
+
+        return [
+            'status' => true,
+            'message' => __('messages.profit-percent-updating-success')
         ];
     }
 }

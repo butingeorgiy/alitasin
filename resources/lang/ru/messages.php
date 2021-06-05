@@ -139,5 +139,9 @@ return [
     'profit-percent-numeric' => 'Процент прибыли должен быть числом!',
     'profit-percent-min' => 'Процент прибыли не может быть меньше 0!',
     'profit-percent-max' => 'Процент прибыли не может быть больше 100!',
-    'sub-partner-profit-percent-required' => 'Укажите процент прибыли от под партнёра!'
+    'sub-partner-profit-percent-required' => 'Укажите процент прибыли от под партнёра!',
+    'profit-percent-updating-success' => 'Процент успешно обновлен!',
+    'is-sub-partner-percent-required' => 'Укажите параметр :attribute!',
+    'is-sub-partner-percent-string' => ':attribute должен быть строкой!',
+    'is-sub-partner-percent-in' => ':attribute может иметь значение 0 или 1!'
 ];

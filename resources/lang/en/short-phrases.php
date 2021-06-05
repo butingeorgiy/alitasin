@@ -175,5 +175,10 @@ return [
     'income' => 'Income',
     'earned' => 'Earned',
     'payed' => 'Payed',
-    'status' => 'Status'
+    'status' => 'Status',
+    'add-vehicle' => 'Add vehicle',
+    'update-profit-percent' => 'Update profit percent',
+    'current-value' => 'Current value',
+    'update-partner-profit-percent-option' => 'Edit percent',
+    'update-sub-partner-profit-percent-option' => 'Edit sub partner percent'
 ];

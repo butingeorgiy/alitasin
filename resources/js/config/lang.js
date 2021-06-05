@@ -85,6 +85,12 @@ const langConfig = {
             'ru': 'Не все поля заполнены',
             'tr': 'Tüm alanlar doldurulmadı',
             'ua': 'Не всі поля заповнені'
+        },
+        'nothing-entered': {
+            'en': 'Nothing entered',
+            'ru': 'Ничего не указано',
+            'tr': 'Hiçbir şey belirtilmedi',
+            'ua': 'Нічого не вказано'
         }
     }
 };

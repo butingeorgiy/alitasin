@@ -1,15 +1,17 @@
-<div id="partnerPaymentPopup" class="hidden fixed w-screen h-screen top-0 left-0 flex justify-center items-center z-50 bg-black bg-opacity-60">
+<div id="updateProfitPercentPopup" class="hidden fixed w-screen h-screen top-0 left-0 flex justify-center items-center z-50 bg-black bg-opacity-60">
     <div class="popup flex flex-col relative top-0 top-80 p-5 sm:p-10 bg-white rounded-xl duration-300" style="width: 500px">
-        <div class="flex items-center mb-8">
-            <p class="mr-auto text-2xl text-black font-bold tracking-wider">{{ __('short-phrases.make-payment') }}</p>
+        <div class="flex items-center mb-4">
+            <p class="mr-auto text-2xl text-black font-bold tracking-wider">{{ __('short-phrases.update-profit-percent') }}</p>
             <svg class="close-popup-button min-w-6 min-h-6 w-6 h-6 text-gray-300 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </div>
 
+        <div class="mb-4"><span class="text-gray-500 font-medium">{{ __('short-phrases.current-value') }}:</span>&nbsp;&nbsp;<span class="current-profit-percent">0</span> %</div>
+
         <label class="px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="number" name="amount" min="0" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.payment-amount')  }}">
+            <input type="number" name="profit_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                   placeholder="{{ __('short-phrases.profit-percent')  }}">
         </label>
 
         <div class="error-message hidden flex items-center -mb-4 mt-6 px-4 py-3 text-red-600 font-medium bg-red-200 rounded-md">
@@ -30,7 +32,7 @@
             <span></span>
         </div>
 
-        <div class="make-partner-payment-button flex justify-center items-center mt-8 py-3 text-sm text-white font-medium bg-blue rounded-md tracking-wider cursor-pointer">
+        <div class="update-profit-percent-button flex justify-center items-center mt-8 py-3 text-sm text-white font-medium bg-blue rounded-md tracking-wider cursor-pointer">
             <svg class="animate-spin mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

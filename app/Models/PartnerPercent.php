@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PartnerPercent extends Model
 {
+    protected $primaryKey = 'user_id';
+
+    public $incrementing = false;
+
     public $timestamps = false;
 
     protected $guarded = [];

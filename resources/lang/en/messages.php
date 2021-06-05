@@ -138,5 +138,9 @@ return [
     'profit-percent-numeric' => 'Profit percent must be a numeric!',
     'profit-percent-min' => 'Profit percent cannot be less than 0!',
     'profit-percent-max' => 'Profit percent cannot be more than 100!',
-    'sub-partner-profit-percent-required' => 'Must specify profit percent from sub partner!'
+    'sub-partner-profit-percent-required' => 'Must specify profit percent from sub partner!',
+    'profit-percent-updating-success' => 'Partner\'s percent was updated successfully!',
+    'is-sub-partner-percent-required' => 'Must specify :attribute param!',
+    'is-sub-partner-percent-string' => ':attribute param must be string!',
+    'is-sub-partner-percent-in' => ':attribute param must be 0 or 1!'
 ];

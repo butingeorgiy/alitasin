@@ -29,6 +29,17 @@ class PartnerListModel {
 
         return response.status === 200 ? await response.json() : await response.text();
     }
+
+    static async updateProfitPercent(data, id) {
+        const url = `${location.origin}/api/partners/update-profit-percent/${id}`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: data
+        });
+
+        return response.status === 200 ? await response.json() : await response.text();
+    }
 }
 
 export default PartnerListModel;

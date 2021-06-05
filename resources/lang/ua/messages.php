@@ -132,11 +132,15 @@ return [
     'payment-amount-numeric' => 'Сума платежу повинна бути числом!',
     'payment-amount-min' => 'Сума платежу не може бути менше 0!',
     'partner-payment-amount-max' => 'Сума платежу не може перевищувати залишок прибутку партнера!',
-    'partner-payment-save-success' => 'Оплату вдало збережено!',
+    'partner-payment-saving-success' => 'Оплату вдало збережено!',
     'hotel-room-number-max' => 'Максимальна довжина номера в готелі 8 символів!',
     'profit-percent-required' => 'Потрібно вказати відсоток прибутку!',
     'profit-percent-numeric' => 'Відсоток прибутку повинен бути числовим!',
     'profit-percent-min' => 'Відсоток прибутку не може бути менше 0!',
     'profit-percent-max' => 'Відсоток прибутку не може бути більше 100!',
-    'sub-partner-profit-percent-required' => 'Потрібно вказати відсоток прибутку від допоміжного партнера!'
+    'sub-partner-profit-percent-required' => 'Потрібно вказати відсоток прибутку від допоміжного партнера!',
+    'profit-percent-updating-success' => 'Відсоток партнера успішно оновлено!',
+    'is-sub-partner-percent-required' => 'Потрібно вказати параметр :attribute!',
+    'is-sub-partner-percent-string' => ':attribute має бути рядком!',
+    'is-sub-partner-percent-in' => ':attribute має бути 0 або 1!'
 ];

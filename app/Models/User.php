@@ -319,4 +319,38 @@ class User extends Model
         return DB::table('sub_partners')
             ->where('parent_user_id', $this->id)->exists();
     }
+
+    /**
+     * Update profit percent
+     *
+     * @param int $newValue
+     * @return bool
+     */
+    public function updateProfitPercent(int $newValue): bool
+    {
+        if (!$percent = $this->percent()->get()->first()) {
+            return false;
+        }
+
+        $percent->percent = $newValue;
+
+        return $percent->save();
+    }
+
+    /**
+     * Update sub partner's profit percent
+     *
+     * @param int $newValue
+     * @return bool
+     */
+    public function updateSubPartnerProfitPercent(int $newValue): bool
+    {
+        if (!$subPartnerProfitPercent = $this->subPartnerPercent()->get()->first()) {
+            return false;
+        }
+
+        $subPartnerProfitPercent->percent = $newValue;
+
+        return $subPartnerProfitPercent->save();
+    }
 }

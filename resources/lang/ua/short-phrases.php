@@ -168,12 +168,17 @@ return [
     'main-section-shopping-description' => 'Екскурсія по найкращих магазинах з корпоративними знижками',
     'main-section-medical-tourism-description' => 'Найдосконаліші ліки в найкращих клініках Туреччини',
     'main-section-yachts-rental-description' => 'Прогулянки на човні на розкішних яхтах',
-    'profit-процент' => 'Відсоток прибутку',
-    'sub-partners' => 'Суб-партнери',
-    'add-sub-partner' => 'Додати суб-партнера',
-    'sub-partner-profit-percent' => 'Відсоток прибутку від суб-партнерів',
+    'profit-percent' => 'Відсоток прибутку',
+    'sub-partners' => 'під партнери',
+    'add-sub-partner' => 'Додати під партнерів',
+    'sub-partner-profit-percent' => 'Відсоток прибутку від під партнерів',
     'income' => 'Дохід',
     'earned' => 'Зароблено',
     'payed' => 'Оплачено',
-    'status' => 'Статус'
+    'status' => 'Статус',
+    'add-vehicle' => 'Додайте ТЗ',
+    'update-profit-percent' => 'Оновіть відсоток прибутку',
+    'current-value' => 'Поточне значення',
+    'update-partner-profit-percent-option' => 'Редагувати відсотки',
+    'update-sub-partner-profit-percent-option' => 'Редагувати відсоток під партнер'
 ];

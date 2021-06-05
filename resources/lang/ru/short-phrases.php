@@ -176,5 +176,10 @@ return [
     'income' => 'Доход',
     'earned' => 'Заработано',
     'payed' => 'Оплачено',
-    'status' => 'Статус'
+    'status' => 'Статус',
+    'add-vehicle' => 'Добавить ТС',
+    'update-profit-percent' => 'Изменить процент прибыли',
+    'current-value' => 'Текущее значение',
+    'update-partner-profit-percent-option' => 'Ред. процент',
+    'update-sub-partner-profit-percent-option' => 'Ред. процент под партнёра'
 ];

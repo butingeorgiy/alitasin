@@ -176,5 +176,10 @@ return [
     'income' => 'Gelir',
     'earned' => 'kazanılan',
     'payed' => 'Payed',
-    'status' => 'Status'
+    'status' => 'Status',
+    'add-vehicle' => 'Araç ekle',
+    'update-profit-percent' => 'Kar yüzdesini güncelle',
+    'current-value' => 'Mevcut değer',
+    'update-partner-profit-percent-option' => 'Yüzdeyi düzenle',
+    'update-sub-partner-profit-percent-option' => 'Alt iş ortağı yüzdesini düzenle'
 ];

@@ -16,7 +16,7 @@
 {{--            </a>--}}
 
             <a href="{{ route('partners') }}" class="flex flex items-center mr-16 group">
-                <span class="mr-4 inline text-blue text-2xl font-medium group-hover:underline">{{ __('short-phrases.partners') }}</span>
+                <span class="mr-4 inline text-blue text-2xl group-hover:underline">{{ __('short-phrases.partners') }}</span>
                 <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
                           stroke-linecap="round" stroke-linejoin="round"/>
@@ -24,7 +24,7 @@
             </a>
 
             <a href="{{ route('create-vehicle') }}" class="flex flex items-center mr-16 group">
-                <span class="mr-4 inline text-blue text-2xl font-medium group-hover:underline">Добавить ТС</span>
+                <span class="mr-4 inline text-blue text-2xl group-hover:underline">{{ __('short-phrases.add-vehicle') }}</span>
                 <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
                           stroke-linecap="round" stroke-linejoin="round"/>
