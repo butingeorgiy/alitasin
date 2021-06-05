@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use phpDocumentor\Reflection\Types\This;
 
 class PasswordGenerated extends Mailable
 {
@@ -17,14 +18,14 @@ class PasswordGenerated extends Mailable
      *
      * @var string
      */
-    public $firstName;
+    public string $firstName;
 
     /**
      * User's password
      *
      * @var string
      */
-    public $password;
+    public string $password;
 
     /**
      * Create a new message instance.
@@ -44,6 +45,7 @@ class PasswordGenerated extends Mailable
      */
     public function build(): PasswordGenerated
     {
-        return $this->view('emails.password');
+        return $this->subject('You was registered successfully!')
+            ->view('emails.password');
     }
 }
