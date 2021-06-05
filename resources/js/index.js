@@ -14,3 +14,4 @@ import './modules/createPartner';
 import './modules/partnerList';
 import './modules/createVehicle';
 import './modules/multiNavigation';
+import './modules/clickToCallWidget';
