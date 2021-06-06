@@ -56,8 +56,6 @@ class ReservationController extends Controller
 
         /** @var Reservation $reservation */
         foreach ($reservations as $reservation) {
-            /** @var Tour $tour */
-            $tour = $reservation->tour()->get()->first();
             $tickets = [];
 
             /** @var Ticket $item */

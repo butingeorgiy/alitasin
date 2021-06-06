@@ -14,14 +14,18 @@ class ReservationListController extends EventHandler {
     constructor(nodes) {
         super();
 
-        if (/^\/admin\/reserves$/.test(location.pathname) && nodes.statusPopup) {
+        this.nodes = {
+            ...nodes,
+            detailsDateInput: nodes.detailsPopup.querySelector('input[name="tour_date"]')
+        };
+
+        if (/^\/admin\/reserves$/.test(location.pathname)) {
             this.nodes = {
-                ...nodes,
+                ...this.nodes,
                 statusSelect: nodes.statusPopup.querySelector('select[name="reservation_status"]'),
                 updateStatusButton: nodes.statusPopup.querySelector('.update-status-button'),
                 filtersContainer: nodes.container.querySelector('.reserves-filters'),
-                detailsDateInput: nodes.detailsPopup.querySelector('input[name="tour_date"]')
-            };
+            }
 
             this.view = new ReservationListView({
                 updateStatusButton: this.nodes.updateStatusButton,
@@ -40,10 +44,11 @@ class ReservationListController extends EventHandler {
             this.statusUpdatingDisabled = true;
 
             this.initStatusPopup();
-            this.initDetailsPopup();
             this.initFilters();
-            this.initDetailsDatePicker();
         }
+
+        this.initDetailsPopup();
+        this.initDetailsDatePicker();
 
         this.initShowReservationContextMenu(nodes.container.querySelectorAll('.reserves-item'));
     }
@@ -176,6 +181,10 @@ class ReservationListController extends EventHandler {
         this.nodes.detailsPopup.querySelector('.hotel-name').innerText = details['hotel-name'];
         this.nodes.detailsPopup.querySelector('.communication-type').innerText = details['communication-type'];
         this.nodes.detailsPopup.querySelector('.total-cost').innerText = details['total-cost'];
+
+        if (this.nodes.detailsPopup.querySelector('.partner-profit') && details['partner-profit']) {
+            this.nodes.detailsPopup.querySelector('.partner-profit').innerHTML = `$ ${details['partner-profit']}`;
+        }
 
         this.detailsDatePicker.clear();
         if (details['date']) {

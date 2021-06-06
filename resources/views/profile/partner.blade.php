@@ -45,5 +45,8 @@
     </section>
 
     @include('components.general.footer')
+
+    <!-- Popups -->
+    @include('popups.reserve-details')
 </body>
 </html>
