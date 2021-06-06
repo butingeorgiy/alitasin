@@ -15,8 +15,6 @@ class LanguageSwitcher
      */
     public function handle($request, Closure $next)
     {
-        abort(503);
-
         $locale = $request->cookie('locale', 'ru');
 
         if (!in_array($locale, ['en', 'ru', 'tr', 'ua'])) {
