@@ -11,14 +11,18 @@
     <title>{{ __('page-titles.main') }}</title>
 </head>
 <body>
-@include('components.general.header')
-@include('components.general.hero', ['title' => $currentRegion->name])
-@include('components.index.global-search', ['bottomBorder' => true])
-@include('components.region.popular-tours')
-@include('components.general.tours')
-@include('components.index.regions', ['title' => __('short-phrases.other-turkey-regions'), 'bottomBorder' => false])
-@include('components.general.footer')
+    @include('components.general.header')
+    @include('components.general.hero', ['title' => $currentRegion->name])
+    @include('components.index.global-search', ['bottomBorder' => true])
+    @include('components.region.popular-tours')
+    @include('components.general.tours')
+    @include('components.index.regions', ['title' => __('short-phrases.other-turkey-regions'), 'bottomBorder' => false])
+    @include('components.general.footer')
 
-@include('popups.login')
+    <!-- Popups -->
+    @include('popups.login')
+
+    <!-- Widgets -->
+    @include('widgets.click-to-call')
 </body>
 </html>

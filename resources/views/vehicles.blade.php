@@ -77,5 +77,8 @@
     <!-- Popups -->
     @include('popups.login')
     @include('popups.reg')
+
+    <!-- Widgets -->
+    @include('widgets.click-to-call')
 </body>
 </html>
