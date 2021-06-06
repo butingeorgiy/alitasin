@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Facades\Auth;
 use App\Models\Reservation;
+use App\Models\Ticket;
+use App\Models\Tour;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ReservationController extends Controller
 {
     /**
      * Show all reservations
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function showAll(Request $request)
     {
@@ -27,7 +31,8 @@ class ReservationController extends Controller
             ]);
         }
 
-        $reservations = Reservation::with(['tour', 'user', 'promoCode', 'status'])->where('manager_id', $user->id);
+        $reservations = Reservation::with(['tour', 'user', 'promoCode', 'status'])
+            ->where('manager_id', $user->id);
 
         // Filtering rows
         if ($request->input('tour_id')) {
@@ -47,17 +52,23 @@ class ReservationController extends Controller
             ];
         }
 
-        if (preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $request->input('time'))) {
-            $reservations->where(
-                'time',
-                '=',
-                Carbon::parse($request->input('time'))->format('H:i:00')
-            );
-        }
-
         $reservations = $reservations->get();
 
+        /** @var Reservation $reservation */
         foreach ($reservations as $reservation) {
+            /** @var Tour $tour */
+            $tour = $reservation->tour()->get()->first();
+            $tickets = [];
+
+            /** @var Ticket $item */
+            foreach ($reservation->tickets()->withPivot(['amount', 'percent_from_init_cost'])->get() as $item) {
+                $tickets[] = [
+                    'title' => $item->name,
+                    'amount' => $item->getOriginal('pivot_amount'),
+                    'price' => $reservation->tour_init_price * $item->getOriginal('pivot_percent_from_init_cost') / 100
+                ];
+            }
+
             $details = [
                 'hotel-name' => $reservation->hotel_name ?: 'Ничего не указано',
                 'communication-type' => $reservation->communication_type ?: 'Ничего не указано',
@@ -66,7 +77,8 @@ class ReservationController extends Controller
                 'user-name' => $reservation->user->full_name,
                 'user-email' => $reservation->user->email,
                 'user-phone' => $reservation->user->phone,
-                'total-cost' => $reservation->costWithSale()
+                'total-cost' => $reservation->costWithSale(),
+                'tickets' => $tickets
             ];
 
             if ($reservation->isUsedPromoCode()) {

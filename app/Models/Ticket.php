@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static find(mixed $id)
+ * @property string name
  */
 class Ticket extends Model
 {

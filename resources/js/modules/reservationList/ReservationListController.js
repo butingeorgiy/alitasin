@@ -16,7 +16,7 @@ class ReservationListController extends EventHandler {
 
         if (/^\/admin\/reserves$/.test(location.pathname) && nodes.statusPopup) {
             this.nodes = {
-                ...this.nodes,
+                ...nodes,
                 statusSelect: nodes.statusPopup.querySelector('select[name="reservation_status"]'),
                 updateStatusButton: nodes.statusPopup.querySelector('.update-status-button'),
                 filtersContainer: nodes.container.querySelector('.reserves-filters'),
@@ -33,8 +33,7 @@ class ReservationListController extends EventHandler {
             this.filters = {
                 'tour_id': null,
                 'date_min': null,
-                'date_max': null,
-                'time': null
+                'date_max': null
             };
 
             this.statusUpdatingLoading = false;
@@ -97,29 +96,6 @@ class ReservationListController extends EventHandler {
                 ...this.filters,
                 'date_min': DateHelper.format(this.datePicker.selectedDates[0]),
                 'date_max': DateHelper.format(this.datePicker.selectedDates[1])
-            };
-        }
-
-        this.timePicker = flatpickr(this.nodes.filtersContainer.querySelector('input[name="time"]'), {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            time_24hr: true,
-            onClose: (_, text) => {
-                if (text !== this.filters['time']) {
-                    this.filters = {
-                        ...this.filters,
-                        'time': text ? text : null
-                    };
-                    this.applyFilters();
-                }
-            }
-        });
-
-        if (this.nodes.filtersContainer.querySelector('input[name="time"]').value) {
-            this.filters = {
-                ...this.filters,
-                'time': this.nodes.filtersContainer.querySelector('input[name="time"]').value
             };
         }
 
@@ -200,6 +176,17 @@ class ReservationListController extends EventHandler {
         this.nodes.detailsPopup.querySelector('.hotel-name').innerText = details['hotel-name'];
         this.nodes.detailsPopup.querySelector('.communication-type').innerText = details['communication-type'];
         this.nodes.detailsPopup.querySelector('.total-cost').innerText = details['total-cost'];
+
+        this.nodes.detailsPopup.querySelector('.tickets-container').innerHTML = '';
+        details['tickets'].forEach(item => {
+            this.nodes.detailsPopup.querySelector('.tickets-container').innerHTML += `
+                <div class="ticket-item flex items-center p-3 border-b border-gray-200">
+                    <span class="mr-auto text-black">${item.title}</span>
+                    <span class="relative top-0.5 mr-10 text-black font-semibold">$ ${item.price}</span>
+                    <span class="tickets-amount relative top-0.5 text-gray-600">${item.amount} шт</span>
+                </div>
+            `;
+        });
 
         if (details['promo-code']) {
             this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = details['promo-code']['code'];

@@ -36,6 +36,7 @@ use Illuminate\Support\Str;
  * @property int profit_percent
  * @property int sub_partners_profit_percent
  * @property string profile
+ * @property string phone
  */
 class User extends Model
 {

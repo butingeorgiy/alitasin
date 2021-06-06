@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static create(array $array)
  * @property integer id
  * @property integer sale_percent
+ * @property string code
  */
 class PromoCode extends Model
 {

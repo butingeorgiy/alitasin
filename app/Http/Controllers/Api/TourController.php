@@ -710,7 +710,8 @@ class TourController extends Controller
             'tour_id' => $tourId,
             'user_id' => $user->id,
             'manager_id' => $tour->manager_id,
-            'total_cost_without_sale' => $totalCostWithoutSale
+            'total_cost_without_sale' => $totalCostWithoutSale,
+            'tour_init_price' => $tour->price
         ]);
 
         if ($promoCode) {

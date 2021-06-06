@@ -18,6 +18,9 @@ use Illuminate\Support\Carbon;
  * @property mixed created_at
  * @property string|null hotel_room_number
  * @property int|null region_id
+ * @property User user
+ * @property PromoCode promoCode
+ * @property int tour_init_price
  * @method static limit(int $int)
  * @method static Reservation find($reservationId)
  */
@@ -206,13 +209,4 @@ class Reservation extends Model
     {
         return Carbon::parse($this->created_at)->format('H:i');
     }
-
-//    public function getPartnerProfit(): int
-//    {
-//        if ($this->isUsedPromoCode()) {
-//            return 0;
-//        }
-//
-//        return ;
-//    }
 }

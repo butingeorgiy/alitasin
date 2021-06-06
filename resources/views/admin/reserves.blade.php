@@ -73,18 +73,6 @@
                         <input class="text-sm text-gray-800 placeholder-gray-800 cursor-pointer" data-value="{{ json_encode($dateRange) }}"
                                type="text" name="date" readonly placeholder="{{ __('short-phrases.select-date') }}">
                     </label>
-
-                    <div class="flex items-center">
-                        <svg class="min-w-4 min-h-4 w-4 h-4 mr-1" viewBox="0 0 22 22" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1C16.5228 1 21 5.47715 21 11C21 16.5228 16.5228 21 11
-                            21C5.47715 21 1 16.5228 1 11C1 6.89936 3.46819 3.3752 7 1.83209M11 5V11L15 13"
-                                  stroke="#4B506D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span class="text-sm text-gray-900 font-medium whitespace-nowrap">{{ __('short-phrases.time') }}:&nbsp;&nbsp;</span>
-                        <input class="text-sm text-gray-800 placeholder-gray-800 cursor-pointer" value="{{ request()->input('time') }}" type="text" name="time" readonly placeholder="{{ __('short-phrases.select-time') }}">
-                    </div>
-
                 </div>
                 @if(count($reservations) > 0)
                     <div class="grid grid-cols-reserve-table gap-5 px-8 pt-3 pb-1 border-b border-gray-200">
