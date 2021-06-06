@@ -41,7 +41,7 @@
 
                     <div class="w-full md:w-auto">
                         <div class="date-picker-container flex justify-center mb-5 mt-3 md:mt-0">
-                            <input type="text" hidden disabled name="tour_date" class="ml-auto border border-black">
+                            <input type="text" hidden readonly name="tour_date" class="ml-auto border border-black">
                         </div>
 
                         <div class="flex items-end px-4 pt-4 pb-3 bg-white shadow-sm rounded-md">

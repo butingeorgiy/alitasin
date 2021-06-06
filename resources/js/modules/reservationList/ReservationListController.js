@@ -177,6 +177,11 @@ class ReservationListController extends EventHandler {
         this.nodes.detailsPopup.querySelector('.communication-type').innerText = details['communication-type'];
         this.nodes.detailsPopup.querySelector('.total-cost').innerText = details['total-cost'];
 
+        this.detailsDatePicker.clear();
+        if (details['date']) {
+            this.detailsDatePicker.setDate(details['date']);
+        }
+
         this.nodes.detailsPopup.querySelector('.tickets-container').innerHTML = '';
         details['tickets'].forEach(item => {
             this.nodes.detailsPopup.querySelector('.tickets-container').innerHTML += `
