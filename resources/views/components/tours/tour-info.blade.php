@@ -260,7 +260,7 @@
             @endif
             <div class="px-4 py-5">
                 <p class="mb-2 text-lg text-black font-bold">{{ __('short-phrases.tour-description') }}:</p>
-                <div class="text-gray-600 whitespace-pre-wrap">{{ $tour->description[App::getLocale()] }}</div>
+                <div class="text-gray-600 whitespace-pre-wrap">{!! $tour->description[App::getLocale()] !!}</div>
             </div>
         </div>
     </div>

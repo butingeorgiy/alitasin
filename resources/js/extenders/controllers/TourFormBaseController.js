@@ -2,6 +2,7 @@ import EventHandler from '../../core/EventHandler';
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min';
 import LocaleHelper from '../../helpers/LocaleHelper';
 import PopupObserver from '../../observers/PopupObserver';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class TourFormBaseController extends EventHandler {
     constructor(nodes) {
@@ -18,6 +19,8 @@ class TourFormBaseController extends EventHandler {
 
         this.additions = [];
         this.params = [];
+
+        this.initDescriptionEditors();
 
         if (this.nodes?.attachAdditionButton) {
             this.initAdditionPopup();
@@ -36,6 +39,28 @@ class TourFormBaseController extends EventHandler {
                 this.paramPopup.open(_ => this.beforeParamPopupOpenHandler());
             });
         }
+    }
+
+    initDescriptionEditors() {
+        ClassicEditor
+            .create(document.querySelector('#en-description-editor'))
+            .then(editor => this.enDescriptionEditor = editor)
+            .catch(error => alert(`Error: ${error}`));
+
+        ClassicEditor
+            .create(document.querySelector('#ru-description-editor'))
+            .then(editor => this.ruDescriptionEditor = editor)
+            .catch(error => alert(`Error: ${error}`));
+
+        ClassicEditor
+            .create(document.querySelector('#tr-description-editor'))
+            .then(editor => this.trDescriptionEditor = editor)
+            .catch(error => alert(`Error: ${error}`));
+
+        ClassicEditor
+            .create(document.querySelector('#ua-description-editor'))
+            .then(editor => this.uaDescriptionEditor = editor)
+            .catch(error => alert(`Error: ${error}`));
     }
 
     initAdditionPopup() {

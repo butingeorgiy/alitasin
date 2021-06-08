@@ -185,6 +185,22 @@ class UpdateTourController extends TourFormBaseController {
             formData.append('additions', JSON.stringify(this.additions));
         }
 
+        if (this.enDescriptionEditor) {
+            formData.append('en_description', this.enDescriptionEditor.getData());
+        }
+
+        if (this.ruDescriptionEditor) {
+            formData.append('ru_description', this.ruDescriptionEditor.getData());
+        }
+
+        if (this.trDescriptionEditor) {
+            formData.append('tr_description', this.trDescriptionEditor.getData());
+        }
+
+        if (this.uaDescriptionEditor) {
+            formData.append('ua_description', this.uaDescriptionEditor.getData());
+        }
+
         UpdateTourModel.update(UpdateTourController.getCurrentTourId(), formData)
             .then(result => {
                 if (typeof result === 'string') {

@@ -101,36 +101,16 @@
 
         <div class="mt-12">
             <p class="mb-2 font-semibold">{{ __('short-phrases.en-description') }}</p>
-            <textarea
-                class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                name="en_description"
-                rows="6"
-                maxlength="10240"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240"></textarea>
+            <div id="en-description-editor"></div>
 
-            <p class="mb-2 font-semibold">{{ __('short-phrases.ru-description') }}</p>
-            <textarea
-                class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                name="ru_description"
-                rows="6"
-                maxlength="10240"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240"></textarea>
+            <p class="mt-5 mb-2 font-semibold">{{ __('short-phrases.ru-description') }}</p>
+            <div id="ru-description-editor"></div>
 
-            <p class="mb-2 font-semibold">{{ __('short-phrases.tr-description') }}</p>
-            <textarea
-                class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                name="tr_description"
-                rows="6"
-                maxlength="10240"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240"></textarea>
+            <p class="mt-5 mb-2 font-semibold">{{ __('short-phrases.tr-description') }}</p>
+            <div id="tr-description-editor"></div>
 
-            <p class="mb-2 font-semibold">{{ __('short-phrases.ua-description') }}</p>
-            <textarea
-                    class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                    name="ua_description"
-                    rows="6"
-                    maxlength="10240"
-                    placeholder="{{ __('short-phrases.max-allowed-characters') }} - 10240"></textarea>
+            <p class="mt-5 mb-2 font-semibold">{{ __('short-phrases.ua-description') }}</p>
+            <div id="ua-description-editor"></div>
         </div>
 
         <div class="grid grid-cols-3 gap-5 mt-12">

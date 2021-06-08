@@ -21,6 +21,10 @@ body.shake {
     animation-iteration-count: 1;
 }
 
+strong {
+    @apply text-black;
+}
+
 input, select {
     -webkit-appearance: none;
     -moz-appearance: none;
