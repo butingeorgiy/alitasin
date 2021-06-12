@@ -181,5 +181,9 @@ return [
     'update-profit-percent' => 'Изменить процент прибыли',
     'current-value' => 'Текущее значение',
     'update-partner-profit-percent-option' => 'Ред. процент',
-    'update-sub-partner-profit-percent-option' => 'Ред. процент под партнёра'
+    'update-sub-partner-profit-percent-option' => 'Ред. процент под партнёра',
+    'order-vehicle' => 'Заказать ТС',
+    'order' => 'Заказать',
+    'chosen-vehicle' => 'Выбранное ТС',
+    'region-of-your-location' => 'Регион вашего нахождения'
 ];

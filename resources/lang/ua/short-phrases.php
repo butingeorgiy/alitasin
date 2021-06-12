@@ -180,5 +180,9 @@ return [
     'update-profit-percent' => 'Оновіть відсоток прибутку',
     'current-value' => 'Поточне значення',
     'update-partner-profit-percent-option' => 'Редагувати відсотки',
-    'update-sub-partner-profit-percent-option' => 'Редагувати відсоток під партнер'
+    'update-sub-partner-profit-percent-option' => 'Редагувати відсоток під партнер',
+    'order-vehicle' => 'Замовити ТЗ',
+    'order' => 'Наказувати',
+    'chosen-vehicle' => 'Обраний ТЗ',
+    'region-of-your-location' => 'Регіон вашого місцезнаходження'
 ];

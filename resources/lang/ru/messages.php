@@ -143,5 +143,10 @@ return [
     'profit-percent-updating-success' => 'Процент успешно обновлен!',
     'is-sub-partner-percent-required' => 'Укажите параметр :attribute!',
     'is-sub-partner-percent-string' => ':attribute должен быть строкой!',
-    'is-sub-partner-percent-in' => ':attribute может иметь значение 0 или 1!'
+    'is-sub-partner-percent-in' => ':attribute может иметь значение 0 или 1!',
+    'region-required' => 'Укажите регион!',
+    'region-name-min' => 'Минимальная длина региона 2 символа!',
+    'region-name-max' => 'Максимальная длина региона 128 символов!',
+    'vehicle-not-found' => 'ТС не найдено!',
+    'request-sending-success' => 'Ваша заявка успешно отправлена! Наш менеджер скоро с вами свяжется...'
 ];

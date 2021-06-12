@@ -142,5 +142,10 @@ return [
     'profit-percent-updating-success' => 'Partner\'s percent was updated successfully!',
     'is-sub-partner-percent-required' => 'Must specify :attribute param!',
     'is-sub-partner-percent-string' => ':attribute param must be string!',
-    'is-sub-partner-percent-in' => ':attribute param must be 0 or 1!'
+    'is-sub-partner-percent-in' => ':attribute param must be 0 or 1!',
+    'region-required' => 'Must specify region!',
+    'region-name-min' => 'Region name cannot be less than 2 characters!',
+    'region-name-max' => 'Region name cannot be more than 128 characters!',
+    'vehicle-not-found' => 'Vehicle not found!',
+    'request-sending-success' => 'Your request was sent successfully! Our manager contact with your soon...'
 ];

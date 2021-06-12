@@ -142,5 +142,10 @@ return [
     'profit-percent-updating-success' => 'Відсоток партнера успішно оновлено!',
     'is-sub-partner-percent-required' => 'Потрібно вказати параметр :attribute!',
     'is-sub-partner-percent-string' => ':attribute має бути рядком!',
-    'is-sub-partner-percent-in' => ':attribute має бути 0 або 1!'
+    'is-sub-partner-percent-in' => ':attribute має бути 0 або 1!',
+    'region-required' => 'Потрібно вказати регіон!',
+    'region-name-min' => 'Назва регіону не може містити менше 2 символів!',
+    'region-name-max' => 'Назва регіону не може містити більше 128 символів!',
+    'vehicle-not-found' => 'ТЗ не знайдено!',
+    'request-sending-success' => 'Ваш запит успішно відправлений! Наш менеджер зв’яжеться з вами найближчим часом...'
 ];

@@ -142,5 +142,10 @@ return [
     'profit-percent-updating-success' => 'İş ortağının yüzdesi başarıyla güncellendi!',
     'is-sub-partner-percent-required' => ':attribute belirtilmelidir!',
     'is-sub-partner-percent-string' => ':attribute dize olmalıdır!',
-    'is-sub-partner-percent-in' => ':attribute 0 veya 1 olmalıdır!'
+    'is-sub-partner-percent-in' => ':attribute 0 veya 1 olmalıdır!',
+    'region-required' => 'Bölge belirtilmelidir!',
+    'region-name-min' => 'Bölge adı 2 karakterden az olamaz!',
+    'region-name-max' => 'Bölge adı 128 karakterden fazla olamaz!',
+    'vehicle-not-found' => 'Araç bulunamadı!',
+    'request-sending-success' => 'İsteğiniz başarıyla gönderildi! Yöneticimiz yakında sizinle iletişime geçecek...'
 ];

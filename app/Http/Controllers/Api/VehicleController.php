@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Facades\Auth;
 use App\Http\Requests\VehicleRequest;
+use App\Models\PromoCode;
 use App\Models\Region;
 use App\Models\Vehicle;
 use App\Models\VehicleImage;
@@ -10,7 +12,9 @@ use App\Models\VehicleType;
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -118,6 +122,60 @@ class VehicleController extends Controller
         return [
             'status' => true,
             'message' => 'ТС успешно сохранено!'
+        ];
+    }
+
+    /**
+     * Order vehicle
+     *
+     * @param Request $request
+     * @param $id
+     * @return bool[]
+     * @throws Exception
+     */
+    public function order(Request $request, $id): array
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'user_name' => 'bail|required|string|min:2|max:32',
+                'user_phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
+                'location_region' => 'bail|required|string|min:2|max:128'
+            ],
+            [
+                'user_name.required' => __('messages.user-first-name-required'),
+                'user_name.min' => __('messages.user-first-name-min'),
+                'user_name.max' => __('messages.user-first-name-max'),
+                'user_phone.required' => __('messages.user-phone-required'),
+                'user_phone.regex' => __('messages.user-phone-regex'),
+                'location_region.required' => __('messages.region-required'),
+                'location_region.min' => __('messages.region-name-min'),
+                'location_region.max' => __('messages.region-name-max')
+            ]
+        );
+
+        if ($validator->fails()) {
+            throw new Exception($validator->errors()->first());
+        }
+
+        if (!$vehicle = Vehicle::find($id)) {
+            throw new Exception(__('messages.vehicle-not-found'));
+        }
+
+        if (Auth::check([1])) {
+            $user = Auth::user();
+        }
+
+        $vehicle->orders()->create([
+            'user_name' => $request->input('user_name'),
+            'user_phone' => $request->input('user_phone'),
+            'user_id' => isset($user) ? $user->id : null,
+            'location_region' => $request->input('location_region')
+        ]);
+
+        return [
+            'status' => true,
+            'message' => __('messages.request-sending-success')
         ];
     }
 }

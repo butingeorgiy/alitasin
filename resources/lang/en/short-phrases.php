@@ -180,5 +180,9 @@ return [
     'update-profit-percent' => 'Update profit percent',
     'current-value' => 'Current value',
     'update-partner-profit-percent-option' => 'Edit percent',
-    'update-sub-partner-profit-percent-option' => 'Edit sub partner percent'
+    'update-sub-partner-profit-percent-option' => 'Edit sub partner percent',
+    'order-vehicle' => 'Order vehicle',
+    'order' => 'Order',
+    'chosen-vehicle' => 'Chosen vehicle',
+    'region-of-your-location' => 'Region of your location'
 ];

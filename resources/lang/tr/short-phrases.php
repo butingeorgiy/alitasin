@@ -181,5 +181,9 @@ return [
     'update-profit-percent' => 'Kar yüzdesini güncelle',
     'current-value' => 'Mevcut değer',
     'update-partner-profit-percent-option' => 'Yüzdeyi düzenle',
-    'update-sub-partner-profit-percent-option' => 'Alt iş ortağı yüzdesini düzenle'
+    'update-sub-partner-profit-percent-option' => 'Alt iş ortağı yüzdesini düzenle',
+    'order-vehicle' => 'Araç siparişi',
+    'order' => 'Sipariş vermek',
+    'chosen-vehicle' => 'Seçilen araç',
+    'region-of-your-location' => 'Bulunduğunuz bölge'
 ];

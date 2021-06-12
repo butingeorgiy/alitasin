@@ -32,6 +32,7 @@ Route::group(['prefix' => 'tours'], function () {
 
 Route::group(['prefix' => 'vehicles'], function() {
     Route::post('create', 'Api\VehicleController@create')->middleware('auth:5');
+    Route::post('order/{id}', 'Api\VehicleController@order');
 });
 
 Route::group(['prefix' => 'reserves'], function () {

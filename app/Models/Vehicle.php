@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $show_at_index_page
  * @property int $cost
  * @property VehicleImage[] images
+ * @method static Vehicle|null find($id)
  */
 class Vehicle extends Model
 {
@@ -54,6 +55,16 @@ class Vehicle extends Model
             'vehicle_id',
             'vehicle_param_id'
         )->withPivot(\App::getLocale() . '_value');
+    }
+
+    /**
+     * Get vehicle's orders
+     *
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(VehicleOrder::class);
     }
 
     /**
