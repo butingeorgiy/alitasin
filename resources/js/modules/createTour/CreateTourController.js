@@ -62,6 +62,22 @@ class CreateTourController extends TourFormBaseController {
             formData.append('additions', JSON.stringify(this.additions));
         }
 
+        if (this.enDescriptionEditor) {
+            formData.append('en_description', this.enDescriptionEditor.getData());
+        }
+
+        if (this.ruDescriptionEditor) {
+            formData.append('ru_description', this.ruDescriptionEditor.getData());
+        }
+
+        if (this.trDescriptionEditor) {
+            formData.append('tr_description', this.trDescriptionEditor.getData());
+        }
+
+        if (this.uaDescriptionEditor) {
+            formData.append('ua_description', this.uaDescriptionEditor.getData());
+        }
+
         const durationInput = form.querySelector('input[name="duration"]');
         const durationSelect = form.querySelector('select[name="duration-mode"]');
 

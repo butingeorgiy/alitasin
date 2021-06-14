@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('partners', 'PartnerController@showAll')->middleware('auth:5')->name('partners');
     Route::get('partners/{id}', 'PartnerController@show')->middleware('auth:5')->name('partner');
     Route::get('vehicles/create', 'VehicleController@showCreateForm')->middleware('auth:5')->name('create-vehicle');
+    Route::get('vehicles/update/{id}', 'VehicleController@showEditForm')->middleware('auth:5')->name('edit-vehicle');
 });
 
 Route::get('cdn/images/{dir}/{file}', 'ImageController@get')->middleware('cache')->name('get-image');

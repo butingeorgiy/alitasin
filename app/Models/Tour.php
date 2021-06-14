@@ -129,7 +129,8 @@ class Tour extends Model
      */
     public function additions(): BelongsToMany
     {
-        return $this->belongsToMany(Addition::class, 'tours_has_additions')->withPivot('is_include', 'en_description', 'ru_description', 'tr_description');
+        return $this->belongsToMany(Addition::class, 'tours_has_additions')
+            ->withPivot('is_include', 'en_description', 'ru_description', 'tr_description', 'ua_description');
     }
 
     /**

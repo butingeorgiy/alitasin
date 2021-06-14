@@ -81,11 +81,11 @@
                                           7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </span>
-                                    @endif
-                                    <input hidden type="file" name="image-{{ $i }}"
-                                           accept="image/jpeg,image/jpg,image/png">
-                                </label>
-                        @endfor
+                        @endif
+                            <input hidden type="file" name="image-{{ $i }}"
+                                   accept="image/jpeg,image/jpg,image/png">
+                        </label>
+                @endfor
             </div>
         </div>
 
@@ -286,6 +286,7 @@
                                 <p class="text-sm text-gray-400 italic">En:&nbsp;&nbsp;{{ $addition['en_description'] ?: 'Ничего не указано' }}</p>
                                 <p class="text-sm text-gray-400 italic">Ru:&nbsp;&nbsp;{{ $addition['ru_description'] ?: 'Ничего не указано' }}</p>
                                 <p class="text-sm text-gray-400 italic">Tr:&nbsp;&nbsp;{{ $addition['tr_description'] ?: 'Ничего не указано' }}</p>
+                                <p class="text-sm text-gray-400 italic">Ua:&nbsp;&nbsp;{{ $addition['ua_description'] ?: 'Ничего не указано' }}</p>
                             </div>
                         </div>
                     @empty
@@ -325,6 +326,7 @@
                                 <p class="text-sm text-gray-400 italic">En:&nbsp;&nbsp;{{ $addition['en_description'] ?: 'Ничего не указано' }}</p>
                                 <p class="text-sm text-gray-400 italic">Ru:&nbsp;&nbsp;{{ $addition['ru_description'] ?: 'Ничего не указано' }}</p>
                                 <p class="text-sm text-gray-400 italic">Tr:&nbsp;&nbsp;{{ $addition['tr_description'] ?: 'Ничего не указано' }}</p>
+                                <p class="text-sm text-gray-400 italic">Ua:&nbsp;&nbsp;{{ $addition['ua_description'] ?: 'Ничего не указано' }}</p>
                             </div>
                         </div>
                     @empty

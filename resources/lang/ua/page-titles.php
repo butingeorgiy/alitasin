@@ -11,5 +11,6 @@ return [
     'partners' => 'Партнери',
     'vehicles' => 'Транспортні засоби',
     'real-estate' => 'Нерухомість',
-    'create-vehicle' => 'Створити транспортний засіб'
+    'create-vehicle' => 'Створити ТЗ',
+    'edit-vehicle' => 'Редагувати ТЗ'
 ];

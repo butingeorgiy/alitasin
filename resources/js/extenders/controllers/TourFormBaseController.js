@@ -20,7 +20,9 @@ class TourFormBaseController extends EventHandler {
         this.additions = [];
         this.params = [];
 
-        this.initDescriptionEditors();
+        if (/(admin\/tours\/create)|(admin\/tours\/update\/\d+)/.test(location.pathname)) {
+            this.initDescriptionEditors();
+        }
 
         if (this.nodes?.attachAdditionButton) {
             this.initAdditionPopup();

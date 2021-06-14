@@ -9,14 +9,14 @@ class AddUaToVehicleHasParamTable extends Migration
     public function up()
     {
         Schema::table('vehicle_has_param', function (Blueprint $table) {
-            $table->string('ua_name', 64)->nullable();
+            $table->string('ua_value', 128);
         });
     }
 
     public function down()
     {
         Schema::table('vehicle_has_param', function (Blueprint $table) {
-            $table->dropColumn('ua_name');
+            $table->dropColumn('ua_value');
         });
     }
 }

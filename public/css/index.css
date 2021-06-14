@@ -2267,12 +2267,12 @@ select::-ms-expand {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-.show-more-tours-button.loading, .show-more-tours-button.disabled, .update-status-button.loading, .update-status-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .create-account-button.loading, .create-account-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled, .save-vehicle-button.disabled, .save-vehicle-button.loading, .save-partner-button.loading, .make-partner-payment-button.loading, .update-profit-percent-button.loading{
+.show-more-tours-button.loading, .show-more-tours-button.disabled, .update-status-button.loading, .update-status-button.disabled, .save-personal-info-button.loading, .save-personal-info-button.disabled, .save-book-button.loading, .save-book-button.disabled, .login-button.loading, .login-button.disabled, .create-account-button.loading, .create-account-button.disabled, .update-tour-button.loading, .update-tour-button.disabled, .save-tour-button.loading, .save-tour-button.disabled, .save-vehicle-button.disabled, .save-vehicle-button.loading, .save-partner-button.loading, .make-partner-payment-button.loading, .update-profit-percent-button.loading, .send-vehicle-order-button.loading{
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.show-more-tours-button.loading .animate-spin, .update-status-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .create-account-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-partner-button.loading .animate-spin, .save-tour-button.loading .animate-spin, .save-vehicle-button.loading .animate-spin, .make-partner-payment-button.loading .animate-spin, .update-profit-percent-button.loading .animate-spin{
+.show-more-tours-button.loading .animate-spin, .update-status-button.loading .animate-spin, .save-personal-info-button.loading .animate-spin, .save-book-button.loading .animate-spin, .create-account-button.loading .animate-spin, .login-button.loading .animate-spin, .update-tour-button.loading .animate-spin, .save-partner-button.loading .animate-spin, .save-tour-button.loading .animate-spin, .save-vehicle-button.loading .animate-spin, .make-partner-payment-button.loading .animate-spin, .update-profit-percent-button.loading .animate-spin, .send-vehicle-order-button.loading .animate-spin{
   display: block;
 }
 
@@ -2346,7 +2346,7 @@ select::-ms-expand {
   }
 }
 
-#createTourForm .image-item, #createVehicleForm .image-item, #editTourForm .image-item{
+#createTourForm .image-item, #createVehicleForm .image-item, #editTourForm .image-item, #editVehicleForm .image-item{
   --tw-border-opacity: 1;
   border-color: rgba(35, 31, 32, var(--tw-border-opacity));
   border-radius: 0.375rem;
@@ -2362,7 +2362,7 @@ select::-ms-expand {
   position: relative;
 }
 
-#createTourForm .image-item .remove-image-button, #createVehicleForm .image-item .remove-image-button, #editTourForm .image-item .remove-image-button{
+#createTourForm .image-item .remove-image-button, #createVehicleForm .image-item .remove-image-button, #editTourForm .image-item .remove-image-button, #editVehicleForm .image-item .remove-image-button{
   display: none;
   height: 1rem;
   min-height: 1rem;
@@ -2375,18 +2375,25 @@ select::-ms-expand {
   width: 1rem;
 }
 
-#createTourForm .image-item.filled, #createVehicleForm .image-item.filled, #editTourForm .image-item.filled{
+#createTourForm .image-item.filled, #editTourForm .image-item.filled{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-style: none;
 }
 
-#createTourForm .image-item.filled .empty, #createVehicleForm .image-item.filled .empty, #editTourForm .image-item.filled .empty{
+#createVehicleForm .image-item.filled, #editVehicleForm .image-item.filled{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-style: none;
+}
+
+#createTourForm .image-item.filled .empty, #createVehicleForm .image-item.filled .empty, #editTourForm .image-item.filled .empty, #editVehicleForm .image-item.filled .empty{
   opacity: 0;
 }
 
-#createTourForm .image-item.filled .remove-image-button, #createVehicleForm .image-item.filled .remove-image-button, #editTourForm .image-item.filled .remove-image-button{
+#createTourForm .image-item.filled .remove-image-button, #createVehicleForm .image-item.filled .remove-image-button, #editTourForm .image-item.filled .remove-image-button, #editVehicleForm .image-item.filled .remove-image-button{
   display: block;
 }
 

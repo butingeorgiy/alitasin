@@ -12,8 +12,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $model
  * @property string $show_at_index_page
  * @property int $cost
- * @property VehicleImage[] images
+ * @property mixed images
+ * @property mixed params
  * @method static Vehicle|null find($id)
+ * @method static findOrFail($id)
  */
 class Vehicle extends Model
 {
@@ -54,7 +56,7 @@ class Vehicle extends Model
             'vehicle_has_param',
             'vehicle_id',
             'vehicle_param_id'
-        )->withPivot(\App::getLocale() . '_value');
+        )->withPivot('en_value', 'ru_value', 'tr_value', 'ua_value');
     }
 
     /**
