@@ -155,6 +155,8 @@ class TourFormBaseView {
     }
 
     renderParams(params, dettachParamHandler, editParamHandler) {
+        console.log(params);
+
         let count = 0;
 
         this.paramsContainer.innerHTML = '';
@@ -181,7 +183,7 @@ class TourFormBaseView {
                 ${icon}
                 <div class="flex flex-col">
                     <div class="flex items-center">
-                        <p class="mr-5 text-black font-medium">${param.title}</p>
+                        <p class="mr-5 text-black font-medium">${param.name}</p>
                         <span class="edit-param-button mr-2 text-sm text-gray-500 cursor-pointer whitespace-nowrap hover:underline">${LocaleHelper.translate('edit')}</span>
                         <span class="dettach-param-button text-sm text-red-500 cursor-pointer whitespace-nowrap hover:underline">${LocaleHelper.translate('delete')}</span>
                     </div>

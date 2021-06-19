@@ -134,6 +134,8 @@ class TourController extends Controller
         $tour->type()->associate($tourType);
         $tour->price = $request->input('price');
         $tour->conducted_at = implode('~', $days);
+        $tour->departure_time = $request->input('departure_time');
+        $tour->check_out_time = $request->input('check_out_time');
 
         if ($request->has('duration')) {
             $tour->duration = $request->input('duration');

@@ -36,8 +36,6 @@ class UpdateTourController extends TourFormBaseController {
         let additions = JsonHelper.parse(this.nodes.includesAdditionsContainer.getAttribute('data-additions')),
             output = [];
 
-        console.log(additions);
-
         additions['0']?.forEach(addition => {
             output.push({
                 id: addition.id.toString(),
@@ -61,8 +59,6 @@ class UpdateTourController extends TourFormBaseController {
                 is_include: '1'
             });
         });
-
-        console.log(output);
 
         return output;
     }

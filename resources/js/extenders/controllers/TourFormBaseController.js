@@ -169,7 +169,7 @@ class TourFormBaseController extends EventHandler {
         }
 
         let id = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[0],
-            title = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[1],
+            name = this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value.split('~')[1],
             en_value = this.nodes.paramPopup.querySelector('input[name="en_value"]').value,
             ru_value = this.nodes.paramPopup.querySelector('input[name="ru_value"]').value,
             tr_value = this.nodes.paramPopup.querySelector('input[name="tr_value"]').value,
@@ -198,7 +198,7 @@ class TourFormBaseController extends EventHandler {
         if (needToCreate) {
             this.params.push({
                 id,
-                title,
+                name,
                 en_value,
                 ru_value,
                 tr_value,
@@ -247,6 +247,7 @@ class TourFormBaseController extends EventHandler {
     }
 
     editAdditionHandler(buttonNode, addition) {
+        console.log(addition);
         this.addEvent(buttonNode, 'click', _ => {
             this.additionPopup.open(_ => {
                 this.nodes.additionPopup.querySelector('select[name="addition_id"]').value = `${addition.id}~${addition.title}`;
@@ -262,7 +263,7 @@ class TourFormBaseController extends EventHandler {
     editParamHandler(buttonNode, param) {
         this.addEvent(buttonNode, 'click', _ => {
             this.paramPopup.open(_ => {
-                this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value = `${param.id}~${param.title}`;
+                this.nodes.paramPopup.querySelector('select[name="vehicle_param_id"]').value = `${param.id}~${param.name}`;
                 this.nodes.paramPopup.querySelector('input[name="en_value"]').value = param.en_value;
                 this.nodes.paramPopup.querySelector('input[name="ru_value"]').value = param.ru_value;
                 this.nodes.paramPopup.querySelector('input[name="tr_value"]').value = param.tr_value;

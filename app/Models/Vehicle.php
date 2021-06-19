@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed images
  * @property mixed params
  * @method static Vehicle|null find($id)
- * @method static findOrFail($id)
+ * @method static Vehicle findOrFail($id)
  */
 class Vehicle extends Model
 {

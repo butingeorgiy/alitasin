@@ -168,7 +168,7 @@
 {{--                                    {{ dd($param) }}--}}
                                     <div class="flex items-center">
                                         <p class="mr-5 text-black font-medium">{{ $param->name }}</p>
-                                        <span class="edit-param-button mr-2 text-sm text-gray-500 cursor-pointer whitespace-nowrap hover:underline" data-addition="{{ json_encode($param) }}">{{ __('buttons.edit') }}</span>
+                                        <span class="edit-param-button mr-2 text-sm text-gray-500 cursor-pointer whitespace-nowrap hover:underline" data-param="{{ json_encode($param) }}">{{ __('buttons.edit') }}</span>
                                         <span class="dettach-param-button text-sm text-red-500 cursor-pointer whitespace-nowrap hover:underline" data-id="{{ $param['id'] }}">{{ __('buttons.delete') }}</span>
                                     </div>
                                     <p class="text-sm text-gray-400 italic">En:&nbsp;&nbsp;{{ $param->getOriginal('pivot_en_value') ?: 'Ничего не указано' }}</p>
