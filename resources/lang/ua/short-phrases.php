@@ -184,5 +184,9 @@ return [
     'order-vehicle' => 'Замовити ТЗ',
     'order' => 'Наказувати',
     'chosen-vehicle' => 'Обраний ТЗ',
-    'region-of-your-location' => 'Регіон вашого місцезнаходження'
+    'region-of-your-location' => 'Регіон вашого місцезнаходження',
+    'enter-new-password' => 'Введіть новий пароль',
+    'confirm-new-password' => 'Підтвердьте новий пароль',
+    'confirm-password' => 'Підтвердьте пароль',
+    'password-confirmation' => 'Підтвердження паролю'
 ];

@@ -147,5 +147,7 @@ return [
     'region-name-min' => 'Bölge adı 2 karakterden az olamaz!',
     'region-name-max' => 'Bölge adı 128 karakterden fazla olamaz!',
     'vehicle-not-found' => 'Araç bulunamadı!',
-    'request-sending-success' => 'İsteğiniz başarıyla gönderildi! Yöneticimiz yakında sizinle iletişime geçecek...'
+    'request-sending-success' => 'İsteğiniz başarıyla gönderildi! Yöneticimiz yakında sizinle iletişime geçecek...',
+    'password-min' => 'Şifre 8 karakterden kısa olmamalıdır!',
+    'password-confirmed' => 'Şifreler eşleşmiyor!'
 ];

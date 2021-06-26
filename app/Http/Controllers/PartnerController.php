@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Auth;
+use App\Facades\Hash;
 use App\Models\User;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller

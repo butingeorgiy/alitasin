@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Facades\Auth;
+use App\Facades\Hash;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class UserController extends Controller
                 'first_name' => 'bail|required|min:2|max:32',
                 'last_name' => 'bail|min:2|max:32',
                 'email' => 'bail|required|email|max:128',
-                'phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/']
+                'phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
+                'new_password' => 'bail|nullable|string|min:8|confirmed',
+                'new_password_confirmation' => 'bail|nullable'
             ],
             [
                 'first_name.required' => __('messages.user-first-name-required'),
@@ -40,7 +43,9 @@ class UserController extends Controller
                 'email.email' => __('messages.user-email-email'),
                 'email.max' => __('messages.user-email-max'),
                 'phone.required' => __('messages.user-phone-required'),
-                'phone.regex' => __('messages.user-phone-regex')
+                'phone.regex' => __('messages.user-phone-regex'),
+                'new_password.min' => __('messages.password-min'),
+                'new_password.confirmed' => __('messages.password-confirmed')
             ]
         );
 
@@ -82,11 +87,21 @@ class UserController extends Controller
             $user->phone = $phone;
         }
 
+        if ($request->has('new_password')) {
+            $passwordWasUpdated = true;
+            $user->password = Hash::make($request->input('new_password'), $user);
+        }
+
         $user->save();
+
+        if (isset($passwordWasUpdated)) {
+            $authCookies = Auth::login($user->email, $request->input('new_password_confirmation'));
+        }
 
         return [
             'status' => true,
-            'message' => __('messages.updating-success')
+            'message' => __('messages.updating-success'),
+            'cookies' => isset($passwordWasUpdated) ? $authCookies['cookies'] : []
         ];
     }
 

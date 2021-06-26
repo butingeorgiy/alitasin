@@ -2,6 +2,7 @@ import EventHandler from '../../core/EventHandler';
 import UpdateProfileInfoModel from './UpdateProfileInfoModel';
 import LocaleHelper from '../../helpers/LocaleHelper';
 import UpdateProfileInfoView from './UpdateProfileInfoView';
+import Cookies from 'js-cookie';
 
 class UpdateProfileInfoController extends EventHandler {
     constructor(nodes) {
@@ -27,11 +28,13 @@ class UpdateProfileInfoController extends EventHandler {
     }
 
     getValues(init = false) {
-        const values = {
+        let values = {
             firstName: this.nodes.form.querySelector('input[name="first_name"]').value,
             lastName: this.nodes.form.querySelector('input[name="last_name"]').value,
             phone: this.nodes.form.querySelector('input[name="phone"]').value.replace(/\D/g, ''),
-            email: this.nodes.form.querySelector('input[name="email"]').value
+            email: this.nodes.form.querySelector('input[name="email"]').value,
+            new_password: this.nodes.form.querySelector('input[name="new_password"]').value,
+            new_password_confirmation: this.nodes.form.querySelector('input[name="new_password_confirmation"]').value
         };
 
         if (init && this.initValues === null) {
@@ -57,6 +60,8 @@ class UpdateProfileInfoController extends EventHandler {
         this.addEvent(this.nodes.form.querySelector('input[name="last_name"]'), 'input', changeHandler);
         this.addEvent(this.nodes.form.querySelector('input[name="email"]'), 'input', changeHandler);
         this.addEvent(this.nodes.form.querySelector('input[name="phone"]'), 'input', changeHandler);
+        this.addEvent(this.nodes.form.querySelector('input[name="new_password"]'), 'input', changeHandler);
+        this.addEvent(this.nodes.form.querySelector('input[name="new_password_confirmation"]'), 'input', changeHandler);
     }
 
     static uploadProfilePhoto(file) {
@@ -94,6 +99,11 @@ class UpdateProfileInfoController extends EventHandler {
             formData.append('last_name', values.lastName);
         }
 
+        if (values.new_password) {
+            formData.append('new_password', values.new_password);
+            formData.append('new_password_confirmation', values.new_password_confirmation);
+        }
+
         UpdateProfileInfoModel.update(formData)
             .then(result => {
                 if (typeof result === 'string') {
@@ -104,6 +114,11 @@ class UpdateProfileInfoController extends EventHandler {
                     this.view.removeButton();
                     this.view.showSuccess(result.message);
                     this.hasChanges = false;
+
+                    if (result['cookies']['token']) {
+                        Cookies.set('token', result['cookies']['token'], { expires: 7 });
+                    }
+
                     setTimeout(_ => location.reload(), 500);
                 }
             })

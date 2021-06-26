@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Facades\Hash;
 use App\Http\Requests\PartnerCreatingRequest;
 use App\Mail\AccountCreated;
 use App\Models\PartnerPayment;
@@ -247,6 +248,33 @@ class PartnerController extends Controller
         return [
             'status' => true,
             'message' => __('messages.profit-percent-updating-success')
+        ];
+    }
+
+    /**
+     * Update partner's password
+     *
+     * @param Request $request
+     * @param $partnerId
+     * @return array
+     * @throws Exception
+     */
+    public function changePassword(Request $request, $partnerId): array
+    {
+        /** @var User|null $partner */
+        if (!$partner = User::partners()->where('id', $partnerId)->first()) {
+            throw new Exception(__('messages.user-not-found'));
+        }
+
+        $partner->password = Hash::make($request->input('new_password'), $partner);
+
+        if (!$partner->save()) {
+            throw new Exception(__('messages.updating-failed'));
+        }
+
+        return [
+            'success' => true,
+            'message' => __('messages.updating-success')
         ];
     }
 }

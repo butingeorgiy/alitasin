@@ -184,5 +184,9 @@ return [
     'order-vehicle' => 'Order vehicle',
     'order' => 'Order',
     'chosen-vehicle' => 'Chosen vehicle',
-    'region-of-your-location' => 'Region of your location'
+    'region-of-your-location' => 'Region of your location',
+    'enter-new-password' => 'Enter a new password',
+    'confirm-new-password' => 'Confirm a new password',
+    'confirm-password' => 'Confirm password',
+    'password-confirmation' => 'Password confirmation'
 ];

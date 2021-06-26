@@ -185,5 +185,9 @@ return [
     'order-vehicle' => 'Заказать ТС',
     'order' => 'Заказать',
     'chosen-vehicle' => 'Выбранное ТС',
-    'region-of-your-location' => 'Регион вашего нахождения'
+    'region-of-your-location' => 'Регион вашего нахождения',
+    'enter-new-password' => 'Введите новый пароль',
+    'confirm-new-password' => 'Подтвердите новый пароль',
+    'confirm-password' => 'Подтвердите пароль',
+    'password-confirmation' => 'Подтверждение пароля'
 ];

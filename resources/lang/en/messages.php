@@ -147,5 +147,7 @@ return [
     'region-name-min' => 'Region name cannot be less than 2 characters!',
     'region-name-max' => 'Region name cannot be more than 128 characters!',
     'vehicle-not-found' => 'Vehicle not found!',
-    'request-sending-success' => 'Your request was sent successfully! Our manager contact with your soon...'
+    'request-sending-success' => 'Your request was sent successfully! Our manager contact with your soon...',
+    'password-min' => 'The password must not be shorter than 8 characters!',
+    'password-confirmed' => 'Passwords are not matched!'
 ];

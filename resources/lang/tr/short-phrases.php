@@ -185,5 +185,9 @@ return [
     'order-vehicle' => 'Araç siparişi',
     'order' => 'Sipariş vermek',
     'chosen-vehicle' => 'Seçilen araç',
-    'region-of-your-location' => 'Bulunduğunuz bölge'
+    'region-of-your-location' => 'Bulunduğunuz bölge',
+    'enter-new-password' => 'Yeni bir şifre gir',
+    'confirm-new-password' => 'Yeni bir şifreyi onaylayın',
+    'confirm-password' => 'Şifreyi onayla',
+    'password-confirmation' => 'Şifre onayı'
 ];

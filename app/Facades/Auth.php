@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static check(string[] $array = null)
  * @method static User user()
- * @method static login(array|string|null $input, array|string|null $input1)
+ * @method static login(string $email, string $password)
  */
 class Auth extends Facade
 {

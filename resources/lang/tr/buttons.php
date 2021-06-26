@@ -19,5 +19,6 @@ return [
     'add-excursion' => 'Gezi ekle',
     'add' => 'Ekle',
     'edit' => 'Düzenle',
-    'delete' => 'Sil'
+    'delete' => 'Sil',
+    'change-password' => 'Şifre değiştir'
 ];
