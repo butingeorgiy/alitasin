@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Facades\Auth;
 use App\Http\Requests\VehicleRequest;
-use App\Models\PromoCode;
 use App\Models\Region;
 use App\Models\Vehicle;
 use App\Models\VehicleImage;
 use App\Models\VehicleType;
 use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
