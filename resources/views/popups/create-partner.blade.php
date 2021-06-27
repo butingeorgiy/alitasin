@@ -7,47 +7,59 @@
             </svg>
         </div>
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="text" name="first_name" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.first-name') }}">
-        </label>
-
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="text" name="last_name" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.last-name') . ' (' . __('short-phrases.unnecessary') . ')' }}">
-        </label>
-
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="email" name="phone" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.phone')  }}">
-        </label>
-
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="email" name="email" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.email')  }}">
-        </label>
-
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="number" name="profit_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.profit-percent')  }}">
-        </label>
-
-        @if(!request()->is('admin/partners'))
+        <div class="flex flex-col overflow-y-scroll hide-scrollbar" style="max-height: 320px">
             <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-                <input type="number" name="sub_partner_profit_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                       placeholder="{{ __('short-phrases.sub-partner-profit-percent')  }}">
+                <input type="text" name="first_name" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.first-name') }}">
             </label>
-        @endif
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="text" name="promo_code" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.promo-code')  }}">
-        </label>
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="text" name="last_name" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.last-name') . ' (' . __('short-phrases.unnecessary') . ')' }}">
+            </label>
 
-        <label class="px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="number" name="sale_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.sale-percent')  }}">
-        </label>
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="email" name="phone" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.phone')  }}">
+            </label>
+
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="email" name="email" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.email')  }}">
+            </label>
+
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="number" name="profit_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.profit-percent')  }}">
+            </label>
+
+            @if(!request()->is('admin/partners'))
+                <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                    <input type="number" name="sub_partner_profit_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                           placeholder="{{ __('short-phrases.sub-partner-profit-percent')  }}">
+                </label>
+            @endif
+
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="text" name="promo_code" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.promo-code')  }}">
+            </label>
+
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="number" name="sale_percent" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.sale-percent')  }}">
+            </label>
+
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="password" name="password" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.password')  }}">
+            </label>
+
+            <label class="px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="password" name="password_confirmation" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.password-confirmation')  }}">
+            </label>
+        </div>
 
         <div class="error-message hidden flex items-center -mb-4 mt-6 px-4 py-3 text-red-600 font-medium bg-red-200 rounded-md">
             <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

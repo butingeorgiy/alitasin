@@ -8,7 +8,6 @@ use App\Mail\AccountCreated;
 use App\Models\PartnerPayment;
 use App\Models\PartnerPercent;
 use App\Models\PromoCode;
-use App\Models\SubPartnerPercent;
 use App\Models\User;
 use Exception;
 use App\Http\Controllers\Controller;
@@ -44,7 +43,7 @@ class PartnerController extends Controller
             $user->last_name = $request->input('last_name');
         }
 
-        $generatedPassword = $user->generatePassword();
+        $user->password = Hash::make($request->input('password'), $user);
 
         if (!$user->save()) {
             throw new Exception(__('messages.user-creating-failed'));
@@ -87,9 +86,6 @@ class PartnerController extends Controller
                 'percent' => $subPartnerProfitPercent
             ]);
         }
-
-        Mail::to($user->email)
-            ->send(new AccountCreated($generatedPassword, $user->first_name, true));
 
         return [
             'status' => true,

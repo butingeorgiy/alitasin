@@ -16,6 +16,8 @@ class PopupController extends EventHandler {
             beforeOpen();
         }
 
+        document.body.classList.add('overflow-y-hidden');
+
         setTimeout(_ => {
             this.popup.querySelector('.popup').classList.remove('top-80');
         }, 0);
@@ -26,6 +28,7 @@ class PopupController extends EventHandler {
 
         setTimeout(_ => {
             this.popup.classList.add('hidden');
+            document.body.classList.remove('overflow-y-hidden');
         }, 250);
 
         if (afterClose) {

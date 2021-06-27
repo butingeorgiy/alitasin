@@ -1332,6 +1332,14 @@ video {
   overflow: hidden;
 }
 
+.overflow-y-hidden{
+  overflow-y: hidden;
+}
+
+.overflow-y-scroll{
+  overflow-y: scroll;
+}
+
 .p-3{
   padding: 0.75rem;
 }
@@ -2169,6 +2177,10 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 body.shake {

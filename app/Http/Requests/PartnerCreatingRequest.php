@@ -23,7 +23,9 @@ class PartnerCreatingRequest extends FormRequest
             'promo_code' => 'bail|required|min:1|max:32',
             'sale_percent' => 'bail|required|numeric|min:0|max:100',
             'profit_percent' => 'bail|required|numeric|min:0|max:100',
-            'sub_partner_profit_percent' => 'bail|nullable|numeric|min:0|max:100'
+            'sub_partner_profit_percent' => 'bail|nullable|numeric|min:0|max:100',
+            'password' => 'bail|required|string|min:8|confirmed',
+            'password_confirmation' => 'bail|required'
         ];
     }
 
@@ -54,7 +56,10 @@ class PartnerCreatingRequest extends FormRequest
             'profit_percent.max' => __('messages.percent-max'),
             'sub_partner_profit_percent.numeric' => __('messages.percent-numeric'),
             'sub_partner_profit_percent.min' => __('messages.percent-min'),
-            'sub_partner_profit_percent.max' => __('messages.percent-max')
+            'sub_partner_profit_percent.max' => __('messages.percent-max'),
+            'password.required' => __('messages.password-required'),
+            'password.min' => __('messages.password-min'),
+            'password.confirmed' => __('messages.password-confirmed'),
         ];
     }
 
