@@ -62,7 +62,6 @@ class UserController extends Controller
             throw new Exception(__('messages.user-email-unique'));
         }
 
-
         if ($user->first_name !== $request->input('first_name')) {
             $user->first_name = $request->input('first_name');
         }

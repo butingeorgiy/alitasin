@@ -252,25 +252,85 @@ class PartnerController extends Controller
     }
 
     /**
-     * Update partner's password
+     * Update partner profile
      *
      * @param Request $request
-     * @param $partnerId
+     * @param $id
      * @return array
      * @throws Exception
      */
-    public function changePassword(Request $request, $partnerId): array
+    public function update(Request $request, $id): array
     {
-        /** @var User|null $partner */
-        if (!$partner = User::partners()->where('id', $partnerId)->first()) {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'first_name' => 'bail|required|min:2|max:32',
+                'last_name' => 'bail|min:2|max:32',
+                'email' => 'bail|required|email|max:128',
+                'phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
+                'new_password' => 'bail|nullable|string|min:8|confirmed',
+                'new_password_confirmation' => 'bail|nullable'
+            ],
+            [
+                'first_name.required' => __('messages.user-first-name-required'),
+                'first_name.min' => __('messages.user-first-name-min'),
+                'first_name.max' => __('messages.user-first-name-max'),
+                'last_name.min' => __('messages.user-last-name-min'),
+                'last_name.max' => __('messages.user-last-name-max'),
+                'email.required' => __('messages.user-email-required'),
+                'email.email' => __('messages.user-email-email'),
+                'email.max' => __('messages.user-email-max'),
+                'phone.required' => __('messages.user-phone-required'),
+                'phone.regex' => __('messages.user-phone-regex'),
+                'new_password.min' => __('messages.password-min'),
+                'new_password.confirmed' => __('messages.password-confirmed')
+            ]
+        );
+
+        if ($validator->fails()) {
+            throw new Exception($validator->errors()->first());
+        }
+
+        if (!$partner = User::partners()->where('id', $id)->first()) {
             throw new Exception(__('messages.user-not-found'));
         }
 
-        $partner->password = Hash::make($request->input('new_password'), $partner);
+        $emailUniqueCheck = User::where('email', $request->input('email'))
+            ->where('id', '!=', $partner->id)->get()->first();
 
-        if (!$partner->save()) {
-            throw new Exception(__('messages.updating-failed'));
+        if ($emailUniqueCheck) {
+            throw new Exception(__('messages.user-email-unique'));
         }
+
+        if ($partner->first_name !== $request->input('first_name')) {
+            $partner->first_name = $request->input('first_name');
+        }
+
+        if ($request->has('last_name')) {
+            if ($partner->last_name !== $request->input('last_name')) {
+                $partner->last_name = $request->input('last_name');
+            }
+        }
+
+        if ($partner->email !== $request->input('email')) {
+            $partner->email = $request->input('email');
+        }
+
+        $userPhone = $partner->phone_code . $partner->getOriginal('phone');
+
+        if ($userPhone !== $request->input('phone')) {
+            $phone = substr($request->input('phone'), -10);
+            $phoneCode = Str::before($request->input('phone'), $phone);
+
+            $partner->phone_code = $phoneCode;
+            $partner->phone = $phone;
+        }
+
+        if ($request->has('new_password')) {
+            $partner->password = Hash::make($request->input('new_password'), $partner);
+        }
+
+        $partner->save();
 
         return [
             'success' => true,

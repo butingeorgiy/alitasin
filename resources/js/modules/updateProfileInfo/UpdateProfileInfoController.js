@@ -91,6 +91,8 @@ class UpdateProfileInfoController extends EventHandler {
         const values = this.getValues();
         const formData = new FormData();
 
+        let mode = 'user', options = {};
+
         formData.append('first_name', values.firstName);
         formData.append('email', values.email);
         formData.append('phone', values.phone);
@@ -104,7 +106,14 @@ class UpdateProfileInfoController extends EventHandler {
             formData.append('new_password_confirmation', values.new_password_confirmation);
         }
 
-        UpdateProfileInfoModel.update(formData)
+        if (/admin\/partners\/\d+/.test(location.pathname)) {
+            mode = 'partner';
+            options = {
+                id: location.pathname.split('/')[3]
+            };
+        }
+
+        UpdateProfileInfoModel.update(formData, mode, options)
             .then(result => {
                 if (typeof result === 'string') {
                     alert(`Error: ${result}`);
@@ -115,7 +124,7 @@ class UpdateProfileInfoController extends EventHandler {
                     this.view.showSuccess(result.message);
                     this.hasChanges = false;
 
-                    if (result['cookies']['token']) {
+                    if (result['cookies']?.token) {
                         Cookies.set('token', result['cookies']['token'], { expires: 7 });
                     }
 

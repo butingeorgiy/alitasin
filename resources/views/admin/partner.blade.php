@@ -32,7 +32,7 @@
         </label>
     </section>
 
-    @include('components.partners.personal-info')
+    @include('components.profile.personal-info', ['user' => $partner])
 
     @if(!$isSubPartner)
         <section id="partnersSection" class="mt-10 mb-10">
