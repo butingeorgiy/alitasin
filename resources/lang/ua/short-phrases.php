@@ -171,7 +171,7 @@ return [
     'profit-percent' => 'Відсоток прибутку',
     'sub-partners' => 'під партнери',
     'add-sub-partner' => 'Додати під партнерів',
-    'sub-partner-profit-percent' => 'Відсоток прибутку від під партнерів',
+    'sub-partner-profit-percent' => 'Відсоток прибутку від суб-партнера',
     'income' => 'Дохід',
     'earned' => 'Зароблено',
     'payed' => 'Оплачено',
@@ -188,5 +188,8 @@ return [
     'enter-new-password' => 'Введіть новий пароль',
     'confirm-new-password' => 'Підтвердьте новий пароль',
     'confirm-password' => 'Підтвердьте пароль',
-    'password-confirmation' => 'Підтвердження паролю'
+    'password-confirmation' => 'Підтвердження паролю',
+    'promo-code-info' => 'Інформація про промо-код',
+    'attracted' => 'Приваблює',
+    'statistic' => 'Статистика'
 ];

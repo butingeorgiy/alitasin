@@ -54,12 +54,12 @@ class ChangePassword extends Command
             $passwordConfirmation = $this->secret('Confirm password');
 
             if ($password !== $passwordConfirmation) {
-                $this->error('Password are not matched!');
+                $this->error('Passwords are not matched!');
             } else {
                 $user->password = Hash::make($password, $user);
                 $user->save();
 
-                $this->info('Passwords was updated successfully!');
+                $this->info('Password was updated successfully!');
             }
         } else {
             $this->error('User not found!');

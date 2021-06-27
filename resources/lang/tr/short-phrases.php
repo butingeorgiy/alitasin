@@ -172,7 +172,7 @@ return [
     'profit-percent' => 'Kar yüzdesi',
     'sub-partners' => 'Alt ortaklar',
     'add-sub-partner' => 'Alt ortak ekle',
-    'sub-partner-profit-percent' => 'Alt ortaklardan kâr yüzdesi',
+    'sub-partner-profit-percent' => 'Kar yüzdesi formu alt ortağı',
     'income' => 'Gelir',
     'earned' => 'kazanılan',
     'payed' => 'Payed',
@@ -189,5 +189,8 @@ return [
     'enter-new-password' => 'Yeni bir şifre gir',
     'confirm-new-password' => 'Yeni bir şifreyi onaylayın',
     'confirm-password' => 'Şifreyi onayla',
-    'password-confirmation' => 'Şifre onayı'
+    'password-confirmation' => 'Şifre onayı',
+    'promo-code-info' => 'Promosyon kodu bilgileri',
+    'attracted' => 'çekici',
+    'statistic' => 'Istatistik'
 ];

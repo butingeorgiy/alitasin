@@ -171,7 +171,7 @@ return [
     'profit-percent' => 'Profit percent',
     'sub-partners' => 'Sub partners',
     'add-sub-partner' => 'Add sub partner',
-    'sub-partner-profit-percent' => 'Profit percent form sub partners',
+    'sub-partner-profit-percent' => 'Profit percent form sub partner',
     'income' => 'Income',
     'earned' => 'Earned',
     'payed' => 'Payed',
@@ -188,5 +188,8 @@ return [
     'enter-new-password' => 'Enter a new password',
     'confirm-new-password' => 'Confirm a new password',
     'confirm-password' => 'Confirm password',
-    'password-confirmation' => 'Password confirmation'
+    'password-confirmation' => 'Password confirmation',
+    'promo-code-info' => 'Promo code information',
+    'attracted' => 'Attracted',
+    'statistic' => 'Statistic'
 ];

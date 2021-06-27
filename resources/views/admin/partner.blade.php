@@ -11,6 +11,8 @@
     <title>{{ __('page-titles.partners') }}</title>
 </head>
 <body class="bg-gray-50">
+    @php /** @var App\Models\User $partner */ @endphp
+
     @include('components.general.header')
 
     <section id="heroSection" class="flex justify-center items-center relative px-5 bg-center bg-cover bg-no-repeat"
@@ -33,6 +35,35 @@
     </section>
 
     @include('components.profile.personal-info', ['user' => $partner])
+
+    @php
+
+    // Promo code info calculation
+
+    $promoCodeInfo = [
+        'promoCode' => $partner->promoCodes()->first()['code'],
+        'salePercent' => $partner->promoCodes()->first()['sale_percent'],
+        'profitPercent' => $partner->profit_percent
+    ];
+
+    if ($partner->isSubPartner()) {
+        $promoCodeInfo['subPartnerProfitPercent'] = $partner->sub_partners_profit_percent;
+    }
+
+
+    // Promo code statistic calculation
+
+    $promoCodeStatistic = [
+        'attracted' => $partner->attractedReservations()->count(),
+        'income' => $partner->total_income,
+        'earned' => $partner->total_profit,
+        'payed' => $partner->total_payment_amount
+    ];
+
+    @endphp
+
+    @include('components.partners.promo-code-info', $promoCodeInfo)
+    @include('components.partners.promo-code-statistic', $promoCodeStatistic)
 
     @if(!$isSubPartner)
         <section id="partnersSection" class="mt-10 mb-10">

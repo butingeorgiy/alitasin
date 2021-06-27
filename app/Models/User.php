@@ -30,9 +30,9 @@ use Illuminate\Support\Str;
  * @property mixed recentViewed
  * @property mixed reservedTours
  * @property mixed favoriteTours
- * @property int total_profit
+ * @property float total_profit
  * @property int total_payment_amount
- * @property int total_income
+ * @property float total_income
  * @property int profit_percent
  * @property int sub_partners_profit_percent
  * @property string profile
@@ -181,9 +181,9 @@ class User extends Model
     /**
      * Get total income attracted by partner
      *
-     * @return int
+     * @return float
      */
-    public function getTotalIncomeAttribute(): int
+    public function getTotalIncomeAttribute(): float
     {
         /**
          * @var $attractedReservations Reservation[]
@@ -201,9 +201,9 @@ class User extends Model
     /**
      * Get partner profit
      *
-     * @return int
+     * @return float
      */
-    public function getTotalProfitAttribute(): int
+    public function getTotalProfitAttribute(): float
     {
         /**
          * @var $attractedReservations Reservation[]
