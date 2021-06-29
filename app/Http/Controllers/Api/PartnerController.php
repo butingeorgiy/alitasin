@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Facades\Hash;
 use App\Http\Requests\PartnerCreatingRequest;
 use App\Mail\AccountCreated;
+use App\Models\PartnerCity;
 use App\Models\PartnerPayment;
 use App\Models\PartnerPercent;
 use App\Models\PromoCode;
@@ -287,6 +288,7 @@ class PartnerController extends Controller
             throw new Exception($validator->errors()->first());
         }
 
+        /** @var User|null $partner */
         if (!$partner = User::partners()->where('id', $id)->first()) {
             throw new Exception(__('messages.user-not-found'));
         }
@@ -310,6 +312,23 @@ class PartnerController extends Controller
 
         if ($partner->email !== $request->input('email')) {
             $partner->email = $request->input('email');
+        }
+
+        if ($partnerCity = $partner->partnerCity()->first()) {
+            if ($partnerCity->city !== $request->input('city')) {
+                $partnerCity->city = $request->input('city');
+
+                $partnerCity->save();
+            }
+        } else {
+            if ($request->input('city')) {
+                $partnerCity = new PartnerCity();
+
+                $partnerCity->partner_id = $partner->id;
+                $partnerCity->city = $request->input('city');
+
+                $partnerCity->save();
+            }
         }
 
         $userPhone = $partner->phone_code . $partner->getOriginal('phone');

@@ -192,5 +192,6 @@ return [
     'password-confirmation' => 'Şifre onayı',
     'promo-code-info' => 'Promosyon kodu bilgileri',
     'attracted' => 'çekici',
-    'statistic' => 'Istatistik'
+    'statistic' => 'Istatistik',
+    'city' => 'Kent'
 ];

@@ -191,5 +191,6 @@ return [
     'password-confirmation' => 'Password confirmation',
     'promo-code-info' => 'Promo code information',
     'attracted' => 'Attracted',
-    'statistic' => 'Statistic'
+    'statistic' => 'Statistic',
+    'city' => 'City'
 ];

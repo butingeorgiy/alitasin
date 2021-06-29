@@ -192,5 +192,6 @@ return [
     'password-confirmation' => 'Подтверждение пароля',
     'promo-code-info' => 'Информация по промо коду',
     'attracted' => 'Привлечено',
-    'statistic' => 'Статистика'
+    'statistic' => 'Статистика',
+    'city' => 'Город'
 ];

@@ -78,7 +78,7 @@
         <div class="hidden custom-dropdown-container origin-top-right absolute -right-4 top-full z-10 w-56 rounded-md shadow-lg bg-white border border-gray-200 transition ease-out duration-100 transform opacity-0 scale-95"
              role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <div class="py-1 rounded-md overflow-hidden" role="none">
-                @if(request()->is('admin/reservations'))
+                @if(request()->is('admin/reserves'))
                     <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
                          data-option-name="change-status" data-option-params="{{ json_encode(['status_id' => $reservation->status->id, 'reservation_id' => $reservation->id]) }}">
                         {{ __('short-phrases.change-status') }}

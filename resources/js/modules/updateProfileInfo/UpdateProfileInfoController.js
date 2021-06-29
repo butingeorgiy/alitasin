@@ -37,6 +37,10 @@ class UpdateProfileInfoController extends EventHandler {
             new_password_confirmation: this.nodes.form.querySelector('input[name="new_password_confirmation"]').value
         };
 
+        if (this.nodes.form.querySelector('input[name="city"]')) {
+            values.city = this.nodes.form.querySelector('input[name="city"]').value;
+        }
+
         if (init && this.initValues === null) {
             this.initValues = values;
             return null;
@@ -62,6 +66,10 @@ class UpdateProfileInfoController extends EventHandler {
         this.addEvent(this.nodes.form.querySelector('input[name="phone"]'), 'input', changeHandler);
         this.addEvent(this.nodes.form.querySelector('input[name="new_password"]'), 'input', changeHandler);
         this.addEvent(this.nodes.form.querySelector('input[name="new_password_confirmation"]'), 'input', changeHandler);
+
+        if (this.nodes.form.querySelector('input[name="city"]')) {
+            this.addEvent(this.nodes.form.querySelector('input[name="city"]'), 'input', changeHandler);
+        }
     }
 
     static uploadProfilePhoto(file) {
@@ -104,6 +112,10 @@ class UpdateProfileInfoController extends EventHandler {
         if (values.new_password) {
             formData.append('new_password', values.new_password);
             formData.append('new_password_confirmation', values.new_password_confirmation);
+        }
+
+        if (values.city) {
+            formData.append('city', values.city);
         }
 
         if (/admin\/partners\/\d+/.test(location.pathname)) {

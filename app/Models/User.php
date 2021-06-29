@@ -179,6 +179,16 @@ class User extends Model
     }
 
     /**
+     * Get partner city
+     *
+     * @return HasOne
+     */
+    public function partnerCity(): HasOne
+    {
+        return $this->hasOne(PartnerCity::class, 'partner_id');
+    }
+
+    /**
      * Get total income attracted by partner
      *
      * @return float
