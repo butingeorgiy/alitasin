@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int partner_id
- * @property array|mixed|string|null city
+ * @property string city
  */
 class PartnerCity extends Model
 {
@@ -17,5 +17,7 @@ class PartnerCity extends Model
         'city'
     ];
 
-    public $primaryKey = null;
+    protected $primaryKey = null;
+
+    public $incrementing = false;
 }
