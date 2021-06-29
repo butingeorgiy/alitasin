@@ -22,7 +22,7 @@ class PageController extends Controller
      */
     public function showIndex()
     {
-        $regions = collect(Region::where('show_at_index_page', '1')->get())->random(6);
+        $regions = Region::where('show_at_index_page', '1')->get();
 
         foreach ($regions as $region) {
             $region->image = route('get-image', [

@@ -314,22 +314,22 @@ class PartnerController extends Controller
             $partner->email = $request->input('email');
         }
 
-//        if ($partnerCity = $partner->partnerCity()->first()) {
-//            if ($partnerCity->city !== $request->input('city')) {
-//                $partnerCity->city = $request->input('city');
-//
-//                $partnerCity->save();
-//            }
-//        } else {
-//            if ($request->input('city')) {
-//                $partnerCity = new PartnerCity();
-//
-//                $partnerCity->partner_id = $partner->id;
-//                $partnerCity->city = $request->input('city');
-//
-//                $partnerCity->save();
-//            }
-//        }
+        if ($partnerCity = $partner->partnerCity()->first()) {
+            if ($partnerCity->city !== $request->input('city')) {
+                $partnerCity->city = $request->input('city');
+
+                $partnerCity->save();
+            }
+        } else {
+            if ($request->input('city')) {
+                $partnerCity = new PartnerCity();
+
+                $partnerCity->partner_id = $partner->id;
+                $partnerCity->city = $request->input('city');
+
+                $partnerCity->save();
+            }
+        }
 
         $userPhone = $partner->phone_code . $partner->getOriginal('phone');
 
