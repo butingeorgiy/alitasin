@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Facades\Hash;
 use App\Http\Requests\PartnerCreatingRequest;
-use App\Mail\AccountCreated;
 use App\Models\PartnerCity;
 use App\Models\PartnerPayment;
 use App\Models\PartnerPercent;
@@ -14,7 +13,6 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -349,6 +347,51 @@ class PartnerController extends Controller
         return [
             'success' => true,
             'message' => __('messages.updating-success')
+        ];
+    }
+
+    /**
+     * Search partners by phone, name, promo code and city
+     *
+     * @param Request $request
+     * @return array|array[]
+     */
+    public function search(Request $request): array
+    {
+        if (!$query = $request->input('query')) {
+            return [
+                'result' => []
+            ];
+        }
+
+        $partnerIds = User::partners()->selectRaw(
+            'users.id, CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(CONCAT(phone_code, ' .
+            'phone, email, first_name, IF(last_name IS NOT NULL, last_name, \'\'), IF(partner_cities.city IS NOT ' .
+            'NULL, partner_cities.city, \'\'), IF(promo_codes.code IS NOT NULL, promo_codes.code, \'\')), \' \', \'\')), ?, \'~\'' .
+            ', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+            [str_replace(' ', '|', $query)]
+        )
+            ->leftJoin('partner_cities', 'users.id', '=', 'partner_cities.partner_id')
+            ->leftJoin('promo_codes', 'users.id', '=', 'promo_codes.user_id')
+            ->having('frequency', '>', 0)
+            ->orderByDesc('frequency')->get()->modelKeys();
+
+        return [
+            'result' => User::find($partnerIds)->map(function ($user) {
+                /**
+                 * @var PromoCode $promoCode
+                 * @var User $user
+                 */
+
+                $promoCode = $user->promoCodes()->first();
+                $promoCode = $promoCode->code;
+
+                return [
+                    'id' => $user->id,
+                    'name' => $user->full_name,
+                    'promo_code' => $promoCode
+                ];
+            })
         ];
     }
 }

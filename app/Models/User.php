@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Facades\Hash;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,11 +16,12 @@ use Illuminate\Support\Str;
 
 /**
  * @method static isEmailUnique($email)
- * @method static find(array|string $id)
- * @method static where(string $string, array|string|null $input)
- * @method static managers()
- * @method static partners()
+ * @method static Collection|User|null find(array|string $id)
+ * @method static Builder where(string $string, array|string|null $input)
+ * @method static Builder managers()
+ * @method static Builder partners()
  * @method static create(string[] $array)
+ * @method static Builder selectRaw(string $expression)
  * @property string full_name
  * @property string first_name
  * @property string account_type_id

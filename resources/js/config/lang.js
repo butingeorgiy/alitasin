@@ -91,6 +91,12 @@ const langConfig = {
             'ru': 'Ничего не указано',
             'tr': 'Hiçbir şey belirtilmedi',
             'ua': 'Нічого не вказано'
+        },
+        'go-to': {
+            'en': 'Go to',
+            'ru': 'Перейти',
+            'tr': 'Git',
+            'ua': 'Перейти'
         }
     }
 };

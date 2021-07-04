@@ -17,3 +17,4 @@ import './modules/multiNavigation';
 import './modules/clickToCallWidget';
 import './modules/orderVehicle';
 import './modules/updateVehicle';
+import './modules/searchPartners';

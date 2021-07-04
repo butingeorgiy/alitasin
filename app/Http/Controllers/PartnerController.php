@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Auth;
-use App\Facades\Hash;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller
 {
-    public function showAll()
+    public function showAll(Request $request)
     {
         $user = Auth::user();
 
-        $partners = User::partners()->withTrashed()->get();
+        if ($search = $request->input('search')) {
+            $partners = User::partners()->whereExists(function ($query) {
+                $query->select('id')->from('promo_codes')
+                    ->whereRaw('promo_codes.id = :promo_code', []);
+            })->withTrashed()->get();
+        } else {
+            $partners = User::partners()->withTrashed()->get();
+        }
 
         return view('admin.partners', compact('user', 'partners'));
     }

@@ -17,6 +17,7 @@ Route::group(['prefix' => 'partners'], function () {
     Route::post('make-payment/{id}', 'Api\PartnerController@makePayment')->middleware('auth:5');
     Route::post('update-profit-percent/{id}', 'Api\PartnerController@updateProfitPercent')->middleware('auth:5');
     Route::post('update/{id}', 'Api\PartnerController@update')->middleware('auth:5');
+    Route::get('search', 'Api\PartnerController@search')->middleware('auth:5');
 });
 
 Route::group(['prefix' => 'tours'], function () {

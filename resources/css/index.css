@@ -190,6 +190,10 @@ select::-ms-expand {
     @apply block;
 }
 
+.partners-search-wrapper {
+    @apply relative flex ml-auto px-3 py-2 border border-gray-500 rounded-md;
+}
+
 /* Tom Select */
 
 .ts-input {
