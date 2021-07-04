@@ -149,5 +149,6 @@ return [
     'vehicle-not-found' => 'Araç bulunamadı!',
     'request-sending-success' => 'İsteğiniz başarıyla gönderildi! Yöneticimiz yakında sizinle iletişime geçecek...',
     'password-min' => 'Şifre 8 karakterden kısa olmamalıdır!',
-    'password-confirmed' => 'Şifreler eşleşmiyor!'
+    'password-confirmed' => 'Şifreler eşleşmiyor!',
+    'promo-code-not-unique' => 'Promosyon kodu zaten var!'
 ];

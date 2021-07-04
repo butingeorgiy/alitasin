@@ -149,5 +149,6 @@ return [
     'vehicle-not-found' => 'Vehicle not found!',
     'request-sending-success' => 'Your request was sent successfully! Our manager contact with your soon...',
     'password-min' => 'The password must not be shorter than 8 characters!',
-    'password-confirmed' => 'Passwords are not matched!'
+    'password-confirmed' => 'Passwords are not matched!',
+    'promo-code-not-unique' => 'Promo code has already existed!'
 ];

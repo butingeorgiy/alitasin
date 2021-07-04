@@ -11,6 +11,7 @@ use App\Models\PromoCode;
 use App\Models\User;
 use Exception;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,12 @@ class PartnerController extends Controller
      */
     public function create(PartnerCreatingRequest $request): array
     {
+        // Check promo code on uniqueness
+
+        if (PromoCode::where('code', $request->input('promo_code'))->first()) {
+            throw new Exception(__('messages.promo-code-not-unique'));
+        }
+
         // Partner creating
 
         $phone = substr($request->input('phone'), -10);
@@ -84,6 +91,17 @@ class PartnerController extends Controller
                 'user_id' => $user->id,
                 'percent' => $subPartnerProfitPercent
             ]);
+        }
+
+        // If city was specified
+
+        if ($request->input('city')) {
+            $partnerCity = new PartnerCity();
+
+            $partnerCity->partner_id = $user->id;
+            $partnerCity->city = $request->input('city');
+
+            $partnerCity->save();
         }
 
         return [

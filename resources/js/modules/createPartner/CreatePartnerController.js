@@ -72,7 +72,11 @@ class CreatePartnerController extends EventHandler {
         }
 
         if (this.nodes.createPartnerPopup.querySelector('input[name="password_confirmation"]')?.value) {
-            formData.append('password_confirmation', this.nodes.createPartnerPopup.querySelector('input[name="password_confirmation"]')?.value);
+            formData.append('password_confirmation', this.nodes.createPartnerPopup.querySelector('input[name="password_confirmation"]').value);
+        }
+
+        if (this.nodes.createPartnerPopup.querySelector('input[name="city"]')?.value) {
+            formData.append('city', this.nodes.createPartnerPopup.querySelector('input[name="city"]').value);
         }
 
         if (/^\/admin\/partners\/\d+$/.test(location.pathname)) {

@@ -150,5 +150,6 @@ return [
     'vehicle-not-found' => 'ТС не найдено!',
     'request-sending-success' => 'Ваша заявка успешно отправлена! Наш менеджер скоро с вами свяжется...',
     'password-min' => 'Пароль не может быть короче 8 символов!',
-    'password-confirmed' => 'Пароли не совпадают!'
+    'password-confirmed' => 'Пароли не совпадают!',
+    'promo-code-not-unique' => 'Промо код уже существует!'
 ];

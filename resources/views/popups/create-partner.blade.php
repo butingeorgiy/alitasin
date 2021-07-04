@@ -51,6 +51,11 @@
             </label>
 
             <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+                <input type="text" name="city" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+                       placeholder="{{ __('short-phrases.city')  }}">
+            </label>
+
+            <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
                 <input type="password" name="password" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
                        placeholder="{{ __('short-phrases.password')  }}">
             </label>
