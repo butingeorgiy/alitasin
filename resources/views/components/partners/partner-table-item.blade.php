@@ -15,6 +15,9 @@
         </div>
     </div>
     <div class="flex items-center">
+        <p class="text-black font-semibold select-text">{{ $partner->promoCodes()->first()['code'] }}</p>
+    </div>
+    <div class="flex items-center">
         <p class="text-black font-semibold">$ {{ $partner->total_income }}</p>
     </div>
     <div class="flex items-center">

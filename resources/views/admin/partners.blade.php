@@ -50,6 +50,7 @@
                 <!-- Table head -->
                 <div class="grid grid-cols-partners-table gap-5 px-8 pt-4 pb-1 border-b border-gray-200">
                     <div class="text-sm text-gray-800 font-medium">{{ __('short-phrases.partner') }}</div>
+                    <div class="text-sm text-gray-800 font-medium">{{ __('short-phrases.promo-code') }}</div>
                     <div class="text-sm text-gray-800 font-medium">{{ __('short-phrases.income') }}</div>
                     <div class="text-sm text-gray-800 font-medium">{{ __('short-phrases.earned') }}</div>
                     <div class="text-sm text-gray-800 font-medium">{{ __('short-phrases.payed') }}</div>

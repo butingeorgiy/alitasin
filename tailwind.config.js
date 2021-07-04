@@ -363,7 +363,7 @@ module.exports = {
             12: 'repeat(12, minmax(0, 1fr))',
             'reserve-table': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
             'reserve-table-filters': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
-            'partners-table': 'minmax(0, 6fr) repeat(4, minmax(0, 1fr))'
+            'partners-table': 'minmax(0, 4fr) minmax(0, 2fr) repeat(4, minmax(0, 1fr))'
         },
         gridTemplateRows: {
             none: 'none',
