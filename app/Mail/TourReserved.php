@@ -2,23 +2,31 @@
 
 namespace App\Mail;
 
+use App\Models\Reservation;
+use App\Models\Tour;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TourReserved extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public Tour $tour;
+    public Reservation $reservation;
+    public User $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Tour $tour, Reservation $reservation, User $user)
     {
-        //
+        $this->tour = $tour;
+        $this->reservation = $reservation;
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +36,7 @@ class TourReserved extends Mailable
      */
     public function build(): Mailable
     {
-        return $this->view('emails.reservation');
+        return $this->view('emails.reservation')
+            ->subject(__('emails.excursion-reservation-on-ali-tour'));
     }
 }

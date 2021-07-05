@@ -25,3 +25,8 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('cdn/images/{dir}/{file}', 'ImageController@get')->middleware('cache')->name('get-image');
+
+Route::get('test', function () {
+    Illuminate\Support\Facades\Mail::to('butingeorgiy48@gmail.com')
+        ->send(new App\Mail\TourReserved());
+});

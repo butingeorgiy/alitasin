@@ -6,6 +6,7 @@ use App\Facades\Auth;
 use App\Facades\Reg;
 use App\Http\Requests\TourRequest;
 use App\Http\Requests\TourReserveRequest;
+use App\Mail\TourReserved;
 use App\Models\PromoCode;
 use App\Models\Region;
 use App\Models\Reservation;
@@ -20,6 +21,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -747,6 +749,10 @@ class TourController extends Controller
         if (isset($accessCookies)) {
             $response['cookies'] = $accessCookies;
         }
+
+        Mail::to($user->email)->send(new TourReserved(
+            $tour, $reservation, $user
+        ));
 
         return $response;
     }

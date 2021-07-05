@@ -193,5 +193,9 @@ return [
     'promo-code-info' => 'Promosyon kodu bilgileri',
     'attracted' => 'çekici',
     'statistic' => 'Istatistik',
-    'city' => 'Kent'
+    'city' => 'Kent',
+    'not-specified' => 'Belirtilmemiş',
+    'name' => 'Isim',
+    'holding-date' => 'Tutma tarihi',
+    'tickets' => 'Biletler',
 ];

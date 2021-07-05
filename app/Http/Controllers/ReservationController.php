@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Facades\Auth;
 use App\Models\Reservation;
 use App\Models\Ticket;
-use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -88,7 +87,7 @@ class ReservationController extends Controller
                 $details['promo-code'] = null;
             }
 
-            $reservation->details = $details;
+            $reservation['details'] = $details;
         }
 
         return view('admin.reserves', compact('user', 'reservations', 'dateRange'));

@@ -97,7 +97,7 @@ return [
     'enter-email' => 'Ввести електронну пошту',
     'enter-phone' => 'Ввести телефон',
     'hotel' => 'Готель',
-    'comfortable-way-communication' => 'Зручний спосіб спілкування',
+    'convenient-way-communication' => 'Зручний спосіб спілкування',
     'select-way' => 'Вибрати шлях',
     'select-time' => 'Вибрати час',
     'promo-code' => 'Промо-код',
@@ -192,5 +192,9 @@ return [
     'promo-code-info' => 'Інформація про промо-код',
     'attracted' => 'Приваблює',
     'statistic' => 'Статистика',
-    'city' => 'Місто'
+    'city' => 'Місто',
+    'not-specified' => 'Не вказано',
+    'name' => 'Найменування',
+    'holding-date' => 'Дата проведення',
+    'tickets' => 'Квитки'
 ];

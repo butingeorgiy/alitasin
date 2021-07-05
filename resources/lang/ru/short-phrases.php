@@ -193,5 +193,9 @@ return [
     'promo-code-info' => 'Информация по промо коду',
     'attracted' => 'Привлечено',
     'statistic' => 'Статистика',
-    'city' => 'Город'
+    'city' => 'Город',
+    'not-specified' => 'Не указано',
+    'name' => 'Наименование',
+    'holding-date' => 'Дата проведения',
+    'tickets' => 'Билеты'
 ];

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 /**
+ * @property int id
  * @property mixed promo_code_id
  * @property mixed promo_code_init_sale_percent
  * @property string hotel_name

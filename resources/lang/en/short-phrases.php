@@ -192,5 +192,9 @@ return [
     'promo-code-info' => 'Promo code information',
     'attracted' => 'Attracted',
     'statistic' => 'Statistic',
-    'city' => 'City'
+    'city' => 'City',
+    'not-specified' => 'Not specified',
+    'name' => 'Name',
+    'holding-date' => 'Date of holding',
+    'tickets' => 'Tickets'
 ];
