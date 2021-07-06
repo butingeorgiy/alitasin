@@ -197,5 +197,6 @@ return [
     'not-specified' => 'Не указано',
     'name' => 'Наименование',
     'holding-date' => 'Дата проведения',
-    'tickets' => 'Билеты'
+    'tickets' => 'Билеты',
+    'link' => 'Ссылка'
 ];

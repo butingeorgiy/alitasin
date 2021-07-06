@@ -21,6 +21,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -750,8 +751,23 @@ class TourController extends Controller
             $response['cookies'] = $accessCookies;
         }
 
+        $pdfService = App::make('dompdf.wrapper');
+
+        $pdfService->loadView(
+            'pdf.reservation-ticket',
+            compact('user', 'reservation', 'tour')
+        )->setPaper([0, 0, 420, 900], 'landscape');
+
+        $pdfService->save(__DIR__ . '/../../../../storage/app/tickets/' . $reservation->id . '.pdf');
+
         Mail::to($user->email)->send(new TourReserved(
             $tour, $reservation, $user
+        ));
+
+        App::setLocale('en');
+
+        Mail::to(config('mail.admin_address'))->send(new TourReserved(
+            $tour, $reservation, $user, true
         ));
 
         return $response;

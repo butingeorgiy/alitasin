@@ -37,8 +37,12 @@
          * @var App\Models\Tour $tour
          */
     @endphp
-    <h2>{{ __('emails.reservation-successfully-formed', ['id' => $reservation->id]) }}</h2>
-    <p>{{ __('emails.reservation-email-description') }}</p>
+    <h2>{{ $isAdmin ? 'New reservation on Ali Tour!' : __('emails.reservation-successfully-formed', ['id' => $reservation->id]) }}</h2>
+
+    @if(!$isAdmin)
+        <p>{{ __('emails.reservation-email-description') }}</p>
+    @endif
+
     <br>
     <h3>{{ __('emails.contact-information') }}:</h3>
     <table>

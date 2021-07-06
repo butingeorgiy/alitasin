@@ -196,5 +196,6 @@ return [
     'not-specified' => 'Not specified',
     'name' => 'Name',
     'holding-date' => 'Date of holding',
-    'tickets' => 'Tickets'
+    'tickets' => 'Tickets',
+    'link' => 'Link'
 ];

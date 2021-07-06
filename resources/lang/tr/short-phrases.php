@@ -198,4 +198,5 @@ return [
     'name' => 'Isim',
     'holding-date' => 'Tutma tarihi',
     'tickets' => 'Biletler',
+    'link' => 'Bağlantı'
 ];
