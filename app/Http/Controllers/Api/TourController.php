@@ -764,7 +764,7 @@ class TourController extends Controller
             $tour, $reservation, $user
         ));
 
-        App::setLocale('en');
+        App::setLocale('ru');
 
         Mail::to(config('mail.admin_address'))->send(new TourReserved(
             $tour, $reservation, $user, true
