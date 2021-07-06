@@ -25,9 +25,3 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('cdn/images/{dir}/{file}', 'ImageController@get')->middleware('cache')->name('get-image');
-
-Route::get('generate-pdf', function () {
-    $pdf = App::make('dompdf.wrapper');
-    $pdf->loadView('pdf.reservation-ticket')->setPaper([0, 0, 420, 900], 'landscape');
-    return $pdf->stream();
-});
