@@ -93,8 +93,15 @@ select::-ms-expand {
 .save-book-button,
 .save-partner-button,
 .save-vehicle-button,
-.save-tour-button {
+.save-tour-button,
+.calculate-transfer-cost,
+.show-transfer-request-popup {
     @apply flex justify-center py-2 text-sm text-white font-medium rounded-md cursor-pointer;
+}
+
+.calculate-transfer-cost.hidden,
+.show-transfer-request-popup.hidden {
+    display: none !important;
 }
 
 .show-more-tours-button.loading,
@@ -118,7 +125,9 @@ select::-ms-expand {
 .save-partner-button.loading,
 .make-partner-payment-button.loading,
 .update-profit-percent-button.loading,
-.send-vehicle-order-button.loading {
+.send-vehicle-order-button.loading,
+.calculate-transfer-cost.loading,
+.show-transfer-request-popup.loading {
     @apply cursor-not-allowed opacity-60;
 }
 
@@ -134,7 +143,9 @@ select::-ms-expand {
 .save-vehicle-button.loading .animate-spin,
 .make-partner-payment-button.loading .animate-spin,
 .update-profit-percent-button.loading .animate-spin,
-.send-vehicle-order-button.loading .animate-spin {
+.send-vehicle-order-button.loading .animate-spin,
+.calculate-transfer-cost.loading .animate-spin,
+.show-transfer-request-popup.loading .animate-spin {
     @apply block;
 }
 
@@ -192,6 +203,16 @@ select::-ms-expand {
 
 .partners-search-wrapper {
     @apply relative flex ml-auto px-3 py-2 border border-gray-500 rounded-md;
+}
+
+.transfer-type-tab-item {
+    @apply py-3 text-center border-l-2 sm:border-l-0 border-r-2 sm:border-r-0
+           border-t-2 sm:border-t-0 border-b-2 rounded-md sm:rounded-none border-black
+           hover:text-blue hover:border-blue cursor-pointer transition-colors duration-200;
+}
+
+.transfer-type-tab-item.active {
+    @apply text-blue border-blue cursor-default;
 }
 
 /* Tom Select */

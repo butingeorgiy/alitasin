@@ -5,6 +5,7 @@ Route::get('logout', 'AuthenticationController@logout')->name('logout');
 Route::get('regions/{id}', 'PageController@showRegion')->name('region');
 Route::get('tours/{id}', 'PageController@showTour')->name('tour');
 Route::get('vehicles', 'PageController@showVehicles')->name('vehicles');
+Route::get('transfers', 'PageController@showTransfers')->name('transfers');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('', 'PageController@profileIndex')->middleware('auth:1,2')->name('profile-index');

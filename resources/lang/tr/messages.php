@@ -150,5 +150,16 @@ return [
     'request-sending-success' => 'İsteğiniz başarıyla gönderildi! Yöneticimiz yakında sizinle iletişime geçecek...',
     'password-min' => 'Şifre 8 karakterden kısa olmamalıdır!',
     'password-confirmed' => 'Şifreler eşleşmiyor!',
-    'promo-code-not-unique' => 'Promosyon kodu zaten var!'
+    'promo-code-not-unique' => 'Promosyon kodu zaten var!',
+    'transfer-type-required' => 'Aktarım türü belirtilmelidir!',
+    'transfer-type-not-found' => 'Aktarım türü bulunamadı!',
+    'airport-required' => 'Havaalanı belirtilmelidir!',
+    'airport-not-found' => 'Havaalanı bulunamadı!',
+    'destination-required' => 'Hedef belirtilmelidir!',
+    'destination-not-found' => 'Hedef bulunamadı!',
+    'departure-date-format' => 'Kalkış için geçersiz tarih biçimi!',
+    'arrival-date-format' => 'Geçersiz varış tarihi biçimi!',
+    'capacity-required' => 'Kapasite belirtilmelidir!',
+    'capacity-not-found' => 'Kapasite bulunamadı!',
+    'transfer-not-found' => 'Aktarım bulunamadı!'
 ];

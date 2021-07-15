@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed params
  * @method static Vehicle|null find($id)
  * @method static Vehicle findOrFail($id)
+ * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
  */
 class Vehicle extends Model
 {

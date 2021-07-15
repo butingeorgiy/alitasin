@@ -12,5 +12,5 @@ return [
     'vehicles' => 'Vehicles',
     'real-estate' => 'Real estate',
     'create-vehicle' => 'Create vehicle',
-    'edit-vehicle' => 'Edit vehicle'
+    'edit-vehicle' => 'Edit vehicle',
 ];

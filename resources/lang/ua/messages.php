@@ -150,5 +150,16 @@ return [
     'request-sending-success' => 'Ваш запит успішно відправлений! Наш менеджер зв’яжеться з вами найближчим часом...',
     'password-min' => 'Пароль не повинен бути коротшим за 8 символів!',
     'password-confirmed' => 'Паролі не збігаються!',
-    'promo-code-not-unique' => 'Промо-код вже існує!'
+    'promo-code-not-unique' => 'Промо-код вже існує!',
+    'transfer-type-required' => 'Потрібно вказати тип передачі!',
+    'transfer-type-not-found' => 'Тип передачі не знайдено!',
+    'airport-required' => 'Потрібно вказати аеропорт!',
+    'airport-not-found' => 'Аеропорт не знайдено!',
+    'destination-required' => 'Потрібно вказати пункт призначення!',
+    'destination-not-found' => 'Пункт призначення не знайдено!',
+    'departure-date-format' => 'Недійсний формат дати відправлення!',
+    'arrival-date-format' => 'Недійсний формат дати прибуття!',
+    'capacity-required' => 'Потрібно вказати місткість!',
+    'capacity-not-found' => 'Ємність не знайдено!',
+    'transfer-not-found' => 'Перенесення не знайдено!'
 ];

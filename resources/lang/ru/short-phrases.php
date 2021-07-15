@@ -198,5 +198,14 @@ return [
     'name' => 'Наименование',
     'holding-date' => 'Дата проведения',
     'tickets' => 'Билеты',
-    'link' => 'Ссылка'
+    'link' => 'Ссылка',
+    'choose-airport' => 'Выберите аэропорт',
+    'choose-destination' => 'Выберите пункт назначения',
+    'arrival-date-and-time' => 'Дата и время прибытия',
+    'departure-date-and-time' => 'Дата и время отправления',
+    'to-choose' => 'Выбрать',
+    'necessary-capacity' => 'Необходимая вместимость',
+    'calculate-cost' => 'Рассчитать стоимость',
+    'transfer-cost' => 'Стоимость трансфера',
+    'order-transfer' => 'Заказать трансфер'
 ];

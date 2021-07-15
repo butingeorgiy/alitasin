@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Facades\RusDecl;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,8 @@ use Illuminate\Support\Carbon;
  * @method static Tour find(mixed $tourId)
  * @method static findOrFail($id)
  * @method static byManager($managerId)
+ * @method static int count()
+ * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
  * @property mixed id
  * @property array conducted_at
  * @property mixed manager_id

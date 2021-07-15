@@ -8,7 +8,7 @@
                 {{ __('short-phrases.tours') }}<span class="text-blue">.</span>
             </p>
             <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-tours-description') }}</p>
-            <p class="mt-auto font-semibold">{{ \App\Models\Tour::count() }} {{ __('short-phrases.main-sections-tours-amount') }}</p>
+            <p class="mt-auto font-semibold">{{ App\Models\Tour::count() }} {{ __('short-phrases.main-sections-tours-amount') }}</p>
         </a>
 
         <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
@@ -19,7 +19,7 @@
                 {{ __('short-phrases.cars-rental') }}<span class="text-blue">.</span>
             </p>
             <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-transport-description') }}</p>
-            <p class="mt-auto font-semibold">{{ \App\Models\Vehicle::where('type_id', 1)->count() }} {{ __('short-phrases.main-sections-cars-rental-amount') }}</p>
+            <p class="mt-auto font-semibold">{{ App\Models\Vehicle::where('type_id', 1)->count() }} {{ __('short-phrases.main-sections-cars-rental-amount') }}</p>
         </a>
 
         <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
@@ -44,7 +44,7 @@
             <p class="mt-auto font-semibold">0 {{ __('short-phrases.main-sections-property-amount') }}</p>
         </div>
 
-        <div class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
+        <a href="{{ route('transfers') }}" class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
              style="background-image: url({{ asset('images/main-sections-bg-transfers.jpg') }})">
             <div class="self-end min-w-20 min-h-20 w-20 h-20 mb-3 bg-contain bg-center bg-no-repeat"
                  style="background-image: url({{ asset('images/main-sections-icon-transfers.svg') }})"></div>
@@ -52,8 +52,8 @@
                 {{ __('short-phrases.transfers') }}<span class="text-blue">.</span>
             </p>
             <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-transfers-description') }}</p>
-            <p class="mt-auto font-semibold">0 {{ __('short-phrases.main-sections-property-amount') }}</p>
-        </div>
+            <p class="mt-auto font-semibold">{{ App\Models\Transfer::count() }} {{ __('short-phrases.main-sections-property-amount') }}</p>
+        </a>
 
         <div class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
              style="background-image: url({{ asset('images/main-sections-bg-medical-tourism.jpg') }})">
@@ -85,7 +85,7 @@
                 {{ __('short-phrases.individually-excursions') }}<span class="text-blue">.</span>
             </p>
             <p class="mb-6 text-sm font-light">{{ __('short-phrases.main-sections-personal-excursions-description') }}</p>
-            <p class="mt-auto font-semibold">{{ \App\Models\Tour::where('tour_type_id', 1)->count() }} {{ __('short-phrases.main-sections-tours-amount') }}</p>
+            <p class="mt-auto font-semibold">{{ App\Models\Tour::where('tour_type_id', 1)->count() }} {{ __('short-phrases.main-sections-tours-amount') }}</p>
         </div>
     </div>
 </section>

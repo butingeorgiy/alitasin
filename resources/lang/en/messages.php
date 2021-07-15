@@ -150,5 +150,16 @@ return [
     'request-sending-success' => 'Your request was sent successfully! Our manager contact with your soon...',
     'password-min' => 'The password must not be shorter than 8 characters!',
     'password-confirmed' => 'Passwords are not matched!',
-    'promo-code-not-unique' => 'Promo code has already existed!'
+    'promo-code-not-unique' => 'Promo code has already existed!',
+    'transfer-type-required' => 'Must specify transfer type!',
+    'transfer-type-not-found' => 'Transfer type not found!',
+    'airport-required' => 'Must specify airport!',
+    'airport-not-found' => 'Airport not found!',
+    'destination-required' => 'Must specify destination!',
+    'destination-not-found' => 'Destination not found!',
+    'departure-date-format' => 'Invalid date format of departure!',
+    'arrival-date-format' => 'Invalid date format of arrival!',
+    'capacity-required' => 'Must specify capacity!',
+    'capacity-not-found' => 'Capacity not found!',
+    'transfer-not-found' => 'Transfer not found!'
 ];

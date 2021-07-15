@@ -247,7 +247,6 @@ class TourFormBaseController extends EventHandler {
     }
 
     editAdditionHandler(buttonNode, addition) {
-        console.log(addition);
         this.addEvent(buttonNode, 'click', _ => {
             this.additionPopup.open(_ => {
                 this.nodes.additionPopup.querySelector('select[name="addition_id"]').value = `${addition.id}~${addition.title}`;

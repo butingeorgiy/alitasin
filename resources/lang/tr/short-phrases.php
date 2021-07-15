@@ -198,5 +198,14 @@ return [
     'name' => 'Isim',
     'holding-date' => 'Tutma tarihi',
     'tickets' => 'Biletler',
-    'link' => 'Bağlantı'
+    'link' => 'Bağlantı',
+    'choose-airport' => 'Havaalanı seçin',
+    'choose-destination' => 'Hedef seçin',
+    'arrival-date-and-time' => 'Varış tarihi ve saati',
+    'departure-date-and-time' => 'Kalkış tarihi ve saati',
+    'to-choose' => 'Seçmek',
+    'necessary-capacity' => 'Gerekli Kapasite',
+    'calculate-cost' => 'Maliyeti hesapla',
+    'transfer-cost' => 'Transfer maliyeti',
+    'order-transfer' => 'Sipariş transferi'
 ];

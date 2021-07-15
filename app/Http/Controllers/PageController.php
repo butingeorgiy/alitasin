@@ -358,7 +358,7 @@ class PageController extends Controller
                 $details['promo-code'] = null;
             }
 
-            $reservation->details = $details;
+            $reservation['details'] = $details;
         }
 
         return view('profile.partner', compact('user', 'reservations'));
@@ -379,5 +379,10 @@ class PageController extends Controller
         $vehicles = Vehicle::where('type_id', $request->input('vehicle_type_id'))->get();
 
         return view('vehicles', compact('vehicles'));
+    }
+
+    public function showTransfers()
+    {
+        return view('transfers');
     }
 }

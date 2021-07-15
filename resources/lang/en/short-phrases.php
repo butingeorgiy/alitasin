@@ -197,5 +197,14 @@ return [
     'name' => 'Name',
     'holding-date' => 'Date of holding',
     'tickets' => 'Tickets',
-    'link' => 'Link'
+    'link' => 'Link',
+    'choose-airport' => 'Choose airport',
+    'choose-destination' => 'Choose destination',
+    'arrival-date-and-time' => 'Date and time of arrival',
+    'departure-date-and-time' => 'Date and time of departure',
+    'to-choose' => 'Choose',
+    'necessary-capacity' => 'Necessary capacity',
+    'calculate-cost' => 'Calculate cost',
+    'transfer-cost' => 'Transfer cost',
+    'order-transfer' => 'Order transfer'
 ];

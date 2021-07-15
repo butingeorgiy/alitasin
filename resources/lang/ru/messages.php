@@ -151,5 +151,16 @@ return [
     'request-sending-success' => 'Ваша заявка успешно отправлена! Наш менеджер скоро с вами свяжется...',
     'password-min' => 'Пароль не может быть короче 8 символов!',
     'password-confirmed' => 'Пароли не совпадают!',
-    'promo-code-not-unique' => 'Промо код уже существует!'
+    'promo-code-not-unique' => 'Промо код уже существует!',
+    'transfer-type-required' => 'Укажите тип трансфера!',
+    'transfer-type-not-found' => 'Тип трансфера не найден!',
+    'airport-required' => 'Укажите аэропорт!',
+    'airport-not-found' => 'Аэропорт не найден!',
+    'destination-required' => 'Укажите пункт назначения!',
+    'destination-not-found' => 'Пункт назначения не найден!',
+    'departure-date-format' => 'Некорректный формат даты отправления!',
+    'arrival-date-format' => 'Некорректный формат даты прибытия!',
+    'capacity-required' => 'Укажите необходимую вместимость!',
+    'capacity-not-found' => 'Вместимости не найдено!',
+    'transfer-not-found' => 'Трансфер не найден!'
 ];

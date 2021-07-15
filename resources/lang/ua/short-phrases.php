@@ -197,5 +197,14 @@ return [
     'name' => 'Найменування',
     'holding-date' => 'Дата проведення',
     'tickets' => 'Квитки',
-    'link' => 'Посилання'
+    'link' => 'Посилання',
+    'choose-airport' => 'Виберіть аеропорт',
+    'choose-destination' => 'Виберіть пункт призначення',
+    'arrival-date-and-time' => 'Дата та час прибуття',
+    'departure-date-and-time' => 'Дата та час виїзду',
+    'to-choose' => 'Вибирати',
+    'necessary-capacity' => 'Необхідна ємність',
+    'calculate-cost' => 'Розрахувати вартість',
+    'transfer-cost' => 'Вартість трансферу',
+    'order-transfer' => 'Переказ замовлення'
 ];

@@ -38,7 +38,13 @@ Route::group(['prefix' => 'vehicles'], function() {
 });
 
 Route::group(['prefix' => 'reserves'], function () {
-    Route::post('/update/{reservationId}/status', 'Api\ReservationController@updateStatus')->middleware('auth:4');
+    Route::post('update/{reservationId}/status', 'Api\ReservationController@updateStatus')->middleware('auth:4');
+});
+
+Route::group(['prefix' => 'transfers'], function () {
+    Route::get('airports', 'Api\TransferController@getAirports');
+    Route::get('destinations', 'Api\TransferController@getDestinations');
+    Route::get('calculate', 'Api\TransferController@getCost');
 });
 
 Route::get('promo-codes/check', 'Api\PromoCodeController@get');

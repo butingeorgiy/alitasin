@@ -22,18 +22,18 @@
             </div>
             <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.rental-cars') }}</a>
             <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.rental-yachts') }}</a>
-            <a href="#" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.transfers') }}</a>
+            <a href="{{ route('transfers') }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.transfers') }}</a>
             <a href="#" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.property') }}</a>
             <a href="#" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.medical-tourism') }}</a>
             <a href="/#contacts" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.contacts') }}</a>
             @if(\App\Facades\Auth::check())
                 @if(!request()->is('admin/*', 'profile/*'))
                     @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
-                        <a href="{{ route('profile-index') }}" class="text-black hover:underline">
+                        <a href="{{ route('profile-index') }}" class="text-black font-medium hover:underline">
                             {{ __('buttons.move-to-cabinet') }}
                         </a>
                     @else
-                        <a href="{{ route('admin-index') }}" class="text-black hover:underline">
+                        <a href="{{ route('admin-index') }}" class="text-black font-medium hover:underline">
                             {{ __('buttons.admin-panel') }}
                         </a>
                     @endif
@@ -96,7 +96,7 @@
                 </div>
                 <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.cars-rental') }}</a>
                 <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.yachts-rental') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.transfers') }}</a>
+                <a href="{{ route('transfers') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.transfers') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.property') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.medical-tourism') }}</a>
                 <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.reviews') }}</a>

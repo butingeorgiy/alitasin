@@ -18,3 +18,5 @@ import './modules/clickToCallWidget';
 import './modules/orderVehicle';
 import './modules/updateVehicle';
 import './modules/searchPartners';
+import './modules/transferForm';
+import './modules/transferRequest';
