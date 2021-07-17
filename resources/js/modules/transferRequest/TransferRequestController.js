@@ -124,7 +124,7 @@ class TransferRequestController extends EventHandler {
                     this.view.showError(result.message);
                 } else {
                     this.view.showSuccess(result.message);
-                    setTimeout(location.reload, 1500);
+                    setTimeout(_ => location.reload(), 1500);
                 }
             })
             .catch(error => {
