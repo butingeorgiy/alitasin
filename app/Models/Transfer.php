@@ -9,9 +9,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
  * @method static int count()
+ * @method static Builder matchedBy(int $airportId, int $destinationId) Find transfer by airport and destination.
  */
 class Transfer extends Model
 {
+    /**
+     * Get transfer's variations.
+     *
+     * @return HasMany
+     */
     public function variations(): HasMany
     {
         return $this->hasMany(TransferCost::class);
@@ -39,5 +45,21 @@ class Transfer extends Model
         }
 
         return null;
+    }
+
+    /**
+     * Local scope for matchedBy static method.
+     *
+     * @param Builder $query
+     * @param int $airportId
+     * @param int $destinationId
+     * @return Builder
+     */
+    public function scopeMatchedBy(Builder $query, int $airportId, int $destinationId): Builder
+    {
+        return $query->where([
+            ['airport_id', $airportId],
+            ['destination_id', $destinationId]
+        ]);
     }
 }

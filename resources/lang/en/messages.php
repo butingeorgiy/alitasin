@@ -161,5 +161,8 @@ return [
     'arrival-date-format' => 'Invalid date format of arrival!',
     'capacity-required' => 'Must specify capacity!',
     'capacity-not-found' => 'Capacity not found!',
-    'transfer-not-found' => 'Transfer not found!'
+    'transfer-not-found' => 'Transfer not found!',
+    'user-name-max' => 'User name cannot be more than 255 characters!',
+    'flight-number-max' => 'Flight number cannot be more than 255 characters!',
+    'request-sending-failed' => 'Failed to send request!'
 ];

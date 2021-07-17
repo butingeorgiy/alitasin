@@ -45,6 +45,7 @@ Route::group(['prefix' => 'transfers'], function () {
     Route::get('airports', 'Api\TransferController@getAirports');
     Route::get('destinations', 'Api\TransferController@getDestinations');
     Route::get('calculate', 'Api\TransferController@getCost');
+    Route::post('requests/create', 'Api\TransferController@createRequest');
 });
 
 Route::get('promo-codes/check', 'Api\PromoCodeController@get');

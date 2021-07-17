@@ -206,5 +206,6 @@ return [
     'necessary-capacity' => 'Необхідна ємність',
     'calculate-cost' => 'Розрахувати вартість',
     'transfer-cost' => 'Вартість трансферу',
-    'order-transfer' => 'Переказ замовлення'
+    'order-transfer' => 'Переказ замовлення',
+    'flight-number' => 'Номер рейсу'
 ];

@@ -162,5 +162,6 @@ return [
     'arrival-date-format' => 'Некорректный формат даты прибытия!',
     'capacity-required' => 'Укажите необходимую вместимость!',
     'capacity-not-found' => 'Вместимости не найдено!',
-    'transfer-not-found' => 'Трансфер не найден!'
+    'transfer-not-found' => 'Трансфер не найден!',
+    'request-sending-failed' => 'Не удалось отправить заявку!'
 ];

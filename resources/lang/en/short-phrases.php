@@ -206,5 +206,6 @@ return [
     'necessary-capacity' => 'Necessary capacity',
     'calculate-cost' => 'Calculate cost',
     'transfer-cost' => 'Transfer cost',
-    'order-transfer' => 'Order transfer'
+    'order-transfer' => 'Order transfer',
+    'flight-number' => 'Flight number'
 ];

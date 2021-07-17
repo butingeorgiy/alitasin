@@ -32,7 +32,7 @@ class Reservation extends Model
     protected $guarded = [];
 
 
-    public function attachPromoCode(PromoCode $promoCode)
+    public function attachPromoCode(PromoCode $promoCode): void
     {
         $this->promo_code_id = $promoCode->id;
         $this->promo_code_init_sale_percent = $promoCode->sale_percent;
@@ -142,19 +142,19 @@ class Reservation extends Model
     /**
      * Get total cost of reservation without sale
      *
-     * @return int
+     * @return float
      */
-    public function costWithoutSale(): int
+    public function costWithoutSale(): float
     {
-        return (int) $this->total_cost_without_sale;
+        return (float) $this->total_cost_without_sale;
     }
 
     /**
      * Get total cost of reservation with sale
      *
-     * @return int
+     * @return float
      */
-    public function costWithSale(): int
+    public function costWithSale(): float
     {
         if ($this->isUsedPromoCode()) {
             return $this->costWithoutSale() * (100 - $this->promoCodeSalePercent()) / 100;

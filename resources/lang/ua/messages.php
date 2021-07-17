@@ -161,5 +161,6 @@ return [
     'arrival-date-format' => 'Недійсний формат дати прибуття!',
     'capacity-required' => 'Потрібно вказати місткість!',
     'capacity-not-found' => 'Ємність не знайдено!',
-    'transfer-not-found' => 'Перенесення не знайдено!'
+    'transfer-not-found' => 'Перенесення не знайдено!',
+    'request-sending-failed' => 'Не вдалося надіслати запит!'
 ];

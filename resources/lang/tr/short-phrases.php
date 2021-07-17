@@ -207,5 +207,6 @@ return [
     'necessary-capacity' => 'Gerekli Kapasite',
     'calculate-cost' => 'Maliyeti hesapla',
     'transfer-cost' => 'Transfer maliyeti',
-    'order-transfer' => 'Sipariş transferi'
+    'order-transfer' => 'Sipariş transferi',
+    'flight-number' => 'Uçuş numarası'
 ];

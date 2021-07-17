@@ -207,5 +207,6 @@ return [
     'necessary-capacity' => 'Необходимая вместимость',
     'calculate-cost' => 'Рассчитать стоимость',
     'transfer-cost' => 'Стоимость трансфера',
-    'order-transfer' => 'Заказать трансфер'
+    'order-transfer' => 'Заказать трансфер',
+    'flight-number' => 'Номер рейса'
 ];

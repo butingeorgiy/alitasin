@@ -127,7 +127,8 @@ select::-ms-expand {
 .update-profit-percent-button.loading,
 .send-vehicle-order-button.loading,
 .calculate-transfer-cost.loading,
-.show-transfer-request-popup.loading {
+.show-transfer-request-popup.loading,
+.order-transfer-button.loading {
     @apply cursor-not-allowed opacity-60;
 }
 
@@ -145,7 +146,8 @@ select::-ms-expand {
 .update-profit-percent-button.loading .animate-spin,
 .send-vehicle-order-button.loading .animate-spin,
 .calculate-transfer-cost.loading .animate-spin,
-.show-transfer-request-popup.loading .animate-spin {
+.show-transfer-request-popup.loading .animate-spin,
+.order-transfer-button.loading .animate-spin {
     @apply block;
 }
 

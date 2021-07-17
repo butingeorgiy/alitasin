@@ -161,5 +161,6 @@ return [
     'arrival-date-format' => 'Geçersiz varış tarihi biçimi!',
     'capacity-required' => 'Kapasite belirtilmelidir!',
     'capacity-not-found' => 'Kapasite bulunamadı!',
-    'transfer-not-found' => 'Aktarım bulunamadı!'
+    'transfer-not-found' => 'Aktarım bulunamadı!',
+    'request-sending-failed' => 'Istek gönderilemedi!'
 ];

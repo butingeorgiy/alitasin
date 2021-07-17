@@ -17,11 +17,15 @@ class TransferRequestObserver {
     }
 
     static setRenderShowTransferRequestPopupButtonHandler(handler) {
-        this.showTransferRequestPopupHandler = handler;
+        this.showTransferRequestPopupButtonHandler = handler;
+    }
+
+    static setHideShowTransferRequestPopupButtonHandler(handler) {
+        this.hideTransferRequestPopupButtonHandler = handler;
     }
 
     static renderShowTransferRequestPopupButton(onSuccess = null, onError = null) {
-        if (!this.showTransferRequestPopupHandler) {
+        if (!this.showTransferRequestPopupButtonHandler) {
             console.warn('showTransferRequestPopupHandler was not set by TransferRequest module!');
 
             if (onError) {
@@ -31,7 +35,25 @@ class TransferRequestObserver {
             return;
         }
 
-        this.showTransferRequestPopupHandler();
+        this.showTransferRequestPopupButtonHandler();
+
+        if (onSuccess) {
+            onSuccess();
+        }
+    }
+
+    static hideShowTransferRequestPopupButton(onSuccess = null, onError = null) {
+        if (!this.hideTransferRequestPopupButtonHandler) {
+            console.warn('hideTransferRequestPopupButtonHandler was not set by TransferRequest module!');
+
+            if (onError) {
+                onError();
+            }
+
+            return;
+        }
+
+        this.hideTransferRequestPopupButtonHandler();
 
         if (onSuccess) {
             onSuccess();

@@ -212,12 +212,15 @@ class TransferFormController extends EventHandler {
 
     initTransferLocalState() {
         return {
-            'type_id': this.nodes.typeTabs[0]?.getAttribute('data-type-id') || null,
+            'type_id': this.nodes.typeTabs[0]?.getAttribute('data-type-id')
+                ? parseInt(this.nodes.typeTabs[0]?.getAttribute('data-type-id')) : null,
+
             'airport_id': null,
             'destination_id': null,
             'departure': null,
             'arrival': null,
-            'capacity_id': this.nodes.capacityRadioInputs[0]?.value || null
+            'capacity_id': this.nodes.capacityRadioInputs[0]?.value
+                ? parseInt(this.nodes.capacityRadioInputs[0]?.value) : null
         };
     }
 
@@ -235,6 +238,12 @@ class TransferFormController extends EventHandler {
         };
 
         TransferRequestObserver.clearState();
+        TransferRequestObserver.hideShowTransferRequestPopupButton(
+            _ => {
+                this.view.showCalculateButton();
+            }
+        );
+
         this.view.hideTransferCost();
 
         this.debugTransferState(); // TODO: remove after module developing
