@@ -15,6 +15,38 @@
     @include('components.general.profile-hero')
     @include('components.profile.personal-info')
 
+    @php
+
+    /** @var App\Models\User $user */
+
+    // Promo code info calculation
+
+    $promoCodeInfo = [
+        'promoCode' => $user->promoCodes()->first()['code'],
+        'salePercent' => $user->promoCodes()->first()['sale_percent'],
+        'profitPercent' => $user->profit_percent
+    ];
+
+    if ($user->isSubPartner()) {
+        $promoCodeInfo['subPartnerProfitPercent'] = $user->sub_partners_profit_percent;
+    }
+
+
+    // Promo code statistic calculation
+
+    $promoCodeStatistic = [
+        'attractedReservations' => $user->attractedReservations()->count(),
+        'attractedTransfers' => $user->attractedTransfers()->count(),
+        'income' => $user->getTotalIncome(),
+        'earned' => $user->getTotalProfit(),
+        'payed' => $user->getPaymentAmount()
+    ];
+
+    @endphp
+
+    @include('components.partners.promo-code-info', $promoCodeInfo)
+    @include('components.partners.promo-code-statistic', $promoCodeStatistic)
+
     <section id="reservesSection" class="mt-10 mb-10">
         <div class="container mx-auto px-5">
             <p class="mb-3 text-black text-2xl font-bold text-black">{{ __('short-phrases.reserves') }}<span class="text-blue">.</span></p>

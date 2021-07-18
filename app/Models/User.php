@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Facades\Hash;
+use App\Traits\PartnerCalculator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -33,9 +34,6 @@ use Illuminate\Support\Str;
  * @property mixed recentViewed
  * @property mixed reservedTours
  * @property mixed favoriteTours
- * @property float total_profit
- * @property int total_payment_amount
- * @property float total_income
  * @property int profit_percent
  * @property int sub_partners_profit_percent
  * @property string profile
@@ -44,6 +42,7 @@ use Illuminate\Support\Str;
 class User extends Model
 {
     use SoftDeletes;
+    use PartnerCalculator;
 
 
     public $timestamps = false;
@@ -95,8 +94,8 @@ class User extends Model
             return null;
         }
 
-        if(preg_match( '/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone,  $matches)) {
-            return $matches[1] . ' ' . $matches[2] . ' ' .$matches[3] . ' ' . $matches[4];
+        if (preg_match('/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone, $matches)) {
+            return $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
         }
 
         return null;
@@ -117,6 +116,11 @@ class User extends Model
         }
     }
 
+    /**
+     * Generate random password.
+     *
+     * @return string
+     */
     public function generatePassword(): string
     {
         $randomPassword = Str::random(10);
@@ -124,32 +128,58 @@ class User extends Model
         return $randomPassword;
     }
 
+    /**
+     * Get recent viewed tours.
+     *
+     * @return BelongsToMany
+     */
     public function recentViewed(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'recent_viewed_tours');
     }
 
+    /**
+     * Get reserved tours.
+     *
+     * @return BelongsToMany
+     */
     public function reservedTours(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'reservations');
     }
 
+    /**
+     * Get favorite tours.
+     *
+     * @return BelongsToMany
+     */
     public function favoriteTours(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'favorite_tours');
     }
 
+
+    # Partner methods
+
+    /**
+     * Get partner's profit percent.
+     *
+     * @return HasOne
+     */
     public function percent(): HasOne
     {
         return $this->hasOne(PartnerPercent::class, 'user_id');
     }
 
+    /**
+     * Get sub partner's profit percent.
+     *
+     * @return HasOne
+     */
     public function subPartnerPercent(): HasOne
     {
         return $this->hasOne(SubPartnerPercent::class, 'user_id');
     }
-
-    // Partner methods
 
     /**
      * Get attracted reservations by partner
@@ -159,6 +189,14 @@ class User extends Model
     public function attractedReservations(): HasManyThrough
     {
         return $this->hasManyThrough(Reservation::class, PromoCode::class);
+    }
+
+    /**
+     * @return HasManyThrough
+     */
+    public function attractedTransfers(): HasManyThrough
+    {
+        return $this->hasManyThrough(TransferRequest::class, PromoCode::class);
     }
 
     /**
@@ -189,82 +227,6 @@ class User extends Model
     public function partnerCity(): HasOne
     {
         return $this->hasOne(PartnerCity::class, 'partner_id');
-    }
-
-    /**
-     * Get total income attracted by partner
-     *
-     * @return float
-     */
-    public function getTotalIncomeAttribute(): float
-    {
-        /**
-         * @var $attractedReservations Reservation[]
-         */
-        $attractedReservations = $this->attractedReservations()->get();
-        $totalIncome = 0;
-
-        foreach ($attractedReservations as $item) {
-            $totalIncome += $item->costWithSale();
-        }
-
-        return $totalIncome;
-    }
-
-    /**
-     * Get partner profit
-     *
-     * @return float
-     */
-    public function getTotalProfitAttribute(): float
-    {
-        /**
-         * @var $attractedReservations Reservation[]
-         */
-        $attractedReservations = $this->attractedReservations()->get();
-        $totalProfit = 0;
-        $profitPercent = $this->profit_percent;
-
-        foreach ($attractedReservations as $item) {
-            $totalProfit += $item->costWithSale() * $profitPercent / 100;
-        }
-
-        if ($this->hasSubPartners()) {
-
-            /** @var $subPartners User[] */
-            $subPartners = User::with(['attractedReservations'])
-                ->whereIn('id', $this->subPartnerIds())->get();
-
-            foreach ($subPartners as $subPartner) {
-                /** @var Reservation $item */
-                foreach ($subPartner->attractedReservations()->get() as $item) {
-                    $totalProfit += $item->costWithSale() * $subPartner->sub_partners_profit_percent / 100;
-                }
-            }
-
-        }
-
-        return $totalProfit;
-    }
-
-    /**
-     * Get partner total payment amount
-     *
-     * @return int
-     */
-    public function getTotalPaymentAmountAttribute(): int
-    {
-        /**
-         * @var $partnerPayments PartnerPayment[]
-         */
-        $partnerPayments = $this->partnerPayments()->get();
-        $amount = 0;
-
-        foreach ($partnerPayments as $item) {
-            $amount += $item->amount;
-        }
-
-        return $amount;
     }
 
     /**

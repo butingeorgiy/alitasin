@@ -18,14 +18,13 @@
         <p class="text-black font-semibold select-text">{{ $partner->promoCodes()->first()['code'] }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->total_income }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->getTotalIncome() }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->total_profit }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->getTotalProfit() }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->total_payment_amount }}</p>
-{{--        <p class="text-black font-semibold">{{ json_encode($partner->subPartnerIds()) }}</p>--}}
+        <p class="text-black font-semibold">$ {{ $partner->getPaymentAmount() }}</p>
     </div>
     <div class="relative flex items-center">
         @if($partner->trashed())

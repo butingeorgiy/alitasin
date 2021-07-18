@@ -54,10 +54,11 @@
     // Promo code statistic calculation
 
     $promoCodeStatistic = [
-        'attracted' => $partner->attractedReservations()->count(),
-        'income' => $partner->total_income,
-        'earned' => $partner->total_profit,
-        'payed' => $partner->total_payment_amount
+        'attractedReservations' => $partner->attractedReservations()->count(),
+        'attractedTransfers' => $partner->attractedTransfers()->count(),
+        'income' => $partner->getTotalIncome(),
+        'earned' => $partner->getTotalProfit(),
+        'payed' => $partner->getPaymentAmount()
     ];
 
     @endphp

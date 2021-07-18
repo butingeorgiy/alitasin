@@ -3,9 +3,12 @@
         <p class="mb-4 text-black text-2xl font-bold text-black">{{ __('short-phrases.statistic') }}<span class="text-blue">.</span></p>
 
         <div class="grid gap-5 grid-cols-4">
-            <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200">
+            <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200"
+                 title="{{ __('page-titles.reserves') }}: {{ $attractedReservations }}; {{ __('short-phrases.transfers') }}: {{  $attractedTransfers}}">
                 <p class="mb-1 text-sm text-center text-gray-800 font-medium">{{ __('short-phrases.attracted') }}:</p>
-                <p class="text-center font-semibold">{{ $attracted }}</p>
+                <p class="text-center font-semibold">
+                    {{ $attractedReservations + $attractedTransfers }}
+                </p>
             </div>
 
             <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200">
