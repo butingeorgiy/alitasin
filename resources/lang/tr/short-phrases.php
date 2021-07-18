@@ -208,5 +208,7 @@ return [
     'calculate-cost' => 'Maliyeti hesapla',
     'transfer-cost' => 'Transfer maliyeti',
     'order-transfer' => 'Sipariş transferi',
-    'flight-number' => 'Uçuş numarası'
+    'flight-number' => 'Uçuş numarası',
+    'shown-records' => 'Gösterilen kayıtlar',
+    'of' => 'nın-nin'
 ];

@@ -207,5 +207,7 @@ return [
     'calculate-cost' => 'Calculate cost',
     'transfer-cost' => 'Transfer cost',
     'order-transfer' => 'Order transfer',
-    'flight-number' => 'Flight number'
+    'flight-number' => 'Flight number',
+    'shown-records' => 'Shown records',
+    'of' => 'of'
 ];

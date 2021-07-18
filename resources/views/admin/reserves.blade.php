@@ -23,8 +23,10 @@
                     <label class="flex items-center">
                         <svg class="min-w-4 min-h-4 w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761
-                        1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#4B506D" stroke-width="2"
+                            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604
+                                  3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761
+                                  1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"
+                                  stroke="#4B506D" stroke-width="2"
                                   stroke-linecap="round" stroke-linejoin="round"/>
                             <path
                                 d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
@@ -35,7 +37,7 @@
                             <option value="">{{ __('short-phrases.all-tours') }}</option>
                             @foreach(App\Models\Tour::byManager($user->id)->get() as $tour)
                                 <option value="{{ $tour->id }}" title="{{ $tour->title[App::getLocale()] }}" {{ (string) $tour->id === request()->input('tour_id', '') ? 'selected' : '' }}>
-                                    {{ \Illuminate\Support\Str::limit($tour->title[App::getLocale()], 50) }}
+                                    {{ Illuminate\Support\Str::limit($tour->title[App::getLocale()], 50) }}
                                 </option>
                             @endforeach
                         </select>
@@ -87,11 +89,37 @@
                     @include('components.reserve.reserves-table-item', compact('reservation'))
                 @endforeach
                 <!-- Reserve table footer  -->
-                <div class="px-8 py-4 {{ count($reservations) === 0 ? 'border-t border-gray-200' : '' }}">
+                <div class="grid grid-cols-3 px-8 py-4 {{ count($reservations) === 0 ? 'border-t border-gray-200' : '' }}">
                     <div class="flex">
-                        <span class="text-sm text-gray-900 font-medium">Найдено записей:&nbsp;&nbsp;</span>
+                        <span class="text-sm text-gray-900 font-medium">{{ __('short-phrases.shown-records') }}:&nbsp;&nbsp;</span>
                         <span class="text-sm text-gray-800">{{ count($reservations) }}</span>
+                        <span class="text-sm text-gray-900 font-medium">&nbsp;{{ __('short-phrases.of') }}&nbsp;</span>
+                        <span class="text-sm text-gray-800">{{ $totalAmount }}</span>
                     </div>
+                    @if(count($reservations) === intval(request()->input('limit', 15)))
+                        <div class="flex justify-center">
+                            @php
+
+                            $query = '?';
+
+                            foreach (request()->query() as $key => $value) {
+                                if ($key === 'limit') {
+                                    continue;
+                                }
+
+                                $query .= $key . '=' . $value . '&';
+                            }
+
+                            $query .= 'limit=' . (intval(request()->input('limit', 15)) + 15) . '&';
+
+                            $query = substr($query, 0, -1);
+
+                            @endphp
+                            <a href="{{ request()->url() . $query }}"
+                               class="text-sm text-blue font-medium">{{ __('buttons.show-more') }}</a>
+                        </div>
+                    @endif
+                    <div></div>
                 </div>
             </div>
         </div>

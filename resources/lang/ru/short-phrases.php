@@ -208,5 +208,7 @@ return [
     'calculate-cost' => 'Рассчитать стоимость',
     'transfer-cost' => 'Стоимость трансфера',
     'order-transfer' => 'Заказать трансфер',
-    'flight-number' => 'Номер рейса'
+    'flight-number' => 'Номер рейса',
+    'shown-records' => 'Показано записей',
+    'of' => 'из'
 ];

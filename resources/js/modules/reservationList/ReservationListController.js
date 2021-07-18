@@ -133,7 +133,9 @@ class ReservationListController extends EventHandler {
             uri += `${key}=${this.filters[key]}&`;
         }
 
-        location.replace(uri === '?' ? '/admin/reserves' : uri);
+        uri = uri.slice(0, -1);
+
+        location.replace(uri === '' ? '/admin/reserves' : uri);
     }
 
     initShowReservationContextMenu(items) {

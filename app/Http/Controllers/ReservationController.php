@@ -51,7 +51,8 @@ class ReservationController extends Controller
             ];
         }
 
-        $reservations = $reservations->get();
+        $totalAmount = $reservations->count();
+        $reservations = $reservations->limit($request->input('limit', 15))->get();
 
         /** @var Reservation $reservation */
         foreach ($reservations as $reservation) {
@@ -90,6 +91,6 @@ class ReservationController extends Controller
             $reservation['details'] = $details;
         }
 
-        return view('admin.reserves', compact('user', 'reservations', 'dateRange'));
+        return view('admin.reserves', compact('user', 'reservations', 'dateRange', 'totalAmount'));
     }
 }
