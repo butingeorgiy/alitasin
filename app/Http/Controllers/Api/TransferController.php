@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Facades\Auth;
 use App\Http\Requests\TransferCostResolvingRequest;
 use App\Http\Requests\TransferRequestCreatingRequest;
+use App\Mail\TransferRequestCreated;
 use App\Models\Airport;
 use App\Models\PromoCode;
 use App\Models\Transfer;
@@ -12,6 +13,7 @@ use App\Models\TransferDestination;
 use App\Models\TransferRequest;
 use Exception;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class TransferController extends Controller
 {
@@ -127,6 +129,9 @@ class TransferController extends Controller
         if (!$transferRequest->save()) {
             throw new Exception(__('messages.request-sending-failed'));
         }
+
+        Mail::to(config('mail.admin_address'))
+            ->send(new TransferRequestCreated($transferRequest));
 
         return [
             'success' => true,

@@ -40,7 +40,7 @@ class TourReserved extends Mailable
     public function build(): Mailable
     {
         $buildResponse = $this->view('emails.tour-reserved')
-            ->subject($this->isAdmin ? 'New reservation on Ali Tour!' : __('emails.excursion-reservation-on-ali-tour'));
+            ->subject($this->isAdmin ? 'Новое бронирование на Ali Tour!' : __('emails.excursion-reservation-on-ali-tour'));
 
         if (!$this->isAdmin && Storage::exists('tickets/' . $this->reservation->id . '.pdf')) {
             $buildResponse->attach(__DIR__ . '/../../storage/app/tickets/' . $this->reservation->id . '.pdf', [

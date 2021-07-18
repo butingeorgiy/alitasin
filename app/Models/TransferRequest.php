@@ -97,4 +97,9 @@ class TransferRequest extends Model
     {
         return $this->belongsTo(TransferDestination::class);
     }
+
+    public function capacity(): BelongsTo
+    {
+        return $this->belongsTo(TransferCapacity::class);
+    }
 }
