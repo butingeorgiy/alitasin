@@ -1,6 +1,6 @@
-<div id="transferOrderPopup" class="fixed hidden w-screen h-screen top-0 left-0 flex justify-center items-center z-50 bg-black bg-opacity-60">
-    <div class="popup flex flex-col relative top-0 top-80 p-5 sm:p-10 bg-white rounded-xl duration-300" style="max-width: 400px;">
-        <div class="flex items-center mb-8">
+<div id="transferOrderPopup" class="hidden fixed w-screen h-screen top-0 left-0 flex justify-center items-center z-50 bg-black bg-opacity-60">
+    <div class="popup flex flex-col relative top-0 top-80 p-5 sm:p-10 bg-white rounded-xl duration-300" style="width: 400px; max-width: 400px;">
+        <div class="flex items-center mb-4">
             <p class="mr-auto text-2xl text-black font-bold tracking-wider">{{ __('short-phrases.order-transfer') }}</p>
 
             <svg class="close-popup-button min-w-6 min-h-6 w-6 h-6 ml-5 text-gray-300 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -8,30 +8,41 @@
             </svg>
         </div>
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+        <p class="mb-4 font-light"><span class="text-lg text-red">*</span> Обязательные поля</p>
+
+        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md">
             <input type="text" name="user_name" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.enter-first-name') }}" value="{{ App\Facades\Auth::check() ? App\Facades\Auth::user()->first_name : null }}">
+                   placeholder="{{ __('short-phrases.enter-first-name') }} *" value="{{ App\Facades\Auth::check() ? App\Facades\Auth::user()->first_name : null }}">
         </label>
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md">
             <input type="text" name="user_phone" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.enter-phone') }}" value="{{ App\Facades\Auth::check() ? App\Facades\Auth::user()->phone : null }}">
+                   placeholder="{{ __('short-phrases.enter-phone') }} *" value="{{ App\Facades\Auth::check() ? App\Facades\Auth::user()->phone : null }}">
         </label>
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md">
             <input type="text" name="user_email" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.enter-email') }}" value="{{ App\Facades\Auth::check() ? App\Facades\Auth::user()->email : null }}">
+                   placeholder="{{ __('short-phrases.enter-email') }} *" value="{{ App\Facades\Auth::check() ? App\Facades\Auth::user()->email : null }}">
         </label>
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
+        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md">
             <input type="text" name="flight_number" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.flight-number') }} ({{ __('short-phrases.unnecessary') }})">
+                   placeholder="{{ __('short-phrases.flight-number') }}">
         </label>
 
-        <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="text" name="promo_code" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
-                   placeholder="{{ __('short-phrases.promo-code') }} ({{ __('short-phrases.unnecessary') }})">
+        <label class="flex items-center mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md">
+            <input type="text" name="promo_code" class="w-full mr-3 text-black placeholder-black tracking-wider bg-gray-100"
+                   placeholder="{{ __('short-phrases.promo-code') }}">
+
+            <span class="check-promo-code-button text-sm text-blue font-semibold cursor-pointer whitespace-nowrap hover:underline">{{ __('buttons.accept') }}</span>
+            <span class="hidden active mr-2 text-sm text-green-500 whitespace-nowrap"></span>
+            <span class="hidden reset-button text-sm text-blue whitespace-nowrap cursor-pointer">{{ __('buttons.reset') }}</span>
         </label>
+
+        <p class="mb-3 font-light">{{ __('short-phrases.total-cost') }}:
+            <span class="hidden old-price mr-1 text-base text-gray-500 line-through"></span>
+            <span class="total-price text-xl text-blue font-semibold">$ 100</span>
+        </p>
 
         @if(App\Facades\Auth::check())
             <input type="hidden" name="user_id" value="{{ App\Facades\Auth::user()->id }}">

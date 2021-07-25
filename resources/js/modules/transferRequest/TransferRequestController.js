@@ -8,16 +8,24 @@ class TransferRequestController extends EventHandler {
     constructor(nodes) {
         super();
 
-        this.nodes = nodes;
+        this.nodes = {
+            ...nodes,
+            promoCodeInput: nodes.transferOrderPopup.querySelector('input[name="promo_code"]'),
+            resetPromoCodeButton: nodes.transferOrderPopup.querySelector('.reset-button')
+        };
 
         this.view = new TransferRequestView({
             successMessage: nodes.successMessage,
             errorMessage: nodes.errorMessage,
             transferOrderButton: nodes.transferOrderButton,
-            showPopupButton: nodes.showTransferOrderPopupButton
+            showPopupButton: nodes.showTransferOrderPopupButton,
+            promoCodeWrapper: this.nodes.promoCodeInput?.parentElement,
+            oldPrice: nodes.oldPrice,
+            totalPrice: nodes.totalPrice
         });
 
         this.loading = false;
+        this.promoCodeChecking = false;
         this.requestData = {
             'user_id': null,
             'user_name': null,
@@ -44,14 +52,41 @@ class TransferRequestController extends EventHandler {
                 this.loading = true;
                 this.sendRequest();
             }
-        })
+        });
+
+        this.nodes.promoCodeInput = nodes.transferOrderPopup.querySelector('input[name="promo_code"]');
+
+        if (this.nodes.promoCodeInput) {
+            this.addEvent(nodes.checkPromoCodeButton, 'click', e => {
+                e.preventDefault();
+
+                const promoCode = this.nodes.promoCodeInput.value;
+
+                if (!this.promoCodeChecking && promoCode) {
+                    this.promoCodeChecking = true;
+                    this.checkPromoCode(promoCode);
+                }
+            });
+
+            this.addEvent(this.nodes.resetPromoCodeButton, 'click', _ => {
+                this.view.disablePromoCode();
+                this.view.renderTransferTotalPrice(TransferRequestObserver.getCost());
+                this.requestData['promo_code'] = null;
+            });
+        } else {
+            console.warn('Promo code input is not defined!');
+        }
     }
 
     initPopup() {
-        this.popup = PopupObserver.init(this.nodes.transferOrderPopup);
+        this.popup = PopupObserver.init(this.nodes.transferOrderPopup, false, _ => {
+            this.clearForm();
+        });
 
         this.addEvent(this.nodes.showTransferOrderPopupButton, 'click', _ => {
-            this.popup.open();
+            this.popup.open(_ => {
+                this.view.renderTransferTotalPrice(TransferRequestObserver.getCost());
+            });
         });
     }
 
@@ -86,6 +121,9 @@ class TransferRequestController extends EventHandler {
                         break;
                     case 'user_phone':
                         output['user_phone'] = node.value.replace(/[^\d]/g, '');
+                        break;
+                    case 'promo_code':
+                        output['promo_code'] = this.requestData['promo_code'];
                         break;
                     default:
                         output[name] = node.value;
@@ -133,6 +171,49 @@ class TransferRequestController extends EventHandler {
             })
             .finally(_ => {
                 this.view.hideLoading();
+            });
+    }
+
+    setPromoCode(promoCode) {
+        this.requestData['promo_code'] = promoCode;
+    }
+
+    clearForm() {
+        this.requestData = {
+            'user_id': null,
+            'user_name': null,
+            'user_phone': null,
+            'user_email': null,
+            'flight_number': null,
+            'promo_code': null
+        };
+
+        this.view.clearForm();
+    }
+
+    checkPromoCode(promoCode) {
+        this.view.hideError();
+
+        TransferRequestModel.checkPromoCode(promoCode)
+            .then(result => {
+                if (typeof result === 'string') {
+                    alert(`Error: ${result}`);
+                } else if (result.error) {
+                    this.view.showError(result.message);
+                } else {
+                    this.setPromoCode(promoCode);
+                    this.view.enablePromoCode(result['sale_percent']);
+                    this.view.renderTransferTotalPrice(
+                        TransferRequestObserver.getCost() * (100 - result['sale_percent']) / 100,
+                        TransferRequestObserver.getCost()
+                    )
+                }
+            })
+            .catch(error => {
+                alert(`Error: ${error}`);
+            })
+            .finally(_ => {
+                this.promoCodeChecking = false;
             });
     }
 }

@@ -16,6 +16,23 @@ class TransferRequestObserver {
         this.transferState = null;
     }
 
+    static setCost(cost) {
+        this.transferCost = cost;
+    }
+
+    static getCost() {
+        if (!this.transferCost) {
+            console.warn('Transfer cost was not set by Transfer Form module!');
+            return null;
+        }
+
+        return this.transferCost;
+    }
+
+    static clearCost() {
+        this.transferCost = null;
+    }
+
     static setRenderShowTransferRequestPopupButtonHandler(handler) {
         this.showTransferRequestPopupButtonHandler = handler;
     }

@@ -21,6 +21,7 @@ class TransferFormController extends EventHandler {
         });
 
         this.transferState = this.initTransferLocalState();
+        this.transferCost = null;
 
         this.initTypeSwitching();
         this.initCapacitySwitching();
@@ -238,6 +239,7 @@ class TransferFormController extends EventHandler {
         };
 
         TransferRequestObserver.clearState();
+        TransferRequestObserver.clearCost();
         TransferRequestObserver.hideShowTransferRequestPopupButton(
             _ => {
                 this.view.showCalculateButton();
@@ -294,6 +296,7 @@ class TransferFormController extends EventHandler {
                     this.view.showErrorMessage(result.message);
                 } else {
                     TransferRequestObserver.setState(this.transferState);
+                    TransferRequestObserver.setCost(result['cost']);
 
                     TransferRequestObserver.renderShowTransferRequestPopupButton(
                         _ => {
@@ -301,7 +304,7 @@ class TransferFormController extends EventHandler {
                         },
                         _ => {
                             alert('Unfortunately, Transfer Form Module is not ' +
-                                'available now! Our developers try to fix it!')
+                                'available now! Our developers try to fix it!');
                         }
                     );
 

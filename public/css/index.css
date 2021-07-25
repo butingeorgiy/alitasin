@@ -1047,6 +1047,11 @@ video {
   line-height: 1.25rem;
 }
 
+.text-base{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .text-lg{
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1899,6 +1904,10 @@ video {
 
 .underline{
   text-decoration: underline;
+}
+
+.line-through{
+  text-decoration: line-through;
 }
 
 .group:hover .group-hover\:underline{

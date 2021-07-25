@@ -9,6 +9,12 @@ class TransferRequestModel {
 
         return response.status === 200 ? await response.json() : await response.text();
     }
+
+    static async checkPromoCode(promoCode) {
+        const response = await fetch(`${location.origin}/api/promo-codes/check?code=${promoCode}`);
+
+        return response.status === 200 ? await response.json() : await response.text();
+    }
 }
 
 export default TransferRequestModel;
