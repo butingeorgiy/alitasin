@@ -77,6 +77,7 @@ class TransferFormController extends EventHandler {
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            maxOptions: 1000,
             preload: true,
             render: {
                 'no_results': _ => {
@@ -114,6 +115,7 @@ class TransferFormController extends EventHandler {
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            maxOptions: 1000,
             preload: true,
             render: {
                 'no_results': _ => {

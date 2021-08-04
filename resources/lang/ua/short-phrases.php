@@ -209,5 +209,8 @@ return [
     'order-transfer' => 'Переказ замовлення',
     'flight-number' => 'Номер рейсу',
     'shown-records' => 'Показані записи',
-    'of' => 'з'
+    'of' => 'з',
+    'transfers-editing' => 'Передає редагування',
+    'add-airport' => 'Додати аеропорт',
+    'add-destination' => 'Додати пункт призначення',
 ];

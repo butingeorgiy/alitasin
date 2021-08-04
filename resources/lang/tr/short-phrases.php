@@ -210,5 +210,8 @@ return [
     'order-transfer' => 'Sipariş transferi',
     'flight-number' => 'Uçuş numarası',
     'shown-records' => 'Gösterilen kayıtlar',
-    'of' => 'nın-nin'
+    'of' => 'nın-nin',
+    'transfers-editing' => 'Transfer düzenleme',
+    'add-airport' => 'Havaalanı ekle',
+    'add-destination' => 'Hedef ekle',
 ];

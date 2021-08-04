@@ -164,5 +164,21 @@ return [
     'transfer-not-found' => 'Transfer not found!',
     'user-name-max' => 'User name cannot be more than 255 characters!',
     'flight-number-max' => 'Flight number cannot be more than 255 characters!',
-    'request-sending-failed' => 'Failed to send request!'
+    'request-sending-failed' => 'Failed to send request!',
+    'airport-name-required' => 'Must specify airport name!',
+    'airport-name-max' => 'Airport name cannot be more than 255 characters!',
+    'airport-creation-failed' => 'Failed to create airport!',
+    'airport-created-successfully' => 'Airport created successfully',
+    'destination-name-required' => 'Must specify destination name!',
+    'destination-name-max' => 'Destination name cannot be more than 255 characters!',
+    'destination-creation-failed' => 'Failed to create destination!',
+    'destination-created-successfully' => 'Destination was created successfully!',
+    'airport-deleting-success' => 'Airport was deleted successfully',
+    'airport-deleting-failed' => 'Failed to delete airport!',
+    'destination-deleting-success' => 'Destination was deleted successfully!',
+    'destination-deleting-failed' => 'Failed to delete destination!',
+    'airport-restoring-success' => 'Airport was restored successfully!',
+    'airport-restoring-failed' => 'Failed to restore airport!',
+    'destination-restoring-success' => 'Destination was restored successfully!',
+    'destination-restoring-failed' => 'Failed to restore destination!'
 ];

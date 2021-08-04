@@ -163,5 +163,21 @@ return [
     'capacity-required' => 'Укажите необходимую вместимость!',
     'capacity-not-found' => 'Вместимости не найдено!',
     'transfer-not-found' => 'Трансфер не найден!',
-    'request-sending-failed' => 'Не удалось отправить заявку!'
+    'request-sending-failed' => 'Не удалось отправить заявку!',
+    'airport-name-required' => 'Необходимо указать название аэропорта!',
+    'airport-name-max' => 'Название аэропорта не может быть длиннее 255 символов!',
+    'airport-creation-failed' => 'Не удалось создать аэропорт!',
+    'airport-created-successfully' => 'Аэропорт успешно создан',
+    'destination-name-required' => 'Укажите название пункта назначения!',
+    'destination-name-max' => 'Название пункта назначения не может быть длиннее 255 символов!',
+    'destination-creation-failed' => 'Не удалось создать пункт назначения!',
+    'destination-created-successfully' => 'Пункт назначения успешно создан!',
+    'airport-deleting-success' => 'Аэропорт успешно удален!',
+    'airport-deleting-failed' => 'Не удалось удалить аэропорт!',
+    'destination-deleting-success' => 'Пункт назначения успешно удален!',
+    'destination-deleting-failed' => 'Не удалось удалить пункт назначения!',
+    'airport-restoring-success' => 'Аэропорт успешно восстановлен!',
+    'airport-restoring-failed' => 'Не удалось восстановить аэропорт!',
+    'destination-restoring-success' => 'Пункт назначения успешно восстановлен!',
+    'destination-restoring-failed' => 'Не удалось восстановить пункт назначения!'
 ];

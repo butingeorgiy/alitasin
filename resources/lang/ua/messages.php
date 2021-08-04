@@ -162,5 +162,21 @@ return [
     'capacity-required' => 'Потрібно вказати місткість!',
     'capacity-not-found' => 'Ємність не знайдено!',
     'transfer-not-found' => 'Перенесення не знайдено!',
-    'request-sending-failed' => 'Не вдалося надіслати запит!'
+    'request-sending-failed' => 'Не вдалося надіслати запит!',
+    'airport-name-required' => 'Необхідно вказати назву аеропорту!',
+    'airport-name-max' => 'Назва аеропорту не може містити більше 255 символів!',
+    'airport-creation-failed' => 'Не вдалося створити аеропорт!',
+    'airport-created-successfully' => 'Додавання аеропорту створено успішно',
+    'destination-name-required' => 'Необхідно вказати назву пункту призначення!',
+    'destination-name-max' => 'Назва призначення не може містити більше 255 символів!',
+    'destination-creation-failed' => 'Не вдалося створити пункт призначення!',
+    'destination-created-successfully' => 'Призначення створено успішно!',
+    'airport-deleting-success' => 'Havaalanı başarıyla silindi',
+    'airport-deleting-failed' => 'Havaalanı silinemedi!',
+    'destination-deleting-success' => 'Hedef başarıyla silindi!',
+    'destination-deleting-failed' => 'Hedef silinemedi!',
+    'airport-restoring-success' => 'Аеропорт успішно відновлено!',
+    'airport-restoring-failed' => 'Не вдалося відновити аеропорт!',
+    'destination-restoring-success' => 'Місце призначення успішно відновлено!',
+    'destination-restoring-failed' => 'Не вдалося відновити пункт призначення!'
 ];

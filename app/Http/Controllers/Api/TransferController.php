@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Facades\Auth;
+use App\Http\Requests\AirportRequest;
 use App\Http\Requests\TransferCostResolvingRequest;
+use App\Http\Requests\TransferDestinationRequest;
 use App\Http\Requests\TransferRequestCreatingRequest;
 use App\Mail\TransferRequestCreated;
 use App\Models\Airport;
@@ -17,22 +19,6 @@ use Illuminate\Support\Facades\Mail;
 
 class TransferController extends Controller
 {
-    /**
-     * Get available airports.
-     */
-    public function getAirports()
-    {
-        return Airport::all();
-    }
-
-    /**
-     * Get available destinations.
-     */
-    public function getDestinations()
-    {
-        return TransferDestination::all();
-    }
-
     /**
      * Get cost of transfer.
      *

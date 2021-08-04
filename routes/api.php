@@ -42,10 +42,25 @@ Route::group(['prefix' => 'reserves'], function () {
 });
 
 Route::group(['prefix' => 'transfers'], function () {
-    Route::get('airports', 'Api\TransferController@getAirports');
     Route::get('destinations', 'Api\TransferController@getDestinations');
     Route::get('calculate', 'Api\TransferController@getCost');
     Route::post('requests/create', 'Api\TransferController@createRequest');
+});
+
+Route::group(['prefix' => 'airports'], function () {
+    Route::get('', 'Api\AirportController@getAll');
+    Route::post('create', 'Api\AirportController@create')->middleware('auth:5');
+    Route::post('{id}/update', 'Api\AirportController@update')->middleware('auth:5');
+    Route::post('{id}/delete', 'Api\AirportController@delete')->middleware('auth:5');
+    Route::post('{id}/restore', 'Api\AirportController@restore')->middleware('auth:5');
+});
+
+Route::group(['prefix' => 'destinations'], function () {
+    Route::get('', 'Api\TransferDestinationController@getAll');
+    Route::post('create', 'Api\TransferDestinationController@create')->middleware('auth:5');
+    Route::post('{id}/update', 'Api\TransferDestinationController@update')->middleware('auth:5');
+    Route::post('{id}/delete', 'Api\TransferDestinationController@delete')->middleware('auth:5');
+    Route::post('{id}/restore', 'Api\TransferDestinationController@restore')->middleware('auth:5');
 });
 
 Route::get('promo-codes/check', 'Api\PromoCodeController@get');

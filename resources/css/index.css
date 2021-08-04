@@ -128,7 +128,11 @@ select::-ms-expand {
 .send-vehicle-order-button.loading,
 .calculate-transfer-cost.loading,
 .show-transfer-request-popup.loading,
-.order-transfer-button.loading {
+.order-transfer-button.loading,
+.create-airport-button.loading,
+.update-airport-button.loading,
+.create-destination-button.loading,
+.update-destination-button.loading {
     @apply cursor-not-allowed opacity-60;
 }
 
@@ -147,7 +151,11 @@ select::-ms-expand {
 .send-vehicle-order-button.loading .animate-spin,
 .calculate-transfer-cost.loading .animate-spin,
 .show-transfer-request-popup.loading .animate-spin,
-.order-transfer-button.loading .animate-spin {
+.order-transfer-button.loading .animate-spin,
+.create-airport-button.loading .animate-spin,
+.update-airport-button.loading .animate-spin,
+.create-destination-button.loading .animate-spin,
+.update-destination-button.loading .animate-spin{
     @apply block;
 }
 
@@ -215,6 +223,16 @@ select::-ms-expand {
 
 .transfer-type-tab-item.active {
     @apply text-blue border-blue cursor-default;
+}
+
+.airport-manage-button,
+.destination-manage-button {
+    @apply cursor-pointer;
+}
+
+.airport-manage-button.disabled,
+.destination-manage-button.disabled {
+    @apply cursor-not-allowed opacity-30;
 }
 
 /* Tom Select */

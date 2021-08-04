@@ -20,3 +20,6 @@ import './modules/updateVehicle';
 import './modules/searchPartners';
 import './modules/transferForm';
 import './modules/transferRequest';
+import './modules/createAirport';
+import './modules/createDestination';
+import './modules/manageTransfers';

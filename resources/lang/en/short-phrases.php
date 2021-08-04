@@ -209,5 +209,8 @@ return [
     'order-transfer' => 'Order transfer',
     'flight-number' => 'Flight number',
     'shown-records' => 'Shown records',
-    'of' => 'of'
+    'of' => 'of',
+    'transfers-editing' => 'Transfers editing',
+    'add-airport' => 'Add airport',
+    'add-destination' => 'Add destination',
 ];

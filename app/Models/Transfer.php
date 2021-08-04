@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Transfer extends Model
 {
+
     /**
      * Get transfer's variations.
      *

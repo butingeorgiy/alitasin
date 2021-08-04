@@ -1,6 +1,6 @@
 const langConfig = {
     default: 'en',
-    allowLanguages: ['en', 'ru', 'tr'],
+    allowLanguages: ['en', 'ru', 'tr', 'ua'],
     dictionary: {
         'reviews': {
             'en': 'Reviews',
@@ -97,6 +97,12 @@ const langConfig = {
             'ru': 'Перейти',
             'tr': 'Git',
             'ua': 'Перейти'
+        },
+        'deleted': {
+            'en': 'Deleted',
+            'ru': 'Удалён',
+            'tr': 'Silindi',
+            'ua': 'Видалено'
         }
     }
 };

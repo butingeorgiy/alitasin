@@ -162,5 +162,21 @@ return [
     'capacity-required' => 'Kapasite belirtilmelidir!',
     'capacity-not-found' => 'Kapasite bulunamadı!',
     'transfer-not-found' => 'Aktarım bulunamadı!',
-    'request-sending-failed' => 'Istek gönderilemedi!'
+    'request-sending-failed' => 'Istek gönderilemedi!',
+    'airport-name-required' => 'Havaalanı adı belirtilmelidir!',
+    'airport-name-max' => 'Havaalanı adı 255 karakterden fazla olamaz!',
+    'airport-creation-failed' => 'Havaalanı oluşturulamadı!',
+    'airport-created-successfully' => 'Havaalanı Ekle başarıyla oluşturuldu',
+    'destination-name-required' => 'Hedef adı belirtilmelidir!',
+    'destination-name-max' => 'Hedef adı 255 karakterden fazla olamaz!',
+    'destination-creation-failed' => 'Hedef oluşturulamadı!',
+    'destination-created-successfully' => 'Hedef başarıyla oluşturuldu!',
+    'airport-deleting-success' => 'Havaalanı başarıyla silindi',
+    'airport-deleting-failed' => 'Havaalanı silinemedi!',
+    'destination-deleting-success' => 'Hedef başarıyla silindi!',
+    'destination-deleting-failed' => 'Hedef silinemedi!',
+    'airport-restoring-success' => 'Havaalanı başarıyla restore edildi!',
+    'airport-restoring-failed' => 'Havaalanı geri yüklenemedi!',
+    'destination-restoring-success' => 'Hedef başarıyla geri yüklendi!',
+    'destination-restoring-failed' => 'Hedef geri yüklenemedi!'
 ];

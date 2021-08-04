@@ -210,5 +210,8 @@ return [
     'order-transfer' => 'Заказать трансфер',
     'flight-number' => 'Номер рейса',
     'shown-records' => 'Показано записей',
-    'of' => 'из'
+    'of' => 'из',
+    'transfers-editing' => 'Редактирование трансферов',
+    'add-airport' => 'Добавить аэропорт',
+    'add-destination' => 'Добавить направление',
 ];
