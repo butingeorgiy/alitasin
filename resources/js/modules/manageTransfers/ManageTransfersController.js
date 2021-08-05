@@ -32,6 +32,10 @@ class ManageTransfersController extends EventHandler {
                     }
                 ]
             },
+            airportData: {
+                value: null,
+                depends: []
+            },
             destinationId: {
                 value: null,
                 depends: [
@@ -51,7 +55,11 @@ class ManageTransfersController extends EventHandler {
                         }
                     }
                 ]
-            }
+            },
+            destinationData: {
+                value: null,
+                depends: []
+            },
         };
 
         this.initAirportSelect();
@@ -79,7 +87,14 @@ class ManageTransfersController extends EventHandler {
                     return `<div class="no-results">${LocaleHelper.translate('no-results')}</div>`;
                 },
                 'item': data => {
-                    return `<div class="mr-2 text-sm text-gray-600 comma-separate" data-is-deleted="${data['deleted_at'] ? 1 : 0}">${data['name']} ${data['deleted_at'] ? '(' + LocaleHelper.translate('deleted') + ')' : ''}</div>`;
+                    const params = {
+                        'en_name': data['en_name'],
+                        'ru_name': data['ru_name'],
+                        'tr_name': data['tr_name'],
+                        'ua_name': data['ua_name']
+                    };
+
+                    return `<div class="mr-2 text-sm text-gray-600 comma-separate" data-is-deleted="${data['deleted_at'] ? 1 : 0}" data-params='${JSON.stringify(params)}'>${data['name']} ${data['deleted_at'] ? '(' + LocaleHelper.translate('deleted') + ')' : ''}</div>`;
                 },
                 'option': data => {
                     return `<div>${data['name']} ${data['deleted_at'] ? '(' + LocaleHelper.translate('deleted') + ')' : ''}</div>`;
@@ -105,6 +120,13 @@ class ManageTransfersController extends EventHandler {
             },
             onChange: value => {
                 const isDeleted = this.airportSelect?.getItem(value)?.getAttribute('data-is-deleted') === '1';
+                const params = this.airportSelect?.getItem(value)?.getAttribute('data-params');
+
+                if (params) {
+                    this.updateState('airportData', JSON.parse(params));
+                } else {
+                    this.updateState('airportData', null);
+                }
 
                 this.updateState('airportId', value ? parseInt(value) : null);
                 this.updateState('isAirportDeleted', isDeleted);
@@ -125,7 +147,14 @@ class ManageTransfersController extends EventHandler {
                     return `<div class="no-results">${LocaleHelper.translate('no-results')}</div>`;
                 },
                 'item': data => {
-                    return `<div class="mr-2 text-sm text-gray-600 comma-separate" data-is-deleted="${data['deleted_at'] ? 1 : 0}">${data['name']} ${data['deleted_at'] ? '(' + LocaleHelper.translate('deleted') + ')' : ''}</div>`;
+                    const params = {
+                        'en_name': data['en_name'],
+                        'ru_name': data['ru_name'],
+                        'tr_name': data['tr_name'],
+                        'ua_name': data['ua_name']
+                    };
+
+                    return `<div class="mr-2 text-sm text-gray-600 comma-separate" data-is-deleted="${data['deleted_at'] ? 1 : 0}" data-params='${JSON.stringify(params)}'>${data['name']} ${data['deleted_at'] ? '(' + LocaleHelper.translate('deleted') + ')' : ''}</div>`;
                 },
                 'option': data => {
                     return `<div>${data['name']} ${data['deleted_at'] ? '(' + LocaleHelper.translate('deleted') + ')' : ''}</div>`;
@@ -151,6 +180,13 @@ class ManageTransfersController extends EventHandler {
             },
             onChange: value => {
                 const isDeleted = this.destinationSelect?.getItem(value)?.getAttribute('data-is-deleted') === '1';
+                const params = this.destinationSelect?.getItem(value)?.getAttribute('data-params');
+
+                if (params) {
+                    this.updateState('destinationData', JSON.parse(params));
+                } else {
+                    this.updateState('destinationData', null);
+                }
 
                 this.updateState('destinationId', value ? parseInt(value) : null);
                 this.updateState('isDestinationDeleted', isDeleted);
@@ -192,6 +228,7 @@ class ManageTransfersController extends EventHandler {
 
     toggleAirportManageButtons(airportId) {
         this.removeAllListeners(this.nodes.deleteAirportButton, 'click');
+        this.removeAllListeners(this.nodes.showAirportUpdatingPopupButton, 'click');
 
         if (airportId === null) {
             this.nodes.showAirportUpdatingPopupButton.classList.add('disabled');
@@ -203,11 +240,16 @@ class ManageTransfersController extends EventHandler {
             this.addEvent(this.nodes.deleteAirportButton, 'click', _ => {
                 this.deleteAirport(airportId);
             });
+
+            this.addEvent(this.nodes.showAirportUpdatingPopupButton, 'click', _ => {
+                ManageTransfersObserver.showUpdatingAirportPopup(this.getState('airportData'), airportId);
+            });
         }
     }
 
     toggleDestinationManageButtons(destinationId) {
         this.removeAllListeners(this.nodes.deleteDestinationButton, 'click');
+        this.removeAllListeners(this.nodes.showDestinationUpdatingPopupButton, 'click');
 
         if (destinationId === null) {
             this.nodes.showDestinationUpdatingPopupButton.classList.add('disabled');
@@ -218,6 +260,10 @@ class ManageTransfersController extends EventHandler {
 
             this.addEvent(this.nodes.deleteDestinationButton, 'click', _ => {
                 this.deleteDestination(destinationId);
+            });
+
+            this.addEvent(this.nodes.showDestinationUpdatingPopupButton, 'click', _ => {
+                ManageTransfersObserver.showUpdatingDestinationPopup(this.getState('destinationData'), destinationId);
             });
         }
     }

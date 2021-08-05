@@ -38,6 +38,28 @@ class ManageTransfersModel {
 
         return response.status === 200 ? await response.json() : await response.text();
     }
+
+    static async updateAirport(data, id) {
+        const url = `${location.origin}/api/airports/${id}/update`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: data
+        });
+
+        return response.status === 200 ? await response.json() : response.text();
+    }
+
+    static async updateDestination(data, id) {
+        const url = `${location.origin}/api/destinations/${id}/update`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: data
+        });
+
+        return response.status === 200 ? await response.json() : response.text();
+    }
 }
 
 export default ManageTransfersModel;

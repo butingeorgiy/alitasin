@@ -21,5 +21,7 @@ import './modules/searchPartners';
 import './modules/transferForm';
 import './modules/transferRequest';
 import './modules/createAirport';
+import './modules/updateAirport';
 import './modules/createDestination';
+import './modules/updateDestination';
 import './modules/manageTransfers';

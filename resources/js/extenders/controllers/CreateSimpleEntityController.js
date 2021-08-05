@@ -8,13 +8,6 @@ class CreateSimpleEntityController extends EventHandler {
         this.nodes = nodes;
         this.loading = false;
 
-        this.addEvent(nodes.saveButton, 'click', _ => {
-            if (!this.loading) {
-                this.loading = true;
-                this.save();
-            }
-        });
-
         this.initPopup();
     }
 

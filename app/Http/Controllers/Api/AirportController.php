@@ -56,7 +56,7 @@ class AirportController extends Controller
      */
     public function update(AirportRequest $request, $id): array
     {
-        if (!$airport = Airport::find($id)) {
+        if (!$airport = Airport::withTrashed()->find($id)) {
             throw new Exception(__('messages.airport-not-found'));
         }
 

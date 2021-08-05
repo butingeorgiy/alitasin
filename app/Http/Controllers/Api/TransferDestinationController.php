@@ -57,7 +57,7 @@ class TransferDestinationController extends Controller
      */
     public function update(TransferDestinationRequest $request, $id): array
     {
-        if (!$destination = TransferDestination::find($id)) {
+        if (!$destination = TransferDestination::withTrashed()->find($id)) {
             throw new Exception(__('messages.destination-not-found'));
         }
 
