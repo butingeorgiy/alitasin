@@ -213,4 +213,6 @@ return [
     'transfers-editing' => 'Transfers editing',
     'add-airport' => 'Add airport',
     'add-destination' => 'Add destination',
+    'create-transfer' => 'Create transfer',
+    'delete-transfer' => 'Delete transfer'
 ];

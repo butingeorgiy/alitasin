@@ -45,6 +45,12 @@ Route::group(['prefix' => 'transfers'], function () {
     Route::get('destinations', 'Api\TransferController@getDestinations');
     Route::get('calculate', 'Api\TransferController@getCost');
     Route::post('requests/create', 'Api\TransferController@createRequest');
+    Route::get('variations', 'Api\TransferController@getAvailableVariations')->middleware('auth:5');
+    Route::post('{id}/update-cost', 'Api\TransferController@updateVariationCost')->middleware('auth:5');
+    Route::post('{id}/delete-cost', 'Api\TransferController@deleteVariationCost')->middleware('auth:5');
+    Route::get('check', 'Api\TransferController@isExists')->middleware('auth:5');
+    Route::post('create', 'Api\TransferController@create')->middleware('auth:5');
+    Route::post('{id}/delete', 'Api\TransferController@delete')->middleware('auth:5');
 });
 
 Route::group(['prefix' => 'airports'], function () {

@@ -178,5 +178,11 @@ return [
     'airport-restoring-success' => 'Аеропорт успішно відновлено!',
     'airport-restoring-failed' => 'Не вдалося відновити аеропорт!',
     'destination-restoring-success' => 'Місце призначення успішно відновлено!',
-    'destination-restoring-failed' => 'Не вдалося відновити пункт призначення!'
+    'destination-restoring-failed' => 'Не вдалося відновити пункт призначення!',
+    'transfer-cost-required' => 'Необхідно вказати вартість трансферу!',
+    'transfer-cost-numeric' => 'Вартість трансферу має бути числовою!',
+    'transfer-cost-min' => 'Вартість трансферу має бути більше 0!',
+    'transfer-creating-success' => 'Передачу створено успішно!',
+    'transfer-creating-failed' => 'Не вдалося створити перенесення!',
+    'transfer-deleting-success' => 'Передачу успішно видалено!'
 ];

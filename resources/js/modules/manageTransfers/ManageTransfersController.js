@@ -17,7 +17,8 @@ class ManageTransfersController extends EventHandler {
                 depends: [
                     (_, newState) => {
                         this.toggleAirportManageButtons(newState.airportId);
-                    }
+                    },
+                    this.resolveTransferVariations
                 ]
             },
             isAirportDeleted: {
@@ -41,7 +42,8 @@ class ManageTransfersController extends EventHandler {
                 depends: [
                     (_, newState) => {
                         this.toggleDestinationManageButtons(newState.destinationId);
-                    }
+                    },
+                    this.resolveTransferVariations
                 ]
             },
             isDestinationDeleted: {
@@ -72,6 +74,16 @@ class ManageTransfersController extends EventHandler {
         this.addEvent(nodes.showDestinationCreatingPopupButton, 'click', _ => {
             ManageTransfersObserver.showCreatingDestinationPopup();
         });
+    }
+
+    resolveTransferVariations(_, newState) {
+        const {airportId, destinationId} = newState;
+
+        if (airportId && destinationId) {
+            ManageTransfersObserver.resolveTransfer(airportId, destinationId);
+        } else {
+            ManageTransfersObserver.hideTransferVariations();
+        }
     }
 
     initAirportSelect() {

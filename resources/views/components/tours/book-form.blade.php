@@ -29,7 +29,7 @@
                         <select name="region_id"
                                 class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow-sm rounded-md cursor-pointer">
                             <option value="">{{ __('short-phrases.select-location-region') }}</option>
-                            @foreach(\App\Models\Region::all() as $region)
+                            @foreach(App\Models\Region::all() as $region)
                                 <option value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
                         </select>

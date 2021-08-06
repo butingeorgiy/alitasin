@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property int id
  * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
  * @method static int count()
  * @method static Builder matchedBy(int $airportId, int $destinationId) Find transfer by airport and destination.
+ * @method static Transfer|Collection|null find(mixed $id)
  */
 class Transfer extends Model
 {
+    public $timestamps = false;
+
+    protected $guarded = [];
+
 
     /**
      * Get transfer's variations.

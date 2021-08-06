@@ -180,5 +180,11 @@ return [
     'airport-restoring-success' => 'Airport was restored successfully!',
     'airport-restoring-failed' => 'Failed to restore airport!',
     'destination-restoring-success' => 'Destination was restored successfully!',
-    'destination-restoring-failed' => 'Failed to restore destination!'
+    'destination-restoring-failed' => 'Failed to restore destination!',
+    'transfer-cost-required' => 'Must specify transfer cost!',
+    'transfer-cost-numeric' => 'Transfer cost must be a numeric!',
+    'transfer-cost-min' => 'Transfer cost must be more than 0!',
+    'transfer-creating-success' => 'Transfer was created successfully!',
+    'transfer-creating-failed' => 'Failed to create transfer!',
+    'transfer-deleting-success' => 'Transfer was deleted successfully!'
 ];

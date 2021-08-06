@@ -179,5 +179,11 @@ return [
     'airport-restoring-success' => 'Аэропорт успешно восстановлен!',
     'airport-restoring-failed' => 'Не удалось восстановить аэропорт!',
     'destination-restoring-success' => 'Пункт назначения успешно восстановлен!',
-    'destination-restoring-failed' => 'Не удалось восстановить пункт назначения!'
+    'destination-restoring-failed' => 'Не удалось восстановить пункт назначения!',
+    'transfer-cost-required' => 'Укажите стоимость трансфера!',
+    'transfer-cost-numeric' => 'Стоимость трансфера должны быть числом!',
+    'transfer-cost-min' => 'Стоимость трансфера должна быть больше 0!',
+    'transfer-creating-success' => 'Трансфер успешно создан!',
+    'transfer-creating-failed' => 'Не удалось создать трансфер!',
+    'transfer-deleting-success' => 'Трансфер успешно удален!'
 ];

@@ -103,6 +103,12 @@ const langConfig = {
             'ru': 'Удалён',
             'tr': 'Silindi',
             'ua': 'Видалено'
+        },
+        'save': {
+            'en': 'Save',
+            'ru': 'Сохранить',
+            'tr': 'Kayıt etmek',
+            'ua': 'Зберегти',
         }
     }
 };

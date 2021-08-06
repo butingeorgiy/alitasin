@@ -25,3 +25,4 @@ import './modules/updateAirport';
 import './modules/createDestination';
 import './modules/updateDestination';
 import './modules/manageTransfers';
+import './modules/manageTransferVariations';

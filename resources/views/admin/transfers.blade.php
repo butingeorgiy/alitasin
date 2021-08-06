@@ -102,6 +102,57 @@
                     </div>
                 </div>
             </div>
+
+            <div class="hidden variations-search-loader flex items-center justify-center mt-10">
+                <svg class="animate-spin mr-3 h-5 w-5 text-blue" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962
+                      7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+
+                <span class="text-gray-400 font-light">Поиск трансферов ...</span>
+            </div>
+
+            <div class="hidden transfer-cost-container mt-6">
+                <div class="create-transfer-button flex justify-center items-center py-3 text-sm text-white font-medium bg-green rounded-md tracking-wider cursor-pointer">
+                    <svg class="animate-spin mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962
+                      7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    {{ __('short-phrases.create-transfer') }}
+                </div>
+
+                <div class="hidden delete-transfer-button flex justify-center items-center py-3 text-sm text-white font-medium bg-red rounded-md tracking-wider cursor-pointer">
+                    <svg class="animate-spin mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962
+                      7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    {{ __('short-phrases.delete-transfer') }}
+                </div>
+
+                <div class="hidden variations-wrapper mt-8">
+                    <p class="mb-8 text-xl font-semibold leading-5">Управление стоимостью:</p>
+
+                    <div class="flex flex-col">
+                        <div class="grid grid-cols-12 gap-10 mb-3">
+                            <div class="col-span-3 mb-2 font-medium leading-5">Тип трансфера</div>
+                            <div class="col-span-2 mb-2 font-medium leading-5">Вместимость</div>
+                            <div class="col-span-2 mb-2 font-medium leading-5">Стоимость, $</div>
+                            <div class="col-span-5 mb-2 font-medium leading-5">Действия</div>
+                        </div>
+
+                        <div class="variations-container flex flex-col"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

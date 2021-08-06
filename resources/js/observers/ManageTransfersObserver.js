@@ -31,6 +31,22 @@ class ManageTransfersObserver {
         }
     }
 
+    static resolveTransfer(airportId, destinationId) {
+        if (ManageTransfersObserver._resolveTransfer) {
+            ManageTransfersObserver._resolveTransfer(airportId, destinationId);
+        } else {
+            console.error('Failed to resolve transfer, because handler has not been set by ManageTransferVariations module!');
+        }
+    }
+
+    static hideTransferVariations() {
+        if (ManageTransfersObserver._hideTransferVariations) {
+            ManageTransfersObserver._hideTransferVariations();
+        } else {
+            console.error('Failed to hide transfer variations, because handler has bit been set by ManageTransferVariations module!');
+        }
+    }
+
     static setShowCreatingAirportPopupHandler(handler) {
         ManageTransfersObserver._showCreatingAirportPopupHandler = handler;
     }
@@ -45,6 +61,14 @@ class ManageTransfersObserver {
 
     static setShowUpdatingDestinationPopupHandler(handler) {
         ManageTransfersObserver._showUpdatingDestinationPopupHandler = handler;
+    }
+
+    static setResolveTransferHandler(handler) {
+        ManageTransfersObserver._resolveTransfer = handler;
+    }
+
+    static setHideTransferVariationsHandler(handler) {
+        ManageTransfersObserver._hideTransferVariations = handler;
     }
 }
 

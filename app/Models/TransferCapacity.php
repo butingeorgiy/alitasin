@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
+/**
+ * @property int id
+ * @property string name
+ */
 class TransferCapacity extends Model
 {
     public $timestamps = false;

@@ -178,5 +178,11 @@ return [
     'airport-restoring-success' => 'Havaalanı başarıyla restore edildi!',
     'airport-restoring-failed' => 'Havaalanı geri yüklenemedi!',
     'destination-restoring-success' => 'Hedef başarıyla geri yüklendi!',
-    'destination-restoring-failed' => 'Hedef geri yüklenemedi!'
+    'destination-restoring-failed' => 'Hedef geri yüklenemedi!',
+    'transfer-cost-required' => 'Aktarım maliyeti belirtilmelidir!',
+    'transfer-cost-numeric' => 'Aktarım maliyeti sayısal olmalıdır!',
+    'transfer-cost-min' => 'Transfer maliyeti 0\'dan fazla olmalıdır!',
+    'transfer-creating-success' => 'Aktarım başarıyla oluşturuldu!',
+    'transfer-creating-failed' => 'Aktarım oluşturulamadı!',
+    'transfer-deleting-success' => 'Aktarım başarıyla silindi!'
 ];
