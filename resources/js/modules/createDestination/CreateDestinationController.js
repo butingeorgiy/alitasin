@@ -14,6 +14,14 @@ class CreateDestinationController extends CreateSimpleEntityController {
         });
 
         ManageTransfersObserver.setShowCreatingDestinationPopupHandler(_ => {
+            this.removeAllListeners(nodes.saveButton, 'click');
+            this.addEvent(nodes.saveButton, 'click', _ => {
+                if (!this.loading) {
+                    this.loading = false;
+                    this.save();
+                }
+            });
+
             this.openPopup();
         });
     }

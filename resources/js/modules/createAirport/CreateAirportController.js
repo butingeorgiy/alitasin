@@ -15,7 +15,7 @@ class CreateAirportController extends CreateSimpleEntityController {
 
         ManageTransfersObserver.setShowCreatingAirportPopupHandler(_ => {
             this.removeAllListeners(nodes.saveButton, 'click');
-            this.addEvent(this.saveButton, 'click', _ => {
+            this.addEvent(nodes.saveButton, 'click', _ => {
                 if (!this.loading) {
                     this.loading = false;
                     this.save();
