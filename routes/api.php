@@ -70,3 +70,4 @@ Route::group(['prefix' => 'destinations'], function () {
 });
 
 Route::get('promo-codes/check', 'Api\PromoCodeController@get');
+Route::post('telegram-bot/webhook', 'Api\TelegramBotController@webhook');
