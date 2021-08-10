@@ -215,5 +215,6 @@ return [
     'add-airport' => 'Добавить аэропорт',
     'add-destination' => 'Добавить направление',
     'create-transfer' => 'Создать трансфер',
-    'delete-transfer' => 'Удалить трансфер'
+    'delete-transfer' => 'Удалить трансфер',
+    'reservation' => 'Бронь'
 ];

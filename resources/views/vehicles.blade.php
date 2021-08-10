@@ -22,7 +22,7 @@
             </div>
 
             <div class="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach(\App\Models\VehicleType::all() as $item)
+                @foreach(App\Models\VehicleType::all() as $item)
                     <a href="{{ route('vehicles', ['vehicle_type_id' => $item->id]) }}"
                        class="flex justify-center items-center text-white text-3xl font-semibold tracking-wide bg-cover bg-center bg-no-repeat shadow rounded-md
                        {{ (int) request()->input('vehicle_type_id') === $item->id ? 'underline' : ''  }}"
@@ -34,7 +34,7 @@
 
             <div class="block sm:hidden swiper-container -mx-3">
                 <div class="swiper-wrapper -mx-2 px-5 py-2">
-                    @foreach(\App\Models\VehicleType::all() as $item)
+                    @foreach(App\Models\VehicleType::all() as $item)
                         <a href="{{ route('vehicles', ['vehicle_type_id' => $item->id]) }}"
                            class="swiper-slide relative flex justify-center items-center w-72 text-white text-3xl font-bold tracking-wide bg-center bg-cover bg-no-repeat rounded-md
                            {{ (int) request()->input('vehicle_type_id') === $item->id ? 'underline' : ''  }}"

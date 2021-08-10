@@ -214,5 +214,6 @@ return [
     'add-airport' => 'Додати аеропорт',
     'add-destination' => 'Додати пункт призначення',
     'create-transfer' => 'Створити переказ',
-    'delete-transfer' => 'Видалити передачу'
+    'delete-transfer' => 'Видалити передачу',
+    'reservation' => 'Бронювання'
 ];

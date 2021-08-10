@@ -12,6 +12,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
@@ -38,10 +39,7 @@ class PageController extends Controller
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', [
-                        'dir' => 'tour_pictures',
-                        'file' => $image->link
-                    ]);
+                    $tour->image = asset('storage/tour_pictures/' . $image->link);
                 }
             }
 
@@ -113,10 +111,7 @@ class PageController extends Controller
         ];
 
         foreach ($vehicles as $i => $vehicle) {
-            $vehicles[$i]['image'] = route('get-image', [
-                'dir' => 'vehicle_pictures',
-                'file' => 'vehicle-s-' . $vehicle['id'] . '.png'
-            ]);
+            $vehicles[$i]['image'] = asset('storage/vehicle_pictures/' . 'vehicle-s-' . $vehicle['id'] . '.png');
         }
 
         return view('index', compact('regions', 'tours', 'filterCounter', 'vehicles'));
@@ -194,10 +189,7 @@ class PageController extends Controller
         $regions = collect(Region::where('id', '!=', $id)->get())->random(6)->shuffle();
 
         foreach ($regions as $region) {
-            $region['image'] = route('get-image', [
-                'dir' => 'region_pictures',
-                'file' => 'region-' . $region['id'] . '-s.jpg'
-            ]);
+            $region['image'] = asset('storage/region_pictures/' . 'region-' . $region['id'] . '-s.jpg');
         }
 
         return view('region', compact('tours', 'regions', 'currentRegion', 'filterCounter', 'popularTours'));
@@ -214,17 +206,11 @@ class PageController extends Controller
 
         foreach ($tour->images as $image) {
             if ($image->isMain()) {
-                $mainImage = route('get-image', [
-                    'dir' => 'tour_pictures',
-                    'file' => $image->link
-                ]);
+                $mainImage = asset('storage/tour_pictures/' . $image->link);
                 continue;
             }
 
-            $image->data = route('get-image', [
-                'dir' => 'tour_pictures',
-                'file' => $image->link
-            ]);
+            $image->data = asset('storage/tour_pictures/' . $image->link);
         }
 
         $user = null;
@@ -246,7 +232,7 @@ class PageController extends Controller
         }
 
         foreach ($tour->additions as $addition) {
-            $addition->title = $addition[\App::getLocale() . '_title'];
+            $addition->title = $addition[App::getLocale() . '_title'];
             $addition->description = $addition->getOriginal('pivot_' . \App::getLocale() . '_description');
             $addition->is_include = $addition->getOriginal('pivot_is_include');
         }
@@ -261,10 +247,7 @@ class PageController extends Controller
         $user = Auth::user();
 
         if (Storage::exists('profile_pictures/' . $user->id . '.jpg')) {
-            $user->profile = route('get-image', [
-                'dir' => 'profile_pictures',
-                'file' => $user->id . '.jpg'
-            ]);
+            $user->profile = asset('storage/profile_pictures/' . $user->id . '.jpg');
         }
 
         $recentViewed = $user->recentViewed;
@@ -272,23 +255,17 @@ class PageController extends Controller
         foreach ($recentViewed as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', [
-                        'dir' => 'tour_pictures',
-                        'file' => $image->link
-                    ]);
+                    $tour->image = asset('storage/tour_pictures/' . $image->link);
                 }
             }
         }
 
-        $reservedTours = $user->reservedTours;
+        $reservedTours = $user->reservedTours()->withPivot('id')->get();
 
         foreach ($reservedTours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', [
-                        'dir' => 'tour_pictures',
-                        'file' => $image->link
-                    ]);
+                    $tour->image = asset('storage/tour_pictures/' . $image->link);
                 }
             }
         }
@@ -298,10 +275,7 @@ class PageController extends Controller
         foreach ($favoriteTours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', [
-                        'dir' => 'tour_pictures',
-                        'file' => $image->link
-                    ]);
+                    $tour->image = asset('storage/tour_pictures/' . $image->link);
                 }
             }
         }
@@ -315,10 +289,7 @@ class PageController extends Controller
         $user = Auth::user();
 
         if (Storage::exists('profile_pictures/' . $user->id . '.jpg')) {
-            $user->profile = route('get-image', [
-                'dir' => 'profile_pictures',
-                'file' => $user->id . '.jpg'
-            ]);
+            $user->profile = asset('storage/profile_pictures/' . $user->id . '.jpg');
         }
 
         $reservations = $user->attractedReservations()->get();

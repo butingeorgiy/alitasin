@@ -90,10 +90,7 @@ class Vehicle extends Model
     {
         foreach ($this->images as $image) {
             if ($image->isMain()) {
-                return route('get-image', [
-                    'dir' => 'vehicle_pictures',
-                    'file' => $image->image
-                ]);
+                return asset('storage/vehicle_pictures/' . $image->image);
             }
         }
 

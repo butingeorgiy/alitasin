@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -20,10 +21,12 @@ use Illuminate\Support\Carbon;
  * @property string|null hotel_room_number
  * @property int|null region_id
  * @property User user
+ * @property Tour tour
  * @property PromoCode promoCode
  * @property int tour_init_price
  * @method static limit(int $int)
  * @method static Reservation find($reservationId)
+ * @method static Reservation|Collection findOrFail(mixed $id)
  */
 class Reservation extends Model
 {

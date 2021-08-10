@@ -586,7 +586,7 @@ class TourController extends Controller
 
             $tours->whereHas('title', function (Builder $query) use ($searchString) {
                 $query->selectRaw(
-                    'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(' . \App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+                    'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(' . App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
                     [$searchString]
                 )->having('frequency', '>', 0)->orderByDesc('frequency');
             });
@@ -610,10 +610,7 @@ class TourController extends Controller
 
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $row['image'] = route('get-image', [
-                        'dir' => 'tour_pictures',
-                        'file' => $image->link
-                    ]);
+                    $row['image'] = asset('storage/tour_pictures/' . $image->link);
                 }
             }
 

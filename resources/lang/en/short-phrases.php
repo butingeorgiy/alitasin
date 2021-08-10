@@ -214,5 +214,6 @@ return [
     'add-airport' => 'Add airport',
     'add-destination' => 'Add destination',
     'create-transfer' => 'Create transfer',
-    'delete-transfer' => 'Delete transfer'
+    'delete-transfer' => 'Delete transfer',
+    'reservation' => 'Reservation'
 ];
