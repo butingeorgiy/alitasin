@@ -22,11 +22,16 @@ class AuthenticateCommand extends Command
      */
     public function handle()
     {
-        $keyboard = Keyboard::make()
-            ->inline()
-            ->row(
-                Keyboard::inlineButton(['text' => 'Отправить номер телефона', 'request_contact' => true]),
-            );
+        $phoneShareButton = Keyboard::button([
+            'text' => 'Отправить номер телефона',
+            'request_contact' => true
+        ]);
+
+        $keyboard = Keyboard::make([
+            'keyboard' => [[$phoneShareButton]],
+            'resize_keyboard' => true,
+            'one_time_keyboard' => true
+        ]);
 
         $this->replyWithMessage([
             'text' => 'Отправьте номер телефона текущего аккаунта ' .
