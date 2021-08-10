@@ -1,5 +1,7 @@
 <?php
 
+use App\Telegram\Commands\AuthenticateCommand;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -116,7 +118,8 @@ return [
     |
     */
     'commands'                     => [
-        Telegram\Bot\Commands\HelpCommand::class,
+//        Telegram\Bot\Commands\HelpCommand::class,
+        AuthenticateCommand::class
     ],
 
     /*
