@@ -1,5 +1,7 @@
 <?php
 
+use App\Facades\TelegramNotifier;
+
 Route::get('', 'PageController@showIndex')->name('index');
 Route::get('logout', 'AuthenticationController@logout')->name('logout');
 Route::get('regions/{id}', 'PageController@showRegion')->name('region');
@@ -32,3 +34,12 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('cdn/images/{dir}/{file}', 'ImageController@get')->middleware('cache')->name('get-image');
+
+Route::get('test-telegram', function () {
+    $to = '77475051903';
+
+    $client = TelegramNotifier::to($to)
+        ->send(new App\Telegram\Notifications\TestNotification('Гоша'));
+
+    $client->writeLog();
+});

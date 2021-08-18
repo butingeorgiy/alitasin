@@ -35,7 +35,7 @@ class AuthenticateCommand extends Command
 
         $this->replyWithMessage([
             'text' => 'Отправьте номер телефона текущего аккаунта ' .
-                'Telegram для проверки доступа в системе AliTasin.',
+                'Telegram для проверки доступа в системе Ali Tasin.',
             'reply_markup' => $keyboard
         ]);
     }
