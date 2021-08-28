@@ -37,7 +37,7 @@
                 <div class="flex items-center">
                     <a href="https://wa.me/+905350303054" target="_blank" class="w-6 h-6 mr-6 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/whatsapp-icon.svg') }})"></a>
                     <a href="https://t.me/alitasin" target="_blank" class="w-6 h-6 mr-7 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/telegram-icon.svg') }})"></a>
-                    <a href="https://instagram.com/ali_tour.ru" target="_blank" class="w-6 h-6 mr-7 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/instagram-icon.svg') }})"></a>
+                    <a href="https://instagram.com/alitour.tr" target="_blank" class="w-6 h-6 mr-7 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/instagram-icon.svg') }})"></a>
                     <a href="viber://add?number=905350303054" class="w-6 h-6 bg-contain bg-center bg-no-repeat" style="background-image: url({{ asset('images/phone-icon.svg') }})"></a>
                 </div>
             </div>
