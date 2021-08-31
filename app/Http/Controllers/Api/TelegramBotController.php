@@ -39,11 +39,6 @@ class TelegramBotController extends Controller
                 'chat_id' => $update->getChat()->id,
                 'text' => 'Вы уже авторизованны в боте Alitasin!'
             ]);
-        } else {
-            Telegram::sendMessage([
-                'chat_id' => $update->getChat()->id,
-                'text' => 'Некорректная команда'
-            ]);
         }
     }
 }
