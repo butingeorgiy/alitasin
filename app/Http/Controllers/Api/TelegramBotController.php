@@ -13,7 +13,7 @@ class TelegramBotController extends Controller
     {
         /** @var Update $update */
         $update = Telegram::commandsHandler(true);
-//
-        Log::info('Telegram Contact: ', ['data' => $update]);
+
+        Log::info('Telegram Contact: ', ['data' => $update->contact]);
     }
 }
