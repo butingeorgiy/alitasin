@@ -14,7 +14,7 @@ class TelegramBotController extends Controller
         /** @var Update $update */
         $update = Telegram::commandsHandler(true);
 
-        Telegram::sendMessate([
+        Telegram::sendMessage([
             'chat_id' => $update->getChat()->id,
             'text' => print_r($update)
         ]);
