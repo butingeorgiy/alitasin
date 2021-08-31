@@ -30,7 +30,18 @@ class TelegramBotController extends Controller
 
             if (!$tgChat->telegram_chat_id) {
                 $tgChat->telegram_chat_id = $chatId;
-                $tgChat->save();
+
+                if ($tgChat->save()) {
+                    Telegram::sendMessage([
+                        'chat_id' => $update->getChat()->id,
+                        'text' => 'Вы успешно авторизовались в боте Alitasin! Теперь вы можете видеть доступные вам уведомления здесь.'
+                    ]);
+                } else {
+                    Telegram::sendMessage([
+                        'chat_id' => $update->getChat()->id,
+                        'text' => 'Произошла ошибка... Попробуйте авторизоваться чуть позже!'
+                    ]);
+                }
 
                 return;
             }
