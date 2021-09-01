@@ -79,7 +79,7 @@
                         {{ __('short-phrases.activate') }}
                     </div>
                 @else
-                    @if($partner->total_payment_amount < $partner->total_profit)
+                    @if($partner->getPaymentAmount() < $partner->getTotalProfit())
                         <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
                              data-option-name="make-payment" data-option-params="{{ json_encode(['id' => $partner->id]) }}">
                             {{ __('short-phrases.make-payment') }}
