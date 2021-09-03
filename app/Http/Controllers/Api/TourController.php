@@ -779,7 +779,7 @@ class TourController extends Controller
             $notify = '77475051903';
 
             if (App::environment('production')) {
-                $notify = ['77007861786'];
+                $notify = ['77007861786', '905350303054'];
             }
 
             TelegramNotifier::to($notify)
