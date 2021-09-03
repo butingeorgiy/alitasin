@@ -11,7 +11,7 @@ abstract class MessageNotification extends BaseNotification
 
     public function generateParseMode(): string
     {
-        return 'MarkdownV2';
+        return 'HTML';
     }
 
     /**

@@ -183,6 +183,6 @@ return [
     'transfer-cost-numeric' => 'Вартість трансферу має бути числовою!',
     'transfer-cost-min' => 'Вартість трансферу має бути більше 0!',
     'transfer-creating-success' => 'Передачу створено успішно!',
-    'transfer-creating-failed' => 'Не вдалося створити перенесення!',
+    'transfer-creating-failed' => 'Не вдалося створити перенесення!', 
     'transfer-deleting-success' => 'Передачу успішно видалено!'
 ];

@@ -437,7 +437,7 @@
 }
 
 .flatpickr-current-month .flatpickr-monthDropdown-months {
-    appearance: menulist;
+    appearance: none;
     background: transparent;
     border: none;
     border-radius: 0;
@@ -454,8 +454,8 @@
     position: relative;
     vertical-align: initial;
     -webkit-box-sizing: border-box;
-    -webkit-appearance: menulist;
-    -moz-appearance: menulist;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     width: auto;
 }
 

@@ -97,10 +97,12 @@
             <td>{{ __('short-phrases.holding-date') }}:</td>
             <td>
                 @php
+                    use Illuminate\Support\Carbon;
+
                     $reservationDate = $reservation->date;
 
                     if ($reservationDate) {
-                        echo \Illuminate\Support\Carbon::parse($reservationDate)->format('d.m.Y');
+                        echo Carbon::parse($reservationDate)->format('d.m.Y');
                     } else {
                         echo __('short-phrases.not-specified');
                     }
