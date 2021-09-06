@@ -1,6 +1,6 @@
 <section class="mb-10 border-b border-gray-200">
     <div class="container grid grid-cols-1 lg:grid-cols-3 gap-4 mx-auto px-5 pt-2 pb-6">
-        <a href="#toursSection" class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
+        <a href="#regionsSection" class="flex flex-col px-8 pt-8 pb-4 text-white bg-center bg-cover bg-no-repeat rounded-md"
             style="background-image: url({{ asset('images/main-sections-bg-tours.jpg') }})">
             <div class="self-end min-w-20 min-h-20 w-20 h-20 mb-3 bg-contain bg-center bg-no-repeat"
                  style="background-image: url({{ asset('images/main-sections-icon-tours.svg') }})"></div>
