@@ -76,11 +76,14 @@ class TourReservationNotification extends MessageNotification
         if ($this->reservation->isUsedPromoCode()) {
             $totalCost = $this->reservation->total_cost_without_sale * (100 - $this->reservation->promo_code_init_sale_percent) / 100;
             $discount = $this->reservation->total_cost_without_sale * $this->reservation->promo_code_init_sale_percent / 100;
+
+            $promoCode = $this->reservation->promoCode->code;
         } else {
             $totalCost = $this->reservation->total_cost_without_sale;
         }
 
         $message .= "\n\rСкидка: $" . ($discount ?? 0) . "\n\r";
+        $message .= "Промо код: " . ($promoCode ?? 'Не указан') . "\n\r";
         $message .= "Итого: $$totalCost \n\n\n\n\n\n";
 
         return $message;
