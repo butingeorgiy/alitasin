@@ -6,7 +6,7 @@
         </a>
         <div class="hidden sm:flex items-center">
             <div class="relative flex flex-wrap group">
-                <a href="/#toursSection" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.tours') }}</a>
+                <a href="/#regionsSection" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.tours') }}</a>
 
                 <!-- Tours submenu -->
                 <div class="hidden group-hover:block origin-top-right absolute left-0 top-full z-10 w-56 rounded-md shadow-lg bg-white border border-gray-200"

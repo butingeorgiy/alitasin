@@ -216,5 +216,6 @@ return [
     'add-destination' => 'Добавить направление',
     'create-transfer' => 'Создать трансфер',
     'delete-transfer' => 'Удалить трансфер',
-    'reservation' => 'Бронь'
+    'reservation' => 'Бронь',
+    'choose-your-region' => 'Выберите ваш регион'
 ];

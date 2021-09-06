@@ -215,5 +215,6 @@ return [
     'add-destination' => 'Add destination',
     'create-transfer' => 'Create transfer',
     'delete-transfer' => 'Delete transfer',
-    'reservation' => 'Reservation'
+    'reservation' => 'Reservation',
+    'choose-your-region' => 'Choose your region'
 ];

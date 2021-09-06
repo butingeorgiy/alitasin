@@ -215,5 +215,6 @@ return [
     'add-destination' => 'Додати пункт призначення',
     'create-transfer' => 'Створити переказ',
     'delete-transfer' => 'Видалити передачу',
-    'reservation' => 'Бронювання'
+    'reservation' => 'Бронювання',
+    'choose-your-region' => 'Виберіть свій регіон'
 ];

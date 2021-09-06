@@ -216,5 +216,6 @@ return [
     'add-destination' => 'Hedef ekle',
     'create-transfer' => 'Aktarım oluştur',
     'delete-transfer' => 'Aktarımı sil',
-    'reservation' => 'Rezervasyon'
+    'reservation' => 'Rezervasyon',
+    'choose-your-region' => 'Bölgeni seç'
 ];
