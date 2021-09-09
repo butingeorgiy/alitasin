@@ -17,6 +17,18 @@
 
     <section id="vehicleTypesSection" class="mb-10 pb-4 sm:pb-6 border-b border-gray-200">
         <div class="container mx-auto px-5">
+            <div class="flex items-center mb-6">
+                <span class="text-gray-900 font-medium">Выберите регион:&nbsp;&nbsp;</span>
+                <select class="text-gray-800 placeholder-gray-800 cursor-pointer" name="tour_id">
+                    <option value="">Любой</option>
+                    @foreach(App\Models\Region::all() as $region)
+                        <option value="{{ $region->id }}" {{ (string) $region->id === request()->input('region_id', '') ? 'selected' : '' }}>
+                            {{ $region->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="mb-2 sm:mb-4">
                 <p class="inline text-black text-2xl font-bold text-black">{{ __('short-phrases.vehicle-categories') }}<span class="text-blue">.</span></p>
             </div>
@@ -47,11 +59,12 @@
 
     <section id="vehicleSection" class="pb-10">
         <div class="container flex flex-col mx-auto px-5">
+            @php /** @var App\Models\Vehicle $vehicle */ @endphp
             @forelse($vehicles as $vehicle)
                 <div class="vehicle-item grid grid-cols-12 mb-5 last:mb-0 bg-gray-1200 rounded-md shadow" data-id="{{ $vehicle->id }}" data-title="{{ $vehicle->brand }} ({{ $vehicle->model  }})">
                     <div class="col-span-full lg:col-span-5 flex flex-col items-center px-8 sm:px-16 pt-8 sm:pt-12 lg:pb-4 lg:border-r border-gray-1300">
                         <div class="w-full h-44 mb-8 bg-contain bg-center bg-no-repeat" style="background-image: url({{ $vehicle->main_image }})"></div>
-                        <p class="mt-auto text-sm text-gray-500 hover:underline cursor-pointer">{{ __('buttons.show-all') }}</p>
+                        <p class="show-vehicle-gallery-btn mt-auto text-sm text-gray-500 hover:underline cursor-pointer" data-images="{{ json_encode($vehicle->getAllImagesUrl()) }}">{{ __('buttons.show-all') }}</p>
                     </div>
                     <div class="col-span-full lg:col-span-7 flex flex-col px-6 sm:px-8 py-6">
                         <p class="mb-4 text-2xl text-black font-medium">{{ $vehicle->brand }}&nbsp;<span class="text-gray-600">{{ $vehicle->model }}</span></p>

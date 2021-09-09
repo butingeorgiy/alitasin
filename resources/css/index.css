@@ -2,6 +2,9 @@
 @import "/css/swiper.css";
 @import "/css/flatpickr.min.css";
 @import "/css/tom-select.css";
+@import "/css/lightgallery-bundle.min.css";
+@import "/css/lg-thumbnail.css";
+@import "/fonts/lg.svg";
 
 @tailwind base;
 @tailwind components;

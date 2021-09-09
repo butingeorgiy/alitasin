@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property string $brand
- * @property string $model
- * @property string $show_at_index_page
- * @property int $cost
+ * @property string brand
+ * @property string model
+ * @property string show_at_index_page
+ * @property int cost
  * @property mixed images
  * @property mixed params
+ * @property string|null main_image
+ * @property string[] extra_images
  * @method static Vehicle|null find($id)
  * @method static Vehicle findOrFail($id)
  * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
@@ -82,6 +84,20 @@ class Vehicle extends Model
     }
 
     /**
+     * Get vehicle's all images
+     *
+     * @return array
+     */
+    public function getAllImagesUrl(): array
+    {
+        foreach ($this->images as $image) {
+            $images[] = asset('storage/vehicle_pictures/' . $image->image);
+        }
+
+        return $images ?? [];
+    }
+
+    /**
      * Get vehicle's main image
      *
      * @return string|null
@@ -95,5 +111,21 @@ class Vehicle extends Model
         }
 
         return null;
+    }
+
+    /**
+     * Get vehicle's extra images
+     *
+     * @return array
+     */
+    public function getExtraImagesAttribute(): array
+    {
+        foreach ($this->images as $image) {
+            if (!$image->isMain()) {
+                $images[] = asset('storage/vehicle_pictures/' . $image->image);
+            }
+        }
+
+        return $images ?? [];
     }
 }

@@ -2,6 +2,8 @@ import EventHandler from '../../core/EventHandler';
 import PopupObserver from '../../observers/PopupObserver';
 import OrderVehicleView from './OrderVehicleView';
 import OrderVehicleModel from './OrderVehicleModel';
+import lightGallery from 'lightgallery';
+import lgThumbnail from 'lightgallery/plugins/thumbnail'
 
 class OrderVehicleController extends EventHandler {
     constructor(nodes) {
@@ -17,6 +19,52 @@ class OrderVehicleController extends EventHandler {
 
         this.initPopup();
         this.initVehicleCards(nodes.vehicleCards);
+        this.initGallery();
+    }
+
+    initGallery() {
+        if (!this.nodes.vehicleCards) {
+            return;
+        }
+
+        this.galleryInstance = lightGallery(this.nodes.vehicleCards[0].querySelector('.show-vehicle-gallery-btn'), {
+            dynamic: true,
+            thumbnail: true,
+            plugins: [lgThumbnail],
+            dynamicEl: [
+                {
+                    src: 'http://ali-tour.local/storage/vehicle_pictures/8xEPJ8k6iA7GdR.png',
+                    thumb: 'http://ali-tour.local/storage/vehicle_pictures/8xEPJ8k6iA7GdR.png',
+                },
+                {
+                    src: 'http://ali-tour.local/storage/vehicle_pictures/639Wk6V7PoesUR.png',
+                    thumb: 'http://ali-tour.local/storage/vehicle_pictures/639Wk6V7PoesUR.png',
+                }
+            ]
+        });
+
+        this.nodes.vehicleCards.forEach((node, index) => {
+            const button = node.querySelector('.show-vehicle-gallery-btn');
+
+            if (!button) {
+                console.warn(`Gallery was not initialized for ${++index} vehicle card!`);
+                return;
+            }
+
+            const images = JSON.parse(button.getAttribute('data-images') || '[]');
+
+            this.addEvent(button, 'click', _ => {
+                this.updateGallery(images);
+                this.galleryInstance.openGallery(0);
+            });
+        });
+    }
+
+    updateGallery(images) {
+        this.galleryInstance.refresh(images.map(image => ({
+            src: image,
+            thumb: image,
+        })));
     }
 
     initPopup() {
