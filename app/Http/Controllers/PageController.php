@@ -347,7 +347,13 @@ class PageController extends Controller
             abort(404);
         }
 
-        $vehicles = Vehicle::where('type_id', $request->input('vehicle_type_id'))->get();
+        $vehicles = Vehicle::where('type_id', $request->input('vehicle_type_id'));
+
+        if ($request->has('region_id')) {
+            $vehicles = $vehicles->where('region_id', $request->input('region_id'));
+        }
+
+        $vehicles = $vehicles->get();
 
         return view('vehicles', compact('vehicles'));
     }

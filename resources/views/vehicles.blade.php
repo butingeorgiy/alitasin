@@ -19,7 +19,7 @@
         <div class="container mx-auto px-5">
             <div class="flex items-center mb-6">
                 <span class="text-gray-900 font-medium">Выберите регион:&nbsp;&nbsp;</span>
-                <select class="text-gray-800 placeholder-gray-800 cursor-pointer" name="tour_id">
+                <select class="text-gray-800 placeholder-gray-800 cursor-pointer" name="region_id">
                     <option value="">Любой</option>
                     @foreach(App\Models\Region::all() as $region)
                         <option value="{{ $region->id }}" {{ (string) $region->id === request()->input('region_id', '') ? 'selected' : '' }}>

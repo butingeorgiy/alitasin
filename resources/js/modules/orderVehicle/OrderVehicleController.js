@@ -20,10 +20,35 @@ class OrderVehicleController extends EventHandler {
         this.initPopup();
         this.initVehicleCards(nodes.vehicleCards);
         this.initGallery();
+
+        console.log(nodes.regionSelect);
+
+        this.addEvent(nodes.regionSelect, 'change', _ => {
+
+            this.switchRegion(nodes.regionSelect.value);
+        })
+    }
+
+    switchRegion(regionId) {
+        const path = location.search.slice(1);
+        const matches = path.match(/vehicle_type_id=(\d+)/);
+
+        if (!matches) {
+            location.replace(`${location.origin}/vehicles`);
+            return;
+        }
+
+        let newPath = `vehicle_type_id=${matches[1]}`;
+
+        if (regionId) {
+            newPath += `&region_id=${regionId}`;
+        }
+
+        location.replace(`${location.origin}/vehicles?${newPath}`);
     }
 
     initGallery() {
-        if (!this.nodes.vehicleCards) {
+        if (!this.nodes.vehicleCards.length) {
             return;
         }
 
