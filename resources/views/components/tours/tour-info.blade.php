@@ -1,15 +1,15 @@
 <section id="tourInfoSection" class="mt-6 mb-12">
     <div class="container mx-auto px-5">
         <div class="grid grid-cols-4 grid-row-2 gap-4 h-60 sm:h-96 mb-4">
-            <div class="col-span-4 md:col-span-2 row-span-2 bg-cover bg-center bg-no-repeat shadow rounded-md"
-                 style="background-image: url({{ $mainImage }})"></div>
+            <div class="show-gallery-button col-span-4 md:col-span-2 row-span-2 bg-cover bg-center bg-no-repeat shadow rounded-md"
+                 style="background-image: url({{ $mainImage }})" data-gallery-image-index="0"></div>
 
             @php
 
-                /**
-                 * @var App\Models\Tour $tour
-                 */
-                $images = $tour->images->where('is_main', '0')->values();
+                foreach ($tour->images->where('is_main', '0')->values() as $image) {
+                    $images[] = $image['data'];
+                }
+
                 $imageCount = count($images);
 
                 if ($imageCount > 4) {
@@ -47,19 +47,20 @@
 
             @endphp
 
-            @foreach($images as $i => $image)
-                <div class="{{ $imageCellClasses[$i] ?? '' }} hidden sm:block bg-cover bg-center bg-no-repeat shadow rounded-md"
-                     style="background-image: url({{ $image['data'] }})"></div>
-            @endforeach
+            <input type="hidden" name="tour_images" value="{{ json_encode(array_merge([$mainImage], $images)) }}">
 
+            @foreach($images as $i => $image)
+                <div class="{{ $imageCellClasses[$i] ?? '' }} show-gallery-button hidden sm:block bg-cover bg-center bg-no-repeat shadow rounded-md"
+                     style="background-image: url({{ $image }})" data-gallery-image-index="{{ ++$i }}"></div>
+            @endforeach
         </div>
 
         @if(count($images) > 0)
             <div class="block sm:hidden swiper-container -ml-1 mb-2">
                 <div class="swiper-wrapper pl-1 pb-2">
                     @foreach($images as $i => $image)
-                        <div class="swiper-slide w-72 h-32 bg-cover bg-center bg-no-repeat shadow rounded-md"
-                             style="background-image: url({{ $image['data'] }})"></div>
+                        <div class="show-gallery-button swiper-slide w-72 h-32 bg-cover bg-center bg-no-repeat shadow rounded-md"
+                             style="background-image: url({{ $image }})"></div>
                     @endforeach
                 </div>
             </div>

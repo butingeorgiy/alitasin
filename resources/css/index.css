@@ -4,6 +4,7 @@
 @import "/css/tom-select.css";
 @import "/css/lightgallery-bundle.min.css";
 @import "/css/lg-thumbnail.css";
+@import "/css/lg-zoom.css";
 @import "/fonts/lg.svg";
 
 @tailwind base;
