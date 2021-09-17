@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App;
 use App\Facades\RusDecl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -154,7 +155,7 @@ class Tour extends Model
      */
     public function getDurationAttribute($value): ?string
     {
-        $locale = \App::getLocale();
+        $locale = App::getLocale();
         $int = intval(explode('~', $value)[0] ?? null);
         $mode = explode('~', $value)[1] ?? null;
 
@@ -271,7 +272,7 @@ class Tour extends Model
     public function scopeSearch($query, string $searchString)
     {
         return $query->selectRaw(
-            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . \App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
             [str_replace(' ', '|', $searchString)]
         )->having('frequency', '>', 0)->orderByDesc('frequency');
     }

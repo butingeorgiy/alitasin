@@ -217,5 +217,7 @@ return [
     'delete-transfer' => 'Delete transfer',
     'reservation' => 'Reservation',
     'choose-your-region' => 'Choose your region',
-    'restore' => 'Restore'
+    'restore' => 'Restore',
+    'vehicle-region-warning' => 'Not all vehicles are available in all regions, so first select the region of your location!',
+    'any' => 'Any'
 ];

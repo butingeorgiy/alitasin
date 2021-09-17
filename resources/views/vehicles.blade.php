@@ -17,12 +17,12 @@
 
     <section id="vehicleTypesSection" class="mb-10 pb-4 sm:pb-6 border-b border-gray-200">
         <div class="container mx-auto px-5">
-            <p class="mb-4 text-black">Не все транспортные средства доступны во всех регионах, поэтому сначала выберите регион вашего местонахождения!</p>
+            <p class="mb-4 text-black">{{ __('short-phrases.vehicle-region-warning') }}</p>
 
             <div class="flex items-center mb-10 text-xl">
                 <span class="font-semibold">{{ __('short-phrases.choose-region') }}:&nbsp;&nbsp;</span>
                 <select class="placeholder-gray-800 text-blue bg-white font-semibold cursor-pointer" name="region_id">
-                    <option value="">Любой</option>
+                    <option value="">{{ __('short-phrases.any') }}</option>
                     @foreach(App\Models\Region::all() as $region)
                         <option value="{{ $region->id }}" {{ (string) $region->id === request()->input('region_id', '') ? 'selected' : '' }}>
                             {{ $region->name }}
@@ -63,7 +63,11 @@
         <div class="container flex flex-col mx-auto px-5">
             @php /** @var App\Models\Vehicle $vehicle */ @endphp
             @forelse($vehicles as $vehicle)
-                <div class="vehicle-item grid grid-cols-12 mb-5 last:mb-0 bg-gray-1200 rounded-md shadow" data-id="{{ $vehicle->id }}" data-title="{{ $vehicle->brand }} ({{ $vehicle->model  }})">
+                <div class="vehicle-item grid grid-cols-12 mb-5 last:mb-0 bg-gray-1200 rounded-md shadow"
+                     data-id="{{ $vehicle->id }}"
+                     data-region="{{ $vehicle->region->name }}"
+                     data-price="{{ $vehicle->cost }}"
+                     data-title="{{ $vehicle->brand }} ({{ $vehicle->model }})">
                     <div class="col-span-full lg:col-span-5 relative flex flex-col items-center px-8 sm:px-16 pt-8 sm:pt-12 lg:pb-12 lg:border-r border-gray-1300">
                         <div class="show-vehicle-gallery-btn w-full h-44 bg-contain bg-center bg-no-repeat cursor-pointer"
                              data-images="{{ json_encode($vehicle->getAllImagesUrl()) }}"

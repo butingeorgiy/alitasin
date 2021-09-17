@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', _ => {
             popup: vehicleOrderPopup,
             sendOrderButton: vehicleOrderPopup.querySelector('.send-vehicle-order-button'),
             vehicleCards,
-            regionSelect: document.querySelector('#vehicleTypesSection select[name="region_id"]')
+            regionSelect: document.querySelector('#vehicleTypesSection select[name="region_id"]'),
+            checkPromoCodeButton: vehicleOrderPopup.querySelector('.check-promo-code-button'),
+            oldPrice: vehicleOrderPopup.querySelector('.old-price'),
+            totalPrice: vehicleOrderPopup.querySelector('.total-price')
         });
     }
 });

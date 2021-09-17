@@ -4,10 +4,10 @@
 
         <div class="grid gap-5 grid-cols-4">
             <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200"
-                 title="{{ __('page-titles.reserves') }}: {{ $attractedReservations }}; {{ __('short-phrases.transfers') }}: {{  $attractedTransfers}}">
+                 title="{{ __('page-titles.reserves') }}: {{ $attractedReservations }}; {{ __('short-phrases.transfers') }}: {{  $attractedTransfers}}; {{ __('page-titles.vehicles') }}: {{ $attractedVehicles }}">
                 <p class="mb-1 text-sm text-center text-gray-800 font-medium">{{ __('short-phrases.attracted') }}:</p>
                 <p class="text-center font-semibold">
-                    {{ $attractedReservations + $attractedTransfers }}
+                    {{ $attractedReservations + $attractedTransfers + $attractedVehicles }}
                 </p>
             </div>
 

@@ -6,18 +6,30 @@ import lightGallery from 'lightgallery';
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
 import lgZoom from 'lightgallery/plugins/zoom';
 import LocaleHelper from '../../helpers/LocaleHelper';
+import TransferRequestModel from '../transferRequest/TransferRequestModel';
 
 class OrderVehicleController extends EventHandler {
     constructor(nodes) {
         super();
 
-        this.nodes = nodes;
         this.loading = false;
+        this.nodes = {
+            ...nodes,
+            promoCodeInput: nodes.popup.querySelector('input[name="promo_code"]'),
+            resetPromoCodeButton: nodes.popup.querySelector('.reset-button')
+        };
+
         this.view = new OrderVehicleView({
             buttonNode: nodes.sendOrderButton,
             errorNode: nodes.popup.querySelector('.error-message'),
-            successNode: nodes.popup.querySelector('.success-message')
+            successNode: nodes.popup.querySelector('.success-message'),
+            promoCodeWrapper: this.nodes.promoCodeInput?.parentElement,
+            oldPrice: nodes.oldPrice,
+            totalPrice: nodes.totalPrice
         });
+
+        this.promoCode = null;
+        this.totalPrice = null;
 
         this.initPopup();
         this.initVehicleCards(nodes.vehicleCards);
@@ -25,7 +37,56 @@ class OrderVehicleController extends EventHandler {
 
         this.addEvent(nodes.regionSelect, 'change', _ => {
             this.switchRegion(nodes.regionSelect.value);
-        })
+        });
+
+        if (this.nodes.promoCodeInput) {
+            this.addEvent(nodes.checkPromoCodeButton, 'click', e => {
+                e.preventDefault();
+
+                const promoCode = this.nodes.promoCodeInput.value;
+
+                if (!this.loading && promoCode) {
+                    this.loading = true;
+                    this.checkPromoCode(promoCode);
+                }
+            });
+
+            this.addEvent(this.nodes.resetPromoCodeButton, 'click', _ => {
+                this.resetPromoCode();
+            });
+        }
+    }
+
+    checkPromoCode(promoCode) {
+        this.view.hideError();
+
+        TransferRequestModel.checkPromoCode(promoCode)
+            .then(result => {
+                if (typeof result === 'string') {
+                    alert(`Error: ${result}`);
+                } else if (result.error) {
+                    this.view.showError(result.message);
+                } else {
+                    this.promoCode = promoCode;
+                    this.view.enablePromoCode(result['sale_percent']);
+                    this.view.renderTransferTotalPrice(
+                        this.totalPrice * (100 - result['sale_percent']) / 100,
+                        this.totalPrice
+                    );
+                }
+            })
+            .catch(error => {
+                alert(`Error: ${error}`);
+            })
+            .finally(_ => {
+                this.loading = false;
+            });
+    }
+
+    resetPromoCode() {
+        this.view.disablePromoCode();
+        this.view.renderTransferTotalPrice(this.totalPrice);
+        this.promoCode = null;
     }
 
     switchRegion(regionId) {
@@ -94,6 +155,8 @@ class OrderVehicleController extends EventHandler {
     initPopup() {
         this.popup = PopupObserver.init(this.nodes.popup, false, _ => {
             this.removeAllListeners(this.nodes.sendOrderButton, 'click');
+            this.resetPromoCode();
+            this.totalPrice = null;
         });
     }
 
@@ -101,12 +164,15 @@ class OrderVehicleController extends EventHandler {
         items.forEach(item => {
             const vehicleId = item.getAttribute('data-id');
             const vehicleTitle = item.getAttribute('data-title');
+            const vehicleCost = parseInt(item.getAttribute('data-price'));
+            const availableRegion = item.getAttribute('data-region');
             const deleteButton = item.querySelector('.delete-vehicle-button');
             const restoreButton = item.querySelector('.restore-vehicle-button');
 
             this.addEvent(item.querySelector('.show-vehicle-order-button'), 'click', _ => {
                 this.popup.open(_ => {
-                    this.beforePopupOpenHandler(vehicleTitle, vehicleId);
+                    this.totalPrice = vehicleCost;
+                    this.beforePopupOpenHandler(vehicleTitle, vehicleId, availableRegion, vehicleCost);
                 });
             });
 
@@ -131,8 +197,10 @@ class OrderVehicleController extends EventHandler {
         });
     }
 
-    beforePopupOpenHandler(vehicleTitle, vehicleId) {
+    beforePopupOpenHandler(vehicleTitle, vehicleId, availableRegion, vehiclePrice) {
         this.nodes.popup.querySelector('.chosen-vehicle').innerText = vehicleTitle;
+        this.nodes.popup.querySelector('.available-region').innerText = availableRegion;
+        this.nodes.totalPrice.innerText = vehiclePrice;
 
         this.addEvent(this.nodes.sendOrderButton, 'click', _ => {
             if (!this.loading) {
@@ -158,6 +226,10 @@ class OrderVehicleController extends EventHandler {
 
         if (this.nodes.popup.querySelector('input[name="location_region"]')) {
             formData.append('location_region', this.nodes.popup.querySelector('input[name="location_region"]').value);
+        }
+
+        if (this.promoCode) {
+            formData.append('promo_code', this.promoCode);
         }
 
         OrderVehicleModel.send(vehicleId, formData)

@@ -192,12 +192,25 @@ class User extends Model
     }
 
     /**
+     * Get attracted transfers by partner
+     *
      * @return HasManyThrough
      */
     public function attractedTransfers(): HasManyThrough
     {
         return $this->hasManyThrough(TransferRequest::class, PromoCode::class);
     }
+
+    /**
+     * Get attracted vehicles by partner
+     *
+     * @return HasManyThrough
+     */
+    public function attractedVehicles(): HasManyThrough
+    {
+        return $this->hasManyThrough(VehicleOrder::class, PromoCode::class);
+    }
+
 
     /**
      * Get partner's promo codes

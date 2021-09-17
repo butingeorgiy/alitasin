@@ -6,6 +6,7 @@ use App\Models\PartnerPayment;
 use App\Models\Reservation;
 use App\Models\TransferRequest;
 use App\Models\User;
+use App\Models\VehicleOrder;
 
 trait PartnerCalculator
 {
@@ -18,8 +19,9 @@ trait PartnerCalculator
     {
         $incomeFromReservations = $this->getIncomeFromAttractedReservations();
         $incomeFromTransfers = $this->getIncomeFromAttractedTransfers();
+        $incomeFromVehicles = $this->getIncomeFromAttractedVehicles();
 
-        return $incomeFromReservations + $incomeFromTransfers;
+        return $incomeFromReservations + $incomeFromTransfers + $incomeFromVehicles;
     }
 
     /**
@@ -31,8 +33,9 @@ trait PartnerCalculator
     {
         $profitFromReservations = $this->getProfitFromAttractedReservations();
         $profitFromTransfers = $this->getProfitFromAttractedTransfers();
+        $profitFromVehicles = $this->getProfitFromAttractedVehicles();
 
-        return $profitFromReservations + $profitFromTransfers;
+        return $profitFromReservations + $profitFromTransfers + $profitFromVehicles;
     }
 
     /**
@@ -62,9 +65,7 @@ trait PartnerCalculator
      */
     private function getIncomeFromAttractedReservations(): float
     {
-        /**
-         * @var $attractedReservations Reservation[]
-         */
+        /** @var $attractedReservations Reservation[] */
         $attractedReservations = $this->attractedReservations()->get();
         $totalIncome = 0;
 
@@ -144,6 +145,62 @@ trait PartnerCalculator
             $totalProfit += $item->costWithSale() * $profitPercent / 100;
         }
 
+        if ($this->hasSubPartners()) {
+
+            /** @var $subPartners User[] */
+            $subPartners = User::with(['attractedTransfers'])
+                ->whereIn('id', $this->subPartnerIds())->get();
+
+            foreach ($subPartners as $subPartner) {
+                /** @var TransferRequest $item */
+                foreach ($subPartner->attractedTransfers()->get() as $item) {
+                    $totalProfit += $item->costWithSale() * $subPartner->sub_partners_profit_percent / 100;
+                }
+            }
+        }
+
         return $totalProfit;
     }
+
+    public function getIncomeFromAttractedVehicles(): float
+    {
+        /** @var VehicleOrder[] $attractedVehicles */
+        $attractedVehicles = $this->attractedVehicles()->get();
+        $totalIncome = 0;
+
+        foreach ($attractedVehicles as $item) {
+            $totalIncome += $item->costWithSale();
+        }
+
+        return $totalIncome;
+    }
+
+    public function getProfitFromAttractedVehicles(): float
+    {
+        /** @var VehicleOrder[] $attractedVehicles */
+        $attractedVehicles = $this->attractedVehicles()->get();
+        $totalProfit = 0;
+        $profitPercent = $this->profit_percent;
+
+        foreach ($attractedVehicles as $item) {
+            $totalProfit += $item->costWithSale() * $profitPercent / 100;
+        }
+
+        if ($this->hasSubPartners()) {
+
+            /** @var $subPartners User[] */
+            $subPartners = User::with(['attractedVehicles'])
+                ->whereIn('id', $this->subPartnerIds())->get();
+
+            foreach ($subPartners as $subPartner) {
+                /** @var VehicleOrder $item */
+                foreach ($subPartner->attractedVehicles()->get() as $item) {
+                    $totalProfit += $item->costWithSale() * $subPartner->sub_partners_profit_percent / 100;
+                }
+            }
+        }
+
+        return $totalProfit;
+    }
+
 }

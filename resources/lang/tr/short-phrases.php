@@ -218,5 +218,7 @@ return [
     'delete-transfer' => 'Aktarımı sil',
     'reservation' => 'Rezervasyon',
     'choose-your-region' => 'Bölgeni seç',
-    'restore' => 'Onarmak'
+    'restore' => 'Onarmak',
+    'vehicle-region-warning' => 'Tüm araçlar tüm bölgelerde mevcut değildir, bu nedenle önce bulunduğunuz bölgeyi seçin!',
+    'any' => 'Herhangi'
 ];

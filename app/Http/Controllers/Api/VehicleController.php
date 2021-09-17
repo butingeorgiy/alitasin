@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Facades\Auth;
 use App\Http\Requests\VehicleRequest;
+use App\Models\PromoCode;
 use App\Models\Region;
 use App\Models\Vehicle;
 use App\Models\VehicleImage;
+use App\Models\VehicleOrder;
 use App\Models\VehicleType;
 use Exception;
 use App\Http\Controllers\Controller;
@@ -220,7 +222,8 @@ class VehicleController extends Controller
             [
                 'user_name' => 'bail|required|string|min:2|max:32',
                 'user_phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
-                'location_region' => 'bail|required|string|min:2|max:128'
+                'location_region' => 'bail|required|string|min:2|max:128',
+                'promo_code' => 'bail|nullable|string|max:32'
             ],
             [
                 'user_name.required' => __('messages.user-first-name-required'),
@@ -230,7 +233,8 @@ class VehicleController extends Controller
                 'user_phone.regex' => __('messages.user-phone-regex'),
                 'location_region.required' => __('messages.region-required'),
                 'location_region.min' => __('messages.region-name-min'),
-                'location_region.max' => __('messages.region-name-max')
+                'location_region.max' => __('messages.region-name-max'),
+                'promo_code.max' => __('messages.promo-code-max')
             ]
         );
 
@@ -242,16 +246,34 @@ class VehicleController extends Controller
             throw new Exception(__('messages.vehicle-not-found'));
         }
 
+        if ($request->has('promo_code')) {
+            /** @var PromoCode|null $promoCode */
+            if (!$promoCode = PromoCode::where('code', $request->input('promo_code'))
+                ->limit(1)->first()) {
+                throw new Exception(__('messages.promo-code-not-found'));
+            }
+        }
+
         if (Auth::check([1])) {
             $user = Auth::user();
         }
 
-        $vehicle->orders()->create([
+        $vehicleOrder = new VehicleOrder([
+            'vehicle_id' => $vehicle->id,
             'user_name' => $request->input('user_name'),
             'user_phone' => $request->input('user_phone'),
             'user_id' => isset($user) ? $user->id : null,
-            'location_region' => $request->input('location_region')
+            'location_region' => $request->input('location_region'),
+            'cost_without_sale' => $vehicle->cost
         ]);
+
+        if (isset($promoCode) && $promoCode) {
+            $vehicleOrder->attachPromoCode($promoCode);
+        }
+
+        if (!$vehicleOrder->save()) {
+            throw new Exception(__('messages.request-sending-failed'));
+        }
 
         return [
             'status' => true,
