@@ -70,7 +70,8 @@ class VehicleController extends Controller
                 $params[$param->id] = [
                     'en_value' => $param->en_value,
                     'ru_value' => $param->ru_value,
-                    'tr_value' => $param->tr_value
+                    'tr_value' => $param->tr_value,
+                    'ua_value' => $param->ua_value
                 ];
             }
         }
