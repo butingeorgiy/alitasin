@@ -195,7 +195,7 @@ class PartnerController extends Controller
             throw new Exception(__('messages.user-not-found'));
         }
 
-        if ($partner->total_profit - $partner->total_payment_amount < (int) $request->input('amount')) {
+        if ($partner->getTotalProfit() - $partner->getPaymentAmount() < (int) $request->input('amount')) {
             throw new Exception(__('messages.partner-payment-amount-max'));
         }
 
