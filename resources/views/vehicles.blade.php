@@ -17,9 +17,11 @@
 
     <section id="vehicleTypesSection" class="mb-10 pb-4 sm:pb-6 border-b border-gray-200">
         <div class="container mx-auto px-5">
-            <div class="flex items-center mb-6">
-                <span class="text-gray-900 font-medium">{{ __('short-phrases.choose-region') }}:&nbsp;&nbsp;</span>
-                <select class="text-gray-800 placeholder-gray-800 bg-white cursor-pointer" name="region_id">
+            <p class="mb-4 text-black">Не все транспортные средства доступны во всех регионах, поэтому сначала выберите регион вашего местонахождения!</p>
+
+            <div class="flex items-center mb-10 text-xl">
+                <span class="font-semibold">{{ __('short-phrases.choose-region') }}:&nbsp;&nbsp;</span>
+                <select class="placeholder-gray-800 text-blue bg-white font-semibold cursor-pointer" name="region_id">
                     <option value="">Любой</option>
                     @foreach(App\Models\Region::all() as $region)
                         <option value="{{ $region->id }}" {{ (string) $region->id === request()->input('region_id', '') ? 'selected' : '' }}>
