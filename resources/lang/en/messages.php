@@ -93,7 +93,7 @@ return [
     'specify-image-id' => 'Specify image\'s ID!',
     'image-not-found' => 'Image not found!',
     'image-not-attached-to-tour' => 'Image is not attached to the specified excursion!',
-    'tour-image-already-main' => 'The image is already the main one!',
+    'image-already-main' => 'The image is already the main one!',
     'cannot-delete-main-image' => 'Cannot delete the main tour image!',
     'tour-image-deleting-success' => 'Image was deleted successfully!',
     'tour-can-have-max-five-images' => 'No more than 5 images can be added to the tour!',
@@ -186,5 +186,12 @@ return [
     'transfer-cost-min' => 'Transfer cost must be more than 0!',
     'transfer-creating-success' => 'Transfer was created successfully!',
     'transfer-creating-failed' => 'Failed to create transfer!',
-    'transfer-deleting-success' => 'Transfer was deleted successfully!'
+    'transfer-deleting-success' => 'Transfer was deleted successfully!',
+    'vehicle-deleting-failed' => 'Failed to delete vehicle!',
+    'vehicle-deleting-success' => 'Vehicle was deleted successfully!',
+    'vehicle-restoring-failed' => 'Failed to restore vehicle!',
+    'vehicle-restoring-success' => 'Vehicle was restored successfully!',
+    'vehicle-type-not-found' => 'Vehicle type not found!',
+    'image-not-attached' => 'Image not attached!',
+    'vehicle-can-have-max-five-images' => 'Vehicle can have max five images!'
 ];

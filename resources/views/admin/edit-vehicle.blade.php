@@ -13,8 +13,19 @@
 <body class="bg-gray-50">
     @include('components.general.header')
 
-    <div class="mt-12 pb-12">
+    <div class="mt-6 pb-12">
         <form id="editVehicleForm" class="container mx-auto px-5">
+            @if($vehicle->trashed())
+                <div class="flex items-center mb-6 px-4 py-3 text-yellow font-medium bg-yellow bg-opacity-20 rounded-md">
+                    <svg class="min-h-5 min-w-5 h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <p>Данное ТС скрыто на сайте! <span class="restore-vehicle-button cursor-pointer underline">Нажмите</span>, чтобы ТС снова появилось на сайте</p>
+                </div>
+            @endif
+
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.choose-images') }}</p>
                 <div class="grid grid-cols-5 gap-5">

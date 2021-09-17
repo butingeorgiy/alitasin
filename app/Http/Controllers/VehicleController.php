@@ -14,7 +14,7 @@ class VehicleController extends Controller
 
     public function showEditForm($id)
     {
-        $vehicle = Vehicle::findOrFail($id);
+        $vehicle = Vehicle::withTrashed()->findOrFail($id);
 
         foreach ($vehicle->params as $param) {
             $param->name = $param[\App::getLocale() . '_name'];

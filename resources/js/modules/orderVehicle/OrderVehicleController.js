@@ -4,6 +4,7 @@ import OrderVehicleView from './OrderVehicleView';
 import OrderVehicleModel from './OrderVehicleModel';
 import lightGallery from 'lightgallery';
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
+import LocaleHelper from '../../helpers/LocaleHelper';
 
 class OrderVehicleController extends EventHandler {
     constructor(nodes) {
@@ -21,10 +22,7 @@ class OrderVehicleController extends EventHandler {
         this.initVehicleCards(nodes.vehicleCards);
         this.initGallery();
 
-        console.log(nodes.regionSelect);
-
         this.addEvent(nodes.regionSelect, 'change', _ => {
-
             this.switchRegion(nodes.regionSelect.value);
         })
     }
@@ -102,11 +100,32 @@ class OrderVehicleController extends EventHandler {
         items.forEach(item => {
             const vehicleId = item.getAttribute('data-id');
             const vehicleTitle = item.getAttribute('data-title');
+            const deleteButton = item.querySelector('.delete-vehicle-button');
+            const restoreButton = item.querySelector('.restore-vehicle-button');
 
             this.addEvent(item.querySelector('.show-vehicle-order-button'), 'click', _ => {
                 this.popup.open(_ => {
                     this.beforePopupOpenHandler(vehicleTitle, vehicleId);
                 });
+            });
+
+            this.addEvent(deleteButton, 'click', _ => {
+                if (!confirm(LocaleHelper.translate('you-are-sure')) || this.loading) {
+                    return;
+                }
+
+                this.loading = true;
+                this.delete(vehicleId);
+            });
+
+
+            this.addEvent(restoreButton, 'click', _ => {
+                if (!confirm(LocaleHelper.translate('you-are-sure')) || this.loading) {
+                    return;
+                }
+
+                this.loading = true;
+                this.restore(vehicleId);
             });
         });
     }
@@ -155,6 +174,42 @@ class OrderVehicleController extends EventHandler {
             .finally(_ => {
                 this.loading = false;
                 this.view.hideButtonLoading();
+            });
+    }
+
+    delete(id) {
+        OrderVehicleModel.deleteVehicle(id)
+            .then(result => {
+                if (typeof result === 'string') {
+                    alert(`Error: ${result}`);
+                } else if (result.error) {
+                    alert(`Error: ${result.message}`)
+                } else {
+                    alert(result.message);
+                    location.reload();
+                }
+            })
+            .catch(error => alert(`Error: ${error}`))
+            .finally(_ => {
+                this.loading = false;
+            });
+    }
+
+    restore(id) {
+        OrderVehicleModel.restoreVehicle(id)
+            .then(result => {
+                if (typeof result === 'string') {
+                    alert(`Error: ${result}`);
+                } else if (result.error) {
+                    alert(`Error: ${result.message}`)
+                } else {
+                    alert(result.message);
+                    location.reload();
+                }
+            })
+            .catch(error => alert(`Error: ${error}`))
+            .finally(_ => {
+                this.loading = false;
             });
     }
 }

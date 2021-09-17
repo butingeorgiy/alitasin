@@ -11,7 +11,25 @@ document.addEventListener('DOMContentLoaded', _ => {
             updateVehicleButton,
             paramPopup: document.querySelector('#parameterPopup'),
             openParamPopupButton: form.querySelector('.open-param-popup-button'),
-            paramsContainer: form.querySelector('.params-container')
+            paramsContainer: form.querySelector('.params-container'),
+            restoreButton: form.querySelector('.restore-vehicle-button')
+        });
+
+        // Image boxes initialization
+        const imageItems = form.querySelectorAll('.image-item');
+
+        if (imageItems.length !== 0) {
+            controller.initImageBoxes(imageItems);
+        } else {
+            console.error('Failed to initialize image boxes!');
+        }
+
+        // Update vehicle handler
+        updateVehicleButton.addEventListener('click', _ => {
+            if (!controller.loading) {
+                controller.loading = true;
+                controller.updateVehicle(form);
+            }
         });
     }
 });

@@ -216,5 +216,6 @@ return [
     'create-transfer' => 'Створити переказ',
     'delete-transfer' => 'Видалити передачу',
     'reservation' => 'Бронювання',
-    'choose-your-region' => 'Виберіть свій регіон'
+    'choose-your-region' => 'Виберіть свій регіон',
+    'restore' => 'Відновлення'
 ];

@@ -93,7 +93,7 @@ return [
     'specify-image-id' => 'Укажите ID изображения!',
     'image-not-found' => 'Изображение не найдено!',
     'image-not-attached-to-tour' => 'Изображение не прикреплено указанной экскурсии!',
-    'tour-image-already-main' => 'Изображение уже является главным!',
+    'image-already-main' => 'Изображение уже является главным!',
     'cannot-delete-main-image' => 'Нельзя удалить основное изображение экскурсии!',
     'tour-image-deleting-success' => 'Изображение успешно удалено!',
     'tour-can-have-max-five-images' => 'К экскурсии может быть добавлено не ' .
@@ -185,5 +185,12 @@ return [
     'transfer-cost-min' => 'Стоимость трансфера должна быть больше 0!',
     'transfer-creating-success' => 'Трансфер успешно создан!',
     'transfer-creating-failed' => 'Не удалось создать трансфер!',
-    'transfer-deleting-success' => 'Трансфер успешно удален!'
+    'transfer-deleting-success' => 'Трансфер успешно удален!',
+    'vehicle-deleting-failed' => 'Не удалось удалить ТС!',
+    'vehicle-deleting-success' => 'ТС успешно удалено!',
+    'vehicle-restoring-failed' => 'Не удалось восстановить ТС!',
+    'vehicle-restoring-success' => 'ТС успешно восстановлено!',
+    'vehicle-type-not-found' => 'Тип ТС не найден!',
+    'image-not-attached' => 'Изображение не прикреплено!',
+    'vehicle-can-have-max-five-images' => 'ТС может иметь максимум 5 изображений!'
 ];

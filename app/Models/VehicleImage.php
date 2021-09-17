@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string is_main
  * @property string image
+ *
+ * @mixin Builder
  */
 class VehicleImage extends Model
 {

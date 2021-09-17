@@ -93,7 +93,7 @@ return [
     'specify-image-id' => 'Görüntü kimliğini girin!',
     'image-not-found' => 'Resim bulunamadı!',
     'image-not-attached-to-tour' => 'Görüntü belirtilen geziye eklenmemiş!',
-    'tour-image-already-main' => 'Görüntü zaten ana görüntü!',
+    'image-already-main' => 'Görüntü zaten ana görüntü!',
     'cannot-delete-main-image' => 'Ana tur görüntüsü silinemiyor!',
     'tour-image-deleting-success' => 'Resim başarıyla silindi!',
     'tour-can-have-max-five-images' => 'Tura 5\'ten fazla resim eklenemez!',
@@ -184,5 +184,12 @@ return [
     'transfer-cost-min' => 'Transfer maliyeti 0\'dan fazla olmalıdır!',
     'transfer-creating-success' => 'Aktarım başarıyla oluşturuldu!',
     'transfer-creating-failed' => 'Aktarım oluşturulamadı!',
-    'transfer-deleting-success' => 'Aktarım başarıyla silindi!'
+    'transfer-deleting-success' => 'Aktarım başarıyla silindi!',
+    'vehicle-deleting-failed' => 'Araç silinemedi!',
+    'vehicle-deleting-success' => 'Araç başarıyla silindi!',
+    'vehicle-restoring-failed' => 'Araç geri yüklenemedi!',
+    'vehicle-restoring-success' => 'Araç başarıyla restore edildi!',
+    'vehicle-type-not-found' => 'Araç tipi bulunamadı!',
+    'image-not-attached' => 'Resim eklenmemiş',
+    'vehicle-can-have-max-five-images' => 'Araçta en fazla beş resim olabilir!'
 ];

@@ -93,7 +93,7 @@ return [
     'specify-image-id' => 'Вкажіть ідентифікатор зображення!',
     'image-not-found' => 'Зображення не знайдено!',
     'image-not-attach-to-tour' => 'Зображення не додається до вказаної екскурсії!',
-    'tour-image-already-main' => 'Зображення вже є головним!',
+    'image-already-main' => 'Зображення вже є головним!',
     'cannot-delete-main-image' => 'Не вдається видалити головне зображення туру!',
     'tour-image-deleting-success' => 'Зображення успішно видалено!',
     'tour-can-have-max-five-images' => 'До туру можна додати не більше 5 зображень!',
@@ -184,5 +184,12 @@ return [
     'transfer-cost-min' => 'Вартість трансферу має бути більше 0!',
     'transfer-creating-success' => 'Передачу створено успішно!',
     'transfer-creating-failed' => 'Не вдалося створити перенесення!', 
-    'transfer-deleting-success' => 'Передачу успішно видалено!'
+    'transfer-deleting-success' => 'Передачу успішно видалено!',
+    'vehicle-deleting-failed' => 'Не вдалося видалити автомобіль!',
+    'vehicle-deleting-success' => 'Автомобіль успішно видалено!',
+    'vehicle-restoring-failed' => 'Не вдалося відновити автомобіль!',
+    'vehicle-restoring-success' => 'Автомобіль успішно відновлено!',
+    'vehicle-type-not-found' => 'Тип транспортного засобу не знайдено!',
+    'image-not-attached' => 'Зображення не додається',
+    'vehicle-can-have-max-five-images' => 'Автомобіль може мати максимум п’ять зображень!'
 ];

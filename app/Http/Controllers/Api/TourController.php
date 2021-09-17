@@ -205,7 +205,7 @@ class TourController extends Controller
         }
 
         // Filters validation
-        $filters = json_decode($request->input('filters'));
+        $filters = json_decode($request->input('filters', '[]'));
 
         if (count($filters) === 0) {
             throw new Exception(__('messages.tour-filters-min'));
@@ -258,9 +258,7 @@ class TourController extends Controller
 
         // Manager updating
         if ($tour->manager->id !== $request->input('manager_id')) {
-            $manager = User::managers()->find($request->input('manager_id'));
-
-            if (!$manager) {
+            if (!$manager = User::managers()->find($request->input('manager_id'))) {
                 throw new Exception(__('messages.manager-not-found'));
             }
 
@@ -411,7 +409,7 @@ class TourController extends Controller
         }
 
         if ($image->isMain()) {
-            throw new Exception(__('messages.tour-image-already-main'));
+            throw new Exception(__('messages.image-already-main'));
         }
 
         $prevMainImage = $tour->mainImage()[0];

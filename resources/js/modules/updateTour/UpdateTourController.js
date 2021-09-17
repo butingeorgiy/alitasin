@@ -114,7 +114,7 @@ class UpdateTourController extends TourFormBaseController {
     }
 
     makeImageMainHandler(imageId) {
-        if (!confirm('You are sure?')) {
+        if (!confirm(LocaleHelper.translate('you-are-sure'))) {
             return;
         }
 
@@ -146,9 +146,9 @@ class UpdateTourController extends TourFormBaseController {
         UpdateTourModel.removeImage(UpdateTourController.getCurrentTourId(), formData)
             .then(result => {
                 if (typeof result === 'string') {
-                    alert(`Error: ${result}`)
+                    alert(`Error: ${result}`);
                 } else if (result.error) {
-                    alert(`Error: ${result.message}`)
+                    alert(`Error: ${result.message}`);
                 } else {
                     alert(result.message);
                     location.reload();

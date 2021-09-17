@@ -69,12 +69,25 @@
                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                         </svg>
+                        @if(App\Facades\Auth::check(['5']))
+                            <div class="flex absolute bottom-4">
+                                <a href="{{ route('edit-vehicle', ['id' => $vehicle->id]) }}"
+                                   target="_blank"
+                                   class="mr-5 text-sm text-gray-600 cursor-pointer hover:underline">{{ __('buttons.edit') }}</a>
+
+                                @if($vehicle->trashed())
+                                    <p class="restore-vehicle-button text-sm text-gray-600 cursor-pointer hover:underline">{{ __('short-phrases.restore') }}</p>
+                                @else
+                                    <p class="delete-vehicle-button text-sm text-gray-600 cursor-pointer hover:underline">{{ __('buttons.delete') }}</p>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                     <div class="col-span-full lg:col-span-7 flex flex-col px-6 sm:px-8 py-6">
                         <p class="mb-4 text-2xl text-black font-medium">{{ $vehicle->brand }}&nbsp;<span class="text-gray-600">{{ $vehicle->model }}</span></p>
                         <div class="flex flex-wrap mb-auto">
                             @foreach($vehicle->params as $param)
-                            <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">{{ $param->name }}:&nbsp;<span class="text-black font-semibold">{{ $param->pivot[App::getLocale() . '_value'] }}</span></p>
+                                <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">{{ $param->name }}:&nbsp;<span class="text-black font-semibold">{{ $param->pivot[App::getLocale() . '_value'] }}</span></p>
                             @endforeach
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mt-5">

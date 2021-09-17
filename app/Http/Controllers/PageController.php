@@ -353,7 +353,11 @@ class PageController extends Controller
             $vehicles = $vehicles->where('region_id', $request->input('region_id'));
         }
 
-        $vehicles = $vehicles->get();
+        if (Auth::check(['5'])) {
+            $vehicles = $vehicles->withTrashed()->get();
+        } else {
+            $vehicles = $vehicles->get();
+        }
 
         return view('vehicles', compact('vehicles'));
     }

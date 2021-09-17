@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string brand
@@ -17,12 +18,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed params
  * @property string|null main_image
  * @property string[] extra_images
- * @method static Vehicle|null find($id)
- * @method static Vehicle findOrFail($id)
- * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
+ * @property VehicleType type
+ * @property Region region
+ *
+ * @mixin Builder
  */
 class Vehicle extends Model
 {
+    use SoftDeletes;
+
+
     public $timestamps = false;
 
     protected $guarded = [];
@@ -36,6 +41,16 @@ class Vehicle extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(VehicleType::class, 'type_id');
+    }
+
+    /**
+     * Get vehicle's region.
+     *
+     * @return BelongsTo
+     */
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
     }
 
     /**
@@ -90,7 +105,7 @@ class Vehicle extends Model
      */
     public function getAllImagesUrl(): array
     {
-        foreach ($this->images as $image) {
+        foreach ($this->images()->orderByDesc('is_main')->get() as $image) {
             $images[] = asset('storage/vehicle_pictures/' . $image->image);
         }
 
@@ -127,5 +142,16 @@ class Vehicle extends Model
         }
 
         return $images ?? [];
+    }
+
+    /**
+     * Get vehicle's main image instance.
+     *
+     * @return Model|HasMany|object|null
+     */
+    public function mainImage()
+    {
+        return $this->images()->where('is_main', '1')
+            ->limit(1)->first();
     }
 }

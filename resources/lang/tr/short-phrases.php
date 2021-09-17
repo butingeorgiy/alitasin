@@ -217,5 +217,6 @@ return [
     'create-transfer' => 'Aktarım oluştur',
     'delete-transfer' => 'Aktarımı sil',
     'reservation' => 'Rezervasyon',
-    'choose-your-region' => 'Bölgeni seç'
+    'choose-your-region' => 'Bölgeni seç',
+    'restore' => 'Onarmak'
 ];

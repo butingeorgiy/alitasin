@@ -35,6 +35,12 @@ Route::group(['prefix' => 'tours'], function () {
 Route::group(['prefix' => 'vehicles'], function() {
     Route::post('create', 'Api\VehicleController@create')->middleware('auth:5');
     Route::post('order/{id}', 'Api\VehicleController@order');
+    Route::post('{id}/delete', 'Api\VehicleController@delete')->middleware('auth:5');
+    Route::post('{id}/restore', 'Api\VehicleController@restore')->middleware('auth:5');
+    Route::post('{id}/update', 'Api\VehicleController@update')->middleware('auth:5');
+    Route::post('{vehicleId}/update/change-main-image', 'Api\VehicleController@changeMainImage')->middleware('auth:5');
+    Route::post('{vehicleId}/update/remove-image', 'Api\VehicleController@deleteImage')->middleware('auth:5');
+    Route::post('{vehicleId}/update/upload-image', 'Api\VehicleController@updateImage')->middleware('auth:5');
 });
 
 Route::group(['prefix' => 'reserves'], function () {

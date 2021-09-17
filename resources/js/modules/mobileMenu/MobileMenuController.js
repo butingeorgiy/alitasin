@@ -10,6 +10,9 @@ class MobileMenuController extends EventHandler {
         this.addEvent(nodes.burgerIcon, 'click', _ => this.toggle());
 
         this.addEvent(window, 'click', e => {
+            if (!e.path) {
+                return;
+            }
             for (let node of e.path) {
                 if (/burger-menu-icon|mobile-menu/.test(node.className)) {
                     return;

@@ -217,5 +217,6 @@ return [
     'create-transfer' => 'Создать трансфер',
     'delete-transfer' => 'Удалить трансфер',
     'reservation' => 'Бронь',
-    'choose-your-region' => 'Выберите ваш регион'
+    'choose-your-region' => 'Выберите ваш регион',
+    'restore' => 'Восстановить'
 ];
