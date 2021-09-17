@@ -4,6 +4,7 @@ import OrderVehicleView from './OrderVehicleView';
 import OrderVehicleModel from './OrderVehicleModel';
 import lightGallery from 'lightgallery';
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
+import lgZoom from 'lightgallery/plugins/zoom';
 import LocaleHelper from '../../helpers/LocaleHelper';
 
 class OrderVehicleController extends EventHandler {
@@ -53,7 +54,7 @@ class OrderVehicleController extends EventHandler {
         this.galleryInstance = lightGallery(this.nodes.vehicleCards[0].querySelector('.show-vehicle-gallery-btn'), {
             dynamic: true,
             thumbnail: true,
-            plugins: [lgThumbnail],
+            plugins: [lgThumbnail, lgZoom],
             dynamicEl: [
                 {
                     src: 'http://ali-tour.local/storage/vehicle_pictures/8xEPJ8k6iA7GdR.png',

@@ -18,7 +18,7 @@
     <section id="vehicleTypesSection" class="mb-10 pb-4 sm:pb-6 border-b border-gray-200">
         <div class="container mx-auto px-5">
             <div class="flex items-center mb-6">
-                <span class="text-gray-900 font-medium">Выберите регион:&nbsp;&nbsp;</span>
+                <span class="text-gray-900 font-medium">{{ __('short-phrases.choose-region') }}:&nbsp;&nbsp;</span>
                 <select class="text-gray-800 placeholder-gray-800 bg-white cursor-pointer" name="region_id">
                     <option value="">Любой</option>
                     @foreach(App\Models\Region::all() as $region)
@@ -63,12 +63,16 @@
             @forelse($vehicles as $vehicle)
                 <div class="vehicle-item grid grid-cols-12 mb-5 last:mb-0 bg-gray-1200 rounded-md shadow" data-id="{{ $vehicle->id }}" data-title="{{ $vehicle->brand }} ({{ $vehicle->model  }})">
                     <div class="col-span-full lg:col-span-5 relative flex flex-col items-center px-8 sm:px-16 pt-8 sm:pt-12 lg:pb-12 lg:border-r border-gray-1300">
-                        <div class="w-full h-44 bg-contain bg-center bg-no-repeat" style="background-image: url({{ $vehicle->main_image }})"></div>
-                        <svg class="show-vehicle-gallery-btn absolute min-h-6 min-w-6 h-6 w-6 bottom-5 right-5 text-blue cursor-pointer"
+                        <div class="show-vehicle-gallery-btn w-full h-44 bg-contain bg-center bg-no-repeat cursor-pointer"
                              data-images="{{ json_encode($vehicle->getAllImagesUrl()) }}"
-                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                        </svg>
+                             style="background-image: url({{ $vehicle->main_image }})">
+                            <svg class="absolute min-h-6 min-w-6 h-6 w-6 bottom-5 right-5 text-blue"
+                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0
+                                  0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                            </svg>
+                        </div>
                         @if(App\Facades\Auth::check(['5']))
                             <div class="flex absolute bottom-4">
                                 <a href="{{ route('edit-vehicle', ['id' => $vehicle->id]) }}"
