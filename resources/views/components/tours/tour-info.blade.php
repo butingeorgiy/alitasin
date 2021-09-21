@@ -6,6 +6,8 @@
 
             @php
 
+                $images = [];
+
                 foreach ($tour->images->where('is_main', '0')->values() as $image) {
                     $images[] = $image['data'];
                 }
