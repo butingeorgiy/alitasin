@@ -116,16 +116,28 @@
                     <p>Deposit: <span>$ 0</span></p>
                 </div>
 
-                <div class="field-wrapper">
+                <div class="field-wrapper" style="margin-bottom: 10px">
                     <p>Promo code discount: <span>
-                            @php
-                                if ($reservation->isUsedPromoCode()) {
-                                    echo '$ ' . ($reservation->total_cost_without_sale * $reservation->promo_code_init_sale_percent / 100);
-                                } else {
-                                    echo '$ 0';
-                                }
-                            @endphp
-                        </span></p>
+                        @php
+                            if ($reservation->isUsedPromoCode()) {
+                                echo '$ ' . ($reservation->total_cost_without_sale * $reservation->promo_code_init_sale_percent / 100);
+                            } else {
+                                echo '$ 0';
+                            }
+                        @endphp
+                    </span></p>
+                </div>
+
+                <div class="field-wrapper">
+                    <p>Rest: <span>
+                        @php
+                            if ($reservation->isUsedPromoCode()) {
+                                echo '$ ' . ($reservation->total_cost_without_sale * (100 - $reservation->promo_code_init_sale_percent) / 100);
+                            } else {
+                                echo '$ ' . $reservation->total_cost_without_sale;
+                            }
+                        @endphp
+                    </span></p>
                 </div>
             </td>
         </tr>
