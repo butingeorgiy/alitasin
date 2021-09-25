@@ -37,6 +37,7 @@
     $promoCodeStatistic = [
         'attractedReservations' => $user->attractedReservations()->count(),
         'attractedTransfers' => $user->attractedTransfers()->count(),
+        'attractedVehicles' => $user->attractedVehicles()->count(),
         'income' => $user->getTotalIncome(),
         'earned' => $user->getTotalProfit(),
         'payed' => $user->getPaymentAmount()
