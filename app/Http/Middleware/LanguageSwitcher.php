@@ -3,17 +3,19 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
 class LanguageSwitcher
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
+     *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         $locale = $request->cookie('locale', 'ru');
 
@@ -21,7 +23,8 @@ class LanguageSwitcher
             $locale = 'ru';
         }
 
-        \App::setLocale($locale);
+        app()->setLocale($locale);
+
         return $next($request);
     }
 }

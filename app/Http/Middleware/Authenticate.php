@@ -15,10 +15,12 @@ class Authenticate
      * @param Request $request
      * @param Closure $next
      * @param string $accountType
+     *
      * @return mixed
+     *
      * @throws Exception
      */
-    public function handle(Request $request, Closure $next, ...$accountType)
+    public function handle(Request $request, Closure $next, ...$accountType): mixed
     {
         $authStatus = Auth::check(array_map(function ($item) { return $item; }, $accountType ?: ['1']));
 
