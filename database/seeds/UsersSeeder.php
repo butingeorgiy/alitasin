@@ -15,45 +15,49 @@ class UsersSeeder extends Seeder
     {
         $rows = [
             new class {
-                public $phone_code = 7;
-                public $phone = 7475051903;
-                public $password = 'example1';
-                public $first_name = 'Георгий';
-                public $last_name = 'Бутин';
-                public $email = 'example1@gmail.com';
-                public $account_type_id = '1';
+                public int $phone_code = 7;
+                public int $phone = 7475051903;
+                public string $password = 'example1';
+                public string $first_name = 'Георгий';
+                public string $last_name = 'Бутин';
+                public string $email = 'example1@gmail.com';
+                public string $account_type_id = '1';
             },
             new class {
-                public $phone_code = 7;
-                public $phone = 7776824163;
-                public $password = 'example2';
-                public $first_name = 'Иван';
-                public $email = 'example2@gmail.com';
-                public $account_type_id = '2';
+                public int $phone_code = 7;
+                public int $phone = 7776824163;
+                public string $password = 'example2';
+                public string $first_name = 'Иван';
+                public string $last_name = 'Бутин';
+                public string $email = 'example2@gmail.com';
+                public string $account_type_id = '2';
             },
             new class {
-                public $phone_code = 1;
-                public $phone = 2223334455;
-                public $password = 'example3';
-                public $first_name = 'Пётр';
-                public $email = 'example3@gmail.com';
-                public $account_type_id = '3';
+                public int $phone_code = 1;
+                public int $phone = 2223334455;
+                public string $password = 'example3';
+                public string $first_name = 'Пётр';
+                public string $last_name = 'Бутин';
+                public string $email = 'example3@gmail.com';
+                public string $account_type_id = '3';
             },
             new class {
-                public $phone_code = 38;
-                public $phone = 4445556677;
-                public $password = 'example4';
-                public $first_name = 'Василий';
-                public $email = 'example4@gmail.com';
-                public $account_type_id = '4';
+                public int $phone_code = 38;
+                public int $phone = 4445556677;
+                public string $password = 'example4';
+                public string $first_name = 'Василий';
+                public string $last_name = 'Бутин';
+                public string $email = 'example4@gmail.com';
+                public string $account_type_id = '4';
             },
             new class {
-                public $phone_code = 7;
-                public $phone = 1234567890;
-                public $password = 'example5';
-                public $first_name = 'Ксения';
-                public $email = 'example5@gmail.com';
-                public $account_type_id = '5';
+                public int $phone_code = 7;
+                public int $phone = 1234567890;
+                public string $password = 'example5';
+                public string $first_name = 'Ксения';
+                public string $last_name = 'Бутин';
+                public string $email = 'example5@gmail.com';
+                public string $account_type_id = '5';
             }
         ];
 
