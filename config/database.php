@@ -144,4 +144,10 @@ return [
 
     ],
 
+    'dbal' => [
+        'types' => [
+            'float' => \Doctrine\DBAL\Types\FloatType::class
+        ],
+    ],
+
 ];

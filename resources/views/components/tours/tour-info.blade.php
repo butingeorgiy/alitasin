@@ -1,15 +1,17 @@
 <section id="tourInfoSection" class="mt-6 mb-12">
     <div class="container mx-auto px-5">
         <div class="grid grid-cols-4 grid-row-2 gap-4 h-60 sm:h-96 mb-4">
-            <div class="col-span-4 md:col-span-2 row-span-2 bg-cover bg-center bg-no-repeat shadow rounded-md"
-                 style="background-image: url({{ $mainImage }})"></div>
+            <div class="show-gallery-button col-span-4 md:col-span-2 row-span-2 bg-cover bg-center bg-no-repeat shadow rounded-md"
+                 style="background-image: url({{ $mainImage }})" data-gallery-image-index="0"></div>
 
             @php
 
-                /**
-                 * @var $tour
-                 */
-                $images = $tour->images->where('is_main', '0')->values();
+                $images = [];
+
+                foreach ($tour->images->where('is_main', '0')->values() as $image) {
+                    $images[] = $image['data'];
+                }
+
                 $imageCount = count($images);
 
                 if ($imageCount > 4) {
@@ -47,19 +49,20 @@
 
             @endphp
 
-            @foreach($images as $i => $image)
-                <div class="{{ $imageCellClasses[$i] ?? '' }} hidden sm:block bg-cover bg-center bg-no-repeat shadow rounded-md"
-                     style="background-image: url({{ $image['data'] }})"></div>
-            @endforeach
+            <input type="hidden" name="tour_images" value="{{ json_encode(array_merge([$mainImage], $images)) }}">
 
+            @foreach($images as $i => $image)
+                <div class="{{ $imageCellClasses[$i] ?? '' }} show-gallery-button hidden sm:block bg-cover bg-center bg-no-repeat shadow rounded-md"
+                     style="background-image: url({{ $image }})" data-gallery-image-index="{{ ++$i }}"></div>
+            @endforeach
         </div>
 
         @if(count($images) > 0)
             <div class="block sm:hidden swiper-container -ml-1 mb-2">
                 <div class="swiper-wrapper pl-1 pb-2">
                     @foreach($images as $i => $image)
-                        <div class="swiper-slide w-72 h-32 bg-cover bg-center bg-no-repeat shadow rounded-md"
-                             style="background-image: url({{ $image['data'] }})"></div>
+                        <div class="show-gallery-button swiper-slide w-72 h-32 bg-cover bg-center bg-no-repeat shadow rounded-md"
+                             style="background-image: url({{ $image }})"></div>
                     @endforeach
                 </div>
             </div>
@@ -149,7 +152,7 @@
                     <p class="relative -bottom-0.5">{{ $tour->region->name }}</p>
                 </div>
 
-                <div class="flex items-center mb-2 text-gray-500">
+                <div class="flex items-center mr-5 mb-2 text-gray-500">
                     <svg class="min-w-5 min-h-5 w-5 h-5 mr-2" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 18C10.1978 18 10.3911 17.9414 10.5556 17.8315C10.72 17.7216 10.8482 17.5654 10.9239 17.3827C10.9996 17.2 11.0194 16.9989 10.9808 16.8049C10.9422
                                  16.6109 10.847 16.4327 10.7071 16.2929C10.5673 16.153 10.3891 16.0578 10.1951 16.0192C10.0011 15.9806 9.80004 16.0004 9.61732 16.0761C9.43459 16.1518 9.27841
@@ -183,6 +186,29 @@
                         @endforeach
                     </p>
                 </div>
+
+                @if($tour->execution_period)
+                    <div class="flex items-center mr-5 mb-2 text-gray-500">
+                        <svg class="min-w-5 min-h-5 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg"
+                             width="512" height="512" x="0" y="0" viewBox="0 0 512 512" xml:space="preserve">
+                            <g>
+                                <g xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m512 135c0-24.813-20.187-45-45-45h-15v-44c0-25.364-20.636-46-46-46h-300c-25.364 0-46
+                                      20.636-46 46v44h-15c-24.813 0-45 20.187-45 45v75.28h60v231.44h20v25.28c0 24.813 20.187
+                                      45 45 45h20.28c24.813 0 45-20.187 45-45v-25.28h131.441v25.28c0 24.813 20.187 45 45
+                                      45h20.279c24.813 0 45-20.187 45-45v-25.28h20v-231.44h60zm-406-105h300c8.822 0 16 7.178 16
+                                      16v14h-332v-14c0-8.822 7.178-16 16-16zm-76 150.28v-45.28c0-8.271 6.729-15 15-15h15v60.28zm392
+                                      201.44v30h-95.42v-60h-141.161v60h-95.419v-30h60.419v-30h-60.419v-57.504c55.122 8.133 110.56
+                                      12.215 166 12.215s110.877-4.082 166-12.215v57.504h-60.42v30zm-125.42 30h-81.161v-30h81.161zm-136.3
+                                      55.28c0 8.271-6.729 15-15 15h-20.28c-8.271 0-15-6.729-15-15v-25.28h50.28zm241.72 0c0 8.271-6.729
+                                      15-15 15h-20.279c-8.271 0-15-6.729-15-15v-25.28h50.279zm20-203.109c-110.22 16.711-221.779 16.711-332
+                                      0v-53.611-120.28h332v120.28zm60-83.611h-30v-60.28h15c8.271 0 15 6.729 15 15z" fill="#747474" class=""/>
+                                </g>
+                            </g>
+                        </svg>
+                        <p class="relative -bottom-0.5">{{ $tour->execution_period }}</p>
+                    </div>
+                @endif
             </div>
             @if(count($tour->additions) !== 0)
                 <div class="px-4 py-5 border-b border-gray-200">
@@ -237,7 +263,7 @@
             @endif
             <div class="px-4 py-5">
                 <p class="mb-2 text-lg text-black font-bold">{{ __('short-phrases.tour-description') }}:</p>
-                <div class="text-gray-600 whitespace-pre-wrap">{{ $tour->description[App::getLocale()] }}</div>
+                <div class="text-gray-600 whitespace-pre-wrap">{!! $tour->description[App::getLocale()] !!}</div>
             </div>
         </div>
     </div>

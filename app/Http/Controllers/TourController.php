@@ -33,6 +33,7 @@ class TourController extends Controller
             $addition->en_description = $addition->getOriginal('pivot_en_description');
             $addition->ru_description = $addition->getOriginal('pivot_ru_description');
             $addition->tr_description = $addition->getOriginal('pivot_tr_description');
+            $addition->ua_description = $addition->getOriginal('pivot_ua_description');
             $addition->is_include = $addition->getOriginal('pivot_is_include');
         }
 

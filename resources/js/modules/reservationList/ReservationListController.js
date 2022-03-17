@@ -16,33 +16,40 @@ class ReservationListController extends EventHandler {
 
         this.nodes = {
             ...nodes,
-            statusSelect: nodes.statusPopup.querySelector('select[name="reservation_status"]'),
-            updateStatusButton: nodes.statusPopup.querySelector('.update-status-button'),
-            filtersContainer: nodes.container.querySelector('.reserves-filters'),
             detailsDateInput: nodes.detailsPopup.querySelector('input[name="tour_date"]')
         };
 
-        this.view = new ReservationListView({
-            updateStatusButton: this.nodes.updateStatusButton,
-            updateStatusError: nodes.statusPopup.querySelector('.error-message'),
-            updateStatusSuccess: nodes.statusPopup.querySelector('.success-message'),
-            statusSelect: this.nodes.statusSelect
-        });
+        if (/^\/admin\/reserves$/.test(location.pathname)) {
+            this.nodes = {
+                ...this.nodes,
+                statusSelect: nodes.statusPopup.querySelector('select[name="reservation_status"]'),
+                updateStatusButton: nodes.statusPopup.querySelector('.update-status-button'),
+                filtersContainer: nodes.container.querySelector('.reserves-filters'),
+            }
 
-        this.filters = {
-            'tour_id': null,
-            'date_min': null,
-            'date_max': null,
-            'time': null
-        };
+            this.view = new ReservationListView({
+                updateStatusButton: this.nodes.updateStatusButton,
+                updateStatusError: nodes.statusPopup.querySelector('.error-message'),
+                updateStatusSuccess: nodes.statusPopup.querySelector('.success-message'),
+                statusSelect: this.nodes.statusSelect
+            });
 
-        this.statusUpdatingLoading = false;
-        this.statusUpdatingDisabled = true;
+            this.filters = {
+                'tour_id': null,
+                'date_min': null,
+                'date_max': null
+            };
 
-        this.initStatusPopup();
+            this.statusUpdatingLoading = false;
+            this.statusUpdatingDisabled = true;
+
+            this.initStatusPopup();
+            this.initFilters();
+        }
+
         this.initDetailsPopup();
-        this.initFilters();
         this.initDetailsDatePicker();
+
         this.initShowReservationContextMenu(nodes.container.querySelectorAll('.reserves-item'));
     }
 
@@ -97,29 +104,6 @@ class ReservationListController extends EventHandler {
             };
         }
 
-        this.timePicker = flatpickr(this.nodes.filtersContainer.querySelector('input[name="time"]'), {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            time_24hr: true,
-            onClose: (_, text) => {
-                if (text !== this.filters['time']) {
-                    this.filters = {
-                        ...this.filters,
-                        'time': text ? text : null
-                    };
-                    this.applyFilters();
-                }
-            }
-        });
-
-        if (this.nodes.filtersContainer.querySelector('input[name="time"]').value) {
-            this.filters = {
-                ...this.filters,
-                'time': this.nodes.filtersContainer.querySelector('input[name="time"]').value
-            };
-        }
-
         // Init handlers
         this.addEvent(this.nodes.filtersContainer.querySelector('select[name="tour_id"]'), 'change', e => {
             this.filters = {
@@ -149,7 +133,9 @@ class ReservationListController extends EventHandler {
             uri += `${key}=${this.filters[key]}&`;
         }
 
-        location.replace(uri === '?' ? '/admin/reserves' : uri);
+        uri = uri.slice(0, -1);
+
+        location.replace(uri === '' ? '/admin/reserves' : uri);
     }
 
     initShowReservationContextMenu(items) {
@@ -163,7 +149,11 @@ class ReservationListController extends EventHandler {
     }
 
     initStatusPopup() {
-        this.statusPopup = PopupObserver.init(this.nodes.statusPopup, false, _ => this.afterStatusPopupCloseHandler());
+        this.statusPopup = PopupObserver.init(
+            this.nodes.statusPopup,
+            false,
+                _ => this.afterStatusPopupCloseHandler()
+        );
     }
 
     initDetailsPopup() {
@@ -173,14 +163,15 @@ class ReservationListController extends EventHandler {
     onContextOptionClick(key, options) {
         switch (key) {
             case 'change-status':
-                this.statusPopup.open(_ => this.beforeStatusPopupOpenHandler(...JsonHelper.getFromJson(options, 'status_id', 'reservation_id')));
+                this.statusPopup.open(_ => this.beforeStatusPopupOpenHandler(
+                    ...JsonHelper.getFromJson(options, 'status_id', 'reservation_id')
+                ));
                 break;
             case 'show-info':
                 this.detailsPopup.open(_ => this.beforeDetailsPopupOpenHandler(JsonHelper.parse(options)));
                 break;
             default:
                 console.error('Undefined option!', [key, options]);
-
         }
     }
 
@@ -191,15 +182,35 @@ class ReservationListController extends EventHandler {
 
         this.nodes.detailsPopup.querySelector('.hotel-name').innerText = details['hotel-name'];
         this.nodes.detailsPopup.querySelector('.communication-type').innerText = details['communication-type'];
-        this.nodes.detailsPopup.querySelector('.available-time').innerText = details['time'];
         this.nodes.detailsPopup.querySelector('.total-cost').innerText = details['total-cost'];
+
+        if (this.nodes.detailsPopup.querySelector('.partner-profit') && details['partner-profit']) {
+            this.nodes.detailsPopup.querySelector('.partner-profit').innerHTML = `$ ${details['partner-profit']}`;
+        }
+
+        this.detailsDatePicker.clear();
+        if (details['date']) {
+            this.detailsDatePicker.setDate(details['date']);
+        }
+
+        this.nodes.detailsPopup.querySelector('.tickets-container').innerHTML = '';
+        details['tickets'].forEach(item => {
+            this.nodes.detailsPopup.querySelector('.tickets-container').innerHTML += `
+                <div class="ticket-item flex items-center p-3 border-b border-gray-200">
+                    <span class="mr-auto text-black">${item.title}</span>
+                    <span class="relative top-0.5 mr-10 text-black font-semibold">$ ${item.price}</span>
+                    <span class="tickets-amount relative top-0.5 text-gray-600">${item.amount} шт</span>
+                </div>
+            `;
+        });
 
         if (details['promo-code']) {
             this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = details['promo-code']['code'];
-            this.nodes.detailsPopup.querySelector('.promo-code .active').innerText = `Активен (-${details['promo-code']['percent']}%)`;
+            this.nodes.detailsPopup.querySelector('.promo-code .active').innerText =
+                `${LocaleHelper.translate('activated')} (-${details['promo-code']['percent']}%)`;
             this.nodes.detailsPopup.querySelector('.promo-code .active').classList.remove('hidden');
         } else {
-            this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = 'Ничего не указано';
+            this.nodes.detailsPopup.querySelector('.promo-code .code').innerText = LocaleHelper.translate('nothing-entered');
             this.nodes.detailsPopup.querySelector('.promo-code .active').innerText = '';
             this.nodes.detailsPopup.querySelector('.promo-code .active').classList.add('hidden');
         }

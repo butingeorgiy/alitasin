@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App;
 use App\Facades\RusDecl;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +17,8 @@ use Illuminate\Support\Carbon;
  * @method static Tour find(mixed $tourId)
  * @method static findOrFail($id)
  * @method static byManager($managerId)
+ * @method static int count()
+ * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
  * @property mixed id
  * @property array conducted_at
  * @property mixed manager_id
@@ -28,6 +32,9 @@ use Illuminate\Support\Carbon;
  * @property mixed region
  * @property mixed manager
  * @property mixed additions
+ * @property string|null departure_time
+ * @property string|null check_out_time
+ * @property string|null execution_period
  */
 class Tour extends Model
 {
@@ -126,7 +133,8 @@ class Tour extends Model
      */
     public function additions(): BelongsToMany
     {
-        return $this->belongsToMany(Addition::class, 'tours_has_additions')->withPivot('is_include', 'en_description', 'ru_description', 'tr_description');
+        return $this->belongsToMany(Addition::class, 'tours_has_additions')
+            ->withPivot('is_include', 'en_description', 'ru_description', 'tr_description', 'ua_description');
     }
 
     /**
@@ -147,7 +155,7 @@ class Tour extends Model
      */
     public function getDurationAttribute($value): ?string
     {
-        $locale = \App::getLocale();
+        $locale = App::getLocale();
         $int = intval(explode('~', $value)[0] ?? null);
         $mode = explode('~', $value)[1] ?? null;
 
@@ -155,7 +163,7 @@ class Tour extends Model
             return null;
         }
 
-        if ($locale === 'ru') {
+        if ($locale === 'ru' || $locale === 'ua') {
             $vars = ($mode === 'h' ? ['час', 'часа', 'часов'] : ['день', 'дня', 'дней']);
             return RusDecl::resolve($int, $vars);
         } else if ($locale === 'tr') {
@@ -264,8 +272,36 @@ class Tour extends Model
     public function scopeSearch($query, string $searchString)
     {
         return $query->selectRaw(
-            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . \App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
             [str_replace(' ', '|', $searchString)]
         )->having('frequency', '>', 0)->orderByDesc('frequency');
+    }
+
+    public function getDepartureTimeAttribute(): ?string
+    {
+        if (!$this->getOriginal('departure_time')) {
+            return null;
+        }
+
+        return Carbon::parse($this->getOriginal('departure_time'))->format('H:i');
+    }
+
+    public function getCheckOutTimeAttribute(): ?string
+    {
+        if (!$this->getOriginal('check_out_time')) {
+            return null;
+        }
+
+        return Carbon::parse($this->getOriginal('check_out_time'))->format('H:i');
+    }
+
+    public function getExecutionPeriodAttribute(): ?string
+    {
+        if (!$this->departure_time or !$this->check_out_time) {
+            return null;
+        }
+
+        return Carbon::parse($this->departure_time)->format('H:i') . ' – ' .
+            Carbon::parse($this->check_out_time)->format('H:i');
     }
 }

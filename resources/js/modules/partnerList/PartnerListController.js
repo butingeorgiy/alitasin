@@ -10,18 +10,23 @@ class PartnerListController extends EventHandler {
     constructor(nodes) {
         super();
 
+        this.loading = false;
         this.nodes = {
             ...nodes,
-            makePartnerPaymentButton: nodes.partnerPaymentPopup.querySelector('.make-partner-payment-button')
+            makePartnerPaymentButton: nodes.partnerPaymentPopup.querySelector('.make-partner-payment-button'),
+            updateProfitPercentButton: nodes.updateProfitPercentPopup.querySelector('.update-profit-percent-button')
         };
         this.view = new PartnerListView({
             paymentPopupButtonNode: this.nodes.makePartnerPaymentButton,
             paymentPopupErrorNode: nodes.partnerPaymentPopup.querySelector('.error-message'),
-            paymentPopupSuccessNode: nodes.partnerPaymentPopup.querySelector('.success-message')
+            paymentPopupSuccessNode: nodes.partnerPaymentPopup.querySelector('.success-message'),
+            updatePercentPopupButtonNode: this.nodes.updateProfitPercentButton,
+            updatePercentPopupErrorNode: nodes.updateProfitPercentPopup.querySelector('.error-message'),
+            updatePercentPopupSuccessNode: nodes.updateProfitPercentPopup.querySelector('.success-message')
         });
-        this.loading = false;
 
         this.initPartnerPayment();
+        this.initUpdatingProfitPercent();
 
         nodes.partnersContainer.querySelectorAll('.partners-item').forEach(node => {
             if (node.querySelector('.show-custom-dropdown-button') && node.querySelector('.custom-dropdown-container')) {
@@ -42,6 +47,14 @@ class PartnerListController extends EventHandler {
         );
     }
 
+    initUpdatingProfitPercent() {
+        this.updateProfitPercentPopup = PopupObserver.init(
+            this.nodes.updateProfitPercentPopup,
+            false,
+            _ => this.removeAllListeners(this.nodes.updateProfitPercentButton, 'click')
+        )
+    }
+
     onContextOptionClick(key, options) {
         switch (key) {
             case 'delete':
@@ -60,6 +73,21 @@ class PartnerListController extends EventHandler {
                         if (!this.loading) {
                             this.loading = true;
                             this.makePayment(JsonHelper.getFromJson(options, 'id'));
+                        }
+                    });
+                });
+                break;
+            case 'update-partner-profit-percent':
+                this.nodes.updateProfitPercentPopup.querySelector('.current-profit-percent').innerText =
+                    JsonHelper.getFromJson(options, 'current_value');
+                this.updateProfitPercentPopup.open(_ => {
+                    this.addEvent(this.nodes.updateProfitPercentButton, 'click', _ => {
+                        if (!this.loading) {
+                            this.loading = true;
+                            this.updateProfitPercent(
+                                JsonHelper.getFromJson(options, 'id')[0],
+                                JsonHelper.getFromJson(options, 'is_sub_partner_percent')[0]
+                            );
                         }
                     });
                 });
@@ -110,8 +138,6 @@ class PartnerListController extends EventHandler {
             return;
         }
 
-        console.log(id)
-
         this.view.hidePaymentPopupError();
         this.view.showPaymentPopupLoading();
 
@@ -140,6 +166,47 @@ class PartnerListController extends EventHandler {
             })
             .finally(_ => {
                 this.view.hidePaymentPopupLoading();
+            });
+    }
+
+    updateProfitPercent(id, isSubPartnerPercent) {
+        if (!id) {
+            return;
+        }
+
+        this.view.hidePaymentPopupError();
+        this.view.showUpdatePercentPopupLoading();
+
+        const formData = new FormData();
+
+        if (this.nodes.updateProfitPercentPopup.querySelector('input[name="profit_percent"]')) {
+            formData.append(
+                'profit_percent',
+                this.nodes.updateProfitPercentPopup.querySelector('input[name="profit_percent"]').value
+            );
+        }
+
+        formData.append('is_sub_partner_percent', isSubPartnerPercent);
+
+        PartnerListModel.updateProfitPercent(formData, id)
+            .then(result => {
+                if (typeof result === 'string') {
+                    alert(`Error: ${result}`);
+                    this.loading = false;
+                } else if (result.error) {
+                    this.view.showUpdatePercentPopupError(result.message);
+                    this.loading = false;
+                } else {
+                    this.view.showUpdatePercentPopupSuccess(result.message);
+                    setTimeout(_ => location.reload(), 500);
+                }
+            })
+            .catch(error => {
+                alert(`Error: ${error}`);
+                this.loading = false;
+            })
+            .finally(_ => {
+                this.view.hideUpdatePercentPopupLoading();
             });
     }
 }

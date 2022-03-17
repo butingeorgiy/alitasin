@@ -17,7 +17,7 @@ class LanguageSwitcher
     {
         $locale = $request->cookie('locale', 'ru');
 
-        if (!in_array($locale, ['en', 'ru', 'tr'])) {
+        if (!in_array($locale, ['en', 'ru', 'tr', 'ua'])) {
             $locale = 'ru';
         }
 

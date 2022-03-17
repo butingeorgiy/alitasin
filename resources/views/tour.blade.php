@@ -11,10 +11,15 @@
     <title>{{ $tour->title[App::getLocale()] }}</title>
 </head>
 <body class="bg-gray-50">
-@include('components.general.header')
-@include('components.tours.tour-info')
-@include('components.tours.book-form')
-@include('components.general.footer')
-@include('popups.login')
+    @include('components.general.header')
+    @include('components.tours.tour-info')
+    @include('components.tours.book-form')
+    @include('components.general.footer')
+
+    <!-- Popups -->
+    @include('popups.login')
+
+    <!-- Widgets -->
+    @include('widgets.click-to-call')
 </body>
 </html>

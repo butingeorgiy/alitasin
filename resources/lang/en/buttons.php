@@ -19,5 +19,6 @@ return [
     'add-excursion' => 'Add excursion',
     'add' => 'Add',
     'edit' => 'Edit',
-    'delete' => 'Delete'
+    'delete' => 'Delete',
+    'change-password' => 'Change password'
 ];

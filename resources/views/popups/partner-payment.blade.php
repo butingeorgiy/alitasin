@@ -8,7 +8,7 @@
         </div>
 
         <label class="px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
-            <input type="number" name="amount" min="0" max="100" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
+            <input type="number" name="amount" min="0" class="w-full text-black placeholder-black tracking-wider bg-gray-100"
                    placeholder="{{ __('short-phrases.payment-amount')  }}">
         </label>
 

@@ -10,8 +10,14 @@ class UpdateProfileInfoModel {
         return response.status === 200 ? await response.json() : response.text();
     }
 
-    static async update(data) {
-        const url = `${location.origin}/api/users/update`;
+    static async update(data, mode = 'user', options = {}) {
+        let url;
+
+        if (mode === 'partner') {
+            url = `${location.origin}/api/partners/update/${options.id}`;
+        } else {
+            url = `${location.origin}/api/users/update`;
+        }
 
         const response = await fetch(url, {
             method: 'POST',

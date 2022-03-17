@@ -1,7 +1,7 @@
 import EventHandler from '../../core/EventHandler';
 import flatpickr from 'flatpickr';
-import { Russian } from 'flatpickr/dist/l10n/ru.js';
-import { Turkish } from 'flatpickr/dist/l10n/tr.js';
+import {Russian} from 'flatpickr/dist/l10n/ru.js';
+import {Turkish} from 'flatpickr/dist/l10n/tr.js';
 import LocaleHelper from '../../helpers/LocaleHelper';
 import BookTourView from './BookTourView';
 import BookTourModel from './BookTourModel';
@@ -18,7 +18,7 @@ class BookTourController extends EventHandler {
         this.promoCode = {
             value: null,
             sale: null
-        }
+        };
         this.initCost = null;
         this.view = new BookTourView({
             totalCostNode: nodes.form.querySelector('.total-cost'),
@@ -66,15 +66,19 @@ class BookTourController extends EventHandler {
         const formData = new FormData();
 
         if (this.nodes.form.querySelector('input[name="hotel_name"]').value) {
-            formData.append('hotel_name', this.nodes.form.querySelector('input[name="hotel_name"]').value)
+            formData.append('hotel_name', this.nodes.form.querySelector('input[name="hotel_name"]').value);
+        }
+
+        if (this.nodes.form.querySelector('input[name="hotel_room_number"]').value) {
+            formData.append('hotel_room_number', this.nodes.form.querySelector('input[name="hotel_room_number"]').value);
         }
 
         if (this.nodes.form.querySelector('select[name="communication_type"]').value) {
             formData.append('communication_type', this.nodes.form.querySelector('select[name="communication_type"]').value);
         }
 
-        if (this.nodes.form.querySelector('select[name="time"]').value) {
-            formData.append('time', this.nodes.form.querySelector('select[name="time"]').value);
+        if (this.nodes.form.querySelector('select[name="region_id"]').value) {
+            formData.append('region_id', this.nodes.form.querySelector('select[name="region_id"]').value);
         }
 
         if (this.datePicker.selectedDates.length !== 0) {
@@ -118,9 +122,9 @@ class BookTourController extends EventHandler {
 
         this.nodes.form.querySelectorAll('.ticket-item').forEach(ticket => {
             const ticketId = ticket.getAttribute('data-ticket-id'),
-                  ticketCost = ticket.getAttribute('data-ticket-cost'),
-                  minusButton = ticket.querySelector('.minus-ticket-button'),
-                  plusButton = ticket.querySelector('.plus-ticket-button');
+                ticketCost = ticket.getAttribute('data-ticket-cost'),
+                minusButton = ticket.querySelector('.minus-ticket-button'),
+                plusButton = ticket.querySelector('.plus-ticket-button');
 
             tickets.push({
                 id: ticketId,
@@ -273,8 +277,8 @@ class BookTourController extends EventHandler {
                     this.view.showSuccess(result.message);
 
                     if (result.cookies) {
-                        Cookies.set('id', result.cookies.id, { expires: 7 });
-                        Cookies.set('token', result.cookies.token, { expires: 7 });
+                        Cookies.set('id', result.cookies.id, {expires: 7});
+                        Cookies.set('token', result.cookies.token, {expires: 7});
                     }
 
                     setTimeout(_ => location.reload(), 500);

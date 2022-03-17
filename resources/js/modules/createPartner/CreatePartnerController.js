@@ -55,12 +55,42 @@ class CreatePartnerController extends EventHandler {
             formData.append('email', this.nodes.createPartnerPopup.querySelector('input[name="email"]')?.value);
         }
 
+        if (this.nodes.createPartnerPopup.querySelector('input[name="profit_percent"]')?.value) {
+            formData.append('profit_percent', this.nodes.createPartnerPopup.querySelector('input[name="profit_percent"]')?.value);
+        }
+
         if (this.nodes.createPartnerPopup.querySelector('input[name="promo_code"]')?.value) {
             formData.append('promo_code', this.nodes.createPartnerPopup.querySelector('input[name="promo_code"]')?.value);
         }
 
         if (this.nodes.createPartnerPopup.querySelector('input[name="sale_percent"]')?.value) {
             formData.append('sale_percent', this.nodes.createPartnerPopup.querySelector('input[name="sale_percent"]')?.value);
+        }
+
+        if (this.nodes.createPartnerPopup.querySelector('input[name="password"]')?.value) {
+            formData.append('password', this.nodes.createPartnerPopup.querySelector('input[name="password"]')?.value);
+        }
+
+        if (this.nodes.createPartnerPopup.querySelector('input[name="password_confirmation"]')?.value) {
+            formData.append('password_confirmation', this.nodes.createPartnerPopup.querySelector('input[name="password_confirmation"]').value);
+        }
+
+        if (this.nodes.createPartnerPopup.querySelector('input[name="city"]')?.value) {
+            formData.append('city', this.nodes.createPartnerPopup.querySelector('input[name="city"]').value);
+        }
+
+        if (/^\/admin\/partners\/\d+$/.test(location.pathname)) {
+            formData.append('parent_user_id', location.pathname.split('/')[3]);
+        }
+
+        if (
+            /^\/admin\/partners\/\d+$/.test(location.pathname) &&
+            this.nodes.createPartnerPopup.querySelector('input[name="sub_partner_profit_percent"]')
+        ) {
+            formData.append(
+                'sub_partner_profit_percent',
+                this.nodes.createPartnerPopup.querySelector('input[name="sub_partner_profit_percent"]')?.value
+            );
         }
 
         CreatePartnerModel.create(formData)

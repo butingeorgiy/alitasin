@@ -33,6 +33,8 @@ module.exports = {
                 900: '#4B506D', // used
                 1000: '#F5F5F5', // used
                 1100: '#E4E4E4', // used
+                1200: '#EEEEEE', // used
+                1300: '#C1C1C1', // used
             },
             red: {
                 DEFAULT: '#FF3D3D', // used
@@ -361,7 +363,7 @@ module.exports = {
             12: 'repeat(12, minmax(0, 1fr))',
             'reserve-table': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
             'reserve-table-filters': 'minmax(0, 6fr) minmax(0, 2fr) repeat(2, minmax(0, 1fr))',
-            'partners-table': 'minmax(0, 6fr) repeat(4, minmax(0, 1fr))'
+            'partners-table': 'minmax(0, 4fr) minmax(0, 2fr) repeat(4, minmax(0, 1fr))'
         },
         gridTemplateRows: {
             none: 'none',
@@ -499,27 +501,12 @@ module.exports = {
             prose: '65ch',
             ...breakpoints(theme('screens')),
         }),
-        minHeight: {
-            0: '0px',
-            4: '1rem',
-            5: '1.25rem',
-            6: '1.5rem',
-            11: '2.75rem',
-            20: '5rem',
-            full: '100%',
-            screen: '100vh',
-        },
-        minWidth: {
-            0: '0px',
-            4: '1rem',
-            5: '1.25rem',
-            6: '1.5rem',
-            11: '2.75rem',
-            20: '5rem',
-            full: '100%',
-            min: 'min-content',
-            max: 'max-content',
-        },
+        minHeight: theme => ({
+            ...theme('spacing')
+        }),
+        minWidth: theme => ({
+            ...theme('spacing')
+        }),
         objectPosition: {
             bottom: 'bottom',
             center: 'center',
@@ -807,7 +794,7 @@ module.exports = {
         clear: ['responsive'],
         container: ['responsive'],
         cursor: ['responsive', 'disabled'],
-        display: ['responsive'],
+        display: ['responsive', 'group-hover'],
         divideColor: ['responsive', 'dark'],
         divideOpacity: ['responsive', 'dark'],
         divideStyle: ['responsive'],
@@ -901,5 +888,9 @@ module.exports = {
         wordBreak: ['responsive'],
         zIndex: ['responsive', 'focus-within', 'focus'],
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/forms')({
+            strategy: 'class'
+        })
+    ],
 }

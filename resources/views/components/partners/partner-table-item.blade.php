@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \App\Models\User $partner
+ * @var App\Models\User $partner
  */
 
 ?>
@@ -10,18 +10,21 @@
     <div class="flex">
         <div class="min-w-11 min-h-11 w-11 h-11 mr-6 bg-contain bg-center bg-no-repeat bg-blue rounded-full"></div>
         <div class="flex flex-col justify-center">
-            <p class="text-black font-semibold">{{ $partner->full_name }}</p>
+            <a href="{{ route('partner', $partner->id) }}" class="text-black font-semibold">{{ $partner->full_name }}</a>
             <p class="text-sm text-gray-600 font-light">{{ $partner->email }}</p>
         </div>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->total_income }}</p>
+        <p class="text-black font-semibold select-text">{{ $partner->promoCodes()->first()['code'] }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->total_profit }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->getTotalIncome() }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->total_payment_amount }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->getTotalProfit() }}</p>
+    </div>
+    <div class="flex items-center">
+        <p class="text-black font-semibold">$ {{ $partner->getPaymentAmount() }}</p>
     </div>
     <div class="relative flex items-center">
         @if($partner->trashed())
@@ -76,7 +79,7 @@
                         {{ __('short-phrases.activate') }}
                     </div>
                 @else
-                    @if($partner->total_payment_amount < $partner->total_profit)
+                    @if($partner->getPaymentAmount() < $partner->getTotalProfit())
                         <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
                              data-option-name="make-payment" data-option-params="{{ json_encode(['id' => $partner->id]) }}">
                             {{ __('short-phrases.make-payment') }}
@@ -86,6 +89,16 @@
                          data-option-name="delete" data-option-params="{{ json_encode(['id' => $partner->id]) }}">
                         {{ __('short-phrases.block') }}
                     </div>
+                    <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
+                         data-option-name="update-partner-profit-percent" data-option-params="{{ json_encode(['id' => $partner->id, 'current_value' => $partner->profit_percent, 'is_sub_partner_percent' => '0']) }}">
+                        {{ __('short-phrases.update-partner-profit-percent-option') }}
+                    </div>
+                    @if($partner->isSubPartner())
+                        <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
+                             data-option-name="update-partner-profit-percent" data-option-params="{{ json_encode(['id' => $partner->id, 'current_value' => $partner->sub_partners_profit_percent, 'is_sub_partner_percent' => '1']) }}">
+                            {{ __('short-phrases.update-sub-partner-profit-percent-option') }}
+                        </div>
+                    @endif
                 @endif
             </div>
         </div>

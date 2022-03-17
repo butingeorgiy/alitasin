@@ -3,21 +3,27 @@
 namespace App\Models;
 
 use App\Facades\Hash;
+use App\Traits\PartnerCalculator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
  * @method static isEmailUnique($email)
- * @method static find(array|string $id)
- * @method static where(string $string, array|string|null $input)
- * @method static managers()
- * @method static partners()
+ * @method static Collection|User|null find(array|string $id)
+ * @method static Builder where(string $string, array|string|null $input)
+ * @method static Builder managers()
+ * @method static Builder partners()
  * @method static create(string[] $array)
+ * @method static Builder selectRaw(string $expression)
+ * @property string full_name
  * @property string first_name
  * @property string account_type_id
  * @property string last_name
@@ -28,13 +34,15 @@ use Illuminate\Support\Str;
  * @property mixed recentViewed
  * @property mixed reservedTours
  * @property mixed favoriteTours
- * @property int total_profit
- * @property int total_payment_amount
- * @property int total_income
+ * @property int profit_percent
+ * @property int sub_partners_profit_percent
+ * @property string profile
+ * @property string phone
  */
 class User extends Model
 {
     use SoftDeletes;
+    use PartnerCalculator;
 
 
     public $timestamps = false;
@@ -86,8 +94,8 @@ class User extends Model
             return null;
         }
 
-        if(preg_match( '/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone,  $matches)) {
-            return $matches[1] . ' ' . $matches[2] . ' ' .$matches[3] . ' ' . $matches[4];
+        if (preg_match('/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone, $matches)) {
+            return $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
         }
 
         return null;
@@ -108,6 +116,11 @@ class User extends Model
         }
     }
 
+    /**
+     * Generate random password.
+     *
+     * @return string
+     */
     public function generatePassword(): string
     {
         $randomPassword = Str::random(10);
@@ -115,22 +128,58 @@ class User extends Model
         return $randomPassword;
     }
 
+    /**
+     * Get recent viewed tours.
+     *
+     * @return BelongsToMany
+     */
     public function recentViewed(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'recent_viewed_tours');
     }
 
+    /**
+     * Get reserved tours.
+     *
+     * @return BelongsToMany
+     */
     public function reservedTours(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'reservations');
     }
 
+    /**
+     * Get favorite tours.
+     *
+     * @return BelongsToMany
+     */
     public function favoriteTours(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'favorite_tours');
     }
 
-    // Partner methods
+
+    # Partner methods
+
+    /**
+     * Get partner's profit percent.
+     *
+     * @return HasOne
+     */
+    public function percent(): HasOne
+    {
+        return $this->hasOne(PartnerPercent::class, 'user_id');
+    }
+
+    /**
+     * Get sub partner's profit percent.
+     *
+     * @return HasOne
+     */
+    public function subPartnerPercent(): HasOne
+    {
+        return $this->hasOne(SubPartnerPercent::class, 'user_id');
+    }
 
     /**
      * Get attracted reservations by partner
@@ -140,6 +189,37 @@ class User extends Model
     public function attractedReservations(): HasManyThrough
     {
         return $this->hasManyThrough(Reservation::class, PromoCode::class);
+    }
+
+    /**
+     * Get attracted transfers by partner
+     *
+     * @return HasManyThrough
+     */
+    public function attractedTransfers(): HasManyThrough
+    {
+        return $this->hasManyThrough(TransferRequest::class, PromoCode::class);
+    }
+
+    /**
+     * Get attracted vehicles by partner
+     *
+     * @return HasManyThrough
+     */
+    public function attractedVehicles(): HasManyThrough
+    {
+        return $this->hasManyThrough(VehicleOrder::class, PromoCode::class);
+    }
+
+
+    /**
+     * Get partner's promo codes
+     *
+     * @return HasMany
+     */
+    public function promoCodes(): HasMany
+    {
+        return $this->hasMany(PromoCode::class);
     }
 
     /**
@@ -153,57 +233,113 @@ class User extends Model
     }
 
     /**
-     * Get total income attracted by partner
+     * Get partner city
      *
-     * @return int
+     * @return HasOne
      */
-    public function getTotalIncomeAttribute(): int
+    public function partnerCity(): HasOne
     {
-        /**
-         * @var $attractedReservations Reservation[]
-         */
-        $attractedReservations = $this->attractedReservations()->get();
-        $totalIncome = 0;
-
-        foreach ($attractedReservations as $item) {
-            $totalIncome += $item->costWithSale();
-        }
-
-        return $totalIncome;
+        return $this->hasOne(PartnerCity::class, 'partner_id');
     }
 
     /**
-     * Get partner profit
+     * Get personal partner profit percent
      *
      * @return int
      */
-    public function getTotalProfitAttribute(): int
+    public function getProfitPercentAttribute(): int
     {
-        /**
-         * @var $attractedReservations Reservation[]
-         */
-        $attractedReservations = $this->attractedReservations()->get();
-        $totalProfit = 0;
-
-        foreach ($attractedReservations as $item) {
-            $totalProfit += $item->costWithSale() * 0.3;
+        if (!$percent = $this->percent()->get()->first()) {
+            return 0;
         }
 
-        return $totalProfit;
+        return $percent->percent;
     }
 
-    public function getTotalPaymentAmountAttribute(): int
+    /**
+     * Get sub partner profit percent
+     *
+     * @return int|null
+     */
+    public function getSubPartnersProfitPercentAttribute(): ?int
     {
-        /**
-         * @var $partnerPayments PartnerPayment[]
-         */
-        $partnerPayments = $this->partnerPayments()->get();
-        $amount = 0;
-
-        foreach ($partnerPayments as $item) {
-            $amount += $item->amount;
+        if (!$subPartnerProfitPercent = $this->subPartnerPercent()->get()->first()) {
+            return null;
         }
 
-        return $amount;
+        return $subPartnerProfitPercent->percent;
+    }
+
+    /**
+     * Determine if user is sub partner
+     *
+     * @return bool
+     */
+    public function isSubPartner(): bool
+    {
+        return DB::table('sub_partners')
+            ->where('user_id', $this->id)->exists();
+    }
+
+    /**
+     * Get ids of sub partners
+     *
+     * @return array
+     */
+    public function subPartnerIds(): array
+    {
+        $subPartnerIds = [];
+
+        foreach (DB::table('sub_partners')->select('user_id')
+                     ->where('parent_user_id', $this->id)->get() as $item) {
+            $subPartnerIds[] = $item->user_id;
+        }
+
+        return $subPartnerIds;
+    }
+
+    /**
+     * Determine if user has sub partners
+     *
+     * @return bool
+     */
+    public function hasSubPartners(): bool
+    {
+        return DB::table('sub_partners')
+            ->where('parent_user_id', $this->id)->exists();
+    }
+
+    /**
+     * Update profit percent
+     *
+     * @param int $newValue
+     * @return bool
+     */
+    public function updateProfitPercent(int $newValue): bool
+    {
+        if (!$percent = $this->percent()->get()->first()) {
+            return false;
+        }
+
+        $percent->percent = $newValue;
+
+        return $percent->save();
+    }
+
+    /**
+     * Update sub partner's profit percent
+     *
+     * @param int $newValue
+     * @return bool
+     */
+    public function updateSubPartnerProfitPercent(int $newValue): bool
+    {
+        if (!$subPartnerProfitPercent = $this->subPartnerPercent()->get()->first()) {
+            return false;
+        }
+
+        $subPartnerProfitPercent->percent = $newValue;
+
+        return $subPartnerProfitPercent->save();
     }
 }

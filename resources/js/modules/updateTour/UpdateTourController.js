@@ -22,7 +22,6 @@ class UpdateTourController extends TourFormBaseController {
 
         this.initFiltersSelect('#editTourForm select[name="filters"]');
         this.initWeekDaysSelect('#editTourForm select[name="conduct_at"]');
-        this.initAvailableTimeSelect('#editTourForm select[name="available_time"]');
 
         document.querySelectorAll('.dettach-addition-button').forEach(buttonNode => {
             this.dettachAdditionHandler(buttonNode, buttonNode.getAttribute('data-id'));
@@ -44,6 +43,7 @@ class UpdateTourController extends TourFormBaseController {
                 en_description: addition.en_description,
                 ru_description: addition.ru_description,
                 tr_description: addition.tr_description,
+                ua_description: addition.ua_description,
                 is_include: '0'
             });
         });
@@ -55,6 +55,7 @@ class UpdateTourController extends TourFormBaseController {
                 en_description: addition.en_description,
                 ru_description: addition.ru_description,
                 tr_description: addition.tr_description,
+                ua_description: addition.ua_description,
                 is_include: '1'
             });
         });
@@ -113,7 +114,7 @@ class UpdateTourController extends TourFormBaseController {
     }
 
     makeImageMainHandler(imageId) {
-        if (!confirm('You are sure?')) {
+        if (!confirm(LocaleHelper.translate('you-are-sure'))) {
             return;
         }
 
@@ -145,9 +146,9 @@ class UpdateTourController extends TourFormBaseController {
         UpdateTourModel.removeImage(UpdateTourController.getCurrentTourId(), formData)
             .then(result => {
                 if (typeof result === 'string') {
-                    alert(`Error: ${result}`)
+                    alert(`Error: ${result}`);
                 } else if (result.error) {
-                    alert(`Error: ${result.message}`)
+                    alert(`Error: ${result.message}`);
                 } else {
                     alert(result.message);
                     location.reload();
@@ -168,7 +169,6 @@ class UpdateTourController extends TourFormBaseController {
 
         formData.append('filters', JSON.stringify(this.filtersSelect.getValue()));
         formData.append('conducted_at', JSON.stringify(this.weekDaysSelect.getValue()));
-        formData.append('available_time', JSON.stringify(this.availableTimeSelect.getValue()));
 
         const durationInput = form.querySelector('input[name="duration"]');
         const durationSelect = form.querySelector('select[name="duration-mode"]');
@@ -179,6 +179,22 @@ class UpdateTourController extends TourFormBaseController {
 
         if (this.additions.length > 0) {
             formData.append('additions', JSON.stringify(this.additions));
+        }
+
+        if (this.enDescriptionEditor) {
+            formData.append('en_description', this.enDescriptionEditor.getData());
+        }
+
+        if (this.ruDescriptionEditor) {
+            formData.append('ru_description', this.ruDescriptionEditor.getData());
+        }
+
+        if (this.trDescriptionEditor) {
+            formData.append('tr_description', this.trDescriptionEditor.getData());
+        }
+
+        if (this.uaDescriptionEditor) {
+            formData.append('ua_description', this.uaDescriptionEditor.getData());
         }
 
         UpdateTourModel.update(UpdateTourController.getCurrentTourId(), formData)

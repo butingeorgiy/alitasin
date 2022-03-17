@@ -2,6 +2,10 @@
 @import "/css/swiper.css";
 @import "/css/flatpickr.min.css";
 @import "/css/tom-select.css";
+@import "/css/lightgallery-bundle.min.css";
+@import "/css/lg-thumbnail.css";
+@import "/css/lg-zoom.css";
+@import "/fonts/lg.svg";
 
 @tailwind base;
 @tailwind components;
@@ -16,9 +20,17 @@ body {
     @apply select-none;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 body.shake {
     animation: shake 0.2s;
     animation-iteration-count: 1;
+}
+
+strong {
+    @apply text-black;
 }
 
 input, select {
@@ -84,8 +96,16 @@ select::-ms-expand {
 .save-personal-info-button,
 .save-book-button,
 .save-partner-button,
-.save-tour-button {
+.save-vehicle-button,
+.save-tour-button,
+.calculate-transfer-cost,
+.show-transfer-request-popup {
     @apply flex justify-center py-2 text-sm text-white font-medium rounded-md cursor-pointer;
+}
+
+.calculate-transfer-cost.hidden,
+.show-transfer-request-popup.hidden {
+    display: none !important;
 }
 
 .show-more-tours-button.loading,
@@ -104,8 +124,19 @@ select::-ms-expand {
 .update-tour-button.disabled,
 .save-tour-button.loading,
 .save-tour-button.disabled,
+.save-vehicle-button.disabled,
+.save-vehicle-button.loading,
 .save-partner-button.loading,
-.make-partner-payment-button.loading {
+.make-partner-payment-button.loading,
+.update-profit-percent-button.loading,
+.send-vehicle-order-button.loading,
+.calculate-transfer-cost.loading,
+.show-transfer-request-popup.loading,
+.order-transfer-button.loading,
+.create-airport-button.loading,
+.update-airport-button.loading,
+.create-destination-button.loading,
+.update-destination-button.loading {
     @apply cursor-not-allowed opacity-60;
 }
 
@@ -118,7 +149,17 @@ select::-ms-expand {
 .update-tour-button.loading .animate-spin,
 .save-partner-button.loading .animate-spin,
 .save-tour-button.loading .animate-spin,
-.make-partner-payment-button.loading .animate-spin {
+.save-vehicle-button.loading .animate-spin,
+.make-partner-payment-button.loading .animate-spin,
+.update-profit-percent-button.loading .animate-spin,
+.send-vehicle-order-button.loading .animate-spin,
+.calculate-transfer-cost.loading .animate-spin,
+.show-transfer-request-popup.loading .animate-spin,
+.order-transfer-button.loading .animate-spin,
+.create-airport-button.loading .animate-spin,
+.update-airport-button.loading .animate-spin,
+.create-destination-button.loading .animate-spin,
+.update-destination-button.loading .animate-spin{
     @apply block;
 }
 
@@ -137,12 +178,16 @@ select::-ms-expand {
 }
 
 #createTourForm .image-item,
-#editTourForm .image-item {
+#createVehicleForm .image-item,
+#editTourForm .image-item,
+#editVehicleForm .image-item {
     @apply flex justify-center relative px-10 py-5 border-2 border-dashed border-black rounded-md cursor-pointer;
 }
 
 #createTourForm .image-item .remove-image-button,
-#editTourForm .image-item .remove-image-button{
+#createVehicleForm .image-item .remove-image-button,
+#editTourForm .image-item .remove-image-button,
+#editVehicleForm .image-item .remove-image-button {
     @apply hidden min-w-4 min-h-4 w-4 h-4 absolute -top-3 -right-1 text-red-500;
 }
 
@@ -151,14 +196,47 @@ select::-ms-expand {
     @apply border-none bg-cover bg-center bg-no-repeat;
 }
 
+#createVehicleForm .image-item.filled,
+#editVehicleForm .image-item.filled {
+    @apply border-none bg-contain bg-center bg-no-repeat;
+}
+
 #createTourForm .image-item.filled .empty,
-#editTourForm .image-item.filled .empty {
+#createVehicleForm .image-item.filled .empty,
+#editTourForm .image-item.filled .empty,
+#editVehicleForm .image-item.filled .empty {
     @apply opacity-0;
 }
 
 #createTourForm .image-item.filled .remove-image-button,
-#editTourForm .image-item.filled .remove-image-button {
+#createVehicleForm .image-item.filled .remove-image-button,
+#editTourForm .image-item.filled .remove-image-button,
+#editVehicleForm .image-item.filled .remove-image-button {
     @apply block;
+}
+
+.partners-search-wrapper {
+    @apply relative flex ml-auto px-3 py-2 border border-gray-500 rounded-md;
+}
+
+.transfer-type-tab-item {
+    @apply py-3 text-center border-l-2 sm:border-l-0 border-r-2 sm:border-r-0
+           border-t-2 sm:border-t-0 border-b-2 rounded-md sm:rounded-none border-black
+           hover:text-blue hover:border-blue cursor-pointer transition-colors duration-200;
+}
+
+.transfer-type-tab-item.active {
+    @apply text-blue border-blue cursor-default;
+}
+
+.airport-manage-button,
+.destination-manage-button {
+    @apply cursor-pointer;
+}
+
+.airport-manage-button.disabled,
+.destination-manage-button.disabled {
+    @apply cursor-not-allowed opacity-30;
 }
 
 /* Tom Select */

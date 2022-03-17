@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 /**
+ * @property int id
  * @property mixed promo_code_id
  * @property mixed promo_code_init_sale_percent
  * @property string hotel_name
@@ -16,8 +18,15 @@ use Illuminate\Support\Carbon;
  * @property mixed date
  * @property mixed total_cost_without_sale
  * @property mixed created_at
+ * @property string|null hotel_room_number
+ * @property int|null region_id
+ * @property User user
+ * @property Tour tour
+ * @property PromoCode promoCode
+ * @property int tour_init_price
  * @method static limit(int $int)
  * @method static Reservation find($reservationId)
+ * @method static Reservation|Collection findOrFail(mixed $id)
  */
 class Reservation extends Model
 {
@@ -26,7 +35,7 @@ class Reservation extends Model
     protected $guarded = [];
 
 
-    public function attachPromoCode(PromoCode $promoCode)
+    public function attachPromoCode(PromoCode $promoCode): void
     {
         $this->promo_code_id = $promoCode->id;
         $this->promo_code_init_sale_percent = $promoCode->sale_percent;
@@ -124,21 +133,31 @@ class Reservation extends Model
     }
 
     /**
+     * Reservation's region
+     *
+     * @return BelongsTo
+     */
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    /**
      * Get total cost of reservation without sale
      *
-     * @return int
+     * @return float
      */
-    public function costWithoutSale(): int
+    public function costWithoutSale(): float
     {
-        return (int) $this->total_cost_without_sale;
+        return (float) $this->total_cost_without_sale;
     }
 
     /**
      * Get total cost of reservation with sale
      *
-     * @return int
+     * @return float
      */
-    public function costWithSale(): int
+    public function costWithSale(): float
     {
         if ($this->isUsedPromoCode()) {
             return $this->costWithoutSale() * (100 - $this->promoCodeSalePercent()) / 100;
@@ -194,13 +213,4 @@ class Reservation extends Model
     {
         return Carbon::parse($this->created_at)->format('H:i');
     }
-
-//    public function getPartnerProfit(): int
-//    {
-//        if ($this->isUsedPromoCode()) {
-//            return 0;
-//        }
-//
-//        return ;
-//    }
 }

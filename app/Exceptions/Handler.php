@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,10 +48,16 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($request->is('api/*')) {
-            return response()->json([
+            $errorResponse = [
                 'error' => true,
-                'message' => parent::isHttpException($exception) ? 'Unknown error happen!' : $exception->getMessage()
-            ]);
+                'message' => $exception->getMessage()
+            ];
+
+            if ($exception instanceof NotFoundHttpException) {
+                $errorResponse['message'] = 'Route not found!';
+            }
+
+            return response()->json($errorResponse);
         }
 
         return parent::render($request, $exception);

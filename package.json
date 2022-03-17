@@ -9,6 +9,7 @@
     "devDependencies": {
         "@babel/core": "^7.13.10",
         "@babel/preset-env": "^7.13.10",
+        "@tailwindcss/forms": "^0.3.3",
         "axios": "^0.19",
         "babel-loader": "^8.2.2",
         "cross-env": "^5.1",
@@ -21,8 +22,10 @@
         "webpack-cli": "^4.5.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^28.0.0",
         "flatpickr": "^4.6.9",
         "js-cookie": "^2.2.1",
+        "lightgallery": "^2.2.1",
         "swiper": "^6.5.4",
         "tom-select": "^1.4.3"
     }

@@ -15,13 +15,17 @@
     @include('components.general.hero', ['title' => __('short-phrases.tours-in-turkey')])
     @include('components.index.global-search', ['bottomBorder' => false])
     @include('components.index.main-sections')
-    @include('components.index.regions', ['title' => __('short-phrases.popular-turkey-regions'), 'bottomBorder' => true])
+    @include('components.index.regions', ['title' => __('short-phrases.choose-your-region'), 'bottomBorder' => true])
     @include('components.general.tours')
     @include('components.index.transport')
     @include('components.general.reviews-slider')
     @include('components.general.footer')
 
+    <!-- Popups -->
     @include('popups.login')
     @include('popups.reg')
+
+    <!-- Widgets -->
+    @include('widgets.click-to-call')
 </body>
 </html>

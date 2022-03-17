@@ -1,6 +1,5 @@
 import FavoritesController from '../modules/favorites/FavoritesController';
 
-
 class FavoritesTogglingObserver {
     static toggleHandler(button, tourId) {
         const controller = new FavoritesController();

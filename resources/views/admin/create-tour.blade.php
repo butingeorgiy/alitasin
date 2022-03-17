@@ -87,6 +87,13 @@
             <p class="mb-2 font-semibold">{{ __('short-phrases.tr-title') }}</p>
             <input type="text"
                    name="tr_title"
+                   class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                   maxlength="256"
+                   placeholder="{{ __('short-phrases.max-allowed-characters') }} - 256">
+
+            <p class="mb-2 font-semibold">{{ __('short-phrases.ua-title') }}</p>
+            <input type="text"
+                   name="ua_title"
                    class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
                    maxlength="256"
                    placeholder="{{ __('short-phrases.max-allowed-characters') }} - 256">
@@ -94,28 +101,16 @@
 
         <div class="mt-12">
             <p class="mb-2 font-semibold">{{ __('short-phrases.en-description') }}</p>
-            <textarea
-                class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                name="en_description"
-                rows="6"
-                maxlength="2048"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 2048"></textarea>
+            <div id="en-description-editor"></div>
 
-            <p class="mb-2 font-semibold">{{ __('short-phrases.ru-description') }}</p>
-            <textarea
-                class="w-full mb-5 px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                name="ru_description"
-                rows="6"
-                maxlength="2048"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 2048"></textarea>
+            <p class="mt-5 mb-2 font-semibold">{{ __('short-phrases.ru-description') }}</p>
+            <div id="ru-description-editor"></div>
 
-            <p class="mb-2 font-semibold">{{ __('short-phrases.tr-description') }}</p>
-            <textarea
-                class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
-                name="tr_description"
-                rows="6"
-                maxlength="2048"
-                placeholder="{{ __('short-phrases.max-allowed-characters') }} - 2048"></textarea>
+            <p class="mt-5 mb-2 font-semibold">{{ __('short-phrases.tr-description') }}</p>
+            <div id="tr-description-editor"></div>
+
+            <p class="mt-5 mb-2 font-semibold">{{ __('short-phrases.ua-description') }}</p>
+            <div id="ua-description-editor"></div>
         </div>
 
         <div class="grid grid-cols-3 gap-5 mt-12">
@@ -152,7 +147,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-5 mt-6">
+        <div class="grid grid-cols-2 gap-5 mt-6">
             <div>
                 <p class="mb-2 font-semibold">{{ __('short-phrases.region') }}</p>
                 <select name="region_id"
@@ -174,10 +169,23 @@
                     @endforeach
                 </select>
             </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 mt-6">
+            <div>
+                <p class="mb-2 font-semibold">{{ __('short-phrases.departure-time') }}</p>
+                <input type="text"
+                       name="departure_time"
+                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                       placeholder="{{ __('short-phrases.enter-time') }}">
+            </div>
 
             <div>
-                <p class="mb-2 font-semibold">{{ __('short-phrases.available-time') }}</p>
-                <select name="available_time" multiple placeholder="{{ __('short-phrases.search') }}"></select>
+                <p class="mb-2 font-semibold">{{ __('short-phrases.check-out-time') }}</p>
+                <input type="text"
+                       name="check_out_time"
+                       class="w-full px-4 py-3 text-sm text-gray-400 placeholder-gray-400 bg-white shadow rounded-md"
+                       placeholder="{{ __('short-phrases.enter-time') }}">
             </div>
         </div>
 

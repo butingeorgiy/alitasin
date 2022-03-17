@@ -68,7 +68,7 @@
                                 </div>
 
                                 <p class="mb-2 text-black font-bold leading-5">{{ $tour->title[App::getLocale()] }}</p>
-                                <p class="mb-4 text-sm text-gray-600 leading-5">{{ \Illuminate\Support\Str::limit($tour->description[App::getLocale()]) }}</p>
+                                <p class="mb-4 text-sm text-gray-600 leading-5">{{ \Illuminate\Support\Str::limit(strip_tags($tour->description[App::getLocale()])) }}</p>
 
                                 <div class="flex items-end" style="flex: 1">
                                     <p class="mr-auto text-3xl text-black font-bold">${{ $tour->price }}</p>

@@ -1,18 +1,48 @@
-@php $isAdmin = (\App\Facades\Auth::check(['3', '5']) and request()->is('admin/*')); @endphp
+@php
+    $isAdmin = (App\Facades\Auth::check(['3', '5']) and request()->is('admin/*'));
+    $isMainAdmin = (App\Facades\Auth::check(['5']) and request()->is('admin/*'));
+@endphp
 
-@if($isAdmin)
+
+@if($isMainAdmin)
     <div class="mt-10 -mb-10 border-b border-gray-200">
-        <div class="container flex items-center mx-auto px-5 pb-5">
-            <a href="{{ route('partners') }}" class="mr-5 inline text-black text-2xl font-bold text-black">{{ __('short-phrases.partners') }}</a>
-            <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#231F20" stroke-width="4"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="container flex mx-auto px-5 pb-5">
+            <a href="{{ route('edit-transfers') }}" class="flex flex items-center mr-16 group">
+                <span class="mr-4 inline text-blue text-2xl group-hover:underline">{{ __('short-phrases.transfers') }}</span>
+                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <a href="{{ route('partners') }}" class="flex flex items-center mr-auto group">
+                <span class="mr-4 inline text-blue text-2xl group-hover:underline">{{ __('short-phrases.partners') }}</span>
+                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <a href="{{ route('create-vehicle') }}" class="flex flex items-center mr-16 group">
+                <span class="mr-4 inline text-blue text-2xl group-hover:underline">{{ __('short-phrases.add-vehicle') }}</span>
+                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <a href="#" class="flex flex items-center group cursor-not-allowed">
+                <span class="mr-4 inline text-blue text-2xl">{{ __('short-phrases.property') }}</span>
+                <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
         </div>
     </div>
 @endif
 
-<section id="toursSection" class="mb-10 pb-6 border-b border-gray-200" data-is-admin="{{ \App\Facades\Auth::check(['3', '5']) and request()->is('admin/*') ? '1' : '0' }}">
+<section id="toursSection" class="mb-10 pb-6 border-b border-gray-200" data-is-admin="{{ App\Facades\Auth::check(['3', '5']) and request()->is('admin/*') ? '1' : '0' }}">
     <div class="container mx-auto px-5 {{ $isAdmin ? 'mt-16' : '' }}">
         @if(!$isAdmin)
             <div class="flex justify-between items-center lg:justify-center mb-4">
@@ -40,7 +70,7 @@
                       7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </div>
-                    @if(\App\Facades\Auth::check(['5']))
+                    @if(App\Facades\Auth::check(['5']))
                         <a href="{{ route('create-form-tour') }}" class="flex justify-center items-center px-8 py-2 text-sm text-white font-medium rounded-md bg-green">
                             <svg class="mr-3 h-4 w-4 text-white" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.3333 9.66671H12.3333V1.66671C12.3333 1.31309 12.1928 0.973947 11.9427 0.723899C11.6927 0.47385 11.3535 0.333374 10.9999
@@ -145,7 +175,7 @@
                 </div>
                 <div class="hidden lg:block p-3 bg-gray-100 shadow rounded-md">
                     <p class="mb-3 text-black font-semibold leading-5">{{ __('short-phrases.connect-with-us-title') }}</p>
-                    <a href="#" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
+                    <a href="https://wa.me/+905350303054" target="_blank" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
                        style="background-color: #77E75B">
                         <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 33 33" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -174,7 +204,7 @@
                         </svg>
                         WhatsApp
                     </a>
-                    <a href="#" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
+                    <a href="https://t.me/alitasin" target="_blank" class="flex justify-center items-center mb-2 py-2 text-white font-semibold rounded-md"
                        style="background-color: #3CA3E6">
                         <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 33 29" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -187,7 +217,7 @@
                         </svg>
                         Telegram
                     </a>
-                    <a href="#" class="flex justify-center items-center py-2 text-white font-semibold rounded-md"
+                    <a href="viber://add?number=905350303054" class="flex justify-center items-center py-2 text-white font-semibold rounded-md"
                        style="background-color: #7527F5">
                         <svg class="min-w-5 min-w-5 w-5 h-5 mr-3" viewBox="0 0 29 29" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
