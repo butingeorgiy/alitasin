@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Api\AuthenticationController@login');
     Route::post('reg', 'Api\AuthenticationController@reg');
