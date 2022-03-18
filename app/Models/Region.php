@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static find(array|string|null $input)
- * @method static where(string|array|\Closure $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')
- * @method static findOrFail($id)
  * @property int id
- * @property string $name
+ * @property string name
+ *
+ * @mixin Builder
  */
 class Region extends Model
 {
@@ -22,6 +22,6 @@ class Region extends Model
      */
     public function getNameAttribute()
     {
-        return $this[\App::getLocale() . '_name'];
+        return $this[app()->getLocale() . '_name'];
     }
 }

@@ -13,4 +13,7 @@ return [
     'real-estate' => 'Real estate',
     'create-vehicle' => 'Create vehicle',
     'edit-vehicle' => 'Edit vehicle',
+    'create-property' => 'Create property',
+    'edit-property' => 'Edit property',
+    'property' => 'Property'
 ];

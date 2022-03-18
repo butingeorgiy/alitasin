@@ -12,5 +12,8 @@ return [
     'vehicles' => 'Транспортні засоби',
     'real-estate' => 'Нерухомість',
     'create-vehicle' => 'Створити ТЗ',
-    'edit-vehicle' => 'Редагувати ТЗ'
+    'edit-vehicle' => 'Редагувати ТЗ',
+    'create-property' => 'Створення нерухомість',
+    'edit-property' => 'Редагувати властивість',
+    'property' => 'Mülk'
 ];

@@ -5,7 +5,6 @@
 @import "/css/lightgallery-bundle.min.css";
 @import "/css/lg-thumbnail.css";
 @import "/css/lg-zoom.css";
-@import "/fonts/lg.svg";
 
 @tailwind base;
 @tailwind components;
@@ -97,6 +96,7 @@ select::-ms-expand {
 .save-book-button,
 .save-partner-button,
 .save-vehicle-button,
+.save-property-button,
 .save-tour-button,
 .calculate-transfer-cost,
 .show-transfer-request-popup {
@@ -126,6 +126,8 @@ select::-ms-expand {
 .save-tour-button.disabled,
 .save-vehicle-button.disabled,
 .save-vehicle-button.loading,
+.save-property-button.disabled,
+.save-property-button.loading,
 .save-partner-button.loading,
 .make-partner-payment-button.loading,
 .update-profit-percent-button.loading,
@@ -150,6 +152,7 @@ select::-ms-expand {
 .save-partner-button.loading .animate-spin,
 .save-tour-button.loading .animate-spin,
 .save-vehicle-button.loading .animate-spin,
+.save-property-button.loading .animate-spin,
 .make-partner-payment-button.loading .animate-spin,
 .update-profit-percent-button.loading .animate-spin,
 .send-vehicle-order-button.loading .animate-spin,
@@ -159,59 +162,91 @@ select::-ms-expand {
 .create-airport-button.loading .animate-spin,
 .update-airport-button.loading .animate-spin,
 .create-destination-button.loading .animate-spin,
-.update-destination-button.loading .animate-spin{
+.update-destination-button.loading .animate-spin {
     @apply block;
 }
 
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
 }
 
 #createTourForm .image-item,
 #createVehicleForm .image-item,
+#createPropertyForm .image-item,
 #editTourForm .image-item,
-#editVehicleForm .image-item {
+#editVehicleForm .image-item,
+#editPropertyForm .image-item {
     @apply flex justify-center relative px-10 py-5 border-2 border-dashed border-black rounded-md cursor-pointer;
 }
 
 #createTourForm .image-item .remove-image-button,
 #createVehicleForm .image-item .remove-image-button,
+#createPropertyForm .image-item .remove-image-button,
 #editTourForm .image-item .remove-image-button,
-#editVehicleForm .image-item .remove-image-button {
+#editVehicleForm .image-item .remove-image-button,
+#editPropertyForm .image-item .remove-image-button {
     @apply hidden min-w-4 min-h-4 w-4 h-4 absolute -top-3 -right-1 text-red-500;
 }
 
 #createTourForm .image-item.filled,
+#createPropertyForm .image-item.filled,
 #editTourForm .image-item.filled {
     @apply border-none bg-cover bg-center bg-no-repeat;
 }
 
 #createVehicleForm .image-item.filled,
-#editVehicleForm .image-item.filled {
+#editVehicleForm .image-item.filled,
+#editPropertyForm .image-item.filled {
     @apply border-none bg-contain bg-center bg-no-repeat;
 }
 
 #createTourForm .image-item.filled .empty,
 #createVehicleForm .image-item.filled .empty,
+#createPropertyForm .image-item.filled .empty,
 #editTourForm .image-item.filled .empty,
-#editVehicleForm .image-item.filled .empty {
+#editVehicleForm .image-item.filled .empty,
+#editPropertyForm .image-item.filled .empty {
     @apply opacity-0;
 }
 
 #createTourForm .image-item.filled .remove-image-button,
 #createVehicleForm .image-item.filled .remove-image-button,
+#createPropertyForm .image-item.filled .remove-image-button,
 #editTourForm .image-item.filled .remove-image-button,
-#editVehicleForm .image-item.filled .remove-image-button {
+#editVehicleForm .image-item.filled .remove-image-button,
+#editPropertyForm .image-item.filled .remove-image-button {
     @apply block;
 }
 
@@ -221,8 +256,8 @@ select::-ms-expand {
 
 .transfer-type-tab-item {
     @apply py-3 text-center border-l-2 sm:border-l-0 border-r-2 sm:border-r-0
-           border-t-2 sm:border-t-0 border-b-2 rounded-md sm:rounded-none border-black
-           hover:text-blue hover:border-blue cursor-pointer transition-colors duration-200;
+    border-t-2 sm:border-t-0 border-b-2 rounded-md sm:rounded-none border-black
+    hover:text-blue hover:border-blue cursor-pointer transition-colors duration-200;
 }
 
 .transfer-type-tab-item.active {

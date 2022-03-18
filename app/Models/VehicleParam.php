@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class VehicleParam extends Model
 {
@@ -10,14 +11,15 @@ class VehicleParam extends Model
 
     protected $guarded = [];
 
+    # Other methods
 
     /**
-     * Get name
+     * Get type name by current locale.
      *
      * @return string
      */
-    public function getNameAttribute(): string
+    public function getLocaleName(): string
     {
-        return $this[\App::getLocale() . '_name'];
+        return $this[App::getLocale() . '_name'];
     }
 }

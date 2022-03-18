@@ -9,10 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int id
- * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
- * @method static int count()
- * @method static Builder matchedBy(int $airportId, int $destinationId) Find transfer by airport and destination.
- * @method static Transfer|Collection|null find(mixed $id)
+ *
+ * @mixin Builder
  */
 class Transfer extends Model
 {

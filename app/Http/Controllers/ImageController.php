@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller
 {
-    /**
-     * @throws FileNotFoundException
-     */
     public function get($dir, $file)
     {
-        if (!\Storage::exists($dir . '/' .  $file)) {
+        if (!Storage::exists($dir . '/' .  $file)) {
             abort(404);
         }
 
-        return Image::make(\Storage::get($dir . '/' .  $file))->response();
+        return Image::make(Storage::get($dir . '/' .  $file))->response();
     }
 }

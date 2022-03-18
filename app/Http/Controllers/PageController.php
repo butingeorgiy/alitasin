@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Auth;
+use App\Models\Property;
 use App\Models\Region;
 use App\Models\Reservation;
 use App\Models\Ticket;
@@ -365,5 +366,26 @@ class PageController extends Controller
     public function showTransfers()
     {
         return view('transfers');
+    }
+
+    public function showProperty(Request $request)
+    {
+        $propertyItems = Property::with(['title', 'description', 'images', 'params']);
+
+        if ($request->has('region_id')) {
+            $propertyItems->where('region_id', $request->input('region_id'));
+        }
+
+        if ($request->has('type_id')) {
+            $propertyItems->where('type_id', $request->input('type_id'));
+        }
+
+        if (Auth::check(['5'])) {
+            $propertyItems = $propertyItems->withTrashed()->get();
+        } else {
+            $propertyItems = $propertyItems->get();
+        }
+
+        return view('property', compact('propertyItems'));
     }
 }

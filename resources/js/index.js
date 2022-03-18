@@ -27,3 +27,6 @@ import './modules/updateDestination';
 import './modules/manageTransfers';
 import './modules/manageTransferVariations';
 import './modules/tourGallery';
+import './modules/createProperty';
+import './modules/updateProperty';
+import './modules/orderProperty'

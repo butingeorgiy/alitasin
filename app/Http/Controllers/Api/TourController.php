@@ -488,12 +488,14 @@ class TourController extends Controller
             throw new Exception(__('messages.tour-not-found'));
         }
 
-        if ($tour->images->count() > 5) {
+        if ($tour->images()->count() > 5) {
             throw new Exception(__('messages.tour-can-have-max-five-images'));
         }
 
         // File validation
-        $file = $request->file('image');
+        if (!$file = $request->file('image')) {
+            throw new Exception(__('messages.file-not-sent'));
+        }
 
         if ($file->getSize() > 2000000) {
             throw new Exception(__('messages.max-uploaded-file-size'));

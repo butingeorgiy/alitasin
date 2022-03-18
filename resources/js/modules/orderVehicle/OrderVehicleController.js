@@ -116,16 +116,7 @@ class OrderVehicleController extends EventHandler {
             dynamic: true,
             thumbnail: true,
             plugins: [lgThumbnail, lgZoom],
-            dynamicEl: [
-                {
-                    src: 'http://ali-tour.local/storage/vehicle_pictures/8xEPJ8k6iA7GdR.png',
-                    thumb: 'http://ali-tour.local/storage/vehicle_pictures/8xEPJ8k6iA7GdR.png',
-                },
-                {
-                    src: 'http://ali-tour.local/storage/vehicle_pictures/639Wk6V7PoesUR.png',
-                    thumb: 'http://ali-tour.local/storage/vehicle_pictures/639Wk6V7PoesUR.png',
-                }
-            ]
+            dynamicEl: []
         });
 
         this.nodes.vehicleCards.forEach((node, index) => {
@@ -222,10 +213,6 @@ class OrderVehicleController extends EventHandler {
 
         if (this.nodes.popup.querySelector('input[name="user_phone"]')) {
             formData.append('user_phone', this.nodes.popup.querySelector('input[name="user_phone"]').value.replace(/\D/g, ''));
-        }
-
-        if (this.nodes.popup.querySelector('input[name="location_region"]')) {
-            formData.append('location_region', this.nodes.popup.querySelector('input[name="location_region"]').value);
         }
 
         if (this.promoCode) {

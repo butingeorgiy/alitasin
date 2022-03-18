@@ -219,5 +219,10 @@ return [
     'choose-your-region' => 'Choose your region',
     'restore' => 'Restore',
     'vehicle-region-warning' => 'Not all vehicles are available in all regions, so first select the region of your location!',
-    'any' => 'Any'
+    'any' => 'Any',
+    'add-property' => 'Add property',
+    'property-type' => 'Property type',
+    'order-property' => 'Application for property',
+    'chosen-property' => 'Chosen property',
+    'cost-unit' => 'Cost unit'
 ];

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='{{ App::getLocale() }}'>
+<html lang='{{ app()->getLocale() }}'>
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport'
@@ -35,8 +35,10 @@
                 <p class="inline text-black text-2xl font-bold text-black">{{ __('short-phrases.vehicle-categories') }}<span class="text-blue">.</span></p>
             </div>
 
+            @php $vehicleTypes = App\Models\VehicleType::all(); @endphp
+
             <div class="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach(App\Models\VehicleType::all() as $item)
+                @foreach($vehicleTypes as $item)
                     <a href="{{ route('vehicles', ['vehicle_type_id' => $item->id]) }}"
                        class="flex justify-center items-center text-white text-3xl font-semibold tracking-wide bg-cover bg-center bg-no-repeat shadow rounded-md
                        {{ (int) request()->input('vehicle_type_id') === $item->id ? 'underline' : ''  }}"
@@ -48,7 +50,7 @@
 
             <div class="block sm:hidden swiper-container -mx-3">
                 <div class="swiper-wrapper -mx-2 px-5 py-2">
-                    @foreach(App\Models\VehicleType::all() as $item)
+                    @foreach($vehicleTypes as $item)
                         <a href="{{ route('vehicles', ['vehicle_type_id' => $item->id]) }}"
                            class="swiper-slide relative flex justify-center items-center w-72 text-white text-3xl font-bold tracking-wide bg-center bg-cover bg-no-repeat rounded-md
                            {{ (int) request()->input('vehicle_type_id') === $item->id ? 'underline' : ''  }}"
@@ -97,7 +99,7 @@
                         <p class="mb-4 text-2xl text-black font-medium">{{ $vehicle->brand }}&nbsp;<span class="text-gray-600">{{ $vehicle->model }}</span></p>
                         <div class="flex flex-wrap mb-auto">
                             @foreach($vehicle->params as $param)
-                                <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">{{ $param->name }}:&nbsp;<span class="text-black font-semibold">{{ $param->pivot[App::getLocale() . '_value'] }}</span></p>
+                                <p class="mr-5 last:mr-0 mb-3 text-sm text-gray-600">{{ $param->getLocaleName() }}:&nbsp;<span class="text-black font-semibold">{{ $param->pivot[app()->getLocale() . '_value'] }}</span></p>
                             @endforeach
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mt-5">

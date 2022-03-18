@@ -12,5 +12,8 @@ return [
     'vehicles' => 'Транспорт',
     'real-estate' => 'Недвижимость',
     'create-vehicle' => 'Создать ТС',
-    'edit-vehicle' => 'Редактировать ТС'
+    'edit-vehicle' => 'Редактировать ТС',
+    'create-property' => 'Создать недвижимость',
+    'edit-property' => 'Редактировать недвижимость',
+    'property' => 'Недвижимость'
 ];

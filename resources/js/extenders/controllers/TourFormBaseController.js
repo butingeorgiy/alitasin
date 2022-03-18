@@ -3,6 +3,7 @@ import TomSelect from 'tom-select/dist/js/tom-select.complete.min';
 import LocaleHelper from '../../helpers/LocaleHelper';
 import PopupObserver from '../../observers/PopupObserver';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CreateVehicleView from '../../modules/createVehicle/CreateVehicleView';
 
 class TourFormBaseController extends EventHandler {
     constructor(nodes) {
@@ -20,7 +21,8 @@ class TourFormBaseController extends EventHandler {
         this.additions = [];
         this.params = [];
 
-        if (/(admin\/tours\/create)|(admin\/tours\/update\/\d+)/.test(location.pathname)) {
+        if (/(admin\/tours\/create)|(admin\/tours\/update\/\d+)|(admin\/properties\/create)|(admin\/properties\/update\/\d+)/
+            .test(location.pathname)) {
             this.initDescriptionEditors();
         }
 
@@ -41,6 +43,35 @@ class TourFormBaseController extends EventHandler {
                 this.paramPopup.open(_ => this.beforeParamPopupOpenHandler());
             });
         }
+    }
+
+    initImageBoxes(items) {
+        items.forEach(item => {
+            const fileInput = item.querySelector('input[type="file"]');
+
+            this.addEvent(fileInput, 'change', e => {
+                const file = e.target.files[0];
+
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = f => CreateVehicleView.renderImage(item, f.target.result);
+                    reader.readAsDataURL(file);
+
+                    this.addEvent(item.querySelector('.remove-image-button'), 'click', e => {
+                        e.preventDefault();
+                        this.dropImage(item);
+                    });
+                }
+            });
+        });
+    }
+
+    dropImage(item) {
+        CreateVehicleView.removeImage(item);
+        item.querySelector('input[type="file"]').value = '';
+
+        this.removeAllListeners(item.querySelector('.remove-image-button'), 'click');
     }
 
     initDescriptionEditors() {

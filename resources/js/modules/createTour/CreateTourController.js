@@ -20,35 +20,6 @@ class CreateTourController extends TourFormBaseController {
         this.initWeekDaysSelect('#createTourForm select[name="conduct_at"]');
     }
 
-    initImageBoxes(items) {
-        items.forEach(item => {
-            const fileInput = item.querySelector('input[type="file"]');
-
-            this.addEvent(fileInput, 'change', e => {
-                const file = e.target.files[0];
-
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = f => CreateTourView.renderImage(item, f.target.result);
-                    reader.readAsDataURL(file);
-
-                    this.addEvent(item.querySelector('.remove-image-button'), 'click', e => {
-                        e.preventDefault();
-                        this.dropImage(item);
-                    });
-                }
-            });
-        });
-    }
-
-    dropImage(item) {
-        CreateTourView.removeImage(item);
-        item.querySelector('input[type="file"]').value = '';
-
-        this.removeAllListeners(item.querySelector('.remove-image-button'), 'click');
-    }
-
     saveTour(form) {
         this.view.showLoader();
         this.view.hideMessages();

@@ -43,6 +43,17 @@ Route::group(['prefix' => 'vehicles'], function() {
     Route::post('{vehicleId}/update/upload-image', 'Api\VehicleController@updateImage')->middleware('auth:5');
 });
 
+Route::group(['prefix' => 'properties'], function () {
+    Route::post('create', 'Api\PropertyController@create')->middleware('auth:5');
+    Route::post('{id}/update', 'Api\PropertyController@update')->middleware('auth:5');
+    Route::post('{id}/delete', 'Api\PropertyController@delete')->middleware('auth:5');
+    Route::post('{id}/restore', 'Api\PropertyController@restore')->middleware('auth:5');
+    Route::post('{id}/update/change-main-image', 'Api\PropertyController@changeMainImage')->middleware('auth:5');
+    Route::post('{id}/update/remove-image', 'Api\PropertyController@deleteImage')->middleware('auth:5');
+    Route::post('{id}/update/upload-image', 'Api\PropertyController@uploadImage')->middleware('auth:5');
+    Route::post('{id}/order', 'Api\PropertyController@order');
+});
+
 Route::group(['prefix' => 'reserves'], function () {
     Route::post('update/{reservationId}/status', 'Api\ReservationController@updateStatus')->middleware('auth:4');
 });

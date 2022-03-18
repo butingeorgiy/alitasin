@@ -9,10 +9,10 @@
                 <a href="/#regionsSection" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.tours') }}</a>
 
                 <!-- Tours submenu -->
-                <div class="hidden group-hover:block origin-top-right absolute left-0 top-full z-10 w-56 rounded-md shadow-lg bg-white border border-gray-200"
+                <div class="hidden group-hover:block origin-top-right absolute left-0 top-full z-20 w-56 rounded-md shadow-lg bg-white border border-gray-200"
                      role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <div class="py-1 rounded-md overflow-hidden" role="none">
-                        @foreach(\App\Models\Region::all() as $region)
+                        @foreach(App\Models\Region::all() as $region)
                             <a href="{{ route('region', $region->id) }}" class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100">
                                 {{ $region->name }}
                             </a>
@@ -23,12 +23,12 @@
             <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.rental-cars') }}</a>
             <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.rental-yachts') }}</a>
             <a href="{{ route('transfers') }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.transfers') }}</a>
-            <a href="#" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.property') }}</a>
+            <a href="{{ route('property') }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.property') }}</a>
             <a href="#" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.medical-tourism') }}</a>
             <a href="/#contacts" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.contacts') }}</a>
-            @if(\App\Facades\Auth::check())
+            @if(App\Facades\Auth::check())
                 @if(!request()->is('admin/*', 'profile/*'))
-                    @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
+                    @if(in_array(App\Facades\Auth::user()->account_type_id, ['1', '2']))
                         <a href="{{ route('profile-index') }}" class="text-black font-medium hover:underline">
                             {{ __('buttons.move-to-cabinet') }}
                         </a>
@@ -40,8 +40,8 @@
                 @endif
                 <a href="{{ route('logout') }}" class="ml-8 text-red font-medium hover:underline">{{ __('buttons.exit') }}</a>
             @else
-                <div class="show-login-popup-button mr-8 text-black font-medium hover:underline">{{ __('buttons.login') }}</div>
-                <div class="show-reg-popup-button text-black font-medium hover:underline">{{ __('buttons.reg') }}</div>
+                <div class="show-login-popup-button mr-8 text-black font-medium hover:underline cursor-pointer">{{ __('buttons.login') }}</div>
+                <div class="show-reg-popup-button text-black font-medium hover:underline cursor-pointer">{{ __('buttons.reg') }}</div>
             @endif
                 <select class="ml-8 cursor-pointer bg-white text-blue" name="language">
                     @foreach(['ru', 'en', 'tr', 'ua'] as $lang)
@@ -59,9 +59,9 @@
 
         <div class="mobile-menu hidden absolute top-full left-0 z-50 w-full pb-10 bg-white shadow-md transition-all duration-150 transform opacity-0 scale-95">
             <div class="grid grid-cols-2 gap-5 px-5 py-6 bg-gray-1000">
-                @if(\App\Facades\Auth::check())
+                @if(App\Facades\Auth::check())
                     @if(!request()->is('admin/*', 'profile/*'))
-                        @if(in_array(\App\Facades\Auth::user()->account_type_id, ['1', '2']))
+                        @if(in_array(App\Facades\Auth::user()->account_type_id, ['1', '2']))
                             <a href="{{ route('profile-index') }}" class="flex justify-center px-3 py-1.5 text-sm text-black font-medium bg-white border border-gray-1100 rounded-md">
                                 {{ __('buttons.move-to-cabinet') }}
                             </a>
@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="hidden group-hover:flex flex-col mt-4">
-                        @foreach(\App\Models\Region::all() as $region)
+                        @foreach(App\Models\Region::all() as $region)
                             <a href="{{ route('region', $region->id) }}" class="mb-4 text-sm text-center text-black font-medium">{{ $region->name }}</a>
                         @endforeach
                     </div>
@@ -97,7 +97,7 @@
                 <a href="{{ route('vehicles', ['vehicle_type_id' => 1]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.cars-rental') }}</a>
                 <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.yachts-rental') }}</a>
                 <a href="{{ route('transfers') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.transfers') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.property') }}</a>
+                <a href="{{ route('property') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.property') }}</a>
                 <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.medical-tourism') }}</a>
                 <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.reviews') }}</a>
                 <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.contacts') }}</a>

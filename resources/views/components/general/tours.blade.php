@@ -31,8 +31,8 @@
                 </svg>
             </a>
 
-            <a href="#" class="flex flex items-center group cursor-not-allowed">
-                <span class="mr-4 inline text-blue text-2xl">{{ __('short-phrases.property') }}</span>
+            <a href="{{ route('create-property') }}" class="flex flex items-center group">
+                <span class="mr-4 inline text-blue text-2xl">{{ __('short-phrases.add-property') }}</span>
                 <svg class="w-3" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.875 28.75L16.125 15.5L2.875 2.25" stroke="#0094FF" stroke-width="3"
                           stroke-linecap="round" stroke-linejoin="round"/>

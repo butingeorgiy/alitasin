@@ -2,29 +2,43 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static VehicleType findOrFail(int|string|null $input)
- * @method static VehicleType find(int|string|null $input)
+ * @property int id
+ * @property string en_name
+ * @property string ru_name
+ * @property string tr_name
+ * @property string ua_name
+ * @property string|null image
+ *
+ * @mixin Builder
  */
 class VehicleType extends Model
 {
     /**
-     * Get name
+     * Interact with `name` property.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getNameAttribute(): string
+    protected function name(): Attribute
     {
-        return $this[\App::getLocale() . '_name'];
+        return Attribute::make(
+            get: fn (): ?string => $this[app()->getLocale() . '_name']
+        );
     }
 
-    public function getImageAttribute(): string
+    /**
+     * Interact with `image` property.
+     *
+     * @return Attribute
+     */
+    protected function image(): Attribute
     {
-        return route('get-image', [
-            'dir' => 'vehicle_types',
-            'file' => $this->getOriginal('image')
-        ]);
+        return Attribute::make(
+            get: fn ($value): string => asset('storage/vehicle_types/' . $value)
+        );
     }
 }

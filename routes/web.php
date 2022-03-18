@@ -1,11 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('', 'PageController@showIndex')->name('index');
 Route::get('logout', 'AuthenticationController@logout')->name('logout');
 Route::get('regions/{id}', 'PageController@showRegion')->name('region');
 Route::get('tours/{id}', 'PageController@showTour')->name('tour');
 Route::get('vehicles', 'PageController@showVehicles')->name('vehicles');
 Route::get('transfers', 'PageController@showTransfers')->name('transfers');
+Route::get('property', 'PageController@showProperty')->name('property');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('', 'PageController@profileIndex')->middleware('auth:1,2')->name('profile-index');
@@ -25,8 +28,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('partners', 'PartnerController@showAll')->middleware('auth:5')->name('partners');
     Route::get('partners/{id}', 'PartnerController@show')->middleware('auth:5')->name('partner');
 
-    Route::get('vehicles/create', 'VehicleController@showCreateForm')->middleware('auth:5')->name('create-vehicle');
-    Route::get('vehicles/update/{id}', 'VehicleController@showEditForm')->middleware('auth:5')->name('edit-vehicle');
+    Route::group(['prefix' => 'vehicles'], function () {
+        Route::get('create', 'VehicleController@showCreateForm')->middleware('auth:5')->name('create-vehicle');
+        Route::get('update/{id}', 'VehicleController@showEditForm')->middleware('auth:5')->name('edit-vehicle');
+    });
+
+    Route::group(['prefix' => 'properties'], function () {
+        Route::get('create', 'PropertyController@showCreateForm')->middleware('auth:5')->name('create-property');
+        Route::get('update/{id}', 'PropertyController@showEditForm')->middleware('auth:5')->name('edit-property');
+    });
 
     Route::get('transfers', 'TransferController@showEditForm')->middleware('auth:5')->name('edit-transfers');
 });

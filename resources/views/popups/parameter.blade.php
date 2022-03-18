@@ -10,8 +10,8 @@
         <label class="mb-4 px-3 py-2 border-2 border-gray-100 bg-gray-100 rounded-md cursor-pointer">
             <select class="w-full text-black placeholder-black tracking-wider bg-gray-100 appearance-none cursor-pointer" name="vehicle_param_id">
                 <option value="">{{ __('short-phrases.nothing-chosen') }}</option>
-                @foreach(\App\Models\VehicleParam::all() as $param)
-                    <option value="{{ $param->id . '~' . $param->name }}">{{ $param->name }}</option>
+                @foreach(request()->is('admin/properties/*') ? App\Models\PropertyParam::all() : App\Models\VehicleParam::all() as $param)
+                    <option value="{{ $param->id . '~' . $param->getLocaleName() }}">{{ $param->getLocaleName() }}</option>
                 @endforeach
             </select>
         </label>

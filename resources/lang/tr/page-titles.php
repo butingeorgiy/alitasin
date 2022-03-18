@@ -12,5 +12,8 @@ return [
     'vehicles' => 'Araçlar',
     'real-estate' => 'Emlak',
     'create-vehicle' => 'Araç oluştur',
-    'edit-vehicle' => 'Aracı düzenle'
+    'edit-vehicle' => 'Aracı düzenle',
+    'create-property' => 'Mülk oluştur',
+    'edit-property' => 'Mülkü düzenle',
+    'property' => 'Mülk'
 ];

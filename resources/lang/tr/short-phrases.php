@@ -220,5 +220,10 @@ return [
     'choose-your-region' => 'Bölgeni seç',
     'restore' => 'Onarmak',
     'vehicle-region-warning' => 'Tüm araçlar tüm bölgelerde mevcut değildir, bu nedenle önce bulunduğunuz bölgeyi seçin!',
-    'any' => 'Herhangi'
+    'any' => 'Herhangi',
+    'add-property' => 'Mülk ekle',
+    'property-type' => 'Emlak Tipi',
+    'order-property' => 'Mülkiyet başvurusu',
+    'chosen-property' => 'Seçilen mülk',
+    'cost-unit' => 'Maliyet birimi'
 ];
