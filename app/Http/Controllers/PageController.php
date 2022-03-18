@@ -27,10 +27,7 @@ class PageController extends Controller
         $regions = Region::where('show_at_index_page', '1')->get();
 
         foreach ($regions as $region) {
-            $region->image = route('get-image', [
-                'dir' => 'region_pictures',
-                'file' => 'region-' . $region->id . '-s.jpg'
-            ]);
+            $region->image = asset('storage/region_pictures/region-' . $region->id . '-s.jpg');
         }
 
         $tours = Tour::with(['title', 'description', 'images', 'type', 'filters'])->limit(15)->get();
