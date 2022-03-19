@@ -13,10 +13,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class VehicleImage extends Model
 {
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     *
+     * @var array
+     */
     protected $guarded = [];
-
 
     /**
      * Check if image is main

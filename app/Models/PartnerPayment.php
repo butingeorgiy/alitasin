@@ -10,7 +10,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PartnerPayment extends Model
 {
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     *
+     * @var array
+     */
     protected $guarded = [];
 }

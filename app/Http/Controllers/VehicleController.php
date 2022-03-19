@@ -3,21 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class VehicleController extends Controller
 {
-    public function showCreateForm()
+    /**
+     * Show vehicle creation form.
+     *
+     * @return Application|Factory|View
+     */
+    public function showCreateForm(): Application|Factory|View
     {
         return view('admin.create-vehicle');
     }
 
-    public function showEditForm($id)
+    /**
+     * Show vehicle editing form.
+     *
+     * @param $id
+     *
+     * @return Application|Factory|View
+     */
+    public function showEditForm($id): Application|Factory|View
     {
+        /** @var Vehicle $vehicle */
         $vehicle = Vehicle::withTrashed()->findOrFail($id);
 
         foreach ($vehicle->params as $param) {
-            $param->name = $param[\App::getLocale() . '_name'];
+            $param->name = $param[app()->getLocale() . '_name'];
             $param->en_value = $param->getOriginal('pivot_en_value');
             $param->ru_value = $param->getOriginal('pivot_ru_value');
             $param->tr_value = $param->getOriginal('pivot_tr_value');

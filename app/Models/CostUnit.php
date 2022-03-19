@@ -20,6 +20,6 @@ class CostUnit extends Model
      */
     public function getLocaleName(): ?string
     {
-        return $this[App::getLocale() . '_name'];
+        return $this[app()->getLocale() . '_name'];
     }
 }

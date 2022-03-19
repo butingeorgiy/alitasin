@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,31 +43,27 @@ class Reservation extends Model
     }
 
     /**
-     * Format date after retrieving
+     * Interact with reservation's date.
      *
-     * @return string|null
+     * @return Attribute
      */
-    public function getDateAttribute(): ?string
+    public function date(): Attribute
     {
-        if ($date = $this->getOriginal('date')) {
-            return Carbon::parse($date)->format('d.m.Y');
-        }
-
-        return null;
+        return Attribute::make(
+            get: fn ($value): ?string => is_null($value) ? null : Carbon::parse($value)->format('d.m.Y')
+        );
     }
 
     /**
-     * Format time after retrieving
+     * Interact with reservation's time.
      *
-     * @return string|null
+     * @return Attribute
      */
-    public function getTimeAttribute(): ?string
+    public function time(): Attribute
     {
-        if ($date = $this->getOriginal('time')) {
-            return Carbon::parse($date)->format('H:i');
-        }
-
-        return null;
+        return Attribute::make(
+            get: fn ($value): ?string => is_null($value) ? null : Carbon::parse($value)->format('H:i')
+        );
     }
 
     /**

@@ -2150,7 +2150,7 @@ var BookTourController = /*#__PURE__*/function (_EventHandler) {
       }
 
       var allowDays = [];
-      input.getAttribute('data-allow-days').split('~').forEach(function (day) {
+      JSON.parse(input.getAttribute('data-allow-days')).forEach(function (day) {
         switch (day) {
           case 'mon':
             allowDays.push(1);

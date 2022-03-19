@@ -4,32 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Facades\Auth;
 use App\Models\Tour;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class TourController extends Controller
 {
     /**
-     * Show creation form
+     * Show creation form.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function showCreateForm()
+    public function showCreateForm(): Application|Factory|View
     {
         return view('admin.create-tour');
     }
 
     /**
-     * Show editing form
+     * Show editing form.
      *
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return Application|Factory|View
      */
-    public function showEditForm($id)
+    public function showEditForm($id): Application|Factory|View
     {
+        /** @var Tour $tour */
         $tour = Tour::with(['title', 'description', 'images', 'type', 'manager', 'region', 'filters', 'additions'])->findOrFail($id);
 
         foreach ($tour->additions as $addition) {
-            $addition->title = $addition[\App::getLocale() . '_title'];
+            $addition->title = $addition[app()->getLocale() . '_title'];
             $addition->en_description = $addition->getOriginal('pivot_en_description');
             $addition->ru_description = $addition->getOriginal('pivot_ru_description');
             $addition->tr_description = $addition->getOriginal('pivot_tr_description');
@@ -42,7 +47,12 @@ class TourController extends Controller
         return view('admin.edit-tour', compact('tour'));
     }
 
-    public function showAll()
+    /**
+     * Show all tours.
+     *
+     * @return Application|Factory|View
+     */
+    public function showAll(): Application|Factory|View
     {
         $user = Auth::user();
 

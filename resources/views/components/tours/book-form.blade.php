@@ -98,7 +98,7 @@
                 <div class="w-full md:w-auto">
                     <div class="date-picker-container flex justify-center mb-5 mt-3 md:mt-0">
                         <input type="text" hidden name="tour_date" class="ml-auto border border-black"
-                               data-allow-days="{{ $tour->getOriginal('conducted_at') }}">
+                               data-allow-days="{{ json_encode($tour->getOriginal('conducted_at')) }}">
                     </div>
 
                     <div class="flex items-end px-4 pt-4 pb-3 bg-white shadow-sm rounded-md">

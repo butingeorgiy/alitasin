@@ -197,7 +197,7 @@ class BookTourController extends EventHandler {
 
         const allowDays = [];
 
-        input.getAttribute('data-allow-days').split('~').forEach(day => {
+        JSON.parse(input.getAttribute('data-allow-days')).forEach(day => {
             switch (day) {
                 case 'mon':
                     allowDays.push(1);

@@ -2,22 +2,37 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static find(array|string|null $input)
+ * @property int id
+ * @property string ru_name
+ * @property string en_name
+ * @property string tr_name
+ * @property string ua_name
+ *
+ * @mixin Builder
  */
 class TourType extends Model
 {
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
     /**
      * Get type's name according app locale
      *
-     * @return mixed
+     * @return Attribute
      */
-    public function getNameAttribute()
+    public function name(): Attribute
     {
-        return $this[\App::getLocale() . '_name'];
+        return Attribute::make(
+            get: fn (): string => $this[app()->getLocale() . '_name']
+        );
     }
 }

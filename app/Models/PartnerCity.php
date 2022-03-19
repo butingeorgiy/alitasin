@@ -10,14 +10,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PartnerCity extends Model
 {
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     *
+     * @var string[]
+     */
     protected $fillable = [
         'partner_id',
         'city'
     ];
 
+    /**
+     * @inheritdoc
+     *
+     * @var null
+     */
     protected $primaryKey = null;
 
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $incrementing = false;
 }

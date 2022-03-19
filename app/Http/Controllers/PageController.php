@@ -11,18 +11,24 @@ use App\Models\Tour;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class PageController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * Show index page.
+     *
+     * @return Application|Factory|View
+     *
+     * @throws FileNotFoundException
      */
-    public function showIndex()
+    public function showIndex(): Application|Factory|View
     {
         $regions = Region::where('show_at_index_page', '1')->get();
 
@@ -116,6 +122,8 @@ class PageController extends Controller
     }
 
     /**
+     * Redirect on admin index.
+     *
      * @return RedirectResponse
      */
     public function adminIndex(): RedirectResponse
@@ -132,6 +140,8 @@ class PageController extends Controller
     }
 
     /**
+     * Redirect on profile index page.
+     *
      * @return RedirectResponse
      */
     public function profileIndex(): RedirectResponse
@@ -148,10 +158,13 @@ class PageController extends Controller
     }
 
     /**
+     * Show region page.
+     *
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return Application|Factory|View
      */
-    public function showRegion($id)
+    public function showRegion($id): Application|Factory|View
     {
         $currentRegion = Region::findOrFail($id);
 
@@ -194,11 +207,15 @@ class PageController extends Controller
     }
 
     /**
+     * Show specific tour page.
+     *
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return Application|Factory|View
      */
-    public function showTour($id)
+    public function showTour($id): Application|Factory|View
     {
+        /** @var Tour $tour */
         $tour = Tour::with(['title', 'description', 'region', 'additions'])->findOrFail($id);
         $mainImage = null;
 
@@ -230,8 +247,8 @@ class PageController extends Controller
         }
 
         foreach ($tour->additions as $addition) {
-            $addition->title = $addition[App::getLocale() . '_title'];
-            $addition->description = $addition->getOriginal('pivot_' . \App::getLocale() . '_description');
+            $addition->title = $addition[app()->getLocale() . '_title'];
+            $addition->description = $addition->getOriginal('pivot_' . app()->getLocale() . '_description');
             $addition->is_include = $addition->getOriginal('pivot_is_include');
         }
 
@@ -240,7 +257,12 @@ class PageController extends Controller
         return view('tour', compact('tour', 'mainImage', 'user'));
     }
 
-    public function showClientProfile()
+    /**
+     * Show client profile page.
+     *
+     * @return Application|Factory|View
+     */
+    public function showClientProfile(): Application|Factory|View
     {
         $user = Auth::user();
 
@@ -281,7 +303,12 @@ class PageController extends Controller
         return view('profile.client', compact('user', 'recentViewed', 'reservedTours', 'favoriteTours'));
     }
 
-    public function showPartnerProfile()
+    /**
+     * Show partner profile page.
+     *
+     * @return Application|Factory|View
+     */
+    public function showPartnerProfile(): Application|Factory|View
     {
         /** @var User|null $user */
         $user = Auth::user();
@@ -333,7 +360,14 @@ class PageController extends Controller
         return view('profile.partner', compact('user', 'reservations'));
     }
 
-    public function showVehicles(Request $request)
+    /**
+     * Show vehicle page.
+     *
+     * @param Request $request
+     *
+     * @return Application|Factory|View|RedirectResponse
+     */
+    public function showVehicles(Request $request): Application|Factory|View|RedirectResponse
     {
         if (!$request->has('vehicle_type_id')) {
             return redirect()->route('vehicles', [
@@ -360,13 +394,26 @@ class PageController extends Controller
         return view('vehicles', compact('vehicles'));
     }
 
-    public function showTransfers()
+    /**
+     * Show transfers page.
+     *
+     * @return Application|Factory|View
+     */
+    public function showTransfers(): Application|Factory|View
     {
         return view('transfers');
     }
 
-    public function showProperty(Request $request)
+    /**
+     * Show property page.
+     *
+     * @param Request $request
+     *
+     * @return Application|Factory|View
+     */
+    public function showProperty(Request $request): Application|Factory|View
     {
+        /** @var Property $propertyItems */
         $propertyItems = Property::with(['title', 'description', 'images', 'params']);
 
         if ($request->has('region_id')) {

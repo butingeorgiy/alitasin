@@ -5,6 +5,7 @@ namespace App\Models;
 use App;
 use App\Facades\RusDecl;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,11 +15,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
- * @method static Tour find(mixed $tourId)
- * @method static findOrFail($id)
- * @method static byManager($managerId)
- * @method static int count()
- * @method static Builder where(string|array $param1, mixed $param2 = null, mixed $param3 = null)
  * @property mixed id
  * @property array conducted_at
  * @property mixed manager_id
@@ -35,6 +31,8 @@ use Illuminate\Support\Carbon;
  * @property string|null departure_time
  * @property string|null check_out_time
  * @property string|null execution_period
+ *
+ * @mixin Builder
  */
 class Tour extends Model
 {
@@ -185,7 +183,8 @@ class Tour extends Model
      * Convert conducted_at field to array
      *
      * @param $value
-     * @return array|null
+     *
+     * @return array
      */
     public function getConductedAtAttribute($value): array
     {
@@ -272,27 +271,35 @@ class Tour extends Model
     public function scopeSearch($query, string $searchString)
     {
         return $query->selectRaw(
-            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . App::getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
+            'CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(tour_titles.' . app()->getLocale() . ', \' \', \'\')), ?, \'~\', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
             [str_replace(' ', '|', $searchString)]
         )->having('frequency', '>', 0)->orderByDesc('frequency');
     }
 
-    public function getDepartureTimeAttribute(): ?string
+    /**
+     * Interact with tour's departure time.
+     *
+     * @return Attribute
+     */
+    public function departureTime(): Attribute
     {
-        if (!$this->getOriginal('departure_time')) {
-            return null;
-        }
-
-        return Carbon::parse($this->getOriginal('departure_time'))->format('H:i');
+        return Attribute::make(
+            get: fn ($value): ?string => is_null($value) ? null
+                : Carbon::parse($value)->format('H:i')
+        );
     }
 
-    public function getCheckOutTimeAttribute(): ?string
+    /**
+     * Interact with tour's check out time.
+     *
+     * @return Attribute
+     */
+    public function checkOutTime(): Attribute
     {
-        if (!$this->getOriginal('check_out_time')) {
-            return null;
-        }
-
-        return Carbon::parse($this->getOriginal('check_out_time'))->format('H:i');
+        return Attribute::make(
+            get: fn ($value): ?string => is_null($value) ? null
+                : Carbon::parse($value)->format('H:i')
+        );
     }
 
     public function getExecutionPeriodAttribute(): ?string

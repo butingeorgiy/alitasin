@@ -46,7 +46,7 @@ class AuthenticationService
             'status' => true,
             'redirect_to' => $redirectTo,
             'cookies' => [
-                'id' => encrypt($user->id, false),
+                'id' => encrypt($user->id),
                 'token' => $token
             ]
         ];
@@ -75,7 +75,7 @@ class AuthenticationService
         if ($isAuth !== true) {
             return null;
         } else {
-            return User::find(request()->cookie('id'));
+            return User::find(decrypt(request()->cookie('id')));
         }
     }
 

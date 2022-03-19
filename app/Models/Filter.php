@@ -2,19 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Filter extends Model
 {
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
     /**
-     * Get filter's name according app locale
+     * Get filter's name according app locale.
      *
-     * @return mixed
+     * @return Attribute
      */
-    public function getNameAttribute()
+    public function name(): Attribute
     {
-        return $this[\App::getLocale() . '_name'];
+        return Attribute::make(
+            get: fn (): ?string => $this[app()->getLocale() . '_name']
+        );
     }
 }

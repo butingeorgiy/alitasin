@@ -1,6 +1,12 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Facades\Auth;
+
+Route::get('auth-test', function (Request $request) {
+    dump(Auth::user());
+});
 
 Route::get('', 'PageController@showIndex')->name('index');
 Route::get('logout', 'AuthenticationController@logout')->name('logout');

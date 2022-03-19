@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\App;
 
 /**
  * @method static Airport|Collection|null find(mixed $primaryKey)
@@ -13,26 +13,42 @@ use Illuminate\Support\Facades\App;
  * @property string ru_name
  * @property string tr_name
  * @property string ua_name
+ * @property string|null name
  */
 class Airport extends Model
 {
     use SoftDeletes;
 
-
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     *
+     * @var array
+     */
     protected $guarded = [];
 
+    /**
+     * @inheritdoc
+     *
+     * @var string[]
+     */
     protected $appends = ['name'];
 
-
     /**
-     * Get localized name
+     * Get localized name.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getNameAttribute(): string
+    public function name(): Attribute
     {
-        return $this[App::getLocale() . '_name'];
+        return Attribute::make(
+            get: fn (): ?string => $this[app()->getLocale() . '_name']
+        );
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,12 +16,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string model
  * @property string show_at_index_page
  * @property int cost
- * @property mixed images
- * @property mixed params
  * @property string|null main_image
  * @property string[] extra_images
  * @property VehicleType type
  * @property Region region
+ *
+ * @property Collection<VehicleParam> params
+ * @property Collection<VehicleImage> images
+ * @property Collection<VehicleOrder> orders
  *
  * @mixin Builder
  */
@@ -28,14 +31,22 @@ class Vehicle extends Model
 {
     use SoftDeletes;
 
-
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     *
+     * @var array
+     */
     protected $guarded = [];
 
-
     /**
-     * Get vehicle's type
+     * Get vehicle's type.
      *
      * @return BelongsTo
      */
@@ -55,7 +66,7 @@ class Vehicle extends Model
     }
 
     /**
-     * Get vehicle's images
+     * Get vehicle's images.
      *
      * @return HasMany
      */
@@ -65,7 +76,7 @@ class Vehicle extends Model
     }
 
     /**
-     * Get vehicle's params
+     * Get vehicle's params.
      *
      * @return BelongsToMany
      */
@@ -148,9 +159,9 @@ class Vehicle extends Model
     /**
      * Get vehicle's main image instance.
      *
-     * @return Model|HasMany|object|null
+     * @return Model|HasMany|null
      */
-    public function mainImage()
+    public function mainImage(): Model|HasMany|null
     {
         return $this->images()->where('is_main', '1')
             ->limit(1)->first();

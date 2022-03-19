@@ -27,8 +27,8 @@ class TokenService
     public function check($accountTypes = null): bool
     {
         try {
-            $id = request()->cookie('id');
-            $token = request()->cookie('token');
+            $id = decrypt(request()->cookie('id'));
+            $token = decrypt(request()->cookie('token'));
         } catch (Throwable $e) {
             throw new Exception('Failed to decrypt cookies!');
         }
@@ -92,7 +92,7 @@ class TokenService
 
     private function encrypt($tokenHash): string
     {
-        return encrypt($tokenHash, false);
+        return encrypt($tokenHash);
     }
 
     private function createHash($user, $token): string

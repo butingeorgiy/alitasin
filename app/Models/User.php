@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Facades\Hash;
 use App\Traits\PartnerCalculator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -85,21 +86,43 @@ class User extends Model
         return $query->where('account_type_id', '2');
     }
 
-    public function getPhoneAttribute(): ?string
+    /**
+     * Interact with user's phone.
+     *
+     * @return Attribute
+     */
+    public function phone(): Attribute
     {
-        $phoneCode = $this->phone_code;
-        $phone = $this->getOriginal('phone');
+        return Attribute::make(
+            get: function ($value, $attributes) {
+                if (!$attributes['phone_code'] or !$value) {
+                    return null;
+                }
 
-        if (!$phoneCode or !$phone) {
-            return null;
-        }
+                if (preg_match('/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $attributes['phone_code'] . $value, $matches)) {
+                    return $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
+                }
 
-        if (preg_match('/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone, $matches)) {
-            return $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
-        }
-
-        return null;
+                return null;
+            }
+        );
     }
+
+//    public function getPhoneAttribute(): ?string
+//    {
+//        $phoneCode = $this->phone_code;
+//        $phone = $this->getOriginal('phone');
+//
+//        if (!$phoneCode or !$phone) {
+//            return null;
+//        }
+//
+//        if (preg_match('/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone, $matches)) {
+//            return $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
+//        }
+//
+//        return null;
+//    }
 
     /**
      * @return string
