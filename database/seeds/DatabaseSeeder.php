@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
              FiltersSeeder::class,
              TicketsSeeder::class,
              ReservationStatusesSeeder::class,
-             PropertyTypesSeeder::class
+             PropertyTypesSeeder::class,
+             PropertyParamsSeeder::class
          ]);
     }
 }
