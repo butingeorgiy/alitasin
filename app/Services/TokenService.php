@@ -11,14 +11,19 @@ use Illuminate\Support\Str;
 
 class TokenService
 {
+    /**
+     * @param $user
+     *
+     * @return string
+     *
+     * @throws Exception
+     */
     public function create($user): string
     {
         $token = self::generate();
 
         if (self::insertToDatabase($user, $token)) {
-            $tokenHash = self::createHash($user, $token);
-
-            return self::encrypt($tokenHash);
+            return encrypt(self::createHash($user, $token));
         } else {
             throw new Exception('Failed to insert token to database!');
         }
@@ -29,7 +34,7 @@ class TokenService
         try {
             $id = decrypt(request()->cookie('id'));
             $token = decrypt(request()->cookie('token'));
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             throw new Exception('Failed to decrypt cookies!');
         }
 
@@ -88,11 +93,6 @@ class TokenService
         return $user->tokens()->create([
             'token' => $token
         ]);
-    }
-
-    private function encrypt($tokenHash): string
-    {
-        return encrypt($tokenHash);
     }
 
     private function createHash($user, $token): string

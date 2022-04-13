@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='{{ App::getLocale() }}'>
+<html lang='{{ app()->getLocale() }}'>
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport'
@@ -58,11 +58,7 @@
                 </div>
                 <!-- Table body -->
                 @foreach($partners as $partner)
-                    @php /** @var App\Models\User $partner */ @endphp
-
-                    @if($partner->isSubPartner())
-                        @continue
-                    @endif
+                    @php /** @var App\Models\Partner $partner */ @endphp
 
                     @include('components.partners.partner-table-item')
                 @endforeach

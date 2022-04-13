@@ -7,7 +7,9 @@ use App\Facades\Token;
 use App\Mail\AccountCreated;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RegistrationService
 {
@@ -41,7 +43,7 @@ class RegistrationService
             $user->last_name = $lastName;
         }
 
-        $password = $user->generatePassword();
+        $user->password = Hash::make($password = Str::random());
 
         if (!$user->save()) {
             throw new Exception(__('messages.user-creating-failed'));

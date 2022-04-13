@@ -3,45 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Auth;
-use App\Models\User;
+use App\Models\Partner;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class PartnerController extends Controller
 {
-    public function showAll(Request $request)
+    /**
+     * Show partners admin page.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function showAll(Request $request): Response
     {
         $user = Auth::user();
 
-        if ($search = $request->input('search')) {
-            $partners = User::partners()->whereExists(function ($query) {
-                $query->select('id')->from('promo_codes')
-                    ->whereRaw('promo_codes.id = :promo_code', []);
-            })->withTrashed()->get();
-        } else {
-            $partners = User::partners()->withTrashed()->get();
-        }
+//        if ($search = $request->input('search')) {
+//            $partners = User::partners()->whereExists(function ($query) {
+//                $query->select('id')->from('promo_codes')
+//                    ->whereRaw('promo_codes.id = :promo_code', []);
+//            })->withTrashed()->get();
+//        } else {
+//            $partners = User::partners()->withTrashed()->get();
+//        }
 
-        return view('admin.partners', compact('user', 'partners'));
+//        if ($search = $request->input('search')) {
+//            $partners = Partner::withTrashed()->whereExists(function ($query) {
+//                $query->select('id')->from('promo_codes')->whereRaw('promo_codes.id = :promo_code', []);
+//            })->get();
+//        } else {
+        $partners = Partner::withTrashed()->with('user')->get();
+//        }
+
+        return response()->view('admin.partners', compact('user', 'partners'));
     }
 
-    public function show($id)
+    /**
+     * Show partner page.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show(int $id): Response
     {
-        /** @var User|null $partner */
-        $partner = User::partners()->withTrashed()->findOrFail($id);
-        $subPartnerIds = [];
+        /** @var Partner $partner */
+        $partner = Partner::withTrashed()->findOrFail($id);
 
-        foreach (DB::table('sub_partners')->select('user_id')
-                     ->where('parent_user_id', $partner->id)->get() as $item) {
-            $subPartnerIds[] = $item->user_id;
-        }
+        $subPartners = Partner::withTrashed()->where('parent_id', $id)->get();
 
-        $subPartners = User::partners()->withTrashed()->whereIn('id', $subPartnerIds)->get();
-        $isSubPartner = $partner->isSubPartner();
-
-        return view(
-            'admin.partner',
-            compact('partner', 'subPartners', 'isSubPartner')
-        );
+        return response()->view('admin.partner', [
+            'partner' => $partner,
+            'isSubPartner' => $partner->isSubPartner(),
+            'subPartners' => $subPartners
+        ]);
     }
 }

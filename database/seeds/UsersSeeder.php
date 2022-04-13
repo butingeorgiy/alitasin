@@ -1,8 +1,8 @@
 <?php
 
-use App\Facades\Hash;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
 {
@@ -62,7 +62,7 @@ class UsersSeeder extends Seeder
         ];
 
         foreach ($rows as $index => $row) {
-            $row->password = Hash::make($row->password, $row);
+            $row->password = Hash::make($row->password);
             $rows[$index] = (array) $row;
         }
 

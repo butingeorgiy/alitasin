@@ -13,6 +13,8 @@ use App\Models\TransferCapacity;
 use App\Models\TransferCost;
 use App\Models\TransferRequest;
 use App\Models\TransferType;
+use App\Services\PartnerCounter\Client as PartnerCounterClient;
+use App\Services\PartnerCounter\Drivers\TransferPartnerCounter;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -112,6 +114,12 @@ class TransferController extends Controller
 
         if (isset($promoCode) && $promoCode) {
             $transferRequest->attachPromoCode($promoCode);
+
+            $partnerCounter = new PartnerCounterClient($promoCode);
+
+            $partnerCounter->calculate(
+                new TransferPartnerCounter($transferCost)
+            );
         }
 
         if (!$transferRequest->save()) {

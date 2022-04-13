@@ -18,9 +18,12 @@ use App\Models\TourImage;
 use App\Models\TourTitle;
 use App\Models\TourType;
 use App\Models\User;
+use App\Services\PartnerCounter\Client as PartnerCounterClient;
+use App\Services\PartnerCounter\Drivers\TourPartnerCounter;
 use App\Telegram\Notifications\TourReservationNotification;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
@@ -34,13 +37,15 @@ use Throwable;
 class TourController extends Controller
 {
     /**
-     * Create a new tour
+     * Create a new tour.
      *
      * @param TourRequest $request
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function create(TourRequest $request): array
+    public function create(TourRequest $request): JsonResponse
     {
         // Region validation
         $region = Region::find($request->input('region_id'));
@@ -183,20 +188,22 @@ class TourController extends Controller
             $tour->additions()->attach($additions);
         }
 
-        return [
+        return response()->json([
             'message' => __('messages.tour-created')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Update tour (except images)
+     * Update tour (except images).
      *
      * @param TourRequest $request
      * @param $id
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function update(TourRequest $request, $id): array
+    public function update(TourRequest $request, $id): JsonResponse
     {
         $tour = Tour::with(['title', 'description', 'region', 'manager', 'type'])->find($id);
 
@@ -345,22 +352,24 @@ class TourController extends Controller
         }
 
         if ($tour->save()) {
-            return [
+            return response()->json([
                 'message' => __('messages.updating-success')
-            ];
+            ], options: JSON_UNESCAPED_UNICODE);
         } else {
             throw new Exception(__('messages.updating-failed'));
         }
     }
 
     /**
-     * Delete tour
+     * Delete tour.
      *
      * @param $id
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function delete($id): array
+    public function delete($id): JsonResponse
     {
         $tour = Tour::find($id);
 
@@ -372,21 +381,23 @@ class TourController extends Controller
             throw new Exception(__('messages.tour-deleting-failed'));
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.tour-deleting-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Change tour's main image
+     * Change tour's main image.
      *
      * @param Request $request
      * @param $tourId
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function changeMainImage(Request $request, $tourId): array
+    public function changeMainImage(Request $request, $tourId): JsonResponse
     {
         if (!$request->has('image_id')) {
             throw new Exception(__('messages.specify-image-id'));
@@ -421,20 +432,22 @@ class TourController extends Controller
             throw new Exception(__('messages.updating-failed'));
         }
 
-        return [
+        return response()->json([
             'message' => __('messages.updating-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Delete tour's image
+     * Delete tour's image.
      *
      * @param Request $request
      * @param $tourId
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function deleteImage(Request $request, $tourId): array
+    public function deleteImage(Request $request, $tourId): JsonResponse
     {
         if (!$request->has('image_id')) {
             throw new Exception(__('messages.specify-image-id'));
@@ -467,9 +480,9 @@ class TourController extends Controller
             Storage::delete($imagePath);
         }
 
-        return [
+        return response()->json([
             'message' => __('messages.tour-image-deleting-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -477,10 +490,12 @@ class TourController extends Controller
      *
      * @param Request $request
      * @param $tourId
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function uploadImage(Request $request, $tourId): array
+    public function uploadImage(Request $request, $tourId): JsonResponse
     {
         $tour = Tour::find($tourId);
 
@@ -535,9 +550,9 @@ class TourController extends Controller
         Image::make($file->get())
             ->save(storage_path('app/tour_pictures/' . $fileName), ($file->getSize() > 1000000 ? 50 : 90));
 
-        return [
+        return response()->json([
             'message' => __('messages.file-uploading-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -602,8 +617,8 @@ class TourController extends Controller
         foreach ($tours as $tour) {
             $row = $tour->only(['id', 'price']);
 
-            $row['title'] = $tour->title[\App::getLocale()];
-            $row['description'] = Str::limit($tour->description[\App::getLocale()]);
+            $row['title'] = $tour->title[app()->getLocale()];
+            $row['description'] = Str::limit($tour->description[app()->getLocale()]);
             $row['duration'] = $tour->duration;
             $row['type'] = $tour->type->name;
             $row['is_favorite'] = '0';
@@ -726,6 +741,12 @@ class TourController extends Controller
 
             if ($promoCode) {
                 $reservation->attachPromoCode($promoCode);
+
+                $partnerCounter = new PartnerCounterClient($promoCode);
+
+                $partnerCounter->calculate(
+                    new TourPartnerCounter($totalCostWithoutSale)
+                );
             }
 
             if ($request->has('region_id')) {

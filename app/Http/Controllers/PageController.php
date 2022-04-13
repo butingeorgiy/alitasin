@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Auth;
+use App\Models\Partner;
 use App\Models\Property;
 use App\Models\Region;
 use App\Models\Reservation;
@@ -313,11 +314,14 @@ class PageController extends Controller
         /** @var User|null $user */
         $user = Auth::user();
 
+        /** @var Partner $partner */
+        $partner = Partner::where('user_id', $user->id)->first();
+
         if (Storage::exists('profile_pictures/' . $user->id . '.jpg')) {
             $user->profile = asset('storage/profile_pictures/' . $user->id . '.jpg');
         }
 
-        $reservations = $user->attractedReservations()->get();
+        $reservations = $partner->attractedReservations()->get();
 
         /** @var Reservation $reservation */
         foreach ($reservations as $reservation) {
@@ -357,7 +361,7 @@ class PageController extends Controller
             $reservation['details'] = $details;
         }
 
-        return view('profile.partner', compact('user', 'reservations'));
+        return view('profile.partner', compact('user', 'reservations', 'partner'));
     }
 
     /**

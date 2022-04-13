@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Facades\Auth;
-use App\Facades\Hash;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -88,7 +88,7 @@ class UserController extends Controller
 
         if ($request->has('new_password')) {
             $passwordWasUpdated = true;
-            $user->password = Hash::make($request->input('new_password'), $user);
+            $user->password = Hash::make($request->input('new_password'));
         }
 
         $user->save();

@@ -18,29 +18,30 @@
     @php
 
     /** @var App\Models\User $user */
+    /** @var App\Models\Partner $partner */
 
     // Promo code info calculation
 
     $promoCodeInfo = [
-        'promoCode' => $user->promoCodes()->first()['code'],
-        'salePercent' => $user->promoCodes()->first()['sale_percent'],
-        'profitPercent' => $user->profit_percent
+        'promoCode' => $partner->promoCodes()->first()['code'],
+        'salePercent' => $partner->promoCodes()->first()['sale_percent'],
+        'profitPercent' => $partner->profit_percent
     ];
 
-    if ($user->isSubPartner()) {
-        $promoCodeInfo['subPartnerProfitPercent'] = $user->sub_partners_profit_percent;
+    if ($partner->isSubPartner()) {
+        $promoCodeInfo['subPartnerProfitPercent'] = 0;
     }
 
 
     // Promo code statistic calculation
 
     $promoCodeStatistic = [
-        'attractedReservations' => $user->attractedReservations()->count(),
-        'attractedTransfers' => $user->attractedTransfers()->count(),
-        'attractedVehicles' => $user->attractedVehicles()->count(),
-        'income' => $user->getTotalIncome(),
-        'earned' => $user->getTotalProfit(),
-        'payed' => $user->getPaymentAmount()
+        'attractedReservations' => $partner->attractedReservations()->count(),
+        'attractedTransfers' => $partner->attractedTransfers()->count(),
+        'attractedVehicles' => $partner->attractedVehicles()->count(),
+        'income' => $partner->company_income,
+        'earned' => $partner->earned_profit,
+        'payed' => $partner->received_profit
     ];
 
     @endphp

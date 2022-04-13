@@ -8632,6 +8632,10 @@ var OrderVehicleController = /*#__PURE__*/function (_EventHandler) {
         formData.append('user_phone', this.nodes.popup.querySelector('input[name="user_phone"]').value.replace(/\D/g, ''));
       }
 
+      if (this.nodes.popup.querySelector('input[name="location_region"]')) {
+        formData.append('location_region', this.nodes.popup.querySelector('input[name="location_region"]').value);
+      }
+
       if (this.promoCode) {
         formData.append('promo_code', this.promoCode);
       }

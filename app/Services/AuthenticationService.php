@@ -2,22 +2,29 @@
 
 namespace App\Services;
 
-use App\Facades\Hash;
-use App\Facades\SafeVar;
 use App\Facades\Token;
 use App\Models\User;
-use Illuminate\Support\Collection;
 use Exception;
+use Illuminate\Support\Facades\Hash;
+use JetBrains\PhpStorm\ArrayShape;
 use Throwable;
 
 class AuthenticationService
 {
     /**
+     * Login attempt.
+     *
      * @param string $email
      * @param string $password
+     *
      * @return array
      * @throws Exception
      */
+    #[ArrayShape([
+        'status' => "bool",
+        'redirect_to' => "string",
+        'cookies' => "array"
+    ])]
     public function login(string $email, string $password): array
     {
         $user = User::where('email', $email)->select(['id', 'email', 'password', 'account_type_id'])->get()->first();
@@ -26,9 +33,7 @@ class AuthenticationService
             throw new Exception(__('messages.user-not-found'));
         }
 
-        $userHasAccess = self::byPassword($user, $password);
-
-        if (!$userHasAccess) {
+        if (!Hash::check($password, $user->password)) {
             throw new Exception(__('messages.wrong-password'));
         }
 
@@ -53,22 +58,27 @@ class AuthenticationService
     }
 
     /**
-     * @param null $accountType
+     * Check authenticated status.
+     *
+     * @param array|null $accountType
+     *
      * @return bool
      */
-    public function check($accountType = null): bool
+    public function check(?array $accountType = null): bool
     {
         try {
             return Token::check($accountType);
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return false;
         }
     }
 
     /**
-     * @return null|User
+     * Get authenticated user instance.
+     *
+     * @return User|null
      */
-    public function user()
+    public function user(): ?User
     {
         $isAuth = self::check();
 
@@ -77,15 +87,5 @@ class AuthenticationService
         } else {
             return User::find(decrypt(request()->cookie('id')));
         }
-    }
-
-    /**
-     * @param $user
-     * @param $password
-     * @return bool
-     */
-    private function byPassword($user, $password): bool
-    {
-        return Hash::check($password, $user);
     }
 }

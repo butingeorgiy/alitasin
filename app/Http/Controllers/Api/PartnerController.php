@@ -2,153 +2,124 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Facades\Hash;
 use App\Http\Requests\PartnerCreatingRequest;
-use App\Models\PartnerCity;
-use App\Models\PartnerPayment;
-use App\Models\PartnerPercent;
+use App\Models\Partner;
 use App\Models\PromoCode;
 use App\Models\User;
 use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class PartnerController extends Controller
 {
     /**
+     * Create a new partner.
+     *
      * @param PartnerCreatingRequest $request
+     *
      * @throws Exception
-     * @return array
+     *
+     * @return JsonResponse
      */
-    public function create(PartnerCreatingRequest $request): array
+    public function create(PartnerCreatingRequest $request): JsonResponse
     {
         // Check promo code on uniqueness
 
-        if (PromoCode::where('code', $request->input('promo_code'))->first()) {
+        if (PromoCode::where('code', $request->input('promo_code'))->exists()) {
             throw new Exception(__('messages.promo-code-not-unique'));
         }
 
-        // Partner creating
+        DB::transaction(function () use ($request) {
+            // User model creating
 
-        $phone = substr($request->input('phone'), -10);
-        $phoneCode = Str::before($request->input('phone'), $phone);
+            $phone = substr($request->input('phone'), -10);
+            $phoneCode = Str::before($request->input('phone'), $phone);
 
-        $user = new User([
-            'first_name' => $request->input('first_name'),
-            'phone_code' => $phoneCode,
-            'phone' => $phone,
-            'email' => $request->input('email'),
-            'account_type_id' => '2'
-        ]);
-
-        if ($request->input('last_name')) {
-            $user->last_name = $request->input('last_name');
-        }
-
-        $user->password = Hash::make($request->input('password'), $user);
-
-        if (!$user->save()) {
-            throw new Exception(__('messages.user-creating-failed'));
-        }
-
-        // Percent attaching
-
-        PartnerPercent::create([
-            'user_id' => $user->id,
-            'percent' => $request->input('profit_percent')
-        ]);
-
-        // Promo code creating
-
-        PromoCode::create([
-            'code' => $request->input('promo_code'),
-            'sale_percent' => $request->input('sale_percent'),
-            'user_id' => $user->id
-        ]);
-
-        // If has parent_user_id
-
-        if ($request->has('parent_user_id')) {
-            /** @var User $partner */
-            if (!$partner = User::partners()->find($request->input('parent_user_id'))) {
-                throw new Exception(__('messages.user-not-found'));
-            }
-
-            if (!$subPartnerProfitPercent = $request->input('sub_partner_profit_percent')) {
-                throw new Exception(__('messages.sub-partner-profit-percent-required'));
-            }
-
-            DB::table('sub_partners')->insert([
-                'parent_user_id' => $partner->id,
-                'user_id' => $user->id
+            $user = new User([
+                'first_name' => $request->input('first_name'),
+                'phone_code' => $phoneCode,
+                'phone' => $phone,
+                'email' => $request->input('email'),
+                'account_type_id' => '2'
             ]);
 
-            DB::table('sub_partner_percents')->insert([
+            if ($request->input('last_name')) {
+                $user->last_name = $request->input('last_name');
+            }
+
+            $user->password = Hash::make($request->input('password'));
+
+            if (!$user->save()) {
+                throw new Exception(__('messages.user-creating-failed'));
+            }
+
+            // Partner model creating
+
+            $partner = Partner::create([
                 'user_id' => $user->id,
-                'percent' => $subPartnerProfitPercent
+                'parent_id' => $request->input('parent_user_id'),
+                'profit_percent' => $request->input('profit_percent'),
+                'city' => $request->input('city'),
+                'company_income' => 0,
+                'earned_profit' => 0,
+                'received_profit' => 0
             ]);
-        }
 
-        // If city was specified
+            $partner->promoCodes()->create([
+                'code' => $request->input('promo_code'),
+                'sale_percent' => $request->input('sale_percent')
+            ]);
+        });
 
-        if ($request->input('city')) {
-            $partnerCity = new PartnerCity();
-
-            $partnerCity->partner_id = $user->id;
-            $partnerCity->city = $request->input('city');
-
-            $partnerCity->save();
-        }
-
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.partner-creating-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Delete partner
+     * Delete partner.
      *
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function delete($id): array
+    public function delete(int $id): JsonResponse
     {
-        /**
-         * @var User $partner
-         */
-        if (!$partner = User::partners()->where('id', $id)->get()->first()) {
+        if (!$partner = Partner::find($id)) {
             throw new Exception(__('messages.user-not-found'));
         }
 
-        if (!$partner->delete()) {
+        if (!$partner->delete() || !$partner->user->delete()) {
             throw new Exception(__('messages.partner-ban-failed'));
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.partner-ban-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Restore partner
+     * Restore partner.
      *
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function restore($id): array
+    public function restore(int $id): JsonResponse
     {
-        /**
-         * @var User $partner
-         */
-        if (!$partner = User::partners()->onlyTrashed()->where('id', $id)->get()->first()) {
+        /** @var User $partner */
+        if (!$partner = Partner::onlyTrashed()->find($id)) {
             throw new Exception(__('messages.user-not-found'));
         }
 
@@ -156,21 +127,23 @@ class PartnerController extends Controller
             throw new Exception(__('messages.partner-restore-failed'));
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.partner-restore-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Make partner payment
+     * Make partner payment.
      *
      * @param Request $request
-     * @param $id
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
-     * @return array
      */
-    public function makePayment(Request $request, $id): array
+    public function makePayment(Request $request, int $id): JsonResponse
     {
         $validator = Validator::make(
             $request->all(),
@@ -188,52 +161,53 @@ class PartnerController extends Controller
             throw new Exception($validator->errors()->first());
         }
 
-        /**
-         * @var $partner User
-         */
-        if (!$partner = User::partners()->where('id', $id)->get()->first()) {
+        if (!$partner = Partner::find($id)) {
             throw new Exception(__('messages.user-not-found'));
         }
 
-        if ($partner->getTotalProfit() - $partner->getPaymentAmount() < (int) $request->input('amount')) {
+        if ($partner->earned_profit - $partner->received_profit < (float) $request->input('amount')) {
             throw new Exception(__('messages.partner-payment-amount-max'));
         }
 
-        PartnerPayment::create([
+        logger()->info('Partner Payment.', [
             'partner_id' => $partner->id,
-            'amount' => (int) $request->input('amount')
+            'amount' => $request->input('amount')
         ]);
 
-        return [
+        $partner->plusReceivedProfit((float) $request->input('amount'));
+
+        return response()->json([
             'status' => true,
             'message' => __('messages.partner-payment-saving-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Update partner's profit percent
+     * Update partner's profit percent.
      *
      * @param Request $request
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function updateProfitPercent(Request $request, $id): array
+    public function updateProfitPercent(Request $request, int $id): JsonResponse
     {
         $validator = Validator::make(
             $request->all(),
             [
                 'profit_percent' => 'bail|required|numeric|min:0|max:100',
-                'is_sub_partner_percent' => 'bail|required|string|in:0,1'
+                // 'is_sub_partner_percent' => 'bail|required|string|in:0,1'
             ],
             [
                 'profit_percent.required' => __('messages.profit-percent-required'),
                 'profit_percent.numeric' => __('messages.profit-percent-numeric'),
                 'profit_percent.min' => __('messages.profit-percent-min'),
                 'profit_percent.max' => __('messages.profit-percent-max'),
-                'is_sub_partner_percent.required' => __('messages.is-sub-partner-percent-required'),
-                'is_sub_partner_percent.string' => __('messages.is-sub-partner-percent-string'),
-                'is_sub_partner_percent.in' => __('messages.is-sub-partner-percent-in')
+                // 'is_sub_partner_percent.required' => __('messages.is-sub-partner-percent-required'),
+                // 'is_sub_partner_percent.string' => __('messages.is-sub-partner-percent-string'),
+                // 'is_sub_partner_percent.in' => __('messages.is-sub-partner-percent-in')
             ]
         );
 
@@ -241,38 +215,31 @@ class PartnerController extends Controller
             throw new Exception($validator->errors()->first());
         }
 
-        /**
-         * @var $partner User
-         */
-        if (!$partner = User::partners()->find($id)) {
+        if (!$partner = Partner::find($id)) {
             throw new Exception(__('messages.user-not-found'));
         }
 
-        if ($request->input('is_sub_partner_percent') === '0') {
-            $isUpdated = $partner->updateProfitPercent((int) $request->input('profit_percent'));
-        } else {
-            $isUpdated = $partner->updateSubPartnerProfitPercent((int) $request->input('profit_percent'));
-        }
+        $partner->update([
+            'profit_percent' => (float) $request->input('profit_percent')
+        ]);
 
-        if (!$isUpdated) {
-            throw new Exception(__('messages.updating-failed'));
-        }
-
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.profit-percent-updating-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Update partner profile
+     * Update partner profile.
      *
      * @param Request $request
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function update(Request $request, $id): array
+    public function update(Request $request, int $id): JsonResponse
     {
         $validator = Validator::make(
             $request->all(),
@@ -282,7 +249,8 @@ class PartnerController extends Controller
                 'email' => 'bail|required|email|max:128',
                 'phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
                 'new_password' => 'bail|nullable|string|min:8|confirmed',
-                'new_password_confirmation' => 'bail|nullable'
+                'new_password_confirmation' => 'bail|nullable',
+                'city' => 'bail|string|max:255'
             ],
             [
                 'first_name.required' => __('messages.user-first-name-required'),
@@ -296,7 +264,8 @@ class PartnerController extends Controller
                 'phone.required' => __('messages.user-phone-required'),
                 'phone.regex' => __('messages.user-phone-regex'),
                 'new_password.min' => __('messages.password-min'),
-                'new_password.confirmed' => __('messages.password-confirmed')
+                'new_password.confirmed' => __('messages.password-confirmed'),
+                'city.max' => 'Максимальная длина города 255 символов!' // todo: translate
             ]
         );
 
@@ -304,112 +273,93 @@ class PartnerController extends Controller
             throw new Exception($validator->errors()->first());
         }
 
-        /** @var User|null $partner */
-        if (!$partner = User::partners()->where('id', $id)->first()) {
+        /** @var Partner $partner */
+        if (!$partner = Partner::with('user')->find($id)) {
             throw new Exception(__('messages.user-not-found'));
         }
 
         $emailUniqueCheck = User::where('email', $request->input('email'))
-            ->where('id', '!=', $partner->id)->get()->first();
+            ->where('id', '!=', $partner->user->id)->exists();
 
         if ($emailUniqueCheck) {
             throw new Exception(__('messages.user-email-unique'));
         }
 
-        if ($partner->first_name !== $request->input('first_name')) {
-            $partner->first_name = $request->input('first_name');
+        if ($partner->user->first_name !== $request->input('first_name')) {
+            $partner->user->first_name = $request->input('first_name');
         }
 
         if ($request->has('last_name')) {
-            if ($partner->last_name !== $request->input('last_name')) {
-                $partner->last_name = $request->input('last_name');
+            if ($partner->user->last_name !== $request->input('last_name')) {
+                $partner->user->last_name = $request->input('last_name');
             }
         }
 
-        if ($partner->email !== $request->input('email')) {
-            $partner->email = $request->input('email');
+        if ($partner->user->email !== $request->input('email')) {
+            $partner->user->email = $request->input('email');
         }
 
-        /** @var PartnerCity|null $partnerCity */
-        if ($partnerCity = $partner->partnerCity()->first()) {
-            if ($partnerCity->city !== $request->input('city')) {
-                $partnerCity->city = $request->input('city');
-
-                $partnerCity->save();
-            }
-        } else if ($request->input('city')) {
-            $partnerCity = new PartnerCity();
-
-            $partnerCity->partner_id = $partner->id;
-            $partnerCity->city = $request->input('city');
-
-            $partnerCity->save();
+        if ($partner->city !== $request->input('city')) {
+            $partner->city = $request->input('city');
         }
 
-        $userPhone = $partner->phone_code . $partner->getOriginal('phone');
+        $userPhone = $partner->user->phone_code . $partner->user->getOriginal('phone');
 
         if ($userPhone !== $request->input('phone')) {
             $phone = substr($request->input('phone'), -10);
             $phoneCode = Str::before($request->input('phone'), $phone);
 
-            $partner->phone_code = $phoneCode;
-            $partner->phone = $phone;
+            $partner->user->phone_code = $phoneCode;
+            $partner->user->phone = $phone;
         }
 
         if ($request->has('new_password')) {
-            $partner->password = Hash::make($request->input('new_password'), $partner);
+            $partner->user->password = Hash::make($request->input('new_password'));
         }
 
         $partner->save();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __('messages.updating-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Search partners by phone, name, promo code and city
+     * Search partners by phone, name, promo code and city.
      *
      * @param Request $request
-     * @return array|array[]
+     *
+     * @return JsonResponse
      */
-    public function search(Request $request): array
+    public function search(Request $request): JsonResponse
     {
         if (!$query = $request->input('query')) {
-            return [
+            return response()->json([
                 'result' => []
-            ];
+            ], options: JSON_UNESCAPED_UNICODE);
         }
 
-        $partnerIds = User::partners()->selectRaw(
-            'users.id, CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(CONCAT(phone_code, ' .
-            'phone, email, first_name, IF(last_name IS NOT NULL, last_name, \'\'), IF(partner_cities.city IS NOT ' .
-            'NULL, partner_cities.city, \'\'), IF(promo_codes.code IS NOT NULL, promo_codes.code, \'\')), \' \', \'\')), ?, \'~\'' .
+        $partnerIds = Partner::withTrashed()->selectRaw(
+            'partners.id, CHAR_LENGTH(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(REPLACE(CONCAT(users.phone_code, ' .
+            'users.phone, users.email, users.first_name, IF(users.last_name IS NOT NULL, users.last_name, \'\'), ' .
+            'IF(partners.city IS NOT NULL, partners.city, \'\'), IF(promo_codes.code IS NOT NULL, promo_codes.code, \'\')), \' \', \'\')), ?, \'~\'' .
             ', 1, 0, \'i\'), \'[^~]\', \'\')) as frequency',
             [str_replace(' ', '|', $query)]
         )
-            ->leftJoin('partner_cities', 'users.id', '=', 'partner_cities.partner_id')
-            ->leftJoin('promo_codes', 'users.id', '=', 'promo_codes.user_id')
+            ->leftJoin('users', 'partners.user_id', '=', 'users.id')
+            ->leftJoin('promo_codes', 'partners.id', '=', 'promo_codes.partner_id')
             ->having('frequency', '>', 0)
             ->orderByDesc('frequency')->get()->modelKeys();
 
-        return [
-            'result' => User::find($partnerIds)->map(function ($user) {
-                /**
-                 * @var PromoCode $promoCode
-                 * @var User $user
-                 */
-
-                $promoCode = $user->promoCodes()->first();
-                $promoCode = $promoCode->code;
-
+        return response()->json([
+            'result' => Partner::withTrashed()->find($partnerIds)->map(function (Partner $partner) {
                 return [
-                    'id' => $user->id,
-                    'name' => $user->full_name,
-                    'promo_code' => $promoCode
+                    'id' => $partner->id,
+                    'name' => $partner->user->full_name,
+                    'promo_code' => $partner->promoCodes()->first()['code']
                 ];
             })
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 }

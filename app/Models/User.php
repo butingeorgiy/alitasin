@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Facades\Hash;
 use App\Traits\PartnerCalculator;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 /**
  * @method static isEmailUnique($email)
@@ -39,22 +39,46 @@ use Illuminate\Support\Str;
  * @property int sub_partners_profit_percent
  * @property string profile
  * @property string phone
+ *
+ * @mixin Builder
  */
-class User extends Model
+class User extends Authenticatable implements FilamentUser
 {
     use SoftDeletes;
     use PartnerCalculator;
 
-
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     *
+     * @var array
+     */
     protected $guarded = [];
 
-    public function scopeIsEmailUnique($query, $email): bool
+    /**
+     * Define is user's email is unique.
+     *
+     * @param Builder $query
+     * @param string $email
+     *
+     * @return bool
+     */
+    public function scopeIsEmailUnique(Builder $query, string $email): bool
     {
         return $query->where('email', $email)->get()->first() === null;
     }
 
+    /**
+     * Get user's tokens.
+     *
+     * @return HasMany
+     */
     public function tokens(): HasMany
     {
         return $this->hasMany(AuthToken::class)->where(
@@ -65,23 +89,24 @@ class User extends Model
     }
 
     /**
-     * Get users with manager's access
+     * Get users with manager's access.
      *
-     * @param $query
-     * @return mixed
+     * @param Builder $query
+     *
+     * @return Builder
      */
-    public function scopeManagers($query)
+    public function scopeManagers(Builder $query): Builder
     {
         return $query->where('account_type_id', '4');
     }
 
     /**
-     * Get users with partner's access
+     * Get users with partner's access.
      *
-     * @param $query
-     * @return mixed
+     * @param Builder $query
+     * @return Builder
      */
-    public function scopePartners($query)
+    public function scopePartners(Builder $query): Builder
     {
         return $query->where('account_type_id', '2');
     }
@@ -108,47 +133,22 @@ class User extends Model
         );
     }
 
-//    public function getPhoneAttribute(): ?string
-//    {
-//        $phoneCode = $this->phone_code;
-//        $phone = $this->getOriginal('phone');
-//
-//        if (!$phoneCode or !$phone) {
-//            return null;
-//        }
-//
-//        if (preg_match('/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/', $phoneCode . $phone, $matches)) {
-//            return $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
-//        }
-//
-//        return null;
-//    }
-
     /**
-     * @return string
-     */
-    public function getFullNameAttribute(): string
-    {
-        $firstName = $this->first_name;
-        $lastName = $this->last_name;
-
-        if (!$lastName) {
-            return $firstName;
-        } else {
-            return $lastName . ' ' . $firstName;
-        }
-    }
-
-    /**
-     * Generate random password.
+     * Interact with user's full name.
      *
-     * @return string
+     * @return Attribute
      */
-    public function generatePassword(): string
+    public function fullName(): Attribute
     {
-        $randomPassword = Str::random(10);
-        $this->password = Hash::make($randomPassword, $this);
-        return $randomPassword;
+        return Attribute::make(
+            get: function ($value, $attributes) {
+                if (!$attributes['last_name']) {
+                    return $attributes['first_name'];
+                } else {
+                    return $attributes['last_name'] . ' ' . $attributes['first_name'];
+                }
+            }
+        );
     }
 
     /**
@@ -205,7 +205,7 @@ class User extends Model
     }
 
     /**
-     * Get attracted reservations by partner
+     * Get attracted reservations by partner.
      *
      * @return HasManyThrough
      */
@@ -215,7 +215,7 @@ class User extends Model
     }
 
     /**
-     * Get attracted transfers by partner
+     * Get attracted transfers by partner.
      *
      * @return HasManyThrough
      */
@@ -225,7 +225,7 @@ class User extends Model
     }
 
     /**
-     * Get attracted vehicles by partner
+     * Get attracted vehicles by partner.
      *
      * @return HasManyThrough
      */
@@ -236,7 +236,7 @@ class User extends Model
 
 
     /**
-     * Get partner's promo codes
+     * Get partner's promo codes.
      *
      * @return HasMany
      */
@@ -246,7 +246,7 @@ class User extends Model
     }
 
     /**
-     * Get partner payments
+     * Get partner payments.
      *
      * @return HasMany
      */
@@ -256,7 +256,7 @@ class User extends Model
     }
 
     /**
-     * Get partner city
+     * Get partner city.
      *
      * @return HasOne
      */
@@ -266,7 +266,7 @@ class User extends Model
     }
 
     /**
-     * Get personal partner profit percent
+     * Get personal partner profit percent.
      *
      * @return int
      */
@@ -280,7 +280,7 @@ class User extends Model
     }
 
     /**
-     * Get sub partner profit percent
+     * Get sub partner profit percent.
      *
      * @return int|null
      */
@@ -294,7 +294,7 @@ class User extends Model
     }
 
     /**
-     * Determine if user is sub partner
+     * Determine if user is sub partner.
      *
      * @return bool
      */
@@ -364,5 +364,13 @@ class User extends Model
         $subPartnerProfitPercent->percent = $newValue;
 
         return $subPartnerProfitPercent->save();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canAccessFilament(): bool
+    {
+        return $this->account_type_id == 5;
     }
 }

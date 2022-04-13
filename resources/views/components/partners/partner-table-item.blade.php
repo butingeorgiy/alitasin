@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var App\Models\User $partner
+ * @var App\Models\Partner $partner
  */
 
 ?>
@@ -10,21 +10,21 @@
     <div class="flex">
         <div class="min-w-11 min-h-11 w-11 h-11 mr-6 bg-contain bg-center bg-no-repeat bg-blue rounded-full"></div>
         <div class="flex flex-col justify-center">
-            <a href="{{ route('partner', $partner->id) }}" class="text-black font-semibold">{{ $partner->full_name }}</a>
-            <p class="text-sm text-gray-600 font-light">{{ $partner->email }}</p>
+            <a href="{{ route('partner', $partner->id) }}" class="text-black font-semibold">{{ $partner->user->full_name }}</a>
+            <p class="text-sm text-gray-600 font-light">{{ $partner->user->email }}</p>
         </div>
     </div>
     <div class="flex items-center">
         <p class="text-black font-semibold select-text">{{ $partner->promoCodes()->first()['code'] }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->getTotalIncome() }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->company_income }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->getTotalProfit() }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->earned_profit }}</p>
     </div>
     <div class="flex items-center">
-        <p class="text-black font-semibold">$ {{ $partner->getPaymentAmount() }}</p>
+        <p class="text-black font-semibold">$ {{ $partner->received_profit }}</p>
     </div>
     <div class="relative flex items-center">
         @if($partner->trashed())
@@ -79,7 +79,7 @@
                         {{ __('short-phrases.activate') }}
                     </div>
                 @else
-                    @if($partner->getPaymentAmount() < $partner->getTotalProfit())
+                    @if($partner->received_profit < $partner->earned_profit)
                         <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
                              data-option-name="make-payment" data-option-params="{{ json_encode(['id' => $partner->id]) }}">
                             {{ __('short-phrases.make-payment') }}

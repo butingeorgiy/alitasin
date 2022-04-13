@@ -10,9 +10,12 @@ use App\Models\Vehicle;
 use App\Models\VehicleImage;
 use App\Models\VehicleOrder;
 use App\Models\VehicleType;
+use App\Services\PartnerCounter\Client as PartnerCounterClient;
+use App\Services\PartnerCounter\Drivers\VehiclePartnerCounter;
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -22,13 +25,15 @@ use Intervention\Image\Facades\Image;
 class VehicleController extends Controller
 {
     /**
-     * Create a new vehicle
+     * Create a new vehicle.
      *
      * @param VehicleRequest $request
-     * @return array
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function create(VehicleRequest $request): array
+    public function create(VehicleRequest $request): JsonResponse
     {
         if (!Region::find($request->input('region_id'))) {
             throw new Exception(__('messages.region-not-found'));
@@ -121,22 +126,25 @@ class VehicleController extends Controller
             $vehicle->params()->attach($params);
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => 'ТС успешно сохранено!'
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * Update vehicle.
      *
      * @param VehicleRequest $request
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function update(VehicleRequest $request, $id): array
+    public function update(VehicleRequest $request, int $id): JsonResponse
     {
+        /** @var Vehicle $vehicle */
         if (!$vehicle = Vehicle::withTrashed()->with(['type', 'region', 'params'])->find($id)) {
             throw new Exception(__('messages.vehicle-not-found'));
         }
@@ -199,24 +207,26 @@ class VehicleController extends Controller
             $vehicle->params()->detach();
         }
 
-        if ($vehicle->save()) {
-            return [
-                'message' => __('messages.updating-success')
-            ];
-        } else {
+        if (!$vehicle->save()) {
             throw new Exception(__('messages.updating-failed'));
         }
+
+        return response()->json([
+            'message' => __('messages.updating-success')
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Order vehicle
+     * Order vehicle.
      *
      * @param Request $request
      * @param $id
-     * @return bool[]
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function order(Request $request, $id): array
+    public function order(Request $request, $id): JsonResponse
     {
         $validator = Validator::make(
             $request->all(),
@@ -270,26 +280,34 @@ class VehicleController extends Controller
 
         if (isset($promoCode) && $promoCode) {
             $vehicleOrder->attachPromoCode($promoCode);
+
+            $partnerCounter = new PartnerCounterClient($promoCode);
+
+            $partnerCounter->calculate(
+                new VehiclePartnerCounter($vehicle->cost)
+            );
         }
 
         if (!$vehicleOrder->save()) {
             throw new Exception(__('messages.request-sending-failed'));
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.request-sending-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * Delete vehicle.
      *
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function delete($id): array
+    public function delete(int $id): JsonResponse
     {
         if (!$vehicle = Vehicle::find($id)) {
             throw new Exception(__('messages.vehicle-not-found'));
@@ -299,20 +317,22 @@ class VehicleController extends Controller
             throw new Exception(__('messages.vehicle-deleting-failed'));
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.vehicle-deleting-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * Restore vehicle.
      *
-     * @param $id
-     * @return array
+     * @param int $id
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function restore($id): array
+    public function restore(int $id): JsonResponse
     {
         if (!$vehicle = Vehicle::withTrashed()->find($id)) {
             throw new Exception(__('messages.vehicle-not-found'));
@@ -322,26 +342,29 @@ class VehicleController extends Controller
             throw new Exception(__('messages.vehicle-restoring-failed'));
         }
 
-        return [
+        return response()->json([
             'status' => true,
             'message' => __('messages.vehicle-restoring-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * Change vehicle's main image.
      *
      * @param Request $request
-     * @param $vehicleId
-     * @return array
+     * @param int $vehicleId
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function changeMainImage(Request $request, $vehicleId): array
+    public function changeMainImage(Request $request, int $vehicleId): JsonResponse
     {
         if (!$request->has('image_id')) {
             throw new Exception(__('messages.specify-image-id'));
         }
 
+        /** @var Vehicle $vehicle */
         if (!$vehicle = Vehicle::withTrashed()->find($vehicleId)) {
             throw new Exception(__('messages.vehicle-not-found'));
         }
@@ -368,25 +391,28 @@ class VehicleController extends Controller
             throw new Exception(__('messages.updating-success'));
         }
 
-        return [
+        return response()->json([
             'message' => __('messages.updating-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * Delete vehicle's images.
      *
      * @param Request $request
-     * @param $vehicleId
-     * @return array
+     * @param int $vehicleId
+     *
+     * @return JsonResponse
+     *
      * @throws Exception
      */
-    public function deleteImage(Request $request, $vehicleId): array
+    public function deleteImage(Request $request, int $vehicleId): JsonResponse
     {
         if (!$request->has('image_id')) {
             throw new Exception(__('messages.specify-image-id'));
         }
 
+        /** @var Vehicle $vehicle */
         if (!$vehicle = Vehicle::withTrashed()->find($vehicleId)) {
             throw new Exception(__('messages.vehicle-not-found'));
         }
@@ -410,22 +436,25 @@ class VehicleController extends Controller
             Storage::delete($imagePath);
         }
 
-        return [
+        return response()->json([
             'message' => __('messages.tour-image-deleting-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * Update or upload vehicle image.
      *
      * @param Request $request
-     * @param $vehicleId
-     * @return array
+     * @param int $vehicleId
+     *
+     * @return JsonResponse
+     *
      * @throws FileNotFoundException
      * @throws Exception
      */
-    public function updateImage(Request $request, $vehicleId): array
+    public function updateImage(Request $request, int $vehicleId): JsonResponse
     {
+        /** @var Vehicle $vehicle */
         if (!$vehicle = Vehicle::withTrashed()->find($vehicleId)) {
             throw new Exception(__('messages.vehicle-not-found'));
         }
@@ -473,8 +502,8 @@ class VehicleController extends Controller
         Image::make($file->get())
             ->save(storage_path('app/vehicle_pictures/' . $fileName), ($file->getSize() > 1000000 ? 50 : 90));
 
-        return [
+        return response()->json([
             'message' => __('messages.file-uploading-success')
-        ];
+        ], options: JSON_UNESCAPED_UNICODE);
     }
 }

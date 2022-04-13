@@ -6,7 +6,7 @@ class DropdownController extends EventHandler {
 
         this.dropdown = dropdownNode;
         this.isShown = false;
-        this.error = {status: false, message: null};
+        this.error = { status: false, message: null };
 
         try {
             if (onClickHandler) {
@@ -31,7 +31,7 @@ class DropdownController extends EventHandler {
 
             DropdownController._instances.push(this);
         } catch (e) {
-            this.error = {status: true, message: e};
+            this.error = { status: true, message: e };
         }
     }
 
