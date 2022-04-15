@@ -161,11 +161,11 @@ class PageController extends Controller
     /**
      * Show region page.
      *
-     * @param $id
+     * @param int $id
      *
      * @return Application|Factory|View
      */
-    public function showRegion($id): Application|Factory|View
+    public function showRegion(int $id): Application|Factory|View
     {
         $currentRegion = Region::findOrFail($id);
 
@@ -177,10 +177,7 @@ class PageController extends Controller
         foreach ($tours as $tour) {
             foreach ($tour->images as $image) {
                 if ($image->isMain()) {
-                    $tour->image = route('get-image', [
-                        'dir' => 'tour_pictures',
-                        'file' => $image->link
-                    ]);
+                    $tour->image = asset('storage/tour_pictures/' . $image->link);
                 }
             }
 
