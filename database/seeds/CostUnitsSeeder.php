@@ -17,12 +17,14 @@ class CostUnitsSeeder extends Seeder
     {
         DB::table('cost_units')->insert([
             [
+                'id' => 1,
                 'en_name' => 'Day',
                 'ru_name' => 'День',
                 'tr_name' => 'Gün',
                 'ua_name' => 'День'
             ],
             [
+                'id' => 2,
                 'en_name' => 'Month',
                 'ru_name' => 'Месяц',
                 'tr_name' => 'Ay',
