@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ReservationStatusesSeeder extends Seeder
 {
@@ -9,7 +12,7 @@ class ReservationStatusesSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('reservation_statuses')->insert([
             [

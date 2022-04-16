@@ -12,7 +12,7 @@ class PropertyParamsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('property_params')->insert([
             [
