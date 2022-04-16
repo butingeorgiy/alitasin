@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehiclePartnerCounter implements CounterInterface
 {
-    const FIRST_LEVEL_PERCENT = 5.0;
+    const FIRST_LEVEL_PERCENT = 4.0;
 
     const SECOND_LEVEL_PERCENT = 1.0;
 
