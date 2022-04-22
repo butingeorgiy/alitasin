@@ -93,12 +93,6 @@
                          data-option-name="update-partner-profit-percent" data-option-params="{{ json_encode(['id' => $partner->id, 'current_value' => $partner->profit_percent, 'is_sub_partner_percent' => '0']) }}">
                         {{ __('short-phrases.update-partner-profit-percent-option') }}
                     </div>
-                    @if($partner->isSubPartner())
-                        <div class="custom-dropdown-option block px-4 py-2 text-sm text-black cursor-pointer hover:bg-gray-100"
-                             data-option-name="update-partner-profit-percent" data-option-params="{{ json_encode(['id' => $partner->id, 'current_value' => $partner->sub_partners_profit_percent, 'is_sub_partner_percent' => '1']) }}">
-                            {{ __('short-phrases.update-sub-partner-profit-percent-option') }}
-                        </div>
-                    @endif
                 @endif
             </div>
         </div>
