@@ -728,6 +728,7 @@ class TourController extends Controller
                 $registrationResponse = Reg::reg($phone, $phoneCode, $email, $firstName);
 
                 $user = $registrationResponse['user'];
+                $user['last_name'] = null;
                 $accessCookies = $registrationResponse['cookies'];
             }
 
