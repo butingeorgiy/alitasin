@@ -225,5 +225,6 @@ return [
     'property-type' => 'Тип недвижимости',
     'order-property' => 'Заявка на недвижимость',
     'chosen-property' => 'Выбранная недвижимость',
-    'cost-unit' => 'Единица измерения'
+    'cost-unit' => 'Единица измерения',
+    'partnership' => 'Партнёрство'
 ];

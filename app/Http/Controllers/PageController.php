@@ -17,6 +17,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -432,5 +433,15 @@ class PageController extends Controller
         }
 
         return view('property', compact('propertyItems'));
+    }
+
+    /**
+     * Show partnership page.
+     *
+     * @return Response
+     */
+    public function showPartnership(): Response
+    {
+        return response()->view('partnership');
     }
 }

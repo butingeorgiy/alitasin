@@ -8,24 +8,29 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PartnerCreatingRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
+    /**
+     * @inheritdoc
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
 
+    /**
+     * @return array
+     */
     public function rules(): array
     {
         return [
-            'first_name' => 'bail|required|min:2|max:32',
-            'last_name' => 'bail|nullable|min:2|max:32',
-            'phone' => ['bail', 'required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
-            'email' => 'bail|required|email|unique:users|max:128',
-            'promo_code' => 'bail|required|min:1|max:32',
-            'sale_percent' => 'bail|required|numeric|min:0|max:100',
-            'profit_percent' => 'bail|required|numeric|min:0|max:100',
-            'sub_partner_profit_percent' => 'bail|nullable|numeric|min:0|max:100',
-            'password' => 'bail|required|string|min:8|confirmed',
-            'password_confirmation' => 'bail|required'
+            'first_name' => 'required|min:2|max:32',
+            'last_name' => 'nullable|min:2|max:32',
+            'phone' => ['required', 'regex:/^(\d{1,4})(\d{3})(\d{3})(\d{4})$/'],
+            'email' => 'required|email|unique:users|max:128',
+            'promo_code' => 'required|min:1|max:32',
+            'sale_percent' => 'required|numeric|min:0|max:100',
+            'profit_percent' => 'required|numeric|min:0|max:100',
+            'sub_partner_profit_percent' => 'nullable|numeric|min:0|max:100',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required'
         ];
     }
 

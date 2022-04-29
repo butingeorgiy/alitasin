@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\PartnerCreatingRequest;
+use App\Http\Requests\PartnerRegisterRequest;
 use App\Models\Partner;
 use App\Models\PromoCode;
 use App\Models\User;
@@ -361,5 +362,63 @@ class PartnerController extends Controller
                 ];
             })
         ], options: JSON_UNESCAPED_UNICODE);
+    }
+
+    public function register(PartnerRegisterRequest $request): JsonResponse
+    {
+        return DB::transaction(function () use ($request) {
+            // User model creating
+
+            $phone = substr($request->input('phone'), -10);
+            $phoneCode = Str::before($request->input('phone'), $phone);
+
+            /** @var User $user */
+            $user = User::create([
+                'first_name' => $request->input('first_name'),
+                'phone_code' => $phoneCode,
+                'phone' => $phone,
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'account_type_id' => '2'
+            ]);
+
+            // Partner model creating
+
+            $parentPromoCode = null;
+
+            if ($request->has('partner_code')) {
+                /** @var PromoCode $parentPromoCode */
+                $parentPromoCode = PromoCode::select('code', 'partner_id')
+                    ->where(
+                        'code',
+                        $request->input('partner_code')
+                    )
+                    ->first();
+
+                if (Partner::where('id', $parentPromoCode->partner_id)->doesntExist()) {
+                    throw new Exception('Partner not found.');
+                }
+            }
+
+            $partner = Partner::create([
+                'user_id' => $user->id,
+                'parent_id' => optional($parentPromoCode)->partner_id,
+                'profit_percent' => 5.0,
+                'city' => $request->input('city'),
+                'company_income' => 0,
+                'earned_profit' => 0,
+                'received_profit' => 0
+            ]);
+
+            $partner->promoCodes()->create([
+                'code' => $request->input('promo_code'),
+                'sale_percent' => 10
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => __('messages.partner-create-success')
+            ], options: JSON_UNESCAPED_UNICODE);
+        });
     }
 }

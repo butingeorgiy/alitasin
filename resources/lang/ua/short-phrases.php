@@ -224,5 +224,6 @@ return [
     'property-type' => 'Тип нерухомості',
     'order-property' => 'Заява про майно',
     'chosen-property' => 'Обрана нерухомість',
-    'cost-unit' => 'Одиниця витрат'
+    'cost-unit' => 'Одиниця витрат',
+    'partnership' => 'Партнерство'
 ];

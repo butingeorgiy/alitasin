@@ -24,7 +24,7 @@
             <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.rental-yachts') }}</a>
             <a href="{{ route('transfers') }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.transfers') }}</a>
             <a href="{{ route('property') }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.property') }}</a>
-            <a href="#" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.medical-tourism') }}</a>
+            <a href="{{ route('partnership') }}" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.partnership') }}</a>
             <a href="/#contacts" class="mr-8 text-black font-medium hover:underline">{{ __('short-phrases.contacts') }}</a>
             @if(App\Facades\Auth::check())
                 @if(!request()->is('admin/*', 'profile/*'))

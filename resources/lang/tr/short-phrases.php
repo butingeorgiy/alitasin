@@ -225,5 +225,6 @@ return [
     'property-type' => 'Emlak Tipi',
     'order-property' => 'Mülkiyet başvurusu',
     'chosen-property' => 'Seçilen mülk',
-    'cost-unit' => 'Maliyet birimi'
+    'cost-unit' => 'Maliyet birimi',
+    'partnership' => 'Ortaklık'
 ];

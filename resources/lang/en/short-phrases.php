@@ -224,5 +224,6 @@ return [
     'property-type' => 'Property type',
     'order-property' => 'Application for property',
     'chosen-property' => 'Chosen property',
-    'cost-unit' => 'Cost unit'
+    'cost-unit' => 'Cost unit',
+    'partnership' => 'Partnership'
 ];
