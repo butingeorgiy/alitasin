@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PartnerController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -20,6 +21,8 @@ Route::group(['prefix' => 'partners'], function () {
     Route::post('update-profit-percent/{id}', 'Api\PartnerController@updateProfitPercent')->middleware('auth:5');
     Route::post('update/{id}', 'Api\PartnerController@update')->middleware('auth:5');
     Route::get('search', 'Api\PartnerController@search')->middleware('auth:5');
+    Route::post('register', [PartnerController::class, 'register']);
+    Route::post('create-sub-partner', [PartnerController::class, 'createSubPartner'])->middleware('auth:2');
 });
 
 Route::group(['prefix' => 'tours'], function () {

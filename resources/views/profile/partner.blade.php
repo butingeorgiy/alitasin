@@ -82,5 +82,6 @@
 
     <!-- Popups -->
     @include('popups.reserve-details')
+    @include('popups.create-sub-partner')
 </body>
 </html>

@@ -167,6 +167,12 @@
                     </svg>
                     <span>{{ __('buttons.save') }}</span>
                 </div>
+
+                @if(request()->is('profile/partner'))
+                    <div class="add-sub-partner-button mt-2 bg-green">
+                        <span>{{ __('short-phrases.add-sub-partner') }}</span>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

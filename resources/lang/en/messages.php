@@ -235,5 +235,7 @@ return [
     'image-deleting-failed' => 'Failed to delete image!',
     'cost-unit-required' => 'Must specify cost unit!',
     'cost-unit-numeric' => 'Cost unit ID must be a numeric!',
-    'cost-unit-exists' => 'Cost unit not found!'
+    'cost-unit-exists' => 'Cost unit not found!',
+    'partner-not-found' => 'Partner not found!',
+    'city-required' => 'Must specify city!'
 ];

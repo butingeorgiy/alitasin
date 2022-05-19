@@ -225,5 +225,7 @@ return [
     'order-property' => 'Заява про майно',
     'chosen-property' => 'Обрана нерухомість',
     'cost-unit' => 'Одиниця витрат',
-    'partnership' => 'Партнерство'
+    'partnership' => 'Партнерство',
+    'partner-promo-code' => 'Промокод партнера',
+    'enter-city' => 'Введіть місто'
 ];

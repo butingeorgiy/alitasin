@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Facades\Auth;
+use App\Http\Requests\CreateSubPartnerRequest;
 use App\Http\Requests\PartnerCreatingRequest;
 use App\Http\Requests\PartnerRegisterRequest;
 use App\Models\Partner;
@@ -364,6 +366,13 @@ class PartnerController extends Controller
         ], options: JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * Register a new partner.
+     *
+     * @param PartnerRegisterRequest $request
+     *
+     * @return JsonResponse
+     */
     public function register(PartnerRegisterRequest $request): JsonResponse
     {
         return DB::transaction(function () use ($request) {
@@ -415,9 +424,64 @@ class PartnerController extends Controller
                 'sale_percent' => 10
             ]);
 
+            $authStatus = Auth::login(
+                $user->email,
+                $request->input('password')
+            );
+
+            return response()->json($authStatus, options: JSON_UNESCAPED_UNICODE);
+        });
+    }
+
+    /**
+     * Create sub partner.
+     *
+     * @param CreateSubPartnerRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function createSubPartner(CreateSubPartnerRequest $request): JsonResponse
+    {
+        return DB::transaction(function () use ($request) {
+            // User model creating
+
+            $phone = substr($request->input('phone'), -10);
+            $phoneCode = Str::before($request->input('phone'), $phone);
+
+            /** @var User $user */
+            $user = User::create([
+                'first_name' => $request->input('first_name'),
+                'phone_code' => $phoneCode,
+                'phone' => $phone,
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'account_type_id' => '2'
+            ]);
+
+            // Partner model creating
+
+            $parentPartner = Partner::select('id')
+                ->where('user_id', Auth::user()->id)
+                ->firstOrFail();
+
+            $partner = Partner::create([
+                'user_id' => $user->id,
+                'parent_id' => $parentPartner->id,
+                'profit_percent' => 5.0,
+                'city' => $request->input('city'),
+                'company_income' => 0,
+                'earned_profit' => 0,
+                'received_profit' => 0
+            ]);
+
+            $partner->promoCodes()->create([
+                'code' => $request->input('promo_code'),
+                'sale_percent' => 10
+            ]);
+
             return response()->json([
-                'status' => true,
-                'message' => __('messages.partner-create-success')
+                'success' => true,
+                'message' => __('messages.partner-creating-success')
             ], options: JSON_UNESCAPED_UNICODE);
         });
     }

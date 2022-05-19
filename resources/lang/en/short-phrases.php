@@ -225,5 +225,7 @@ return [
     'order-property' => 'Application for property',
     'chosen-property' => 'Chosen property',
     'cost-unit' => 'Cost unit',
-    'partnership' => 'Partnership'
+    'partnership' => 'Partnership',
+    'partner-promo-code' => 'Partner promo code',
+    'enter-city' => 'Enter city'
 ];

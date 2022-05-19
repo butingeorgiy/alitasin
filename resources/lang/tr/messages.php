@@ -233,5 +233,7 @@ return [
     'image-deleting-failed' => 'Resim silinemedi!',
     'cost-unit-required' => 'Maliyet birimi belirtilmelidir!',
     'cost-unit-numeric' => 'Maliyet birimi kimliği sayısal olmalıdır!',
-    'cost-unit-exists' => 'Maliyet birimi bulunamadı!'
+    'cost-unit-exists' => 'Maliyet birimi bulunamadı!',
+    'partner-not-found' => 'İş ortağı bulunamadı!',
+    'city-required' => 'Şehir belirtilmelidir!'
 ];

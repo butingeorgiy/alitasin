@@ -99,7 +99,10 @@ select::-ms-expand {
 .save-property-button,
 .save-tour-button,
 .calculate-transfer-cost,
-.show-transfer-request-popup {
+.show-transfer-request-popup,
+.send-partner-reg-button,
+.add-sub-partner-button,
+.save-sub-partner-button {
     @apply flex justify-center py-2 text-sm text-white font-medium rounded-md cursor-pointer;
 }
 
@@ -138,7 +141,9 @@ select::-ms-expand {
 .create-airport-button.loading,
 .update-airport-button.loading,
 .create-destination-button.loading,
-.update-destination-button.loading {
+.update-destination-button.loading,
+.send-partner-reg-button.loading,
+.save-sub-partner-button.loading {
     @apply cursor-not-allowed opacity-60;
 }
 
@@ -162,7 +167,9 @@ select::-ms-expand {
 .create-airport-button.loading .animate-spin,
 .update-airport-button.loading .animate-spin,
 .create-destination-button.loading .animate-spin,
-.update-destination-button.loading .animate-spin {
+.update-destination-button.loading .animate-spin,
+.send-partner-reg-button.loading .animate-spin,
+.save-sub-partner-button.loading .animate-spin {
     @apply block;
 }
 

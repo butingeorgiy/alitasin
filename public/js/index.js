@@ -1537,6 +1537,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_createProperty__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./modules/createProperty */ "./resources/js/modules/createProperty/index.js");
 /* harmony import */ var _modules_updateProperty__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./modules/updateProperty */ "./resources/js/modules/updateProperty/index.js");
 /* harmony import */ var _modules_orderProperty__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./modules/orderProperty */ "./resources/js/modules/orderProperty/index.js");
+/* harmony import */ var _modules_partnerRegistration__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./modules/partnerRegistration */ "./resources/js/modules/partnerRegistration/index.js");
+/* harmony import */ var _modules_createSubPartner__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./modules/createSubPartner */ "./resources/js/modules/createSubPartner/index.js");
+
+
 
 
 
@@ -4010,6 +4014,354 @@ document.addEventListener('DOMContentLoaded', function (_) {
         controller.loading = true;
         controller.saveProperty(form);
       }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/createSubPartner/CreateSubPartnerController.js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/modules/createSubPartner/CreateSubPartnerController.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _core_EventHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/EventHandler */ "./resources/js/core/EventHandler.js");
+/* harmony import */ var _CreateSubPartnerView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateSubPartnerView */ "./resources/js/modules/createSubPartner/CreateSubPartnerView.js");
+/* harmony import */ var _observers_PopupObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../observers/PopupObserver */ "./resources/js/observers/PopupObserver.js");
+/* harmony import */ var _CreateSubPartnerModel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CreateSubPartnerModel */ "./resources/js/modules/createSubPartner/CreateSubPartnerModel.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var CreateSubPartnerController = /*#__PURE__*/function (_EventHandler) {
+  _inherits(CreateSubPartnerController, _EventHandler);
+
+  var _super = _createSuper(CreateSubPartnerController);
+
+  function CreateSubPartnerController(nodes) {
+    var _this;
+
+    _classCallCheck(this, CreateSubPartnerController);
+
+    _this = _super.call(this);
+    _this.loading = false;
+    _this.nodes = nodes;
+    _this.view = new _CreateSubPartnerView__WEBPACK_IMPORTED_MODULE_1__["default"]({
+      submitFormButton: nodes.submitFormButton,
+      errorNode: nodes.errorNode,
+      successNode: nodes.successNode
+    });
+
+    _this.initPopup();
+
+    _this.addEvent(nodes.showPopupButton, 'click', function (_) {
+      _this.popup.open();
+    });
+
+    _this.addEvent(nodes.submitFormButton, 'click', function (e) {
+      e.preventDefault();
+
+      if (_this.loading === false) {
+        _this.loading = true;
+
+        _this.createPartner();
+      }
+    });
+
+    return _this;
+  }
+
+  _createClass(CreateSubPartnerController, [{
+    key: "initPopup",
+    value: function initPopup() {
+      this.popup = _observers_PopupObserver__WEBPACK_IMPORTED_MODULE_2__["default"].init(this.nodes.popup);
+    }
+  }, {
+    key: "prepareDataForCreating",
+    value: function prepareDataForCreating() {
+      var _form$querySelector;
+
+      var formData = new FormData();
+      var form = this.nodes.popup;
+
+      if (form.querySelector('input[name="first_name"]')) {
+        formData.append('first_name', form.querySelector('input[name="first_name"]').value);
+      }
+
+      if ((_form$querySelector = form.querySelector('input[name="last_name"]')) !== null && _form$querySelector !== void 0 && _form$querySelector.value) {
+        formData.append('last_name', form.querySelector('input[name="last_name"]').value);
+      }
+
+      if (form.querySelector('input[name="phone"]')) {
+        formData.append('phone', form.querySelector('input[name="phone"]').value);
+      }
+
+      if (form.querySelector('input[name="email"]')) {
+        formData.append('email', form.querySelector('input[name="email"]').value);
+      }
+
+      if (form.querySelector('input[name="promo_code"]')) {
+        formData.append('promo_code', form.querySelector('input[name="promo_code"]').value);
+      }
+
+      if (form.querySelector('input[name="city"]')) {
+        formData.append('city', form.querySelector('input[name="city"]').value);
+      }
+
+      if (form.querySelector('input[name="password"]')) {
+        formData.append('password', form.querySelector('input[name="password"]').value);
+      }
+
+      if (form.querySelector('input[name="password_confirmation"]')) {
+        formData.append('password_confirmation', form.querySelector('input[name="password_confirmation"]').value);
+      }
+
+      return formData;
+    }
+  }, {
+    key: "createPartner",
+    value: function createPartner() {
+      var _this2 = this;
+
+      this.view.hideError();
+      this.view.showButtonLoading();
+      _CreateSubPartnerModel__WEBPACK_IMPORTED_MODULE_3__["default"].send(this.prepareDataForCreating()).then(function (result) {
+        if (typeof result === 'string') {
+          alert("Error: ".concat(result));
+        } else if (result.error) {
+          _this2.view.showError(result.message);
+        } else {
+          _this2.view.showSuccess(result.message);
+
+          setTimeout(function (_) {
+            return location.reload();
+          }, 1000);
+        }
+      })["catch"](function (error) {
+        return alert("Error: ".concat(error));
+      })["finally"](function (_) {
+        _this2.loading = false;
+
+        _this2.view.hideButtonLoading();
+      });
+    }
+  }]);
+
+  return CreateSubPartnerController;
+}(_core_EventHandler__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateSubPartnerController);
+
+/***/ }),
+
+/***/ "./resources/js/modules/createSubPartner/CreateSubPartnerModel.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/modules/createSubPartner/CreateSubPartnerModel.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var CreateSubPartnerModel = /*#__PURE__*/function () {
+  function CreateSubPartnerModel() {
+    _classCallCheck(this, CreateSubPartnerModel);
+  }
+
+  _createClass(CreateSubPartnerModel, null, [{
+    key: "send",
+    value: function () {
+      var _send = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(data) {
+        var url, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = "".concat(location.origin, "/api/partners/create-sub-partner");
+                _context.next = 3;
+                return fetch(url, {
+                  method: 'POST',
+                  body: data
+                });
+
+              case 3:
+                response = _context.sent;
+
+                if (!(response.status === 200)) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 7;
+                return response.json();
+
+              case 7:
+                _context.t0 = _context.sent;
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.next = 12;
+                return response.text();
+
+              case 12:
+                _context.t0 = _context.sent;
+
+              case 13:
+                return _context.abrupt("return", _context.t0);
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function send(_x) {
+        return _send.apply(this, arguments);
+      }
+
+      return send;
+    }()
+  }]);
+
+  return CreateSubPartnerModel;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateSubPartnerModel);
+
+/***/ }),
+
+/***/ "./resources/js/modules/createSubPartner/CreateSubPartnerView.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/modules/createSubPartner/CreateSubPartnerView.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var CreateSubPartnerView = /*#__PURE__*/function () {
+  function CreateSubPartnerView(nodes) {
+    _classCallCheck(this, CreateSubPartnerView);
+
+    this.buttonNode = nodes.submitFormButton;
+    this.errorNode = nodes.errorNode;
+    this.successNode = nodes.successNode;
+  }
+
+  _createClass(CreateSubPartnerView, [{
+    key: "showButtonLoading",
+    value: function showButtonLoading() {
+      this.buttonNode.classList.add('loading');
+    }
+  }, {
+    key: "hideButtonLoading",
+    value: function hideButtonLoading() {
+      this.buttonNode.classList.remove('loading');
+    }
+  }, {
+    key: "showError",
+    value: function showError(msg) {
+      this.errorNode.classList.remove('hidden');
+      this.errorNode.innerText = msg;
+    }
+  }, {
+    key: "hideError",
+    value: function hideError() {
+      this.errorNode.classList.add('hidden');
+      this.errorNode.innerText = '';
+    }
+  }, {
+    key: "showSuccess",
+    value: function showSuccess(msg) {
+      this.successNode.classList.remove('hidden');
+      this.successNode.innerText = msg;
+    }
+  }]);
+
+  return CreateSubPartnerView;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateSubPartnerView);
+
+/***/ }),
+
+/***/ "./resources/js/modules/createSubPartner/index.js":
+/*!********************************************************!*\
+  !*** ./resources/js/modules/createSubPartner/index.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CreateSubPartnerController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateSubPartnerController */ "./resources/js/modules/createSubPartner/CreateSubPartnerController.js");
+
+document.addEventListener('DOMContentLoaded', function (_) {
+  var createSubPartnerPopup = document.querySelector('#createSubPartnerPopup');
+  var showPopupButton = document.querySelector('.add-sub-partner-button');
+
+  if (createSubPartnerPopup) {
+    new _CreateSubPartnerController__WEBPACK_IMPORTED_MODULE_0__["default"]({
+      popup: createSubPartnerPopup,
+      showPopupButton: showPopupButton,
+      errorNode: createSubPartnerPopup.querySelector('.error-message'),
+      successNode: createSubPartnerPopup.querySelector('.success-message'),
+      submitFormButton: createSubPartnerPopup.querySelector('.save-sub-partner-button')
     });
   }
 });
@@ -9706,6 +10058,340 @@ document.addEventListener('DOMContentLoaded', function (_) {
       partnersContainer: document.querySelector('#partnersSection .partners-container'),
       partnerPaymentPopup: document.querySelector('#partnerPaymentPopup'),
       updateProfitPercentPopup: document.querySelector('#updateProfitPercentPopup')
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/partnerRegistration/PartnerRegistrationController.js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/modules/partnerRegistration/PartnerRegistrationController.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _core_EventHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/EventHandler */ "./resources/js/core/EventHandler.js");
+/* harmony import */ var _PartnerRegistrationView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PartnerRegistrationView */ "./resources/js/modules/partnerRegistration/PartnerRegistrationView.js");
+/* harmony import */ var _PartnerRegistrationModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PartnerRegistrationModel */ "./resources/js/modules/partnerRegistration/PartnerRegistrationModel.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var PartnerRegistrationController = /*#__PURE__*/function (_EventHandler) {
+  _inherits(PartnerRegistrationController, _EventHandler);
+
+  var _super = _createSuper(PartnerRegistrationController);
+
+  function PartnerRegistrationController(nodes) {
+    var _this;
+
+    _classCallCheck(this, PartnerRegistrationController);
+
+    _this = _super.call(this);
+    _this.loading = false;
+    _this.nodes = nodes;
+    _this.view = new _PartnerRegistrationView__WEBPACK_IMPORTED_MODULE_1__["default"]({
+      buttonNode: nodes.submitFormButton,
+      errorNode: nodes.errorNode
+    });
+
+    _this.addEvent(nodes.submitFormButton, 'click', function (e) {
+      e.preventDefault();
+
+      if (_this.loading === false) {
+        _this.loading = true;
+
+        _this.sendForm();
+      }
+    });
+
+    return _this;
+  }
+
+  _createClass(PartnerRegistrationController, [{
+    key: "prepareRegisterData",
+    value: function prepareRegisterData() {
+      var _form$querySelector;
+
+      var formData = new FormData();
+      var form = this.nodes.form;
+
+      if (form.querySelector('input[name="first_name"]')) {
+        formData.append('first_name', form.querySelector('input[name="first_name"]').value);
+      }
+
+      if (form.querySelector('input[name="email"]')) {
+        formData.append('email', form.querySelector('input[name="email"]').value);
+      }
+
+      if (form.querySelector('input[name="phone"]')) {
+        formData.append('phone', form.querySelector('input[name="phone"]').value);
+      }
+
+      if (form.querySelector('input[name="city"]')) {
+        formData.append('city', form.querySelector('input[name="city"]').value);
+      }
+
+      if (form.querySelector('input[name="promo_code"]')) {
+        formData.append('promo_code', form.querySelector('input[name="promo_code"]').value);
+      }
+
+      if ((_form$querySelector = form.querySelector('input[name="partner_code"]')) !== null && _form$querySelector !== void 0 && _form$querySelector.value) {
+        formData.append('partner_code', form.querySelector('input[name="partner_code"]').value);
+      }
+
+      if (form.querySelector('input[name="password"]')) {
+        formData.append('password', form.querySelector('input[name="password"]').value);
+      }
+
+      if (form.querySelector('input[name="password_confirmation"]')) {
+        formData.append('password_confirmation', form.querySelector('input[name="password_confirmation"]').value);
+      }
+
+      return formData;
+    }
+  }, {
+    key: "sendForm",
+    value: function sendForm() {
+      var _this2 = this;
+
+      this.view.showButtonLoading();
+      this.view.hideError();
+      _PartnerRegistrationModel__WEBPACK_IMPORTED_MODULE_2__["default"].send(this.prepareRegisterData()).then(function (result) {
+        if (typeof result === 'string') {
+          alert("Error: ".concat(result));
+        } else if (result.error) {
+          _this2.view.showError(result.message);
+        } else {
+          _this2.setAuthCookie(result.cookies);
+
+          location.replace('/profile/partner');
+        }
+      })["catch"](function (error) {
+        return alert("Error: ".concat(error));
+      })["finally"](function (_) {
+        _this2.loading = false;
+
+        _this2.view.hideButtonLoading();
+      });
+    }
+  }, {
+    key: "setAuthCookie",
+    value: function setAuthCookie(cookies) {
+      js_cookie__WEBPACK_IMPORTED_MODULE_3__["default"].set('id', cookies.id, {
+        expires: 7
+      });
+      js_cookie__WEBPACK_IMPORTED_MODULE_3__["default"].set('token', cookies.token, {
+        expires: 7
+      });
+    }
+  }]);
+
+  return PartnerRegistrationController;
+}(_core_EventHandler__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PartnerRegistrationController);
+
+/***/ }),
+
+/***/ "./resources/js/modules/partnerRegistration/PartnerRegistrationModel.js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/modules/partnerRegistration/PartnerRegistrationModel.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var PartnerRegistrationModel = /*#__PURE__*/function () {
+  function PartnerRegistrationModel() {
+    _classCallCheck(this, PartnerRegistrationModel);
+  }
+
+  _createClass(PartnerRegistrationModel, null, [{
+    key: "send",
+    value: function () {
+      var _send = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(data) {
+        var url, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = "".concat(location.origin, "/api/partners/register");
+                _context.next = 3;
+                return fetch(url, {
+                  method: 'POST',
+                  body: data
+                });
+
+              case 3:
+                response = _context.sent;
+
+                if (!(response.status === 200)) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 7;
+                return response.json();
+
+              case 7:
+                _context.t0 = _context.sent;
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.next = 12;
+                return response.text();
+
+              case 12:
+                _context.t0 = _context.sent;
+
+              case 13:
+                return _context.abrupt("return", _context.t0);
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function send(_x) {
+        return _send.apply(this, arguments);
+      }
+
+      return send;
+    }()
+  }]);
+
+  return PartnerRegistrationModel;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PartnerRegistrationModel);
+
+/***/ }),
+
+/***/ "./resources/js/modules/partnerRegistration/PartnerRegistrationView.js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/modules/partnerRegistration/PartnerRegistrationView.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var PartnerRegistrationView = /*#__PURE__*/function () {
+  function PartnerRegistrationView(nodes) {
+    _classCallCheck(this, PartnerRegistrationView);
+
+    this.buttonNode = nodes.buttonNode;
+    this.errorNode = nodes.errorNode;
+  }
+
+  _createClass(PartnerRegistrationView, [{
+    key: "showError",
+    value: function showError(msg) {
+      this.errorNode.classList.remove('hidden');
+      this.errorNode.innerText = msg;
+    }
+  }, {
+    key: "hideError",
+    value: function hideError() {
+      this.errorNode.classList.add('hidden');
+      this.errorNode.innerText = '';
+    }
+  }, {
+    key: "showButtonLoading",
+    value: function showButtonLoading() {
+      this.buttonNode.classList.add('loading');
+    }
+  }, {
+    key: "hideButtonLoading",
+    value: function hideButtonLoading() {
+      this.buttonNode.classList.remove('loading');
+    }
+  }]);
+
+  return PartnerRegistrationView;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PartnerRegistrationView);
+
+/***/ }),
+
+/***/ "./resources/js/modules/partnerRegistration/index.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/modules/partnerRegistration/index.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PartnerRegistrationController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PartnerRegistrationController */ "./resources/js/modules/partnerRegistration/PartnerRegistrationController.js");
+
+document.addEventListener('DOMContentLoaded', function (_) {
+  var form = document.querySelector('#partnershipSection form');
+
+  if (form) {
+    new _PartnerRegistrationController__WEBPACK_IMPORTED_MODULE_0__["default"]({
+      form: form,
+      submitFormButton: form.querySelector('.send-partner-reg-button'),
+      errorNode: form.querySelector('.error-message')
     });
   }
 });

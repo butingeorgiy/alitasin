@@ -226,5 +226,7 @@ return [
     'order-property' => 'Mülkiyet başvurusu',
     'chosen-property' => 'Seçilen mülk',
     'cost-unit' => 'Maliyet birimi',
-    'partnership' => 'Ortaklık'
+    'partnership' => 'Ortaklık',
+    'partner-promo-code' => 'İş ortağı promosyon kodu',
+    'enter-city' => 'şehri girin'
 ];

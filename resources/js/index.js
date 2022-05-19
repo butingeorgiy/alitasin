@@ -30,3 +30,5 @@ import './modules/tourGallery';
 import './modules/createProperty';
 import './modules/updateProperty';
 import './modules/orderProperty'
+import './modules/partnerRegistration'
+import './modules/createSubPartner'

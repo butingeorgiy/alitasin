@@ -226,5 +226,7 @@ return [
     'order-property' => 'Заявка на недвижимость',
     'chosen-property' => 'Выбранная недвижимость',
     'cost-unit' => 'Единица измерения',
-    'partnership' => 'Партнёрство'
+    'partnership' => 'Партнёрство',
+    'partner-promo-code' => 'Промо код партнёра',
+    'enter-city' => 'Введите город'
 ];
