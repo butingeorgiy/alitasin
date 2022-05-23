@@ -98,7 +98,7 @@
                 <a href="{{ route('vehicles', ['vehicle_type_id' => 3]) }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.yachts-rental') }}</a>
                 <a href="{{ route('transfers') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.transfers') }}</a>
                 <a href="{{ route('property') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.property') }}</a>
-                <a href="#" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.medical-tourism') }}</a>
+                <a href="{{ route('partnership') }}" class="mb-4 text-sm text-black font-semibold">{{ __('short-phrases.partnership') }}</a>
                 <a href="/#reviewsSliderSection" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.reviews') }}</a>
                 <a href="/#contacts" class="close-after-click mb-4 text-sm text-black font-semibold">{{ __('short-phrases.contacts') }}</a>
                 <select class="text-sm text-black font-semibold bg-white" name="language">

@@ -10154,7 +10154,7 @@ var PartnerRegistrationController = /*#__PURE__*/function (_EventHandler) {
       }
 
       if (form.querySelector('input[name="phone"]')) {
-        formData.append('phone', form.querySelector('input[name="phone"]').value);
+        formData.append('phone', form.querySelector('input[name="phone"]').value.replace(/\D/g, ''));
       }
 
       if (form.querySelector('input[name="city"]')) {

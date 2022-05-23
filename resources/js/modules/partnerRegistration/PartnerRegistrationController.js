@@ -46,7 +46,7 @@ class PartnerRegistrationController extends EventHandler {
         if (form.querySelector('input[name="phone"]')) {
             formData.append(
                 'phone',
-                form.querySelector('input[name="phone"]').value
+                form.querySelector('input[name="phone"]').value.replace(/\D/g, '')
             )
         }
 

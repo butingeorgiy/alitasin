@@ -149,7 +149,7 @@
                     <input type="text"
                            name="partner_code"
                            class="w-80 mb-1 px-4 py-3 text-sm text-gray-600 placeholder-gray-400 border border-gray-200 bg-white rounded-md"
-                           placeholder="{{ __('short-phrases.partner-promo-code') }} ({{ __('short-phrases.unnecessary') }})"
+                           placeholder="{{ __('short-phrases.partner-promo-code') }} ({{ __('short-phrases.if-have') }})"
                            autocomplete="off">
 
                     <p class="mb-5 text-sm text-gray-600 font-light">
