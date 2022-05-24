@@ -7,6 +7,7 @@ use App\Models\Partner;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller
 {
@@ -38,7 +39,9 @@ class PartnerController extends Controller
         $partners = Partner::withTrashed()->with('user')->get();
 //        }
 
-        return response()->view('admin.partners', compact('user', 'partners'));
+        $totalFigures = Partner::getTotalFigures();
+
+        return response()->view('admin.partners', compact('user', 'partners', 'totalFigures'));
     }
 
     /**

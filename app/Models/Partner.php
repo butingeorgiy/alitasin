@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 
 /**
@@ -235,5 +236,21 @@ class Partner extends Model
         ]);
 
         return $result;
+    }
+
+    /**
+     * Get total figures:
+     *
+     * @return array
+     */
+    public static function getTotalFigures(): array
+    {
+        return (array) DB::table('partners')
+            ->selectRaw(
+                'SUM(company_income) as company_income, ' .
+                'SUM(earned_profit) as earned_profit, ' .
+                'SUM(received_profit) as received_profit'
+            )
+            ->first();
     }
 }

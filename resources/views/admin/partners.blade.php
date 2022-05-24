@@ -46,6 +46,26 @@
                     <div class="partners-search-results-container hidden absolute flex flex-col top-full left-0 z-10 w-full mt-2 bg-white rounded-md shadow-md overflow-y-scroll" style="max-height: 220px"></div>
                 </div>
             </div>
+
+            <div class="my-5">
+                <div class="grid gap-5 grid-cols-3">
+                    <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200">
+                        <p class="mb-1 text-sm text-center text-gray-800 font-medium">{{ __('short-phrases.income') }}:</p>
+                        <p class="text-center font-semibold">$ {{ $totalFigures['company_income'] }}</p>
+                    </div>
+
+                    <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200">
+                        <p class="mb-1 text-sm text-center text-gray-800 font-medium">{{ __('short-phrases.earned') }}:</p>
+                        <p class="text-center font-semibold">$ {{ $totalFigures['earned_profit'] }}</p>
+                    </div>
+
+                    <div class="flex flex-col px-5 py-3 bg-white rounded border border-gray-200">
+                        <p class="mb-1 text-sm text-center text-gray-800 font-medium">{{ __('short-phrases.payed') }}:</p>
+                        <p class="text-center font-semibold">$ {{ $totalFigures['received_profit'] }}</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="partners-container bg-white border border-gray-200 rounded-md">
                 <!-- Table head -->
                 <div class="grid grid-cols-partners-table gap-5 px-8 pt-4 pb-1 border-b border-gray-200">
