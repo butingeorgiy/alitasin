@@ -321,6 +321,7 @@ class PartnerController extends Controller
         }
 
         $partner->save();
+        $partner->user->save();
 
         return response()->json([
             'success' => true,

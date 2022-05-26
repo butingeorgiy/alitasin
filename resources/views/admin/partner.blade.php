@@ -34,7 +34,7 @@
         </label>
     </section>
 
-    @include('components.profile.personal-info', ['user' => $partner->user])
+    @include('components.profile.personal-info', ['user' => $partner->user, 'partnerCity' => $partner->city])
 
     @php
 

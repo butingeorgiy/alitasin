@@ -113,16 +113,10 @@
                     </label>
 
                     @if(request()->is('admin/partners/*'))
-                        @php
-
-                        $partnerCity = $user->partnerCity()->first();
-
-                        @endphp
-
                         <label class="col-span-1">
                             <span class="mb-3 text-sm text-gray-500">{{ __('short-phrases.city') }}</span>
                             <span class="flex items-center pb-1 border-b border-black cursor-pointer">
-                                <input class="w-full mr-auto text-sm text-black font-semibold" type="text" name="city" value="{{ $partnerCity->city ?? '' }}" placeholder="{{ __('short-phrases.city') }}">
+                                <input class="w-full mr-auto text-sm text-black font-semibold" type="text" name="city" value="{{ $partnerCity }}" placeholder="{{ __('short-phrases.city') }}">
                                 <svg class="min-w-4 min-h-4 w-4 h-4 ml-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M16 4.1917C16.0006 4.08642 15.9804 3.98206 15.9406 3.8846C15.9008 3.78714 15.8421 3.69849 15.768 3.62374L12.376
                                           0.231996C12.3012 0.157856 12.2126 0.0992007 12.1151 0.0593919C12.0176 0.0195832 11.9133 -0.000595299 11.808 1.33704e-05C11.7027
